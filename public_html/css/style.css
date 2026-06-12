@@ -258,6 +258,17 @@ p { margin-bottom: 1rem; }
     linear-gradient(to bottom, rgba(36,27,19,.55) 0%, rgba(36,27,19,.38) 45%, rgba(36,27,19,.72) 100%);
 }
 /* Bilingual floating hero text */
+.hero-logo {
+  width: clamp(96px, 15vw, 150px);
+  height: auto;
+  max-height: none;
+  margin: 0 auto 1.4rem;
+  border-radius: 22px;
+  background: #fff;
+  padding: 10px;
+  object-fit: contain;
+  box-shadow: 0 14px 40px -10px rgba(0,0,0,.5);
+}
 .hero-kicker-es {
   font-family: var(--font-display);
   font-style: italic;
