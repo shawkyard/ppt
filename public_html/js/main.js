@@ -57,6 +57,12 @@
     });
   });
 
+  // Respect reduced-motion preference for the background hero video
+  var heroVideo = document.querySelector(".hero-video-bg");
+  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroVideo.pause();
+  }
+
   // Current year in footer
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();

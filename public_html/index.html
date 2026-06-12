@@ -84,37 +84,28 @@
 
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- HERO — full-screen Entavo video -->
+  <section class="hero hero--video">
+    <video class="hero-video-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay" aria-hidden="true"></div>
     <div class="wrap">
-      <div>
-        <div class="hero-badges">
-          <span class="badge">🌮 Mexican</span>
-          <span class="badge">🥙 Mediterranean</span>
-          <span class="badge">☪️ Halal in Both Kitchens</span>
-          <span class="badge">📍 Now in Midvale</span>
-        </div>
-        <h1>Sizzling Fajitas. Savory Shawarma. <em>One Kitchen You Can Trust.</em></h1>
-        <p class="lede">Fajita Grill brings homemade Mexican and Mediterranean cooking together under one roof in our new Midvale home — from street tacos and sizzling fajita plates to shawarma and hummus platters, all halal.</p>
-        <div class="cta-row">
-          <a class="btn btn--primary btn--lg" href="order.html">Order Online</a>
-          <a class="btn btn--ghost-light btn--lg" href="tel:+18019963715">Call (801) 996-3715</a>
-        </div>
-        <p class="hero-note">Open daily from 9 AM · <a href="https://www.google.com/maps/search/?api=1&amp;query=Fajita+Grill+7680+S+State+St+Midvale+UT+84047" target="_blank" rel="noopener">Get directions to 7680 S State St →</a></p>
+      <div class="hero-badges">
+        <span class="badge">🌮 Mexican</span>
+        <span class="badge">🥙 Mediterranean</span>
+        <span class="badge">☪️ Halal in Both Kitchens</span>
+        <span class="badge">📍 Now in Midvale</span>
       </div>
-      <!--
-        ENTAVO VIDEO SLOT #1 (hero).
-        When the Entavo video files arrive, replace this placeholder with:
-        <video autoplay muted loop playsinline poster="assets/img/hero-poster.jpg" style="border-radius:18px;width:100%;">
-          <source src="assets/video/hero.mp4" type="video/mp4">
-        </video>
-      -->
-      <div class="video-slot" role="img" aria-label="Video placeholder: Fajita Grill kitchen and food video">
-        <span class="play-ring" aria-hidden="true">▶</span>
-        <strong>Entavo Video — Hero</strong>
-        <p>Drop the main Entavo restaurant video here (assets/video/hero.mp4). See docs/PHOTO-VIDEO-REQUEST-LIST.md.</p>
+      <h1>Sizzling Fajitas. Savory Shawarma. <em>One Kitchen You Can Trust.</em></h1>
+      <p class="lede">Fajita Grill brings homemade Mexican and Mediterranean cooking together under one roof in our new Midvale home — from street tacos and sizzling fajita plates to shawarma and hummus platters, all halal.</p>
+      <div class="cta-row">
+        <a class="btn btn--primary btn--lg" href="order.html">Order Online</a>
+        <a class="btn btn--ghost-light btn--lg" href="tel:+18019963715">Call (801) 996-3715</a>
       </div>
+      <p class="hero-note">Open daily from 9 AM · <a href="https://www.google.com/maps/search/?api=1&amp;query=Fajita+Grill+7680+S+State+St+Midvale+UT+84047" target="_blank" rel="noopener">Get directions to 7680 S State St →</a></p>
     </div>
+    <a class="hero-scroll" href="#gateway">Scroll<span aria-hidden="true">▾</span></a>
   </section>
 
   <!-- TRUST BAR (verified facts only) -->
@@ -128,7 +119,7 @@
   </div>
 
   <!-- CUSTOMER-NEED GATEWAY -->
-  <section class="section">
+  <section class="section" id="gateway">
     <div class="wrap">
       <div class="section-head section-head--center">
         <span class="kicker">What brings you in today?</span>

@@ -9,6 +9,7 @@
 |---|---|---|---|---|---|
 | A1 | public_html/assets/favicon.svg | Neutral flame/grill icon (non-representational graphic) | Neutral graphic created for this build | Verified-safe (does not depict the business) | All pages (favicon) |
 | A2 | "FG" typographic brand mark (CSS, no file) | Initials wordmark | Neutral typographic treatment | Placeholder — replace with official logo when supplied | Header/footer, all pages |
+| V1 | public_html/assets/video/hero.mp4 | Colorful fajita meal ingredients close-up (original file: "ColorfulFajitaMealKitIngredientsCloseUp…Utc.mp4") | Client-supplied via BBP (Entavo batch, 2026-06-12) | Supplied by client — confirm owner holds usage rights before public launch | index.html full-screen hero |
 
 No photographs or videos are currently used anywhere on the site. **Every** photo/video position is a labeled `.img-slot` / `.video-slot` placeholder stating: official business image to be supplied or approved before publication.
 
@@ -16,7 +17,7 @@ No photographs or videos are currently used anywhere on the site. **Every** phot
 
 | ID | Page / slot | Needed asset | Source expected | Status |
 |---|---|---|---|---|
-| P1 | index.html hero | Entavo video — main restaurant video (assets/video/hero.mp4) | Entavo (client-authorized production) | Awaiting files from owner |
+| P1 | ~~index.html hero~~ | ~~Entavo video — main restaurant video~~ | Entavo | **DONE — see V1** |
 | P2 | index.html story section | Entavo video — team/kitchen/location (assets/video/story.mp4) | Entavo | Awaiting files |
 | P3 | index.html "Why" split | Signature fajita or shawarma plate photo | Owner / official Facebook (with permission) | Awaiting |
 | P4 | halal.html hero | Spread of halal dishes (fajitas + shawarma) | Owner | Awaiting |
