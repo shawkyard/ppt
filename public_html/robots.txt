@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you.html
+
+# Replace example.com with the live domain before launch (see docs/HOSTINGER-DEPLOYMENT.md)
+Sitemap: https://example.com/sitemap.xml
