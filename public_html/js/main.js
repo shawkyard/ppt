@@ -81,6 +81,14 @@
     heroVideo.pause();
   }
 
+  // Mobile quick-pick: jump straight to the chosen page
+  var quickPick = document.getElementById("quickPick");
+  if (quickPick) {
+    quickPick.addEventListener("change", function () {
+      if (quickPick.value) window.location.href = quickPick.value;
+    });
+  }
+
   // Current year in footer
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();

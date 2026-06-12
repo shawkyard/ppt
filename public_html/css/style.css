@@ -193,6 +193,21 @@ img.real-img[hidden], img[hidden] { display: none !important; }
   margin: 5px auto; transition: .2s;
 }
 
+/* Mobile quick-pick (replaces the gateway card grid on small screens) */
+.quick-pick { display: none; max-width: 480px; margin: 0 auto 1rem; }
+.quick-pick label {
+  display: block; font-weight: 700; font-size: .92rem;
+  color: var(--char); margin-bottom: .45rem;
+}
+.quick-pick select {
+  width: 100%; padding: 1rem 1.1rem;
+  font-family: var(--font-body); font-weight: 600; font-size: 1.05rem;
+  color: var(--ink); background: var(--paper);
+  border: 2px solid var(--saffron); border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+.quick-pick select:focus { outline: 2px solid var(--flame); }
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
@@ -673,6 +688,10 @@ ul.checks li::before {
   }
   .mobile-bar { display: flex; }
   body { padding-bottom: 64px; }
+
+  /* On phones: one tap picker instead of scrolling the gateway card grid */
+  .quick-pick { display: block; }
+  .gateway-grid, .gateway-extra { display: none; }
 }
 
 @media (max-width: 480px) {

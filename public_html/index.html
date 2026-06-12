@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -121,7 +121,26 @@
         <h2>Find the Page Made for You</h2>
         <p>Whether you're feeding the family, grabbing a fast halal lunch, or planning an office event — start here.</p>
       </div>
-      <div class="grid grid--4">
+      <div class="quick-pick">
+        <label for="quickPick">Pick what you're looking for:</label>
+        <select id="quickPick">
+          <option value="" selected>Tap to choose…</option>
+          <option value="order.html">🛒 Order online now</option>
+          <option value="menu.html">📖 See the full menu</option>
+          <option value="halal.html">☪️ Halal dining</option>
+          <option value="families.html">👨‍👩‍👧‍👦 Family dinner</option>
+          <option value="lunch.html">⏱️ Quick lunch</option>
+          <option value="breakfast.html">🌅 Breakfast</option>
+          <option value="fajitas.html">🔥 Sizzling fajitas</option>
+          <option value="mediterranean.html">🥙 Shawarma &amp; Mediterranean</option>
+          <option value="catering.html">🎉 Catering an event</option>
+          <option value="delivery.html">🛵 Delivery &amp; takeout</option>
+          <option value="groups.html">👥 Feeding a group</option>
+          <option value="near-you.html">📍 Near Sandy, Murray &amp; Fort Union</option>
+          <option value="contact.html">📞 Contact &amp; directions</option>
+        </select>
+      </div>
+      <div class="grid grid--4 gateway-grid">
         <a class="gateway-card" href="halal.html">
           <span class="gw-emoji" aria-hidden="true">☪️</span>
           <strong>I need halal food</strong>
@@ -163,7 +182,7 @@
           <span>Mediterranean entrees, hummus &amp; more.</span>
         </a>
       </div>
-      <p class="center mt-2"><a href="groups.html"><strong>Feeding a group?</strong></a> &nbsp;·&nbsp; <a href="near-you.html"><strong>Coming from Sandy, Murray or Fort Union?</strong></a></p>
+      <p class="center mt-2 gateway-extra"><a href="groups.html"><strong>Feeding a group?</strong></a> &nbsp;·&nbsp; <a href="near-you.html"><strong>Coming from Sandy, Murray or Fort Union?</strong></a></p>
     </div>
   </section>
 
@@ -432,6 +451,6 @@
   <a class="mb-map" href="https://www.google.com/maps/search/?api=1&amp;query=Fajita+Grill+7680+S+State+St+Midvale+UT+84047" target="_blank" rel="noopener">📍 Map</a>
 </nav>
 
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=6"></script>
 </body>
 </html>
