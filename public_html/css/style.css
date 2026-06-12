@@ -365,6 +365,25 @@ p { margin-bottom: 1rem; }
 section:not(.section--dark):not(.hero) .img-slot,
 section:not(.section--dark):not(.hero) .video-slot { box-shadow: var(--shadow-soft); }
 
+/* Real photos (supplied by the business) */
+.real-img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  max-height: 520px;
+}
+.brand-img {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #fff;
+  box-shadow: none;
+  max-height: none;
+}
+.gallery-img { aspect-ratio: 4 / 3; object-fit: cover; }
+.logo-pad { object-fit: contain; background: #fff; padding: 2rem; }
+
 /* ---------- Trust bar ---------- */
 .trust-bar { background: var(--flame-deep); color: var(--cream); padding: 1.1rem 0; }
 .trust-bar .wrap {

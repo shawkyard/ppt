@@ -10,6 +10,13 @@
 | A1 | public_html/assets/favicon.svg | Neutral flame/grill icon (non-representational graphic) | Neutral graphic created for this build | Verified-safe (does not depict the business) | All pages (favicon) |
 | A2 | "FG" typographic brand mark (CSS, no file) | Initials wordmark | Neutral typographic treatment | Placeholder — replace with official logo when supplied | Header/footer, all pages |
 | V1 | public_html/assets/video/hero.mp4 | Colorful fajita meal ingredients close-up (original file: "ColorfulFajitaMealKitIngredientsCloseUp…Utc.mp4") | Client-supplied via BBP (Entavo batch, 2026-06-12) | Supplied by client — confirm owner holds usage rights before public launch | index.html full-screen hero |
+| A3 | assets/img/logo.png (awaiting upload) | Official mascot logo (cactus, "Mexican and Mediterranean food") | Supplied by client 2026-06-12 ("they are the real food and restaurant") | Approved by client | Header, all pages (FG monogram fallback if missing) |
+| A4 | assets/img/logo-togo.png (awaiting upload) | "Fajita Grill ToGo" skillet logo | Supplied by client 2026-06-12 | Approved by client | delivery.html (DoorDash name tie-in) |
+| A5 | assets/img/storefront.jpg (awaiting upload) | Storefront sign, 7680 S State St | Supplied by client 2026-06-12 | Approved by client | visit.html, about.html, near-you.html, reviews.html gallery |
+| A6 | assets/img/kofta-plate.jpg (awaiting upload) | Kofta kebab plate, hummus, rice, fries | Supplied by client 2026-06-12 | Approved by client | halal.html, mediterranean.html, reviews.html gallery |
+| A7 | assets/img/birria-tacos.jpg (awaiting upload) | Street tacos plate with chips and salsa | Supplied by client 2026-06-12 | Approved by client | index.html, lunch.html, reviews.html gallery |
+
+NOTE: A3–A7 were delivered as chat image previews; the actual files must be exported at full resolution and uploaded to public_html/assets/img/ (see README.txt there). The site falls back to placeholders automatically until each file exists.
 
 No photographs or videos are currently used anywhere on the site. **Every** photo/video position is a labeled `.img-slot` / `.video-slot` placeholder stating: official business image to be supplied or approved before publication.
 

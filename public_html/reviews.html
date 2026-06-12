@@ -25,7 +25,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">FG</span>
+      <img class="brand-img real-img" src="assets/img/logo.png" alt="" width="42" height="42"><span class="brand-mark" aria-hidden="true" hidden>FG</span>
       <span class="brand-name"><strong>Fajita Grill</strong><span>Mexican · Mediterranean</span></span>
     </a>
     <nav class="nav" aria-label="Main navigation">
@@ -112,6 +112,18 @@
     </div>
   </section>
 
+  <!-- LIVE GOOGLE RATING (embedded place card pulls the rating straight from Google) -->
+  <section class="section section--sand">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <span class="kicker">Live from Google</span>
+        <h2>Our Google Rating, Straight from the Map</h2>
+        <p>This is Google's own live listing — the star rating and review count update automatically. Tap the rating inside the card to read every review.</p>
+      </div>
+      <iframe src="https://maps.google.com/maps?q=Fajita%20Grill%207680%20S%20State%20St%20Midvale%20UT&amp;output=embed" width="100%" height="420" style="border:0;border-radius:18px;box-shadow:0 18px 50px -18px rgba(36,27,19,.28);" loading="lazy" title="Live Google listing for Fajita Grill, Midvale — rating and reviews" allowfullscreen></iframe>
+    </div>
+  </section>
+
   <!-- FEATURED QUOTE -->
   <section class="section section--cream">
     <div class="wrap">
@@ -137,17 +149,20 @@
         <p>Official photos of the dishes, the dining room and the counter are on their way. Until then, Yelp lists 60 customer photos if you can't wait.</p>
       </div>
       <div class="grid grid--3">
-        <div class="img-slot img-slot--short" role="img" aria-label="Image placeholder: dishes">
+        <img class="real-img gallery-img" src="assets/img/kofta-plate.jpg" alt="Kofta kebab plate with hummus and rice at Fajita Grill" loading="lazy">
+      <div class="img-slot img-slot--short" role="img" hidden aria-label="Image placeholder: dishes">
           <span class="slot-icon" aria-hidden="true">📷</span>
           <strong>Official Photo Needed</strong>
           <p>Signature dishes — fajitas, tacos, shawarma. Official business image to be added.</p>
         </div>
-        <div class="img-slot img-slot--short" role="img" aria-label="Image placeholder: dining room">
+        <img class="real-img gallery-img" src="assets/img/birria-tacos.jpg" alt="Street tacos served at Fajita Grill in Midvale" loading="lazy">
+      <div class="img-slot img-slot--short" role="img" hidden aria-label="Image placeholder: dining room">
           <span class="slot-icon" aria-hidden="true">📷</span>
           <strong>Official Photo Needed</strong>
           <p>The dining room at our new Midvale location. Official business image to be added.</p>
         </div>
-        <div class="img-slot img-slot--short" role="img" aria-label="Image placeholder: order counter">
+        <img class="real-img gallery-img" src="assets/img/storefront.jpg" alt="Fajita Grill storefront sign in Midvale" loading="lazy">
+      <div class="img-slot img-slot--short" role="img" hidden aria-label="Image placeholder: order counter">
           <span class="slot-icon" aria-hidden="true">📷</span>
           <strong>Official Photo Needed</strong>
           <p>The counter where it all happens. Official business image to be added.</p>

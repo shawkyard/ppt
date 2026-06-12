@@ -57,6 +57,19 @@
     });
   });
 
+  // Real photos: if an image file hasn't been uploaded yet, fall back to its
+  // labeled placeholder slot (or the FG monogram for the header logo).
+  document.addEventListener("error", function (e) {
+    var t = e.target;
+    if (t && t.tagName === "IMG" && t.classList.contains("real-img")) {
+      t.hidden = true;
+      var n = t.nextElementSibling;
+      if (n && (n.classList.contains("img-slot") || n.classList.contains("brand-mark"))) {
+        n.hidden = false;
+      }
+    }
+  }, true);
+
   // Respect reduced-motion preference for the background hero video
   var heroVideo = document.querySelector(".hero-video-bg");
   if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
