@@ -35,6 +35,9 @@
 9. **Payment methods, parking, seating capacity, reservations** — unknown; FAQ answers direct visitors to call.
 10. **Halal wording** — "halal in both kitchens" is from public listings. Confirm scope (e.g., all meats) with the owner before launch.
 
+### Menu board photo (received 2026-06-12)
+Owner shared a photo of the in-store Mexican menu board. Item names/descriptions were added to the site (fajita meat choices, birria lineup, taco varieties, kids menu, breakfast plates, "all orders include chips and salsa", handmade tortillas, 3 tacos include a fountain drink). **Prices were intentionally NOT published** — the photo is low resolution and prices change; live prices remain on the ordering site. If the owner wants prices on the website, get a current menu PDF/text and add them deliberately.
+
 ## 3. Conversion system
 
 - **Primary goal:** phone calls + online orders (pickup/delivery).
