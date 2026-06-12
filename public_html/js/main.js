@@ -59,16 +59,21 @@
 
   // Real photos: if an image file hasn't been uploaded yet, fall back to its
   // labeled placeholder slot (or the FG monogram for the header logo).
+  function imgFailed(img) {
+    img.hidden = true;
+    var n = img.nextElementSibling;
+    if (n && (n.classList.contains("img-slot") || n.classList.contains("brand-mark"))) {
+      n.hidden = false;
+    }
+  }
   document.addEventListener("error", function (e) {
     var t = e.target;
-    if (t && t.tagName === "IMG" && t.classList.contains("real-img")) {
-      t.hidden = true;
-      var n = t.nextElementSibling;
-      if (n && (n.classList.contains("img-slot") || n.classList.contains("brand-mark"))) {
-        n.hidden = false;
-      }
-    }
+    if (t && t.tagName === "IMG" && t.classList.contains("real-img")) imgFailed(t);
   }, true);
+  // Images that failed before this script ran won't fire the listener — sweep them now.
+  document.querySelectorAll("img.real-img").forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) imgFailed(img);
+  });
 
   // Respect reduced-motion preference for the background hero video
   var heroVideo = document.querySelector(".hero-video-bg");
