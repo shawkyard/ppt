@@ -4,26 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cornerstone Chiropractic — Hero Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0c0e11;
-    --bg2:#13171c;
-    --cream:#f5efe4;
-    --muted:#9aa4ad;
-    --teal:#2fd6a6;
-    --teal-soft:#7af0cf;
-    --warm:#e8654a;
-    --warm-soft:#f6a78f;
-    --line:rgba(245,239,228,.08);
+    --bg:#000000;
+    --bg2:#0a0705;
+    --cream:#f3e9d6;
+    --muted:#9a8b73;
+    --gold:#d9a441;          /* metallic gold */
+    --gold-soft:#f6dd9c;     /* highlight gold */
+    --gold-deep:#a9762a;     /* shadow gold */
+    --warm:#c1281f;          /* crimson */
+    --warm-soft:#e8736a;
+    --line:rgba(217,164,65,.14);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     font-family:"Helvetica Neue",Arial,system-ui,sans-serif;
     background:
-      radial-gradient(1200px 600px at 78% 18%, rgba(47,214,166,.10), transparent 60%),
-      radial-gradient(900px 500px at 12% 90%, rgba(232,101,74,.07), transparent 60%),
-      linear-gradient(160deg,var(--bg),var(--bg2));
+      radial-gradient(1100px 600px at 80% 16%, rgba(217,164,65,.10), transparent 62%),
+      radial-gradient(900px 520px at 14% 92%, rgba(193,40,31,.08), transparent 60%),
+      var(--bg);
     color:var(--cream);
     min-height:100vh;
     display:flex;
@@ -45,18 +49,24 @@
   .copy{max-width:560px}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
-    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--teal-soft);font-weight:700;margin-bottom:22px;
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-soft);font-weight:700;margin-bottom:22px;
   }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
   h1{
-    font-size:clamp(34px,5vw,60px);
-    line-height:1.04;
-    font-weight:800;
-    letter-spacing:-.02em;
+    font-family:"Cormorant Garamond","Trajan Pro",Georgia,"Times New Roman",serif;
+    font-size:clamp(40px,5.6vw,70px);
+    line-height:1.02;
+    font-weight:700;
+    letter-spacing:.005em;
     margin-bottom:22px;
   }
-  h1 .accent{color:var(--teal)}
+  /* metallic gold text */
+  h1 .accent{
+    background:linear-gradient(180deg,var(--gold-soft) 8%,var(--gold) 48%,var(--gold-deep) 92%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 1px 0 rgba(0,0,0,.4);
+  }
   .word{display:inline-block;opacity:0;transform:translateX(-40px);}
   .lede{
     font-size:clamp(16px,1.6vw,19px);
@@ -67,15 +77,15 @@
   /* problem vs solution contrast */
   .disease{
     color:var(--warm-soft);font-weight:700;
-    text-decoration:line-through;text-decoration-color:rgba(232,101,74,.7);
+    text-decoration:line-through;text-decoration-color:rgba(193,40,31,.85);
     text-decoration-thickness:2px;
   }
-  .arrow{color:var(--muted);font-weight:700;padding:0 4px;}
+  .arrow{color:var(--gold);font-weight:700;padding:0 4px;}
   .power{
-    color:#05281f;font-weight:800;letter-spacing:.04em;
-    background:linear-gradient(90deg,var(--teal),var(--teal-soft));
-    padding:1px 9px;border-radius:6px;white-space:nowrap;
-    box-shadow:0 4px 16px rgba(47,214,166,.35);
+    color:#2a1602;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold) 60%,var(--gold-deep));
+    padding:2px 10px;border-radius:6px;white-space:nowrap;
+    box-shadow:0 4px 16px rgba(217,164,65,.4);
   }
   .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;opacity:0;transform:translateX(-30px);}
   .btn{
@@ -83,10 +93,12 @@
     padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;
     text-decoration:none;transition:transform .2s ease, box-shadow .2s ease;
   }
-  .btn-primary{background:var(--teal);color:#05281f;box-shadow:0 10px 30px rgba(47,214,166,.28)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(47,214,166,.42)}
+  .btn-primary{
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold) 55%,var(--gold-deep));
+    color:#2a1602;box-shadow:0 10px 30px rgba(217,164,65,.3)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(217,164,65,.5)}
   .btn-ghost{color:var(--cream);border:1px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-soft)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
   .signoff{margin-top:30px;font-size:13px;color:var(--muted);opacity:0;transform:translateX(-30px);}
   .signoff b{color:var(--cream)}
 
@@ -113,19 +125,19 @@
   }
   .label small{display:block;font-weight:600;letter-spacing:.16em;font-size:10px;color:var(--muted);margin-top:5px;text-transform:uppercase}
   .label.bad{color:var(--warm-soft)}
-  .label.good{color:var(--teal-soft)}
+  .label.good{color:var(--gold-soft)}
   .pill{
     position:absolute;top:8px;left:50%;transform:translateX(-50%);
     padding:5px 13px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.12em;
     text-transform:uppercase;white-space:nowrap;
   }
-  .pill.bad{background:rgba(232,101,74,.14);color:var(--warm-soft);border:1px solid rgba(232,101,74,.35)}
-  .pill.good{background:rgba(47,214,166,.14);color:var(--teal-soft);border:1px solid rgba(47,214,166,.4)}
+  .pill.bad{background:rgba(193,40,31,.16);color:var(--warm-soft);border:1px solid rgba(193,40,31,.4)}
+  .pill.good{background:rgba(217,164,65,.16);color:var(--gold-soft);border:1px solid rgba(217,164,65,.45)}
 
   /* glow loop on the healthy spine */
   @keyframes glowPulse{
-    0%,100%{filter:drop-shadow(0 0 6px rgba(47,214,166,.35))}
-    50%{filter:drop-shadow(0 0 18px rgba(47,214,166,.7))}
+    0%,100%{filter:drop-shadow(0 0 6px rgba(217,164,65,.4))}
+    50%{filter:drop-shadow(0 0 20px rgba(246,221,156,.8))}
   }
   .good .spine-svg{animation:glowPulse 3.4s ease-in-out infinite}
   /* pinch pain pulse on the unhealthy spine */
@@ -155,7 +167,7 @@
   <main class="hero">
     <!-- LEFT -->
     <section class="copy">
-      <span class="eyebrow"><span class="dot"></span>Cornerstone Chiropractic · Since 2001</span>
+      <span class="eyebrow"><span class="dot"></span>Cornerstone Chiropractic · Power for Life</span>
       <h1 id="headline">
         <span class="word">A</span> <span class="word">Voice</span> <span class="word">for</span>
         <span class="word accent">Powerful</span> <span class="word accent">Healing</span>
@@ -202,9 +214,9 @@
   function buildSpine(opts){
     const svg=el("svg",{class:"spine-svg",viewBox:`-30 0 ${W+60} ${H+20}`,width:W,height:H});
     const cx=W/2;
-    const col = opts.healthy ? "var(--teal)" : "var(--warm)";
-    const colSoft = opts.healthy ? "var(--teal-soft)" : "var(--warm-soft)";
-    const disc = opts.healthy ? "rgba(122,240,207,.55)" : "rgba(246,167,143,.5)";
+    const col = opts.healthy ? "var(--gold)" : "var(--warm)";
+    const colSoft = opts.healthy ? "var(--gold-soft)" : "var(--warm-soft)";
+    const disc = opts.healthy ? "rgba(246,221,156,.6)" : "rgba(232,115,106,.5)";
 
     // ---- spinal cord / flow line through vertebral bodies ----
     let d="", pts=[];
@@ -234,9 +246,13 @@
         svg.appendChild(el("ellipse",{cx:mx,cy:my,rx:15,ry:dh,fill:pinch?"var(--warm)":disc,opacity:pinch?.9:.6}));
       }
 
-      // vertebra body (lateral block)
+      // vertebra body (lateral block) — tilt to follow the curve; misaligned when unhealthy
       const w=34, h=15;
-      const g=el("g",{transform:`translate(${p.x} ${p.y})`});
+      const a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)];
+      let ang=Math.atan2(b.x-a.x, -(b.y-a.y))*180/Math.PI;   // tangent tilt
+      if(!opts.healthy){ ang = ang*1.5 + (i%2?9:-9)*Math.sin(p.t*Math.PI); } // exaggerate + jitter
+      else { ang *= .5; }
+      const g=el("g",{transform:`translate(${p.x} ${p.y}) rotate(${ang.toFixed(1)})`});
       g.appendChild(el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:6,
         fill:"#0c0e11",stroke:col,"stroke-width":2.4}));
       // subtle inner fill toward the top (vertebral body)
@@ -264,10 +280,11 @@
     healthy:true,
     curve:t=> 11*Math.sin(t*Math.PI*1.9 - 0.4)
   });
-  // Unhealthy: exaggerated forward hunch + lean (kyphosis)
+  // Unhealthy: severe forward hunch + collapsing lean (kyphosis) + jitter
   const unhealthy = buildSpine({
     healthy:false,
-    curve:t=> 40*Math.sin(t*Math.PI*0.95 + 0.25) + 26*t - 10
+    curve:t=> 62*Math.sin(t*Math.PI*0.9 + 0.2) + 46*t - 20
+            + 7*Math.sin(t*Math.PI*7)   // vertebra-to-vertebra misalignment
   });
 
   const cardBad=document.getElementById('cardBad');
