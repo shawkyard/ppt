@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornerstone Chiropractic — Hero Prototype</title>
+<style>
+  :root{
+    --bg:#0c0e11;
+    --bg2:#13171c;
+    --cream:#f5efe4;
+    --muted:#9aa4ad;
+    --teal:#2fd6a6;
+    --teal-soft:#7af0cf;
+    --warm:#e8654a;
+    --warm-soft:#f6a78f;
+    --line:rgba(245,239,228,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Helvetica Neue",Arial,system-ui,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 78% 18%, rgba(47,214,166,.10), transparent 60%),
+      radial-gradient(900px 500px at 12% 90%, rgba(232,101,74,.07), transparent 60%),
+      linear-gradient(160deg,var(--bg),var(--bg2));
+    color:var(--cream);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow-x:hidden;
+  }
+
+  .hero{
+    width:min(1180px,92vw);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    align-items:center;
+    gap:48px;
+    padding:64px 0;
+  }
+
+  /* ---------- LEFT: copy ---------- */
+  .copy{max-width:560px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--teal-soft);font-weight:700;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
+  h1{
+    font-size:clamp(34px,5vw,60px);
+    line-height:1.04;
+    font-weight:800;
+    letter-spacing:-.02em;
+    margin-bottom:22px;
+  }
+  h1 .accent{color:var(--teal)}
+  .word{display:inline-block;opacity:0;transform:translateX(-40px);}
+  .lede{
+    font-size:clamp(16px,1.6vw,19px);
+    line-height:1.6;color:var(--muted);max-width:48ch;margin-bottom:34px;
+    opacity:0;transform:translateX(-30px);
+  }
+  .lede b{color:var(--cream);font-weight:600}
+  /* problem vs solution contrast */
+  .disease{
+    color:var(--warm-soft);font-weight:700;
+    text-decoration:line-through;text-decoration-color:rgba(232,101,74,.7);
+    text-decoration-thickness:2px;
+  }
+  .arrow{color:var(--muted);font-weight:700;padding:0 4px;}
+  .power{
+    color:#05281f;font-weight:800;letter-spacing:.04em;
+    background:linear-gradient(90deg,var(--teal),var(--teal-soft));
+    padding:1px 9px;border-radius:6px;white-space:nowrap;
+    box-shadow:0 4px 16px rgba(47,214,166,.35);
+  }
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;opacity:0;transform:translateX(-30px);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;
+    text-decoration:none;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--teal);color:#05281f;box-shadow:0 10px 30px rgba(47,214,166,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(47,214,166,.42)}
+  .btn-ghost{color:var(--cream);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-soft)}
+  .signoff{margin-top:30px;font-size:13px;color:var(--muted);opacity:0;transform:translateX(-30px);}
+  .signoff b{color:var(--cream)}
+
+  /* ---------- RIGHT: spines ---------- */
+  .stage{
+    position:relative;
+    display:flex;justify-content:center;align-items:flex-end;gap:24px;
+    min-height:560px;
+  }
+  .stage::before{
+    content:"";position:absolute;inset:auto 0 6% 0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--line),transparent);
+  }
+  .spine-card{
+    position:relative;display:flex;flex-direction:column;align-items:center;gap:0;
+    opacity:0;            /* set by JS reveal */
+    will-change:transform,opacity;
+  }
+  .spine-card svg{display:block;overflow:visible}
+  .label{
+    margin-top:14px;text-align:center;
+    font-weight:800;letter-spacing:.04em;font-size:15px;
+    text-transform:uppercase;
+  }
+  .label small{display:block;font-weight:600;letter-spacing:.16em;font-size:10px;color:var(--muted);margin-top:5px;text-transform:uppercase}
+  .label.bad{color:var(--warm-soft)}
+  .label.good{color:var(--teal-soft)}
+  .pill{
+    position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    padding:5px 13px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.12em;
+    text-transform:uppercase;white-space:nowrap;
+  }
+  .pill.bad{background:rgba(232,101,74,.14);color:var(--warm-soft);border:1px solid rgba(232,101,74,.35)}
+  .pill.good{background:rgba(47,214,166,.14);color:var(--teal-soft);border:1px solid rgba(47,214,166,.4)}
+
+  /* glow loop on the healthy spine */
+  @keyframes glowPulse{
+    0%,100%{filter:drop-shadow(0 0 6px rgba(47,214,166,.35))}
+    50%{filter:drop-shadow(0 0 18px rgba(47,214,166,.7))}
+  }
+  .good .spine-svg{animation:glowPulse 3.4s ease-in-out infinite}
+  /* pinch pain pulse on the unhealthy spine */
+  @keyframes painPulse{
+    0%,100%{opacity:.15;r:6}
+    50%{opacity:.55;r:13}
+  }
+  .pain{animation:painPulse 1.9s ease-in-out infinite}
+
+  /* gentle idle float once settled */
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  .settled.good{animation:floaty 5s ease-in-out infinite}
+  .settled.bad{animation:floaty 6s ease-in-out infinite .4s}
+
+  @media (max-width:880px){
+    .hero{grid-template-columns:1fr;gap:30px;text-align:left}
+    .stage{min-height:440px;transform:scale(.82);transform-origin:top center}
+    .copy{order:2}.stage{order:1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .word,.lede,.cta-row,.signoff,.spine-card{opacity:1!important;transform:none!important}
+    .good .spine-svg,.pain,.settled{animation:none!important}
+  }
+</style>
+</head>
+<body>
+  <main class="hero">
+    <!-- LEFT -->
+    <section class="copy">
+      <span class="eyebrow"><span class="dot"></span>Cornerstone Chiropractic · Since 2001</span>
+      <h1 id="headline">
+        <span class="word">A</span> <span class="word">Voice</span> <span class="word">for</span>
+        <span class="word accent">Powerful</span> <span class="word accent">Healing</span>
+        <span class="word">in</span> <span class="word">Our</span> <span class="word">Community</span>
+      </h1>
+      <p class="lede" id="lede">
+        Your spine is the cornerstone of your health. We help you go from the
+        <span class="disease">cause of dis‑ease</span>
+        <span class="arrow">→</span>
+        its <span class="power">POWER solution</span> —
+        so your whole family can live well, for life.
+      </p>
+      <div class="cta-row" id="cta">
+        <a class="btn btn-primary" href="#">Discover the POWER Solution</a>
+        <a class="btn btn-ghost" href="#">Book Your First Visit</a>
+      </div>
+      <p class="signoff" id="signoff">
+        <b>Dr. Todd Doxey, D.C., M.P.H.</b> — University of Utah · L.A. College of Chiropractic
+      </p>
+    </section>
+
+    <!-- RIGHT: spines -->
+    <section class="stage" id="stage">
+      <div class="spine-card bad" id="cardBad" data-delay="0">
+        <span class="pill bad">Before</span>
+        <!-- unhealthy spine injected here -->
+        <div class="label bad">Not This Spine<small>Subluxated · compressed</small></div>
+      </div>
+      <div class="spine-card good" id="cardGood" data-delay="240">
+        <span class="pill good">After</span>
+        <!-- healthy spine injected here -->
+        <div class="label good">Healthy Spine!<small>Aligned · powered</small></div>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  const W=170, H=470, TOP=46, BOTTOM=430, N=17;
+  const NS="http://www.w3.org/2000/svg";
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+  // curve(t) returns horizontal offset from centerline; t:0(top)->1(bottom)
+  function buildSpine(opts){
+    const svg=el("svg",{class:"spine-svg",viewBox:`-30 0 ${W+60} ${H+20}`,width:W,height:H});
+    const cx=W/2;
+    const col = opts.healthy ? "var(--teal)" : "var(--warm)";
+    const colSoft = opts.healthy ? "var(--teal-soft)" : "var(--warm-soft)";
+    const disc = opts.healthy ? "rgba(122,240,207,.55)" : "rgba(246,167,143,.5)";
+
+    // ---- spinal cord / flow line through vertebral bodies ----
+    let d="", pts=[];
+    for(let i=0;i<N;i++){
+      const t=i/(N-1);
+      // uneven vertical spacing on the unhealthy spine (compression)
+      let y = TOP + (BOTTOM-TOP)*t;
+      if(!opts.healthy){ y += Math.sin(t*Math.PI)* -14; } // bunch toward the hunch
+      const x = cx + opts.curve(t);
+      pts.push({x,y,t});
+    }
+    pts.forEach((p,i)=> d += (i===0?`M ${p.x} ${p.y}`:` L ${p.x} ${p.y}`));
+    const cord=el("path",{d,fill:"none",stroke:colSoft,"stroke-width":3,
+      "stroke-linecap":"round","stroke-linejoin":"round",opacity:.35});
+    svg.appendChild(cord);
+
+    // ---- discs + vertebrae ----
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];
+      // disc below this vertebra
+      if(i<pts.length-1){
+        const q=pts[i+1];
+        const mx=(p.x+q.x)/2, my=(p.y+q.y)/2;
+        // pinched discs near the hunch on the bad spine
+        const pinch = (!opts.healthy && p.t>0.32 && p.t<0.6);
+        const dh = pinch ? 2.4 : 4.2;
+        svg.appendChild(el("ellipse",{cx:mx,cy:my,rx:15,ry:dh,fill:pinch?"var(--warm)":disc,opacity:pinch?.9:.6}));
+      }
+
+      // vertebra body (lateral block)
+      const w=34, h=15;
+      const g=el("g",{transform:`translate(${p.x} ${p.y})`});
+      g.appendChild(el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:6,
+        fill:"#0c0e11",stroke:col,"stroke-width":2.4}));
+      // subtle inner fill toward the top (vertebral body)
+      g.appendChild(el("rect",{x:-w/2+3,y:-h/2+3,width:w-6,height:h-6,rx:4,fill:col,opacity:.16}));
+      // spinous process pointing backward (-x)
+      const sp = opts.healthy ? 14 : 11;
+      g.appendChild(el("path",{
+        d:`M ${-w/2} -2 L ${-w/2-sp} 3 L ${-w/2} 5 Z`,
+        fill:col,opacity:.85}));
+      svg.appendChild(g);
+    }
+
+    // ---- pain markers on the unhealthy pinch ----
+    if(!opts.healthy){
+      pts.filter(p=>p.t>0.34&&p.t<0.56).forEach((p,k)=>{
+        svg.appendChild(el("circle",{class:"pain",cx:p.x-30,cy:p.y,r:7,
+          fill:"var(--warm)",style:`animation-delay:${k*0.25}s`}));
+      });
+    }
+    return svg;
+  }
+
+  // Healthy: gentle, balanced S-curve (well aligned)
+  const healthy = buildSpine({
+    healthy:true,
+    curve:t=> 11*Math.sin(t*Math.PI*1.9 - 0.4)
+  });
+  // Unhealthy: exaggerated forward hunch + lean (kyphosis)
+  const unhealthy = buildSpine({
+    healthy:false,
+    curve:t=> 40*Math.sin(t*Math.PI*0.95 + 0.25) + 26*t - 10
+  });
+
+  const cardBad=document.getElementById('cardBad');
+  const cardGood=document.getElementById('cardGood');
+  cardBad.insertBefore(unhealthy, cardBad.querySelector('.label'));
+  cardGood.insertBefore(healthy, cardGood.querySelector('.label'));
+
+  // ---------- entrance: roll in from left -> right, then settle ----------
+  function rollIn(card){
+    const delay=parseInt(card.dataset.delay||0,10);
+    card.style.transform='translateX(-70vw) rotate(-9deg)';
+    card.style.opacity='0';
+    setTimeout(()=>{
+      card.style.transition='transform 1.15s cubic-bezier(.16,.84,.3,1.06), opacity .7s ease';
+      card.style.transform='translateX(0) rotate(0deg)';
+      card.style.opacity='1';
+      // hand off to idle float once the slide finishes
+      setTimeout(()=>{ card.style.transition='none'; card.style.transform='none'; card.classList.add('settled'); },1250);
+    }, delay+150);
+  }
+
+  function revealWords(){
+    document.querySelectorAll('#headline .word').forEach((w,i)=>{
+      setTimeout(()=>{
+        w.style.transition='transform .55s cubic-bezier(.2,.9,.3,1.1), opacity .55s ease';
+        w.style.opacity='1'; w.style.transform='translateX(0)';
+      }, 120*i);
+    });
+    ['lede','cta','signoff'].forEach((id,i)=>{
+      const e=document.getElementById(id);
+      setTimeout(()=>{
+        e.style.transition='transform .6s ease, opacity .6s ease';
+        e.style.opacity='1'; e.style.transform='translateX(0)';
+      }, 1000 + i*180);
+    });
+  }
+
+  window.addEventListener('load',()=>{
+    revealWords();
+    rollIn(cardBad);
+    rollIn(cardGood);
+  });
+})();
+</script>
+</body>
+</html>
