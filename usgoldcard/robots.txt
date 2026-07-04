@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/campaigns
+
+Sitemap: https://usgoldcard.com/sitemap.xml
