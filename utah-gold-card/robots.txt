@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin-dashboard/
+Disallow: /campaign-dashboard/
+Disallow: /build/
+
+Sitemap: https://utahgoldcard.com/sitemap.xml
