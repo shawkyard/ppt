@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Builder — LeadGen Machine</title>
+<meta name="description" content="Build a LeadGen campaign step by step: from target market to demo results.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=1">
+</head>
+<body>
+<div class="app">
+  <aside class="app__side">
+    <a href="/index.html" class="app__brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#20252f"/><rect x="11" y="19" width="30" height="20" rx="4" fill="#cf9a34"/><rect x="11" y="24" width="30" height="4" fill="#a97b1f"/><path d="M44 44 l5 -8 l5 8 l-3.2 0 l0 7 l-3.6 0 l0 -7 z" fill="#d15a25"/></svg>LeadGen Machine</a>
+    <span class="app__nav-label">Workspace · Northgate IT</span>
+    <a href="/dashboard/leadgen.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+    <a href="/dashboard/leadgen/campaign-builder.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Campaign Builder</a>
+    <a href="/dashboard/leadgen/results.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>Results</a>
+    <a href="/dashboard/leadgen/message-studio.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message Studio</a>
+    <a href="/dashboard/leadgen/reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Reports</a>
+    <span class="app__nav-label">Your business</span>
+    <a href="/company/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/></svg>My Mini-Site</a>
+    <a href="/admin.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>Admin Console</a>
+    <div class="app__credits"><div class="k" style="font-size:.75rem;color:#8a94a4;text-transform:uppercase;">Credit balance</div><div class="bal">2,140</div><div class="bar"><i style="width:71%"></i></div><div style="font-size:.78rem;color:#8a94a4;">3,000 monthly · renews Aug 1</div></div>
+  </aside>
+
+  <div class="app__main">
+    <div class="app__mobile-top"><a href="/dashboard/leadgen.html" style="font-weight:800;">☰ LeadGen Machine</a></div>
+    <div class="app__topbar"><h1>Campaign Builder</h1><span class="credit-cost">Est. this campaign · 5 credits to plan</span></div>
+    <div class="app__body" data-wizard>
+
+      <!-- Step chips -->
+      <div class="wizard-steps">
+        <div class="ws active"><b>1</b> Sell</div>
+        <div class="ws"><b>2</b> Reach</div>
+        <div class="ws"><b>3</b> Geography</div>
+        <div class="ws"><b>4</b> Industries</div>
+        <div class="ws"><b>5</b> Titles</div>
+        <div class="ws"><b>6</b> Offer / page</div>
+        <div class="ws"><b>7</b> Tone</div>
+        <div class="ws"><b>8</b> Credits</div>
+        <div class="ws"><b>9</b> Results</div>
+      </div>
+
+      <!-- Panels -->
+      <div class="panel"><div class="panel__body">
+
+        <div class="wpanel active">
+          <h2>1 · What do you sell?</h2>
+          <p class="muted">Tell us what you offer so we can match the right buyers.</p>
+          <div class="field mt-16"><label>Your service</label><input value="Managed IT &amp; cybersecurity for offices"></div>
+          <div class="field"><label>Best-fit customer in one line (your ICP)</label><input value="Dental &amp; medical offices with 10–100 staff that depend on their software"></div>
+          <div class="btn-row"><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>2 · Who do you want to reach?</h2>
+          <p class="muted">Pick the kinds of companies this campaign should target.</p>
+          <div class="chip-row mt-16" data-chipgroup="multi"><span class="chip active">Dental offices</span><span class="chip">Medical clinics</span><span class="chip">Professional firms</span><span class="chip">Property managers</span><span class="chip">Multi-location offices</span></div>
+          <div class="field mt-24"><label>Company size</label><select><option>10–100 employees</option><option>1–10 employees</option><option>100–500 employees</option></select></div>
+          <div class="btn-row"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>3 · What geography matters?</h2>
+          <div class="field-row mt-16"><div class="field"><label>State(s)</label><input value="Utah"></div><div class="field"><label>Cities / radius</label><input value="Salt Lake City + 40 mi"></div></div>
+          <div class="btn-row"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>4 · Industries to include or avoid</h2>
+          <div class="grid grid-2 mt-16">
+            <div><label class="strong">Include</label><div class="chip-row mt-16" data-chipgroup="multi"><span class="chip active">Dental</span><span class="chip active">Medical</span><span class="chip">Legal</span><span class="chip">Real estate</span></div></div>
+            <div><label class="strong">Avoid</label><div class="chip-row mt-16" data-chipgroup="multi"><span class="chip active">Solo freelancers</span><span class="chip">Enterprises 500+</span><span class="chip">Government</span></div></div>
+          </div>
+          <div class="btn-row mt-24"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>5 · What job titles matter?</h2>
+          <p class="muted">We identify likely decision-maker roles — we never scrape or guarantee personal data.</p>
+          <div class="chip-row mt-16" data-chipgroup="multi"><span class="chip active">Office Manager</span><span class="chip active">Practice Owner</span><span class="chip active">Operations Manager</span><span class="chip">Managing Partner</span><span class="chip">Facilities Lead</span></div>
+          <div class="btn-row mt-24"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>6 · Which offer &amp; audience page?</h2>
+          <div class="field mt-16"><label>Offer to feature</label><select><option>Free 1-hour IT assessment ($100 value)</option><option>Free security review</option></select></div>
+          <div class="field"><label>Landing page (audience page)</label><select><option>IT for dental offices</option><option>IT for medical offices</option><option>IT for property managers</option></select></div>
+          <div class="offer-strip mt-16"><div class="offer-strip__ico">🎁</div><div><strong>Prospects land on your dental audience page</strong><br><span class="muted">— the exact message written for them.</span></div></div>
+          <div class="btn-row mt-24"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>7 · What tone should the message use?</h2>
+          <div class="chip-row mt-16" data-chipgroup="single"><span class="chip active">Friendly &amp; professional</span><span class="chip">Direct &amp; concise</span><span class="chip">Warm &amp; consultative</span><span class="chip">Formal</span></div>
+          <div class="btn-row mt-24"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--primary" data-next>Continue →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <h2>8 · Review credit estimate</h2>
+          <div class="table-wrap mt-16"><table class="table">
+            <thead><tr><th>Action</th><th>Qty</th><th style="text-align:right;">Credits</th></tr></thead>
+            <tbody>
+              <tr><td>Campaign plan</td><td>1</td><td style="text-align:right;">5</td></tr>
+              <tr><td>Research company</td><td>80</td><td style="text-align:right;">800</td></tr>
+              <tr><td>Find likely contact roles</td><td>80</td><td style="text-align:right;">1,200</td></tr>
+              <tr><td>Generate email drafts</td><td>80</td><td style="text-align:right;">400</td></tr>
+              <tr style="border-top:2px solid var(--line);"><td colspan="2"><b>Estimated total</b></td><td style="text-align:right;"><b class="gold-txt">2,405 credits</b></td></tr>
+            </tbody>
+          </table></div>
+          <p class="muted mt-16">Balance after run: <b>~ −265</b> — you may want to <a href="/pricing.html">top up credits</a> or trim the list.</p>
+          <div class="btn-row mt-16"><button class="btn btn--ghost" data-prev>← Back</button><button class="btn btn--gold" data-next>Generate demo results →</button></div>
+        </div>
+
+        <div class="wpanel">
+          <div class="compliance-box"><h4>✅ Demo results generated (prototype)</h4><p style="font-size:.92rem;">In the live platform this runs real research and drafts. Here's a preview of what you'd get.</p></div>
+          <div class="grid grid-4 mt-24">
+            <div class="stat-tile"><div class="k">Companies found</div><div class="v">80</div></div>
+            <div class="stat-tile"><div class="k">Good-fit (score ≥ 8)</div><div class="v up">34</div></div>
+            <div class="stat-tile"><div class="k">Likely contacts</div><div class="v">96</div></div>
+            <div class="stat-tile"><div class="k">Drafts ready</div><div class="v">80</div></div>
+          </div>
+          <div class="btn-row mt-24"><button class="btn btn--ghost" data-prev>← Back</button><a href="/dashboard/leadgen/results.html" class="btn btn--primary">View full results →</a><a href="/dashboard/leadgen/message-studio.html" class="btn btn--gold">Open Message Studio →</a></div>
+        </div>
+
+      </div></div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js?v=1"></script>
+</body>
+</html>

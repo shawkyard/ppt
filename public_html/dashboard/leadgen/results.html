@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Results — LeadGen Machine</title>
+<meta name="description" content="Researched companies, fit scores, and likely contacts for your campaign.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=1">
+</head>
+<body>
+<div class="app">
+  <aside class="app__side">
+    <a href="/index.html" class="app__brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#20252f"/><rect x="11" y="19" width="30" height="20" rx="4" fill="#cf9a34"/><rect x="11" y="24" width="30" height="4" fill="#a97b1f"/><path d="M44 44 l5 -8 l5 8 l-3.2 0 l0 7 l-3.6 0 l0 -7 z" fill="#d15a25"/></svg>LeadGen Machine</a>
+    <span class="app__nav-label">Workspace · Northgate IT</span>
+    <a href="/dashboard/leadgen.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+    <a href="/dashboard/leadgen/campaign-builder.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Campaign Builder</a>
+    <a href="/dashboard/leadgen/results.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>Results</a>
+    <a href="/dashboard/leadgen/message-studio.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message Studio</a>
+    <a href="/dashboard/leadgen/reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Reports</a>
+    <span class="app__nav-label">Your business</span>
+    <a href="/company/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/></svg>My Mini-Site</a>
+    <a href="/admin.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>Admin Console</a>
+    <div class="app__credits"><div class="k" style="font-size:.75rem;color:#8a94a4;text-transform:uppercase;">Credit balance</div><div class="bal">2,140</div><div class="bar"><i style="width:71%"></i></div><div style="font-size:.78rem;color:#8a94a4;">3,000 monthly · renews Aug 1</div></div>
+  </aside>
+
+  <div class="app__main">
+    <div class="app__mobile-top"><a href="/dashboard/leadgen.html" style="font-weight:800;">☰ LeadGen Machine</a></div>
+    <div class="app__topbar"><h1>Results · Dental offices — SLC</h1><span class="credit-cost">Export leads · 50 credits</span></div>
+    <div class="app__body">
+
+      <div class="grid grid-4" style="margin-bottom:24px;">
+        <div class="stat-tile"><div class="k">Companies</div><div class="v">80</div></div>
+        <div class="stat-tile"><div class="k">Good-fit (≥ 8)</div><div class="v up">34</div></div>
+        <div class="stat-tile"><div class="k">Likely contacts</div><div class="v">96</div></div>
+        <div class="stat-tile"><div class="k">Drafts ready</div><div class="v">80</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head">
+          <h3>Researched companies</h3>
+          <div class="btn-row"><a href="#" class="btn btn--ghost btn--sm">Export leads (50 cr)</a><a href="/dashboard/leadgen/message-studio.html" class="btn btn--gold btn--sm">Write outreach</a></div>
+        </div>
+        <div class="panel__body" style="padding:0;">
+          <div style="padding:14px 24px;border-bottom:1px solid var(--line-soft);"><input type="search" placeholder="🔍 Filter companies…" style="width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:10px;"></div>
+          <div class="table-wrap"><table class="table">
+            <thead><tr><th>Company</th><th>City</th><th>Size</th><th>Likely contact role</th><th>Fit</th><th>Draft</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wasatch Family Dental</b></td><td>Salt Lake City</td><td>18</td><td>Office Manager</td><td><span class="badge badge--green">9.4</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Cottonwood Dental Group</b></td><td>Murray</td><td>34</td><td>Practice Owner</td><td><span class="badge badge--green">9.1</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Valley Orthodontics</b></td><td>Sandy</td><td>22</td><td>Operations Manager</td><td><span class="badge badge--green">8.7</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Bright Smile Pediatric Dental</b></td><td>Draper</td><td>15</td><td>Office Manager</td><td><span class="badge badge--green">8.5</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Foothill Dental Arts</b></td><td>SLC</td><td>26</td><td>Practice Owner</td><td><span class="badge badge--gold">7.6</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Redwood Family Dentistry</b></td><td>West Jordan</td><td>12</td><td>Office Manager</td><td><span class="badge badge--gold">7.2</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+              <tr><td><b>Alta View Dental</b></td><td>Sandy</td><td>40</td><td>Managing Partner</td><td><span class="badge badge--gold">6.9</span></td><td><a href="/dashboard/leadgen/message-studio.html">Open →</a></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+      <p class="muted mt-16" style="font-size:.85rem;">Fit scores are demo data. Contact roles are likely-role suggestions, not verified personal contact details.</p>
+
+    </div>
+  </div>
+</div>
+<script src="/js/main.js?v=1"></script>
+</body>
+</html>

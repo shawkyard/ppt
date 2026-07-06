@@ -1,30 +1,80 @@
-# Fajita Grill — Premium Audience-Specific Website
+# B2B Local Sales Machine
 
-Concept website for **Fajita Grill** (Mexican & Mediterranean, halal in both kitchens), 7680 S State St, Midvale, UT 84047. Built to the **BBP LLC Master Website Build Engine** standard: 10 core pages + 10 audience-specific sales pages + utility pages, conversion-first, authentic-imagery policy (placeholders until official photos/Entavo videos arrive).
+**Real offers. Better-fit customers. More sales.**
 
-## Structure
+> "We are in business to help you make more money. Period."
 
-```
-public_html/   ← upload the CONTENTS of this folder to Hostinger
-  index.html               Homepage (need-gateway, video slots, trust bar)
-  about / menu / how-to-order / reviews / faq / order-guide / contact / order / visit
-  halal / families / lunch / breakfast / fajitas / mediterranean /
-  catering / delivery / groups / near-you        ← 10 audience sales pages
-  privacy / terms / accessibility / thank-you / 404
-  css/style.css  js/main.js  assets/favicon.svg
-  sitemap.xml  robots.txt  .htaccess
-docs/          ← INTERNAL ONLY — do not upload
-  BUILD-BRIEF.md             facts, sources, flagged items, page rationale
-  IMAGE-SOURCE-LEDGER.md     authentic-image policy tracking
-  PHOTO-VIDEO-REQUEST-LIST.md  what to collect from the owner / Entavo shoot
-  CLIENT-APPROVAL-CHECKLIST.md launch gate
-  HOSTINGER-DEPLOYMENT.md    step-by-step deploy guide
-```
+A premium, standardized B2B sales platform + clickable web-app prototype for local and regional
+B2B service companies. It helps them win better-fit customers through real-value offers,
+standardized premium mini-sites, ICP audience pages, LeadGen tools, and AI-assisted prospecting.
 
-## Before launch (short version)
+One website. One platform. One system.
 
-1. Replace `https://example.com` with the live domain everywhere.
-2. Confirm hours + business name with the owner (listings conflict — see BUILD-BRIEF.md §2).
-3. Drop in official photos/Entavo videos (placeholders must not go live).
-4. Set the owner's email in the two inquiry forms.
-5. Work through docs/CLIENT-APPROVAL-CHECKLIST.md.
+## What's in here
+
+Static HTML/CSS/JS prototype — no build step. Upload the **contents** of `public_html/` to Hostinger.
+
+### Public / marketing site
+| Page | File |
+|------|------|
+| Homepage (11 sections, hero video, full-system illustration) | `index.html` |
+| How It Works (7-step system) | `how-it-works.html` |
+| Directory marketplace + searchable explore | `directory.html` |
+| LeadGen Machine (public + responsible-outreach/compliance) | `leadgen.html` |
+| Pricing (mini-site + LeadGen + bundles + credit costs) | `pricing.html` |
+| ROI examples (interactive revenue calculator) | `roi.html` |
+| Claim / list a business (upgrade flow) | `claim.html` |
+| 404 | `404.html` |
+
+### Standardized company mini-site (demo: "Northgate IT")
+| Page | File |
+|------|------|
+| Main company page — all 20 standardized sections | `company/index.html` |
+| Audience page — full 12-part formula (dental offices) | `company/audience-dental.html` |
+
+Every paid company follows the **same layout and section order** — only logo, colors, photos,
+offers, and copy change. That's how the network scales to thousands of businesses while staying
+clean, premium, and easy to manage.
+
+### LeadGen web-app (clickable dashboard prototype)
+| Screen | File |
+|--------|------|
+| Overview (stats + credits) | `dashboard/leadgen.html` |
+| Campaign Builder (9-step wizard) | `dashboard/leadgen/campaign-builder.html` |
+| Results (researched companies + fit scores) | `dashboard/leadgen/results.html` |
+| Message Studio (generate + approve drafts, statuses) | `dashboard/leadgen/message-studio.html` |
+| Reports (charts + campaign performance) | `dashboard/leadgen/reports.html` |
+
+### Admin
+| Screen | File |
+|--------|------|
+| Platform admin console (businesses, offers, pages, credits, revenue, templates) | `admin.html` |
+
+### Shared
+- `css/style.css` — the full design system (one consistent look across every page)
+- `js/main.js` — nav, video placeholders, demo forms, filters, wizard, ROI slider
+- `assets/favicon.svg` — brand mark (Gold Card + growth arrow)
+
+## Brand architecture
+- **Gold Card** = the stored/real value mechanism (each business brings a real offer, not a fake coupon).
+- **B2B Local Sales Machine** = the marketplace + sales system.
+- **Company mini-sites** = standardized premium sales pages.
+- **Audience pages** = one page per buyer type (farming + landing pages).
+- **LeadGen tools** = the hunting side.
+- **ICP matching** = the secret sauce.
+
+## Design
+White / warm off-white backgrounds, charcoal text, dark premium sections, burnt-orange accents,
+gold accents for value/offers. Friendly cartoon-style SVG illustrations, rounded cards, soft
+shadows, consistent section order. Mobile-first responsive. Fonts: Plus Jakarta Sans + Inter.
+
+## Prototype notes
+- Videos are **placeholders** (click to see a note). Forms are **demo-only** — nothing is sent.
+- All prices, credit costs, stats, and revenue figures are **placeholders / examples, not guarantees.**
+- `dashboard/` and `admin.html` are disallowed in `robots.txt`.
+
+## Before launch
+1. Replace `https://example.com` in `robots.txt` and `sitemap.xml` with the live domain.
+2. Drop in real explainer/Alma videos and business photos/logos.
+3. Wire the lead forms and claim form to a real inbox/CRM.
+4. Set real pricing and confirm credit costs.

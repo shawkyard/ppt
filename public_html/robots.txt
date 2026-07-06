@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you.html
+Disallow: /dashboard/
+Disallow: /admin.html
 
-# Replace example.com with the live domain before launch (see docs/HOSTINGER-DEPLOYMENT.md)
+# Replace example.com with the live domain before launch.
 Sitemap: https://example.com/sitemap.xml

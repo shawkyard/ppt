@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — LeadGen Machine</title>
+<meta name="description" content="Campaign performance, credit usage, and lead reporting.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=1">
+</head>
+<body>
+<div class="app">
+  <aside class="app__side">
+    <a href="/index.html" class="app__brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#20252f"/><rect x="11" y="19" width="30" height="20" rx="4" fill="#cf9a34"/><rect x="11" y="24" width="30" height="4" fill="#a97b1f"/><path d="M44 44 l5 -8 l5 8 l-3.2 0 l0 7 l-3.6 0 l0 -7 z" fill="#d15a25"/></svg>LeadGen Machine</a>
+    <span class="app__nav-label">Workspace · Northgate IT</span>
+    <a href="/dashboard/leadgen.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+    <a href="/dashboard/leadgen/campaign-builder.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Campaign Builder</a>
+    <a href="/dashboard/leadgen/results.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>Results</a>
+    <a href="/dashboard/leadgen/message-studio.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message Studio</a>
+    <a href="/dashboard/leadgen/reports.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Reports</a>
+    <span class="app__nav-label">Your business</span>
+    <a href="/company/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/></svg>My Mini-Site</a>
+    <a href="/admin.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>Admin Console</a>
+    <div class="app__credits"><div class="k" style="font-size:.75rem;color:#8a94a4;text-transform:uppercase;">Credit balance</div><div class="bal">2,140</div><div class="bar"><i style="width:71%"></i></div><div style="font-size:.78rem;color:#8a94a4;">3,000 monthly · renews Aug 1</div></div>
+  </aside>
+
+  <div class="app__main">
+    <div class="app__mobile-top"><a href="/dashboard/leadgen.html" style="font-weight:800;">☰ LeadGen Machine</a></div>
+    <div class="app__topbar"><h1>Reports</h1><a href="#" class="btn btn--ghost btn--sm">Export report (50 cr)</a></div>
+    <div class="app__body">
+
+      <div class="grid grid-4" style="margin-bottom:24px;">
+        <div class="stat-tile"><div class="k">Companies researched</div><div class="v">312</div><div class="d up">▲ 18%</div></div>
+        <div class="stat-tile"><div class="k">Qualified leads</div><div class="v">27</div><div class="d up">▲ 6</div></div>
+        <div class="stat-tile"><div class="k">Reply rate</div><div class="v">14%</div><div class="d up">▲ 2 pts</div></div>
+        <div class="stat-tile"><div class="k">Est. pipeline value</div><div class="v gold-txt">$108k</div><div class="d muted">27 × $4k ann.</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start;">
+        <div class="panel"><div class="panel__head"><h3>Leads by week</h3></div><div class="panel__body">
+          <svg viewBox="0 0 560 220" width="100%" role="img" aria-label="Bar chart of leads per week trending up.">
+            <line x1="40" y1="10" x2="40" y2="180" stroke="#e9e1d3"/><line x1="40" y1="180" x2="540" y2="180" stroke="#e9e1d3"/>
+            <g fill="#d15a25">
+              <rect x="70" y="140" width="44" height="40" rx="5"/><rect x="140" y="120" width="44" height="60" rx="5"/><rect x="210" y="100" width="44" height="80" rx="5"/><rect x="280" y="86" width="44" height="94" rx="5"/><rect x="350" y="64" width="44" height="116" rx="5"/><rect x="420" y="44" width="44" height="136" rx="5"/>
+            </g>
+            <g style="font:600 12px 'Plus Jakarta Sans',sans-serif;fill:#66707f"><text x="92" y="200" text-anchor="middle">W1</text><text x="162" y="200" text-anchor="middle">W2</text><text x="232" y="200" text-anchor="middle">W3</text><text x="302" y="200" text-anchor="middle">W4</text><text x="372" y="200" text-anchor="middle">W5</text><text x="442" y="200" text-anchor="middle">W6</text></g>
+          </svg>
+        </div></div>
+
+        <div class="panel"><div class="panel__head"><h3>Message outcomes</h3></div><div class="panel__body">
+          <div class="grid" style="gap:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span><span class="status-pill status-sent">Sent</span></span><b>184</b></div>
+            <div class="bar" style="height:8px;border-radius:999px;background:var(--offwhite-2);"><i style="display:block;height:100%;width:100%;background:var(--gold);border-radius:999px;"></i></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span><span class="status-pill status-replied">Replied</span></span><b>26</b></div>
+            <div class="bar" style="height:8px;border-radius:999px;background:var(--offwhite-2);"><i style="display:block;height:100%;width:14%;background:var(--green);border-radius:999px;"></i></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span><span class="status-pill status-no">Not interested</span></span><b>19</b></div>
+            <div class="bar" style="height:8px;border-radius:999px;background:var(--offwhite-2);"><i style="display:block;height:100%;width:10%;background:var(--orange);border-radius:999px;"></i></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span><span class="status-pill status-dnc">Do not contact</span></span><b>7</b></div>
+            <div class="bar" style="height:8px;border-radius:999px;background:var(--offwhite-2);"><i style="display:block;height:100%;width:4%;background:#2a2118;border-radius:999px;"></i></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="panel mt-24"><div class="panel__head"><h3>Campaign performance</h3><a href="/dashboard/leadgen/results.html" class="btn btn--ghost btn--sm">View results</a></div>
+        <div class="panel__body" style="padding:0;"><div class="table-wrap"><table class="table">
+          <thead><tr><th>Campaign</th><th>Audience page</th><th>Companies</th><th>Sent</th><th>Replies</th><th>Leads</th><th>Credits used</th></tr></thead>
+          <tbody>
+            <tr><td><b>Dental offices — SLC</b></td><td>IT for dental offices</td><td>84</td><td>72</td><td>11</td><td>11</td><td>2,405</td></tr>
+            <tr><td><b>Medical clinics — UT</b></td><td>IT for medical offices</td><td>66</td><td>58</td><td>8</td><td>7</td><td>1,980</td></tr>
+            <tr><td><b>Property managers</b></td><td>IT for property managers</td><td>92</td><td>54</td><td>5</td><td>6</td><td>1,640</td></tr>
+            <tr><td><b>Growing firms 10–100</b></td><td>IT for growing companies</td><td>70</td><td>0</td><td>0</td><td>3</td><td>420</td></tr>
+          </tbody>
+        </table></div></div>
+      </div>
+      <p class="muted mt-16" style="font-size:.85rem;">All figures are demo data for the prototype.</p>
+
+    </div>
+  </div>
+</div>
+<script src="/js/main.js?v=1"></script>
+</body>
+</html>

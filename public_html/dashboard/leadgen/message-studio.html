@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Studio — LeadGen Machine</title>
+<meta name="description" content="Generate and approve personalized email, LinkedIn, and call-opener drafts. Nothing sends without your approval.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css?v=1">
+</head>
+<body>
+<div class="app">
+  <aside class="app__side">
+    <a href="/index.html" class="app__brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#20252f"/><rect x="11" y="19" width="30" height="20" rx="4" fill="#cf9a34"/><rect x="11" y="24" width="30" height="4" fill="#a97b1f"/><path d="M44 44 l5 -8 l5 8 l-3.2 0 l0 7 l-3.6 0 l0 -7 z" fill="#d15a25"/></svg>LeadGen Machine</a>
+    <span class="app__nav-label">Workspace · Northgate IT</span>
+    <a href="/dashboard/leadgen.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+    <a href="/dashboard/leadgen/campaign-builder.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Campaign Builder</a>
+    <a href="/dashboard/leadgen/results.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>Results</a>
+    <a href="/dashboard/leadgen/message-studio.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message Studio</a>
+    <a href="/dashboard/leadgen/reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Reports</a>
+    <span class="app__nav-label">Your business</span>
+    <a href="/company/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/></svg>My Mini-Site</a>
+    <a href="/admin.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>Admin Console</a>
+    <div class="app__credits"><div class="k" style="font-size:.75rem;color:#8a94a4;text-transform:uppercase;">Credit balance</div><div class="bal">2,140</div><div class="bar"><i style="width:71%"></i></div><div style="font-size:.78rem;color:#8a94a4;">3,000 monthly · renews Aug 1</div></div>
+  </aside>
+
+  <div class="app__main">
+    <div class="app__mobile-top"><a href="/dashboard/leadgen.html" style="font-weight:800;">☰ LeadGen Machine</a></div>
+    <div class="app__topbar"><h1>Message Studio</h1><span class="pill-note">🔒 Nothing sends without your approval</span></div>
+    <div class="app__body">
+      <div style="display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;">
+
+        <!-- Setup -->
+        <div class="panel"><div class="panel__body">
+          <h3 class="mb-0" style="margin-bottom:16px;">Set up the draft</h3>
+          <div class="field"><label>Campaign</label><select><option>Dental offices — SLC</option><option>Medical clinics — UT</option></select></div>
+          <div class="field"><label>Company</label><select><option>Wasatch Family Dental</option><option>Cottonwood Dental Group</option></select></div>
+          <div class="field"><label>Audience page</label><select><option>IT for dental offices</option><option>IT for medical offices</option></select></div>
+          <div class="field"><label>Offer</label><select><option>Free 1-hour IT assessment ($100)</option></select></div>
+          <div class="field"><label>Message type</label>
+            <div class="chip-row" data-chipgroup="single"><span class="chip active">Email</span><span class="chip">LinkedIn DM</span><span class="chip">Call opener</span><span class="chip">Follow-up seq.</span></div>
+          </div>
+          <div class="field"><label>Tone</label><select><option>Friendly &amp; professional</option><option>Direct &amp; concise</option></select></div>
+          <button class="btn btn--gold btn--block" data-generate>✨ Generate draft <span class="credit-cost" style="background:rgba(0,0,0,.12);">5 cr</span></button>
+        </div></div>
+
+        <!-- Output -->
+        <div>
+          <div class="panel" data-msgout style="display:none;">
+            <div class="panel__head"><h3>Generated email draft</h3><span class="status-pill status-draft">Draft</span></div>
+            <div class="panel__body">
+              <div class="msg-preview">
+                <div class="subj">Subject: A quick way to keep Wasatch Family Dental's software running</div>
+                <p>Hi [Office Manager],</p>
+                <p><em>[Opening]</em> I work with dental offices around Salt Lake City on the tech that keeps the schedule moving.</p>
+                <p><em>[Personalized reason]</em> Practices your size running practice-management and imaging software all day tend to lose real hours when a system slows down at the wrong moment.</p>
+                <p><em>[Pain point]</em> If a frozen screen has ever backed up your chairs, you know how fast that turns into lost revenue — and a stressed front desk.</p>
+                <p><em>[Offer]</em> We're offering dental offices a <b>free 1-hour IT assessment (a $100 value)</b> — a security &amp; backup health check with a list of quick wins you keep, whether or not we work together.</p>
+                <p><em>[Audience page link]</em> Here's exactly what it covers → <a href="/company/audience-dental.html">IT for dental offices</a></p>
+                <p><em>[CTA]</em> Would a 20-minute call this week be worth it to see if it's a fit?</p>
+                <p>Thanks,<br>Alex · Northgate IT · (801) 555-0142</p>
+                <div class="foot">[Compliance footer placeholder] Northgate IT, 245 Northgate Ave, Salt Lake City, UT 84101 · You're receiving this as a local business. Reply “unsubscribe” to opt out.</div>
+              </div>
+              <div class="btn-row mt-24"><button class="btn btn--primary btn--sm">✓ Approve</button><button class="btn btn--ghost btn--sm">Save version</button><button class="btn btn--ghost btn--sm">Regenerate (5 cr)</button><button class="btn btn--gold btn--sm">Mark ready to send</button></div>
+              <p class="muted mt-16" style="font-size:.82rem;">Every message output includes: subject line · opening · personalized reason · pain point · offer · audience-page link · CTA · compliance footer.</p>
+            </div>
+          </div>
+
+          <!-- Placeholder before generating -->
+          <div class="panel" data-msgplaceholder>
+            <div class="panel__body center" style="padding:60px 24px;">
+              <div style="font-size:2.4rem;">✍️</div>
+              <h3 class="mt-16">Your draft appears here</h3>
+              <p class="muted">Set up the details on the left, then hit <b>Generate draft</b>.</p>
+            </div>
+          </div>
+
+          <!-- Message queue / statuses -->
+          <div class="panel mt-24">
+            <div class="panel__head"><h3>Message queue</h3></div>
+            <div class="panel__body" style="padding:0;">
+              <div class="table-wrap"><table class="table">
+                <thead><tr><th>Company</th><th>Type</th><th>Version</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Wasatch Family Dental</td><td>Email</td><td>v2</td><td><span class="status-pill status-approved">Approved</span></td></tr>
+                  <tr><td>Cottonwood Dental Group</td><td>Email</td><td>v1</td><td><span class="status-pill status-sent">Sent</span></td></tr>
+                  <tr><td>Valley Orthodontics</td><td>LinkedIn DM</td><td>v1</td><td><span class="status-pill status-replied">Replied</span></td></tr>
+                  <tr><td>Foothill Dental Arts</td><td>Email</td><td>v1</td><td><span class="status-pill status-draft">Draft</span></td></tr>
+                  <tr><td>Alta View Dental</td><td>Email</td><td>v1</td><td><span class="status-pill status-no">Not interested</span></td></tr>
+                  <tr><td>Redwood Family Dentistry</td><td>Email</td><td>—</td><td><span class="status-pill status-dnc">Do not contact</span></td></tr>
+                </tbody>
+              </table></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js?v=1"></script>
+<script>
+  // hide placeholder once generated
+  document.querySelector("[data-generate]")?.addEventListener("click", function(){
+    var ph = document.querySelector("[data-msgplaceholder]"); if (ph) ph.style.display = "none";
+  });
+</script>
+</body>
+</html>

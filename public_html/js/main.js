@@ -1,95 +1,121 @@
-/* Fajita Grill — shared site behavior */
+/* B2B Local Sales Machine — prototype interactions */
 (function () {
   "use strict";
 
-  // Mobile navigation
-  var toggle = document.querySelector(".nav-toggle");
-  var nav = document.querySelector(".nav");
-  if (toggle && nav) {
+  /* ---- Mobile nav ---- */
+  var toggle = document.querySelector(".nav__toggle");
+  var links = document.querySelector(".nav__links");
+  if (toggle && links) {
     toggle.addEventListener("click", function () {
-      nav.classList.add("open");
-      toggle.setAttribute("aria-expanded", "true");
-    });
-    var close = nav.querySelector(".nav-close");
-    if (close) {
-      close.addEventListener("click", function () {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-    }
-    nav.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () { nav.classList.remove("open"); });
+      links.classList.toggle("open");
     });
   }
 
-  // Dropdown (tap support on touch devices)
-  document.querySelectorAll(".nav-drop > button").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var drop = btn.parentElement;
-      drop.classList.toggle("open");
-      btn.setAttribute("aria-expanded", drop.classList.contains("open") ? "true" : "false");
-    });
-  });
-  document.addEventListener("click", function () {
-    document.querySelectorAll(".nav-drop.open").forEach(function (d) {
-      if (!d.closest(".nav.open")) d.classList.remove("open");
+  /* ---- Video placeholders (prototype only) ---- */
+  document.querySelectorAll(".video-ph").forEach(function (v) {
+    v.addEventListener("click", function () {
+      alert("▶  Video placeholder\n\nIn the live site this plays the explainer video. This is a clickable prototype, so the video is not embedded yet.");
     });
   });
 
-  // Inquiry forms: compose an email via mailto until a form service is connected.
-  // See docs/HOSTINGER-DEPLOYMENT.md for connecting a real form endpoint.
-  document.querySelectorAll("form[data-inquiry]").forEach(function (form) {
-    form.addEventListener("submit", function (e) {
+  /* ---- Demo forms: never actually submit ---- */
+  document.querySelectorAll("form[data-demo]").forEach(function (f) {
+    f.addEventListener("submit", function (e) {
       e.preventDefault();
-      var to = form.getAttribute("data-inquiry-to") || "";
-      var subject = form.getAttribute("data-inquiry-subject") || "Website inquiry — Fajita Grill";
-      var lines = [];
-      form.querySelectorAll("input, select, textarea").forEach(function (field) {
-        if (!field.name || field.type === "submit") return;
-        lines.push(field.name + ": " + field.value);
-      });
-      var body = encodeURIComponent(lines.join("\n"));
-      if (to) {
-        window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + body;
+      var note = f.querySelector(".form-note");
+      if (note) {
+        note.style.display = "block";
+        note.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        alert("✅ Thanks! In the live platform this lead is captured and routed to the business. (Prototype — nothing was sent.)");
       }
-      window.setTimeout(function () { window.location.href = "thank-you.html"; }, 400);
+      f.reset();
     });
   });
 
-  // Real photos: if an image file hasn't been uploaded yet, fall back to its
-  // labeled placeholder slot (or the FG monogram for the header logo).
-  function imgFailed(img) {
-    img.hidden = true;
-    var n = img.nextElementSibling;
-    if (n && (n.classList.contains("img-slot") || n.classList.contains("brand-mark"))) {
-      n.hidden = false;
-    }
-  }
-  document.addEventListener("error", function (e) {
-    var t = e.target;
-    if (t && t.tagName === "IMG" && t.classList.contains("real-img")) imgFailed(t);
-  }, true);
-  // Images that failed before this script ran won't fire the listener — sweep them now.
-  document.querySelectorAll("img.real-img").forEach(function (img) {
-    if (img.complete && img.naturalWidth === 0) imgFailed(img);
+  /* ---- Filter / selector chips (visual demo) ---- */
+  document.querySelectorAll("[data-chipgroup]").forEach(function (group) {
+    group.querySelectorAll(".chip").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        if (group.getAttribute("data-chipgroup") === "multi") {
+          chip.classList.toggle("active");
+        } else {
+          group.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("active"); });
+          chip.classList.add("active");
+        }
+      });
+    });
   });
 
-  // Respect reduced-motion preference for the background hero video
-  var heroVideo = document.querySelector(".hero-video-bg");
-  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    heroVideo.pause();
-  }
-
-  // Mobile quick-pick: jump straight to the chosen page
-  var quickPick = document.getElementById("quickPick");
-  if (quickPick) {
-    quickPick.addEventListener("change", function () {
-      if (quickPick.value) window.location.href = quickPick.value;
+  /* ---- Directory live text search (client-side demo) ---- */
+  var search = document.querySelector("[data-dirsearch]");
+  if (search) {
+    search.addEventListener("input", function () {
+      var q = search.value.toLowerCase().trim();
+      document.querySelectorAll("[data-biz]").forEach(function (card) {
+        var hay = card.getAttribute("data-biz").toLowerCase();
+        card.style.display = hay.indexOf(q) > -1 ? "" : "none";
+      });
     });
   }
 
-  // Current year in footer
+  /* ---- Campaign builder wizard ---- */
+  var wizard = document.querySelector("[data-wizard]");
+  if (wizard) {
+    var panels = wizard.querySelectorAll(".wpanel");
+    var steps = document.querySelectorAll(".wizard-steps .ws");
+    var idx = 0;
+    var show = function (i) {
+      idx = Math.max(0, Math.min(panels.length - 1, i));
+      panels.forEach(function (p, n) { p.classList.toggle("active", n === idx); });
+      steps.forEach(function (s, n) {
+        s.classList.toggle("active", n === idx);
+        s.classList.toggle("done", n < idx);
+      });
+      wizard.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    wizard.querySelectorAll("[data-next]").forEach(function (b) {
+      b.addEventListener("click", function () { show(idx + 1); });
+    });
+    wizard.querySelectorAll("[data-prev]").forEach(function (b) {
+      b.addEventListener("click", function () { show(idx - 1); });
+    });
+    steps.forEach(function (s, n) {
+      s.addEventListener("click", function () { show(n); });
+    });
+    show(0);
+  }
+
+  /* ---- Message studio: generate drafts ---- */
+  var gen = document.querySelector("[data-generate]");
+  if (gen) {
+    gen.addEventListener("click", function () {
+      var out = document.querySelector("[data-msgout]");
+      if (out) {
+        out.style.display = "block";
+        out.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+
+  /* ---- ROI slider (revenue example) ---- */
+  var slider = document.querySelector("[data-roi]");
+  if (slider) {
+    var render = function () {
+      var clients = parseInt(slider.value, 10);
+      var mrr = 4000;
+      var monthly = clients * mrr;
+      var annual = monthly * 12;
+      var fmt = function (n) { return "$" + n.toLocaleString("en-US"); };
+      document.querySelector("[data-roi-clients]").textContent = clients;
+      document.querySelector("[data-roi-monthly]").textContent = fmt(monthly);
+      document.querySelector("[data-roi-annual]").textContent = fmt(annual);
+    };
+    slider.addEventListener("input", render);
+    render();
+  }
+
+  /* ---- Year in footer ---- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
