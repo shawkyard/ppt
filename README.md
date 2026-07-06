@@ -4,11 +4,17 @@
 
 > "We are in business to help you make more money. Period."
 
-A premium, standardized B2B sales platform + clickable web-app prototype for local and regional
-B2B service companies. It helps them win better-fit customers through real-value offers,
-standardized premium mini-sites, ICP audience pages, LeadGen tools, and AI-assisted prospecting.
+A premium, standardized B2B sales platform + clickable web-app prototype. It is a **curated,
+Utah-first B2B local sales network** — not an instant self-serve directory. Businesses **apply**,
+we **review and vet** them, we **build** the listing, and the owner **approves before it goes live**.
+It helps B2B service companies win better-fit customers through real-value offers, standardized
+premium mini-sites, ICP audience pages, LeadGen tools, and AI-assisted prospecting.
 
 One website. One platform. One system.
+
+**Positioning:** application + approval based, full-service setup included. Listing CTAs read
+"Apply for a Free Listing" / "Request Your Free Listing", each with microcopy: *"Every business is
+reviewed before publishing. We only list real businesses that serve other businesses."*
 
 ## What's in here
 
