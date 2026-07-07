@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPS365.ai — Premium Listing | GPS365 Business Directory</title>
+<style>
+  :root{
+    --blue:#1a73e8;
+    --blue-dark:#0b5ed7;
+    --blue-ink:#0f57c2;
+    --green:#22c55e;
+    --green-dark:#16a34a;
+    --ink:#0f1b2d;
+    --ink-2:#334155;
+    --muted:#64748b;
+    --line:#e5e9f0;
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --navy:#0c2237;
+    --radius:12px;
+    --shadow:0 1px 3px rgba(16,32,60,.06),0 8px 24px rgba(16,32,60,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:#fff;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  .blue{color:var(--blue)}
+  .green{color:var(--green-dark)}
+
+  /* ---------- utility bar ---------- */
+  .utilbar{border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  .utilbar .wrap{display:flex;align-items:center;justify-content:space-between;height:38px;gap:16px}
+  .crumbs{display:flex;align-items:center;gap:8px;color:var(--blue);font-weight:600}
+  .crumbs span{color:#9aa7b8;font-weight:500}
+  .crumbs b{color:var(--ink);font-weight:700}
+  .util-links{display:flex;align-items:center;gap:20px}
+  .util-links a{color:var(--ink-2);font-weight:500}
+  .util-links a:last-child{color:var(--blue);font-weight:600}
+
+  /* ---------- header / nav ---------- */
+  header.nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:50}
+  .nav .wrap{display:flex;align-items:center;height:64px;gap:24px}
+  .logo{display:flex;flex-direction:column;line-height:1}
+  .logo .mark{display:flex;align-items:center;gap:6px;font-weight:800;font-size:22px;letter-spacing:-.5px}
+  .logo .mark .pin{width:22px;height:22px;color:var(--green)}
+  .logo .mark .gps{color:var(--ink)}
+  .logo .mark .n365{color:var(--blue)}
+  .logo .sub{font-size:8px;letter-spacing:2px;color:var(--green-dark);font-weight:700;margin-left:28px}
+  nav.main{display:flex;align-items:center;gap:22px;margin-left:14px;font-size:14px;font-weight:600;color:var(--ink-2)}
+  nav.main a{display:flex;align-items:center;gap:4px}
+  nav.main a .car{width:8px;height:8px;opacity:.6}
+  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;border-radius:8px;padding:9px 16px;cursor:pointer;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark)}
+  .btn-outline{background:#fff;color:var(--ink);border-color:var(--line)}
+  .btn-outline:hover{border-color:#c9d3e0}
+  .btn-green{background:var(--green-dark);color:#fff}
+  .btn-green:hover{background:#15803d}
+
+  /* ---------- hero ---------- */
+  .hero{padding:36px 0 8px}
+  .hero-grid{display:grid;grid-template-columns:1fr 0.95fr;gap:28px;align-items:start}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;padding:5px 11px;border-radius:20px;text-transform:uppercase}
+  h1.hero-title{font-size:38px;line-height:1.12;letter-spacing:-1px;margin:16px 0 12px;font-weight:800}
+  .hero-sub{color:var(--blue);font-weight:700;font-size:17px;margin-bottom:12px}
+  .hero-lead{color:var(--ink-2);font-size:15px;max-width:440px;margin-bottom:18px}
+  .checkrow{display:flex;flex-wrap:wrap;gap:18px 26px;margin-bottom:22px}
+  .checkrow .ci{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+  .checkrow .ci svg{width:15px;height:15px;color:var(--green)}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+
+  /* dashboard visual */
+  .hero-visual{position:relative}
+  .laptop{background:#0f1a2b;border-radius:12px 12px 0 0;padding:10px;box-shadow:var(--shadow)}
+  .laptop-screen{background:linear-gradient(160deg,#0b1626,#12233c);border-radius:6px;height:210px;position:relative;overflow:hidden}
+  .laptop-base{height:12px;background:linear-gradient(#c7cfdb,#9aa7b8);border-radius:0 0 14px 14px;margin:0 auto;width:calc(100% + 40px);margin-left:-20px;box-shadow:var(--shadow)}
+  .screen-top{display:flex;align-items:center;gap:5px;padding:8px 10px}
+  .screen-top i{width:7px;height:7px;border-radius:50%;background:#33465f;display:block}
+  .map-lines{position:absolute;inset:36px 12px 12px 12px;opacity:.5}
+  .map-route{position:absolute;top:44px;left:24px;right:24px;height:120px}
+  .miniphone{position:absolute;right:-6px;bottom:-14px;width:96px;height:180px;background:#0f1a2b;border-radius:16px;padding:6px;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+  .miniphone .pscreen{background:linear-gradient(160deg,#0b1626,#12233c);border-radius:11px;height:100%}
+  .dot-veh{position:absolute;width:9px;height:9px;background:#f6c445;border-radius:2px;box-shadow:0 0 0 3px rgba(246,196,69,.25)}
+
+  /* premium card */
+  .premium-card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px}
+  .premium-card .pc-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .premium-card .pc-head .crown{width:30px;height:30px;color:#f5b301}
+  .premium-card .pc-head h3{font-size:17px;font-weight:800}
+  .premium-card .pc-head p{font-size:12px;color:var(--muted)}
+  .pc-list{display:flex;flex-direction:column;gap:11px;margin-bottom:16px}
+  .pc-list .row{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+  .pc-list .row svg{width:16px;height:16px;color:var(--blue);flex:none}
+  .pc-rating{border-top:1px solid var(--line);padding-top:14px;text-align:center}
+  .stars{color:#f5b301;font-size:18px;letter-spacing:2px}
+  .pc-rating .score{font-weight:800;font-size:15px;margin-left:6px;color:var(--ink)}
+  .pc-rating .rev{font-size:12px;color:var(--muted);margin-top:2px}
+
+  /* ---------- stats strip ---------- */
+  .stats-strip{background:var(--bg);border:1px solid var(--line);border-radius:14px;margin:26px 0;padding:22px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{display:flex;align-items:center;gap:14px;justify-content:center;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat svg{width:30px;height:30px;color:var(--blue)}
+  .stat .num{font-size:24px;font-weight:800;line-height:1}
+  .stat .num.g{color:var(--green-dark)}
+  .stat .lbl{font-size:12px;color:var(--muted)}
+
+  /* ---------- offer banner ---------- */
+  .offer{background:#eafaf0;border:1px solid #c7ecd4;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:34px}
+  .offer .gift{width:44px;height:44px;background:var(--green-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
+  .offer .gift svg{width:24px;height:24px}
+  .offer .otext h4{font-size:15px;font-weight:800}
+  .offer .otext p{font-size:13px;color:var(--ink-2)}
+  .offer .btn{margin-left:auto}
+
+  /* ---------- section headings ---------- */
+  .eyebrow{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--blue);text-transform:uppercase;margin-bottom:6px}
+  h2.sec{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:16px}
+  section.block{padding:14px 0}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;padding-bottom:16px}
+  .about-lead{color:var(--ink-2);font-size:14px;margin-bottom:20px}
+  .mini-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .mini{display:flex;flex-direction:column;gap:4px}
+  .mini svg{width:22px;height:22px;color:var(--blue)}
+  .mini .m-num{font-weight:800;font-size:16px}
+  .mini .m-lbl{font-size:11px;color:var(--muted)}
+  .about-panel{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+  .about-panel .row{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:var(--ink-2);margin-bottom:13px}
+  .about-panel .row svg{width:16px;height:16px;color:var(--blue);flex:none}
+  .about-illus{position:absolute;right:14px;bottom:14px;width:140px;opacity:.9}
+
+  /* core services */
+  .cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .svc{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff;transition:.15s}
+  .svc:hover{box-shadow:var(--shadow);border-color:#d6def0}
+  .svc .ic{width:38px;height:38px;border-radius:9px;background:#eef4fe;display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:12px}
+  .svc .ic svg{width:20px;height:20px}
+  .svc h4{font-size:14.5px;font-weight:700;margin-bottom:6px}
+  .svc p{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+  /* industries */
+  .ind-row{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;padding:8px 0}
+  .ind{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .ind svg{width:26px;height:26px;color:var(--blue)}
+  .ind h5{font-size:12.5px;font-weight:700}
+  .ind p{font-size:10.5px;color:var(--muted);line-height:1.4}
+
+  /* proven results */
+  .results-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .res{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px 14px}
+  .res svg{width:22px;height:22px;color:var(--green-dark);margin-bottom:8px}
+  .res .r-num{font-size:22px;font-weight:800;color:var(--green-dark);line-height:1}
+  .res .r-lbl{font-size:11px;color:var(--muted);margin-top:6px}
+
+  /* testimonials + premium includes */
+  .test-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start}
+  .quote-box{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:26px 30px;position:relative}
+  .quote-mark{font-size:44px;color:#c7d3e6;line-height:.6;font-family:Georgia,serif}
+  .quote-box .qt{font-size:16px;color:var(--ink);font-weight:500;margin:8px 0 18px;line-height:1.5}
+  .quote-box .qauthor{font-weight:800;font-size:14px}
+  .quote-box .qrole{font-size:12px;color:var(--muted)}
+  .quote-box .qstars{color:#f5b301;letter-spacing:2px;position:absolute;right:30px;bottom:30px}
+  .qarrow{position:absolute;bottom:26px;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer}
+  .qarrow.left{left:-14px}.qarrow.right{right:-14px}
+  .qdots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+  .qdots i{width:8px;height:8px;border-radius:50%;background:#cbd5e1}
+  .qdots i.on{background:var(--blue)}
+  .includes-card{border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .includes-card .ic-head{display:flex;align-items:center;gap:9px;margin-bottom:16px}
+  .includes-card .ic-head .crown{width:24px;height:24px;color:#f5b301}
+  .includes-card .ic-head h4{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--blue)}
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 16px}
+  .inc-grid .row{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+  .inc-grid .row svg{width:14px;height:14px;color:var(--green-dark);flex:none}
+
+  /* demo form */
+  .demo{background:#fff;padding:8px 0 30px}
+  .demo-grid{display:grid;grid-template-columns:0.7fr 1.6fr;gap:30px;align-items:start}
+  .demo-benefits .row{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:12px}
+  .demo-benefits .row svg{width:16px;height:16px;color:var(--green-dark);flex:none}
+  .form-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .field label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--ink-2)}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff}
+  .field.full{grid-column:1/-1}
+  .field textarea{min-height:44px;resize:vertical}
+  .form-submit{grid-column:2/-1;display:flex;align-items:center;gap:14px}
+  .form-submit .btn{flex:1;justify-content:center;padding:12px}
+  .form-note{grid-column:2/-1;font-size:11px;color:var(--muted);text-align:center}
+
+  /* faq */
+  .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .acc-item{border-bottom:1px solid var(--line)}
+  .acc-q{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-2)}
+  .acc-q .pm{font-size:18px;color:var(--muted)}
+  .acc-a{font-size:13px;color:var(--muted);padding:0 4px 14px;display:none}
+  .acc-item.open .acc-a{display:block}
+  .acc-item.open .pm{transform:rotate(45deg)}
+  .faq-note{border:1px solid var(--line);border-radius:14px;padding:22px}
+
+  /* footer */
+  footer{background:var(--navy);color:#cdd8e6;margin-top:36px;padding:38px 0 24px;font-size:13px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1.2fr;gap:24px}
+  footer .flogo{font-weight:800;font-size:20px;color:#fff;display:flex;align-items:center;gap:6px}
+  footer .flogo .pin{width:20px;height:20px;color:var(--green)}
+  footer .fdesc{margin:12px 0 16px;color:#8ea3bd;max-width:230px;font-size:12.5px}
+  footer h6{color:#fff;font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  footer ul a{color:#9fb2cb}
+  footer ul a:hover{color:#fff}
+  .fcontact li{display:flex;align-items:center;gap:8px;color:#9fb2cb;margin-bottom:8px}
+  .fcontact svg{width:14px;height:14px;color:var(--green);flex:none}
+  .socials{display:flex;gap:10px;margin-top:14px}
+  .socials a{width:30px;height:30px;border-radius:50%;background:#16324e;display:flex;align-items:center;justify-content:center;color:#cdd8e6}
+  .socials a:hover{background:var(--blue)}
+  .socials svg{width:14px;height:14px}
+  .footbar{border-top:1px solid #1c3956;margin-top:28px;padding-top:16px;display:flex;justify-content:space-between;font-size:11.5px;color:#7f96b3}
+  .footbar a{color:#9fb2cb;margin-left:16px}
+
+  @media(max-width:880px){
+    .hero-grid,.about-grid,.test-grid,.demo-grid,.faq-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--line);padding:12px 0}
+    .cards-grid{grid-template-columns:1fr 1fr}
+    .ind-row{grid-template-columns:repeat(4,1fr)}
+    .results-grid{grid-template-columns:1fr 1fr 1fr}
+    .mini-stats{grid-template-columns:1fr 1fr}
+    .form-fields{grid-template-columns:1fr}
+    .form-submit,.form-note{grid-column:1/-1}
+    nav.main,.util-links,.crumbs span,.crumbs{display:none}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ UTILITY BAR ============ -->
+<div class="utilbar">
+  <div class="wrap">
+    <div class="crumbs">GPS365 Business Directory <span>›</span> Premium Listings <span>›</span> <b>GPS365.ai</b></div>
+    <div class="util-links">
+      <a href="#">For Businesses ▾</a>
+      <a href="#">Resources ▾</a>
+      <a href="#">About GPS365</a>
+      <a href="#">List Your Business</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#">
+      <span class="mark">
+        <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.2 8 12 8 12s8-6.8 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <span class="gps">gps</span><span class="n365">365</span>
+      </span>
+      <span class="sub">HISTORY OF GPS™</span>
+    </a>
+    <nav class="main">
+      <a href="#">Industries <svg class="car" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg></a>
+      <a href="#">Solutions <svg class="car" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg></a>
+      <a href="#">Proof &amp; ROI <svg class="car" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg></a>
+      <a href="#">Partners <svg class="car" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg></a>
+      <a href="#">Pricing</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline" href="#">Log in</a>
+      <a class="btn btn-primary" href="#">Test Demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <!-- left copy -->
+      <div>
+        <span class="badge">★ PREMIUM LISTING</span>
+        <h1 class="hero-title">GPS Tracking. Real-Time Visibility. Lower Costs. Stronger Local Performance.</h1>
+        <div class="hero-sub">GPS365 Pro by GPS365</div>
+        <p class="hero-lead">AI-powered GPS tracking and fleet intelligence that helps local businesses track vehicles, reduce costs, protect assets, and grow with confidence.</p>
+        <div class="checkrow">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> No Contracts</div>
+          <div class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Live in 60 Seconds</div>
+          <div class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> 90+ Day Data History</div>
+          <div class="ci"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> U.S.-Based Support</div>
+        </div>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="#demo">Request a Demo</a>
+          <a class="btn btn-outline" href="#">📊 Calculate My ROI</a>
+          <a class="btn btn-outline" href="#">📞 Talk to Sales ▾</a>
+        </div>
+      </div>
+      <!-- right: premium card -->
+      <div class="premium-card">
+        <div class="pc-head">
+          <svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4 4 5-6 5 6 4-4-2 12H5z"/></svg>
+          <div>
+            <h3>Premium Listing</h3>
+            <p>Verified &amp; Featured</p>
+          </div>
+        </div>
+        <div class="pc-list">
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Trusted by 12,400+ Businesses</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> AI-Powered GPS Platform</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> 99.9% Uptime Guarantee</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Made in the USA</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> SOC 2 Compliant</div>
+        </div>
+        <div class="pc-rating">
+          <div><span class="stars">★★★★★</span><span class="score">4.9 / 5</span></div>
+          <div class="rev">(1,250+ Verified Reviews)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- dashboard visual centered under -->
+    <div style="margin:24px auto 0;max-width:560px;position:relative">
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="screen-top"><i></i><i></i><i></i></div>
+          <svg class="map-route" viewBox="0 0 400 120" fill="none" stroke="#2f6df6" stroke-width="2">
+            <path d="M20 90 L90 60 L160 78 L240 40 L320 66 L380 30" stroke="#3b82f6"/>
+            <path d="M20 30 L80 50 L150 34 L230 70 L310 44 L380 74" stroke="#1d4ed8" opacity=".6"/>
+          </svg>
+          <span class="dot-veh" style="left:150px;top:96px"></span>
+          <span class="dot-veh" style="left:250px;top:56px;background:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.25)"></span>
+        </div>
+      </div>
+      <div class="laptop-base"></div>
+      <div class="miniphone"><div class="pscreen"></div></div>
+    </div>
+
+    <!-- stats strip -->
+    <div class="stats-strip">
+      <div class="stats-grid">
+        <div class="stat">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13l2-5h14l2 5v5h-2a2 2 0 11-4 0H9a2 2 0 11-4 0H3v-5zm3-3l-1 3h14l-1-3H6z"/></svg>
+          <div><div class="num">12,400+</div><div class="lbl">Vehicles Tracked</div></div>
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.7 2.5 1.7-1 1.3-2.5 1.3-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>
+          <div><div class="num g">23%</div><div class="lbl">Average Cost Savings</div></div>
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><div class="num">99.9%</div><div class="lbl">Uptime Guarantee</div></div>
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><path d="M4 13a8 8 0 0116 0"/><path d="M4 17h4M16 17h4M12 8v3l2 2"/></svg>
+          <div><div class="num g">&lt; 60 sec</div><div class="lbl">Average Response Time</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- offer banner -->
+    <div class="offer">
+      <div class="gift"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-2.2a3 3 0 00-4.8-3.4A3 3 0 006.2 7H4a1 1 0 00-1 1v3a1 1 0 001 1v7a1 1 0 001 1h14a1 1 0 001-1v-7a1 1 0 001-1V8a1 1 0 00-1-1zm-7 12h-2v-8h2v8zm0-10h-3a1 1 0 110-2c1 0 2 .8 3 2zm2-2a1 1 0 110 2h-1c1-1.2 2-2 1-2z"/></svg></div>
+      <div class="otext">
+        <h4>Limited-Time Offer: Get $150 in Free GPS Service Credits</h4>
+        <p>New customers get $150 in free service credits when you schedule a demo this month.</p>
+      </div>
+      <a class="btn btn-green" href="#">Claim My Offer →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="block">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">About GPS365AI.AI</div>
+      <h2 class="sec">Smarter Tracking. Stronger Results.</h2>
+      <p class="about-lead"><b>GPS365AI.ai</b> (<span class="blue">GPS365 Pro</span>) is an AI-powered GPS tracking and fleet intelligence platform built for small and mid-sized businesses. We make it easy to see what's happening, improve driver performance, reduce costs, and protect your assets—so you can focus on growth.</p>
+      <div class="mini-stats">
+        <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><div class="m-num">10+</div><div class="m-lbl">Years in Business</div></div>
+        <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5M17 11a3 3 0 000-6"/></svg><div class="m-num">250+</div><div class="m-lbl">Happy Clients</div></div>
+        <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18v-6a8 8 0 0116 0v6"/><rect x="2" y="14" width="4" height="6" rx="1"/><rect x="18" y="14" width="4" height="6" rx="1"/></svg><div class="m-num">US-Based</div><div class="m-lbl">Support Team</div></div>
+        <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg><div class="m-num">Secure</div><div class="m-lbl">Cloud Platform</div></div>
+      </div>
+    </div>
+    <div class="about-panel">
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Real-time GPS Tracking &amp; Mapping</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> AI Alerts &amp; Anomaly Detection</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Driver Behavior &amp; Safety Insights</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Route Optimization &amp; Fuel Savings</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Maintenance &amp; Compliance Reminders</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Advanced Reports &amp; ROI Analytics</div>
+      <svg class="about-illus" viewBox="0 0 120 80" fill="none"><rect x="10" y="35" width="55" height="26" rx="3" fill="#dbe7fb"/><rect x="60" y="42" width="26" height="19" rx="2" fill="#c3d8f7"/><circle cx="28" cy="64" r="5" fill="#1a73e8"/><circle cx="72" cy="64" r="5" fill="#1a73e8"/><path d="M95 20l6 12h-12z" fill="#1a73e8"/><circle cx="95" cy="34" r="4" fill="#1a73e8"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORE SERVICES ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Core Services &amp; Capabilities</div>
+    <div class="cards-grid" style="margin-top:6px">
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c4-4 7-7.5 7-11a7 7 0 10-14 0c0 3.5 3 7 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h4>Live GPS Tracking</h4><p>See every vehicle in real time on an interactive map.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5h11l3 3h2v5h-2M3 13v4h2M8 17h8"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></div><h4>Fleet Monitoring</h4><p>Monitor status, location, ignition, speed, and utilization 24/7.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div><h4>Driver Behavior</h4><p>Get insights on speeding, harsh braking, idling, and more.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19a3 3 0 100-6h12a3 3 0 100-6"/><circle cx="6" cy="19" r="1"/><circle cx="18" cy="7" r="1"/></svg></div><h4>Route Optimization</h4><p>AI recommends the best routes to save time and fuel.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7a3 3 0 11-4 4l-6 6 2 2 6-6a3 3 0 014-4z"/><circle cx="16" cy="7" r="1"/></svg></div><h4>Maintenance Alerts</h4><p>Automated reminders to reduce downtime and repair costs.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v5c0 4.5-3.2 8.3-8 10-4.8-1.7-8-5.5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Theft Recovery</h4><p>Stolen vehicle recovery support and real-time movement alerts.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h4>Reports &amp; Analytics</h4><p>Custom reports that turn data into actionable business insights.</p></div>
+      <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h3M13 11h3M8 15h3M13 15h3"/></svg></div><h4>ROI Calculator</h4><p>See how much you can save with GPS365 Pro in minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Industries Served / Best Customer Types</div>
+    <div class="ind-row" style="margin-top:8px">
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5h11l3 3h2v5h-2M3 13v4h2M8 17h8"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg><h5>Fleet Owners</h5><p>Trucks, Vans, Cars</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16M6 20V9l6-4 6 4v11M10 20v-5h4v5"/></svg><h5>Construction</h5><p>Heavy Equipment &amp; Field Teams</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="13" height="10" rx="1"/><path d="M16 9h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg><h5>Logistics</h5><p>Delivery &amp; Last-Mile</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><h5>Service Businesses</h5><p>HVAC, Plumbing, Electrical</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg><h5>Real Estate</h5><p>Agents, Showing Vehicles</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V10M19 21V10M4 10h16l-8-6z"/><path d="M9 21v-6h6v6"/></svg><h5>Government</h5><p>Municipal &amp; Public Sector</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.3-7-10a7 7 0 0114 0c0 5.7-7 10-7 10z"/><path d="M12 7v6M9 10h6"/></svg><h5>Healthcare</h5><p>Home Health, Medical Transport</p></div>
+      <div class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><h5>And More</h5><p>Custom Solutions for Your Industry</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROVEN RESULTS ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Proven Results That Drive Growth</div>
+    <div class="results-grid" style="margin-top:8px">
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M4 20h16"/></svg><div class="r-num">23%</div><div class="r-lbl">Average Reduction in Operating Costs</div></div>
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div class="r-num">35%</div><div class="r-lbl">Increase in On-Time Job Completion</div></div>
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21V8l6-5 6 5v13"/><path d="M4 21h16M10 21v-5h6"/></svg><div class="r-num">25%</div><div class="r-lbl">Less Fuel Consumption</div></div>
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v5c0 4.5-3.2 8.3-8 10-4.8-1.7-8-5.5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div class="r-num">92%</div><div class="r-lbl">Improvement in Driver Safety</div></div>
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V4M4 20h16M8 16l3-4 3 2 4-6"/></svg><div class="r-num">5–10x</div><div class="r-lbl">Faster Theft Recovery Time</div></div>
+      <div class="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg><div class="r-num">$4,200+</div><div class="r-lbl">Average Annual Savings per Vehicle</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS + INCLUDES ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">What Our Customers Say</div>
+    <div class="test-grid" style="margin-top:8px">
+      <div class="quote-box">
+        <div class="quote-mark">“</div>
+        <div class="qt">GPS365 Pro has completely transformed how we operate. We save time, reduce fuel costs, and our customers love the faster service. The ROI was almost immediate.”</div>
+        <div class="qauthor">— Mark T.</div>
+        <div class="qrole">Operations Manager, Peak Construction</div>
+        <div class="qstars">★★★★★</div>
+        <div class="qarrow left">‹</div>
+        <div class="qarrow right">›</div>
+        <div class="qdots"><i class="on"></i><i></i></div>
+      </div>
+      <div class="includes-card">
+        <div class="ic-head">
+          <svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4 4 5-6 5 6 4-4-2 12H5z"/></svg>
+          <h4>Premium Listing Includes</h4>
+        </div>
+        <div class="inc-grid">
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Premium Sales Page</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Case-Study Eligibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Stronger Positioning</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Featured Placement</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Lead Capture Form</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Advanced SEO Benefits</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Value Offer Section</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Priority Directory Visibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Newsletter Eligibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Performance Insights</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO FORM ============ -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="eyebrow">Ready to See GPS365 Pro in Action?</div>
+    <p class="about-lead" style="margin-bottom:20px">Request a demo and see how much you can save.</p>
+    <div class="demo-grid">
+      <div class="demo-benefits">
+        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Free 30-Minute Demo</div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> No Obligation</div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Custom Solution for Your Business</div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.4-1.4z"/></svg> Get Your ROI Estimate</div>
+      </div>
+      <form class="form-fields" onsubmit="return false">
+        <div class="field"><label>Full Name*</label><input type="text" placeholder="Your full name"></div>
+        <div class="field"><label>Business Email*</label><input type="email" placeholder="you@company.com"></div>
+        <div class="field"><label>Phone Number*</label><input type="tel" placeholder="(555) 555-5555"></div>
+        <div class="field"><label>Company Name*</label><input type="text" placeholder="Your company"></div>
+        <div class="field"><label>Industry*</label><select><option>Select your industry</option><option>Fleet</option><option>Construction</option><option>Logistics</option></select></div>
+        <div class="field"><label>Fleet Size</label><select><option>Select fleet size</option><option>1–10</option><option>11–50</option><option>50+</option></select></div>
+        <div class="field full"><label>How can we help you?</label><textarea placeholder="Tell us about your goals or challenges..."></textarea></div>
+        <div class="form-submit"><button class="btn btn-primary">Request My Demo →</button></div>
+        <div class="form-note">Your information is safe and will never be shared.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Frequently Asked Questions</div>
+    <div class="faq-grid" style="margin-top:8px">
+      <div>
+        <div class="acc-item open">
+          <div class="acc-q" onclick="this.parentNode.classList.toggle('open')">How quickly can I start tracking my vehicles? <span class="pm">+</span></div>
+          <div class="acc-a">Most fleets are live in under 60 seconds after plugging in the device—no long installs or contracts required.</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.parentNode.classList.toggle('open')">Do you offer installation and support? <span class="pm">+</span></div>
+          <div class="acc-a">Yes—U.S.-based support and simple self-install options are included with every plan.</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.parentNode.classList.toggle('open')">Can I monitor vehicles across multiple locations? <span class="pm">+</span></div>
+          <div class="acc-a">Absolutely. Track and manage vehicles across any number of sites from a single dashboard.</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.parentNode.classList.toggle('open')">Is there a contract or long-term commitment? <span class="pm">+</span></div>
+          <div class="acc-a">No contracts. Plans are month-to-month so you stay in control.</div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-q" onclick="this.parentNode.classList.toggle('open')">How accurate is the GPS data? <span class="pm">+</span></div>
+          <div class="acc-a">Our platform delivers real-time, meter-level accuracy with 90+ days of history retention.</div>
+        </div>
+      </div>
+      <div class="faq-note">
+        <div class="inc-grid">
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Premium Sales Page</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Case-Study Eligibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Stronger Positioning</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Featured Placement</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Lead Capture Form</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Advanced SEO Benefits</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Value Offer Section</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Priority Directory Visibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Newsletter Eligibility</div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg> Performance Insights</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="flogo">
+          <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.2 8 12 8 12s8-6.8 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+          gps<span style="color:var(--blue)">365</span>
+        </div>
+        <p class="fdesc">The largest directory of GPS tracking solutions for businesses. Find. Compare. Connect.</p>
+        <div class="socials">
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3v16H4zM5.5 2A1.5 1.5 0 105.5 5 1.5 1.5 0 005.5 2zM10 8h3v2a3.5 3.5 0 013-2c3 0 4 2 4 5v7h-3v-6c0-1.5-.5-2.5-2-2.5S13 12 13 14v6h-3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.5-3H14V4.5c0-1 .3-1.5 1.6-1.5H18V.2C17.5.1 16.4 0 15.3 0 12.8 0 11 1.5 11 4.2V6H8v3h3v11h3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4.9a8 8 0 01-2.3.6 4 4 0 001.8-2.2c-.8.5-1.7.8-2.6 1a4 4 0 00-6.9 3.6A11.3 11.3 0 013 3.8a4 4 0 001.2 5.3c-.6 0-1.2-.2-1.7-.5a4 4 0 003.2 4c-.5.1-1 .2-1.6.1a4 4 0 003.7 2.8A8 8 0 012 21.3a11.3 11.3 0 006.1 1.8c7.3 0 11.4-6.1 11.4-11.4v-.5A8 8 0 0022 4.9z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7.5a3.5 3.5 0 00-2.4-2.5C17.7 4.5 12 4.5 12 4.5s-5.7 0-7.6.5A3.5 3.5 0 002 7.5 36 36 0 002 12a36 36 0 00.4 4.5A3.5 3.5 0 004.4 19c1.9.5 7.6.5 7.6.5s5.7 0 7.6-.5a3.5 3.5 0 002.4-2.5A36 36 0 0022 12a36 36 0 00-.4-4.5zM10 15V9l5 3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h6>For Businesses</h6>
+        <ul><li><a href="#">List Your Business</a></li><li><a href="#">Premium Listings</a></li><li><a href="#">Industries</a></li><li><a href="#">Solutions</a></li></ul>
+      </div>
+      <div>
+        <h6>Resources</h6>
+        <ul><li><a href="#">Business Guides</a></li><li><a href="#">ROI Calculator</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Blog</a></li></ul>
+      </div>
+      <div>
+        <h6>Company</h6>
+        <ul><li><a href="#">About GPS365</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li></ul>
+      </div>
+      <div>
+        <h6>Contact Us</h6>
+        <ul class="fcontact">
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.2 11 11 0 003.5.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11 11 0 00.6 3.5 1 1 0 01-.2 1z"/></svg> 855-4-GPS-365 (855-447-7365)</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 5h20v14H2z" opacity=".2"/><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7l-8 5z" fill="currentColor"/></svg> hello@gps365.ai</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.2 8 12 8 12s8-6.8 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg> 8197 Emerald Ave, Parkland, FL 33076</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footbar">
+      <div>© 2026 GPS365. All rights reserved.</div>
+      <div><a href="#">Terms of Service</a><a href="#">Privacy Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
