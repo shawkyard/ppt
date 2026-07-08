@@ -25,7 +25,7 @@ export default function Settings() {
         <ol className="grid gap-4 md:grid-cols-2">
           {STEPS.map((s, i) => (
             <li key={i} className="flex gap-3">
-              <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-gold text-ink text-sm font-bold">{i + 1}</span>
+              <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-gold text-white text-sm font-bold">{i + 1}</span>
               <div><div className="text-sm font-medium text-stone">{s.t}</div><div className="text-sm text-mist">{s.d}</div></div>
             </li>
           ))}

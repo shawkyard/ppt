@@ -105,7 +105,7 @@ export default function DealSourcingQueue() {
             <div className="space-y-2 max-h-72 overflow-y-auto">
               {approved.map((m) => (
                 <div key={m.id} className="flex items-center gap-2 text-sm">
-                  <span className="h-2.5 w-2.5 rounded-sm" style={{ background: '#2E7D5B' }} />
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ background: '#27B36B' }} />
                   <span className="text-fog flex-1">{m.marketName}</span>
                   <span className="text-xs text-mist">{m.state}</span>
                 </div>

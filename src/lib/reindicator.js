@@ -2,11 +2,11 @@
 // Version 1 statuses are approximate from screenshot review — verify before use.
 
 export const INDICATORS = {
-  green:  { key: 'green',  label: 'Continuing Emerging', sub: '3+ years',      color: '#2E7D5B', priority: 'High Priority Hunt' },
-  yellow: { key: 'yellow', label: 'New Emerging',        sub: 'only 2 years',  color: '#DFFF00', priority: 'Limited Hunt' },
-  turq:   { key: 'turq',   label: 'Pre-Emerging',        sub: 'early signal',  color: '#4DD6D0', priority: 'Watchlist / Early Hunt' },
-  gray:   { key: 'gray',   label: 'Not Emerging',        sub: '',              color: '#64748B', priority: 'Ignore unless approved' },
-  white:  { key: 'white',  label: 'Insufficient Data',   sub: '',              color: '#E5E7EB', priority: 'Manual Review' },
+  green:  { key: 'green',  label: 'Continuing Emerging', sub: '3+ years',      color: '#27B36B', priority: 'High Priority Hunt' },
+  yellow: { key: 'yellow', label: 'New Emerging',        sub: 'only 2 years',  color: '#FFD23F', priority: 'Limited Hunt' },
+  turq:   { key: 'turq',   label: 'Pre-Emerging',        sub: 'early signal',  color: '#3AD6C9', priority: 'Watchlist / Early Hunt' },
+  gray:   { key: 'gray',   label: 'Not Emerging',        sub: '',              color: '#AAB2C2', priority: 'Ignore unless approved' },
+  white:  { key: 'white',  label: 'Insufficient Data',   sub: '',              color: '#D9D5E6', priority: 'Manual Review' },
 }
 
 export const INDICATOR_ORDER = ['green', 'yellow', 'turq', 'gray', 'white']

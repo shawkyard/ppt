@@ -4,36 +4,36 @@ import { useApp } from '../context/AppContext.jsx'
 
 const NAV_GROUPS = [
   { title: 'Command', items: [
-    { to: '/', label: 'Dashboard', end: true },
-    { to: '/map', label: 'Map Command Center' },
-    { to: '/markets', label: 'Market Gate' },
-    { to: '/layers', label: 'Market Layer Manager' },
+    { to: '/', label: 'Dashboard', end: true, icon: '🏠' },
+    { to: '/map', label: 'Map Command Center', icon: '🗺️' },
+    { to: '/markets', label: 'Market Gate', icon: '🚦' },
+    { to: '/layers', label: 'Market Layer Manager', icon: '🧩' },
   ]},
   { title: 'Sourcing', items: [
-    { to: '/sourcing', label: 'Deal Sourcing Queue' },
-    { to: '/add', label: 'Add Property' },
-    { to: '/upload', label: 'Upload OM / RR / T12' },
-    { to: '/scratch', label: 'Scratch Screen' },
+    { to: '/sourcing', label: 'Deal Sourcing Queue', icon: '📥' },
+    { to: '/add', label: 'Add Property', icon: '➕' },
+    { to: '/upload', label: 'Upload OM / RR / T12', icon: '📤' },
+    { to: '/scratch', label: 'Scratch Screen', icon: '⚡' },
   ]},
   { title: 'Deal Room', items: [
-    { to: '/reports', label: 'Report Builder' },
-    { to: '/settings', label: 'Settings' },
+    { to: '/reports', label: 'Report Builder', icon: '📄' },
+    { to: '/settings', label: 'Settings', icon: '⚙️' },
   ]},
 ]
 
 function Brand() {
   return (
     <Link to="/" className="flex items-center gap-3 px-5 py-5">
-      <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink border border-gold/40">
+      <span className="grid h-10 w-10 place-items-center rounded-2xl shadow-glow" style={{ backgroundImage: 'linear-gradient(135deg,#8B6BFF,#7A5AF5 55%,#FF6FB3)' }}>
         <svg viewBox="0 0 32 32" className="h-5 w-5">
-          <path d="M6 22V13l10-6 10 6v9" fill="none" stroke="#C9A45C" strokeWidth="1.8" strokeLinejoin="round" />
-          <rect x="12" y="17" width="3" height="5" fill="#C9A45C" />
-          <rect x="17" y="17" width="3" height="5" fill="#2E7D5B" />
+          <path d="M6 22V13l10-6 10 6v9" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinejoin="round" />
+          <rect x="12" y="17" width="3" height="5" fill="#FFFFFF" />
+          <rect x="17" y="17" width="3" height="5" fill="#FFD23F" />
         </svg>
       </span>
       <span className="leading-tight">
-        <span className="block text-sm font-semibold text-stone">Stonebrook</span>
-        <span className="block text-[10px] tracking-[0.2em] text-gold uppercase">Deal Scout</span>
+        <span className="block text-sm font-extrabold text-stone">Stonebrook</span>
+        <span className="block text-[10px] tracking-[0.2em] gradient-text font-bold uppercase">Deal Scout</span>
       </span>
     </Link>
   )
@@ -49,10 +49,10 @@ function NavItems({ onNavigate }) {
             {g.items.map((n) => (
               <NavLink key={n.to} to={n.to} end={n.end} onClick={onNavigate}
                 className={({ isActive }) =>
-                  `block rounded-lg px-3 py-2 text-sm transition-colors ${
-                    isActive ? 'bg-panel text-stone border-l-2 border-gold pl-[10px]' : 'text-mist hover:text-stone hover:bg-charcoal'
+                  `flex items-center gap-2.5 rounded-2xl px-3 py-2 text-sm font-medium transition-all ${
+                    isActive ? 'bg-grape/10 text-grape shadow-soft' : 'text-fog hover:text-stone hover:bg-softgray/60'
                   }`}>
-                {n.label}
+                <span className="text-base leading-none">{n.icon}</span>{n.label}
               </NavLink>
             ))}
           </div>

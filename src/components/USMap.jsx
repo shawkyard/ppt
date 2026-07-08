@@ -19,21 +19,25 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
   return (
     <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} className="w-full h-full block" role="img" aria-label="Approximate US emerging-markets map">
       <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M40 0H0V40" fill="none" stroke="#0e1626" strokeWidth="1" />
+        <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+          <path d="M44 0H0V44" fill="none" stroke="#BFDcFa" strokeWidth="1" />
         </pattern>
-        <radialGradient id="sea" cx="50%" cy="40%" r="75%">
-          <stop offset="0%" stopColor="#0a1220" />
-          <stop offset="100%" stopColor="#05070A" />
+        <radialGradient id="sea" cx="50%" cy="35%" r="80%">
+          <stop offset="0%" stopColor="#E8F2FF" />
+          <stop offset="100%" stopColor="#D3E7FF" />
         </radialGradient>
+        <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FBF6EA" />
+          <stop offset="100%" stopColor="#F1E9D6" />
+        </linearGradient>
       </defs>
 
       <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#sea)" />
-      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#grid)" opacity="0.5" />
+      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#grid)" opacity="0.35" />
 
       {/* Landmass */}
-      <path d={US_PATH} fill="#0f1a2b" stroke="#243449" strokeWidth="1.5" />
-      <path d={US_PATH} fill="none" stroke="#C9A45C" strokeWidth="0.6" opacity="0.25" />
+      <path d={US_PATH} fill="url(#land)" stroke="#D8C9A6" strokeWidth="1.5" />
+      <path d={US_PATH} fill="none" stroke="#F5981E" strokeWidth="0.8" opacity="0.25" />
 
       {/* Market regions (approximate blobs) */}
       {markets.map((m) => {
@@ -45,13 +49,13 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
         return (
           <g key={m.id} className="cursor-pointer" onClick={() => onSelectMarket(m.id)}
              onMouseEnter={() => setHover(m.id)} onMouseLeave={() => setHover(null)}>
-            <circle cx={x} cy={y} r={r} fill={ind.color} fillOpacity={isSel || isHover ? 0.42 : 0.24}
-              stroke={ind.color} strokeWidth={isSel ? 2.5 : 1.5} strokeOpacity="0.9" />
+            <circle cx={x} cy={y} r={r} fill={ind.color} fillOpacity={isSel || isHover ? 0.78 : 0.55}
+              stroke={ind.color} strokeWidth={isSel ? 3 : 1.8} strokeOpacity="1" />
             {(isSel || isHover) && (
               <g>
-                <rect x={x + r + 4} y={y - 12} width={m.marketName.length * 6.4 + 16} height="22" rx="4"
-                  fill="#05070A" stroke="#243449" />
-                <text x={x + r + 12} y={y + 3} fill="#F5F1E8" fontSize="12" fontWeight="600">{m.marketName}</text>
+                <rect x={x + r + 4} y={y - 13} width={m.marketName.length * 6.6 + 18} height="24" rx="12"
+                  fill="#FFFFFF" stroke="#E9E4F5" strokeWidth="1.5" />
+                <text x={x + r + 13} y={y + 3} fill="#2A2350" fontSize="12" fontWeight="700">{m.marketName}</text>
               </g>
             )}
           </g>
@@ -66,12 +70,12 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
         const x = base.x + 10, y = base.y - 8
         const isSel = selected?.type === 'property' && selected.id === p.id
         const tone = p.verdict.tone
-        const color = tone === 'green' ? '#3fa876' : tone === 'yellow' ? '#DFFF00' : '#C94848'
+        const color = tone === 'green' ? '#1FAE6B' : tone === 'yellow' ? '#F0AE1A' : '#EF5D6B'
         return (
           <g key={p.id} className="cursor-pointer" onClick={(e) => { e.stopPropagation(); onSelectProperty(p.id) }}>
             <path d={`M${x} ${y} c-7 -9 -11 -13 -11 -20 a11 11 0 0 1 22 0 c0 7 -4 11 -11 20 z`}
-              fill="#05070A" stroke={color} strokeWidth={isSel ? 2.5 : 1.5} transform={`translate(0,${-4})`} />
-            <circle cx={x} cy={y - 24} r="4.5" fill={color} />
+              fill={color} stroke="#FFFFFF" strokeWidth={isSel ? 3 : 2} transform={`translate(0,${-4})`} />
+            <circle cx={x} cy={y - 24} r="4" fill="#FFFFFF" />
           </g>
         )
       })}
