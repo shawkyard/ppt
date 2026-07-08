@@ -4,13 +4,13 @@ import { useApp } from '../context/AppContext.jsx'
 import USMap from '../components/USMap.jsx'
 import { Badge, Callout } from '../components/ui.jsx'
 import { INDICATOR_ORDER, INDICATORS, GATE_TONE } from '../lib/reindicator.js'
-import { MAP_LAYERS, LOCKED_LAYERS, getLayer } from '../lib/mapLayers.js'
+import { CATEGORIES, layersInCategory, getLayer, YEARS, YEAR_MIN, YEAR_MAX } from '../lib/mapLayers.js'
 import { usd } from '../lib/format.js'
 
-function Legend({ layer }) {
+function Legend({ layer, year }) {
   return (
     <div className="absolute bottom-3 left-3 rounded-xl border border-line bg-white/95 backdrop-blur px-3 py-2.5 text-xs shadow-soft">
-      <div className="label mb-1.5">{layer.name}</div>
+      <div className="label mb-1.5">{layer.name}{layer.yearAware ? ` · ${year}` : ''}</div>
       {layer.legend.map((e) => (
         <div key={e.key} className="flex items-center gap-2 py-0.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: e.color }} />
@@ -102,8 +102,13 @@ export default function MapCommandCenter() {
   const [confidence, setConfidence] = useState('all')
   const [showPins, setShowPins] = useState(true)
   const [selected, setSelected] = useState(null)
+  const [category, setCategory] = useState('Market Signal')
   const [layerId, setLayerId] = useState('status')
+  const [year, setYear] = useState(YEAR_MAX)
   const layer = getLayer(layerId)
+  const layerChoices = layersInCategory(category)
+
+  const pickCategory = (c) => { setCategory(c); setLayerId(layersInCategory(c)[0]?.id) }
 
   const states = useMemo(() => ['all', ...Array.from(new Set(screenedMarkets.map((m) => m.state))).sort()], [screenedMarkets])
 
@@ -170,25 +175,36 @@ export default function MapCommandCenter() {
 
         {/* Map */}
         <div className="panel relative overflow-hidden">
-          <div className="absolute top-3 left-3 z-10 rounded-xl border border-line bg-white/95 backdrop-blur px-3 py-2 shadow-soft">
-            <div className="flex items-center gap-2">
+          <div className="absolute top-3 left-3 z-10 w-64 rounded-xl border border-line bg-white/95 backdrop-blur px-3 py-2.5 shadow-soft">
+            <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wide text-gold">Display Data</span>
+              {layer.demo && <span className="tag bg-yellow/15 text-yellow border border-yellow/40">DEMO</span>}
             </div>
-            <select value={layerId} onChange={(e) => setLayerId(e.target.value)}
-              className="mt-1 bg-transparent text-sm font-bold text-stone focus:outline-none cursor-pointer">
-              {MAP_LAYERS.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
-              <optgroup label="Live data — V2 (locked)">
-                {LOCKED_LAYERS.map((l) => <option key={l} disabled>🔒 {l}</option>)}
-              </optgroup>
+            <select value={category} onChange={(e) => pickCategory(e.target.value)}
+              className="mt-1.5 w-full bg-offwhite border border-line rounded-lg px-2 py-1.5 text-xs font-semibold text-fog focus:outline-none cursor-pointer">
+              {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
-            <div className="text-[11px] text-mist">Approximate · verify before investing</div>
+            <select value={layerId} onChange={(e) => setLayerId(e.target.value)}
+              className="mt-1.5 w-full bg-transparent text-sm font-bold text-stone focus:outline-none cursor-pointer">
+              {layerChoices.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
+            {layer.yearAware && (
+              <div className="mt-2">
+                <div className="flex items-center justify-between text-[11px] text-mist">
+                  <span>Year</span><span className="tnum font-bold text-stone">{year}</span>
+                </div>
+                <input type="range" min={YEAR_MIN} max={YEAR_MAX} step="1" value={year}
+                  onChange={(e) => setYear(Number(e.target.value))} className="w-full accent-gold" />
+              </div>
+            )}
+            <div className="mt-1 text-[10px] text-mist">{layer.demo ? 'Demo coloring — import real values' : 'Approximate · verify before investing'}</div>
           </div>
           <div className="aspect-[5/3]">
-            <USMap markets={visibleMarkets} properties={visibleProperties} selected={selected} colorFor={layer.colorFor}
+            <USMap markets={visibleMarkets} properties={visibleProperties} selected={selected} colorFor={(m) => layer.colorFor(m, year)}
               onSelectMarket={(id) => setSelected({ type: 'market', id })}
               onSelectProperty={(id) => setSelected({ type: 'property', id })} />
           </div>
-          <Legend layer={layer} />
+          <Legend layer={layer} year={year} />
         </div>
 
         {/* Drawer */}
