@@ -1,54 +1,49 @@
-// Property scratch scoring.
-// Weighted 0–100. Some sub-scores are auto-derived from data (market strength,
-// rent upside, vacancy upside); others are analyst 0–10 ratings on the property.
-// "Broker optimism risk" is inverted — high broker optimism is a negative.
+// Property scratch scoring — weighted 0–100.
+// Market strength, rent upside, and vacancy upside auto-derive from data;
+// the rest are analyst 0–10 ratings. Broker optimism risk is inverted.
+import { marketGate } from './reindicator.js'
 
 export const SCRATCH_FACTORS = [
-  { key: 'marketStrength', label: 'Market strength', weight: 20, derived: true,
-    help: 'Pulled from the linked market gate score.' },
-  { key: 'submarketQuality', label: 'Submarket quality', weight: 15, derived: false,
-    help: 'Is this a C property sitting in a B (or better) pocket? 10 = strong pocket.' },
-  { key: 'conditionFit', label: 'Property condition / value-add fit', weight: 15, derived: false,
-    help: 'Dated but fixable scores high. Already-renovated or luxury scores low.' },
-  { key: 'rentUpside', label: 'Rent upside', weight: 15, derived: true,
-    help: 'Derived from the gap between current and market rents.' },
-  { key: 'vacancyUpside', label: 'Vacancy / operations upside', weight: 10, derived: true,
-    help: 'Derived from current vacancy vs. a stabilized target.' },
-  { key: 'capexFeasibility', label: 'Capex feasibility', weight: 10, derived: false,
-    help: 'Is the renovation path realistic on budget and timeline? 10 = clean path.' },
-  { key: 'brokerOptimismRisk', label: 'Broker optimism risk', weight: 5, derived: false, invert: true,
-    help: 'How much does the deal lean on the broker pro forma? 10 = heavy reliance (bad).' },
-  { key: 'debtStrikeFactor', label: 'Debt / strike-factor likelihood', weight: 10, derived: false,
-    help: 'Likelihood financing pencils at todays terms. 10 = high confidence.' },
+  { key: 'marketStrength', label: 'Market strength', weight: 20, help: 'From the market REIndicator gate.' },
+  { key: 'submarketQuality', label: 'Submarket quality', weight: 15, help: 'C property in a B pocket scores high.' },
+  { key: 'conditionFit', label: 'Condition / value-add fit', weight: 15, help: 'Dated but fixable scores high.' },
+  { key: 'rentUpside', label: 'Rent upside', weight: 15, help: 'Derived from current → market rent gap.' },
+  { key: 'vacancyUpside', label: 'Vacancy / operations upside', weight: 10, help: 'Derived from current occupancy.' },
+  { key: 'capexFeasibility', label: 'Capex feasibility', weight: 10, help: 'Is the reno path realistic?' },
+  { key: 'brokerOptimismRisk', label: 'Broker optimism risk', weight: 5, invert: true, help: 'Reliance on broker pro forma (high = bad).' },
+  { key: 'debtStrikeFactor', label: 'Debt / strike-factor likelihood', weight: 10, help: 'Will financing pencil at stabilization?' },
 ]
 
-// Map a rent gap % into a 0–10 rating. ~20%+ gap = full marks.
-function rentUpsideRating(rentGapPct) {
-  if (rentGapPct <= 0) return 0
-  return clamp010((rentGapPct / 0.20) * 10)
+const clamp = (v) => Math.min(10, Math.max(0, Number(v) || 0))
+
+// Map a market gate to a 0–10 strength score.
+const GATE_STRENGTH = { hunt: 9, limited: 6.5, watch: 5, review: 4, ignore: 2 }
+
+function marketStrengthRating(market) {
+  if (!market) return 5
+  const gate = marketGate(market)
+  let base = GATE_STRENGTH[gate.gate] ?? 5
+  if (market.confidence === 'Needs verification') base -= 1
+  return clamp(base)
 }
 
-// Map current vacancy into a 0–10 upside rating vs a 5% stabilized target.
-function vacancyUpsideRating(vacancyRate, target = 0.05) {
-  const excess = (vacancyRate ?? 0) - target
-  if (excess <= 0) return 1 // little operational upside if already tight
-  return clamp010((excess / 0.15) * 10)
+const rentUpsideRating = (gapPct) => clamp((Math.max(0, gapPct) / 0.20) * 10)
+const vacancyUpsideRating = (occupancy) => {
+  const vac = 1 - (occupancy ?? 0.95)
+  const excess = vac - 0.05
+  return excess <= 0 ? 1 : clamp((excess / 0.15) * 10)
 }
 
 export function scoreDeal(property, market, deal) {
-  const marketStrength = market ? (market.score / 10) : 5
-  const rentUpside = rentUpsideRating(deal.rentGapPct)
-  const vacancyUpside = vacancyUpsideRating(property.vacancyRate)
-
   const ratings = {
-    marketStrength,
-    submarketQuality: clamp010(property.submarketQuality),
-    conditionFit: clamp010(property.conditionFit),
-    rentUpside,
-    vacancyUpside,
-    capexFeasibility: clamp010(property.capexFeasibility),
-    brokerOptimismRisk: clamp010(property.brokerOptimismRisk),
-    debtStrikeFactor: clamp010(property.debtStrikeFactor),
+    marketStrength: marketStrengthRating(market),
+    submarketQuality: clamp(property.submarketQuality),
+    conditionFit: clamp(property.conditionFit),
+    rentUpside: rentUpsideRating(deal.rentGapPct),
+    vacancyUpside: vacancyUpsideRating(deal.current.occupancy),
+    capexFeasibility: clamp(property.capexFeasibility),
+    brokerOptimismRisk: clamp(property.brokerOptimismRisk),
+    debtStrikeFactor: clamp(property.debtStrikeFactor),
   }
 
   let total = 0
@@ -59,20 +54,13 @@ export function scoreDeal(property, market, deal) {
     total += points
     return { ...f, raw, points }
   })
-
   return { score: Math.round(total), breakdown, ratings }
 }
 
 export function dealVerdict(score) {
-  if (score >= 85) return { label: 'Strong lead — request full OM immediately', short: 'Strong lead', tone: 'approve', band: 'strong' }
-  if (score >= 70) return { label: 'Worth requesting full OM', short: 'Request OM', tone: 'approve', band: 'request' }
-  if (score >= 55) return { label: 'Watchlist / needs price reset', short: 'Watchlist', tone: 'warn', band: 'watchlist' }
-  if (score >= 40) return { label: 'Pass unless price drops materially', short: 'Pass unless price drops', tone: 'danger', band: 'pass-price' }
-  return { label: 'Pass', short: 'Pass', tone: 'danger', band: 'pass' }
-}
-
-function clamp010(v) {
-  const x = Number(v)
-  if (Number.isNaN(x)) return 0
-  return Math.min(10, Math.max(0, x))
+  if (score >= 85) return { label: 'Strong Lead — request full OM immediately', short: 'Strong Lead', tone: 'green', band: 'strong' }
+  if (score >= 70) return { label: 'Worth Requesting Full OM', short: 'Request OM', tone: 'green', band: 'request' }
+  if (score >= 55) return { label: 'Watchlist / Needs Price Reset', short: 'Watchlist', tone: 'yellow', band: 'watchlist' }
+  if (score >= 40) return { label: 'Pass Unless Price Drops Materially', short: 'Pass unless price drops', tone: 'red', band: 'pass-price' }
+  return { label: 'Pass', short: 'Pass', tone: 'red', band: 'pass' }
 }

@@ -1,82 +1,69 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { demoMarkets, demoProperties } from '../data/demoData.js'
+import { demoMarkets } from '../data/markets.js'
+import { demoProperties } from '../data/properties.js'
 import { loadState, saveState } from '../lib/storage.js'
 import { screenMarket, screenProperty } from '../lib/screen.js'
 
 const AppContext = createContext(null)
+const uid = (p) => `${p}-${Math.random().toString(36).slice(2, 8)}`
 
-const uid = (prefix) => `${prefix}-${Math.random().toString(36).slice(2, 8)}`
+const DEFAULT_SETTINGS = {
+  sourcingMode: 'Manual / Assisted',   // default; live scraping locked in V1
+  liveScrapingEnabled: false,
+  runBudgetUSD: 0,
+  maxPropertiesPerRun: 5,
+  returnTopN: 5,
+  approvedMarketsOnly: true,
+  investorName: 'Scott & Alma',
+  fundName: 'Stonebrook Multifamily',
+}
 
 export function AppProvider({ children }) {
   const [markets, setMarkets] = useState([])
   const [properties, setProperties] = useState([])
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS)
+  const [ready, setReady] = useState(false)
 
-  // Hydrate from localStorage, or seed demo data on first run.
   useEffect(() => {
     const saved = loadState()
     if (saved?.markets?.length) {
       setMarkets(saved.markets)
       setProperties(saved.properties || [])
+      setSettings({ ...DEFAULT_SETTINGS, ...(saved.settings || {}) })
     } else {
       setMarkets(demoMarkets)
       setProperties(demoProperties)
     }
+    setReady(true)
   }, [])
 
-  // Persist on change (skip the initial empty render).
   useEffect(() => {
-    if (markets.length || properties.length) {
-      saveState({ markets, properties })
-    }
-  }, [markets, properties])
+    if (ready) saveState({ markets, properties, settings })
+  }, [markets, properties, settings, ready])
 
-  // Derived, screened views — recomputed whenever underlying data changes.
   const screenedMarkets = useMemo(() => markets.map(screenMarket), [markets])
-  const screenedProperties = useMemo(() => {
-    return properties.map((p) => {
-      const mkt = screenedMarkets.find((m) => m.id === p.marketId)
-      return screenProperty(p, mkt)
-    })
-  }, [properties, screenedMarkets])
+  const screenedProperties = useMemo(() => properties.map((p) => {
+    const m = screenedMarkets.find((x) => x.id === p.marketId)
+    return screenProperty(p, m)
+  }), [properties, screenedMarkets])
 
   const api = useMemo(() => ({
-    markets,
-    properties,
-    screenedMarkets,
-    screenedProperties,
-
+    ready, markets, properties, settings, screenedMarkets, screenedProperties,
     getMarket: (id) => screenedMarkets.find((m) => m.id === id),
     getProperty: (id) => screenedProperties.find((p) => p.id === id),
 
-    addProperty: (data) => {
-      const id = uid('prop')
-      setProperties((prev) => [...prev, { id, ...data }])
-      return id
-    },
-    updateProperty: (id, patch) => {
-      setProperties((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch } : p)))
-    },
-    removeProperty: (id) => {
-      setProperties((prev) => prev.filter((p) => p.id !== id))
-    },
+    addProperty: (data) => { const id = uid('prop'); setProperties((p) => [...p, { id, ...data }]); return id },
+    updateProperty: (id, patch) => setProperties((p) => p.map((x) => (x.id === id ? { ...x, ...patch } : x))),
+    removeProperty: (id) => setProperties((p) => p.filter((x) => x.id !== id)),
 
-    addMarket: (data) => {
-      const id = uid('mkt')
-      setMarkets((prev) => [...prev, { id, ...data }])
-      return id
-    },
-    updateMarket: (id, patch) => {
-      setMarkets((prev) => prev.map((m) => (m.id === id ? { ...m, ...patch } : m)))
-    },
-    removeMarket: (id) => {
-      setMarkets((prev) => prev.filter((m) => m.id !== id))
-    },
+    addMarket: (data) => { const id = uid('mkt'); setMarkets((m) => [...m, { id, ...data }]); return id },
+    updateMarket: (id, patch) => setMarkets((m) => m.map((x) => (x.id === id ? { ...x, ...patch } : x))),
+    removeMarket: (id) => setMarkets((m) => m.filter((x) => x.id !== id)),
 
-    resetDemo: () => {
-      setMarkets(demoMarkets)
-      setProperties(demoProperties)
-    },
-  }), [markets, properties, screenedMarkets, screenedProperties])
+    updateSettings: (patch) => setSettings((s) => ({ ...s, ...patch })),
+
+    resetDemo: () => { setMarkets(demoMarkets); setProperties(demoProperties); setSettings(DEFAULT_SETTINGS) },
+  }), [ready, markets, properties, settings, screenedMarkets, screenedProperties])
 
   return <AppContext.Provider value={api}>{children}</AppContext.Provider>
 }

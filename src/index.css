@@ -3,55 +3,34 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    @apply bg-ink text-fog font-sans antialiased;
-  }
-  h1, h2, h3, h4 {
-    @apply text-white tracking-tight;
-  }
-  /* Numeric alignment for financial figures */
-  .tnum {
-    font-variant-numeric: tabular-nums;
-  }
+  html { color-scheme: dark; }
+  body { @apply bg-ink text-fog font-sans antialiased; }
+  h1, h2, h3, h4 { @apply text-stone tracking-tight; }
+  .tnum { font-variant-numeric: tabular-nums; }
 }
 
 @layer components {
-  .panel {
-    @apply bg-charcoal border border-slateline/70 rounded-lg shadow-panel;
-  }
-  .panel-hd {
-    @apply px-5 py-4 border-b border-slateline/60;
-  }
-  .label {
-    @apply text-[11px] uppercase tracking-[0.14em] text-mist font-medium;
-  }
+  .panel { @apply bg-charcoal border border-line rounded-xl shadow-panel; }
+  .panel-hd { @apply px-5 py-4 border-b border-line/70 flex items-center justify-between gap-3; }
+  .label { @apply text-[10px] uppercase tracking-[0.16em] text-mist font-semibold; }
   .input {
-    @apply w-full bg-ink border border-slateline rounded-md px-3 py-2 text-sm text-white
+    @apply w-full bg-ink border border-line rounded-lg px-3 py-2 text-sm text-stone
            placeholder-mist/50 focus:outline-none focus:border-gold/70 focus:ring-1 focus:ring-gold/30;
   }
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium
-           transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-  .btn-gold {
-    @apply btn bg-gold text-ink hover:bg-goldsoft;
-  }
-  .btn-ghost {
-    @apply btn border border-slateline text-fog hover:border-gold/60 hover:text-white;
-  }
-  .btn-danger {
-    @apply btn border border-danger/50 text-danger hover:bg-danger/10;
-  }
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium;
-  }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-gold { @apply btn bg-gold text-ink hover:bg-goldsoft; }
+  .btn-ghost { @apply btn border border-line text-fog hover:border-gold/60 hover:text-stone; }
+  .btn-dark { @apply btn bg-ink border border-line text-fog hover:border-gold/50; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium; }
+  .tag { @apply inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold tracking-wide; }
 }
 
-/* Slim scrollbar for the shell */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #0b0d0f; }
-::-webkit-scrollbar-thumb { background: #2e343c; border-radius: 6px; }
-::-webkit-scrollbar-thumb:hover { background: #3a4048; }
+::-webkit-scrollbar-track { background: #05070A; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #2b3a4f; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}

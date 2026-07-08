@@ -1,18 +1,18 @@
-// Combines raw data → deal math → scores → verdict into one screened object.
-// This is the single source of truth the UI reads from.
-import { computeDeal, priceCorrection } from './calculations.js'
+// Enriches raw records into screened objects the UI reads from.
+import { computeDeal, strikeFactors } from './calculations.js'
 import { scoreDeal, dealVerdict } from './dealScore.js'
-import { scoreMarket, marketVerdict } from './marketScore.js'
+import { marketGate } from './reindicator.js'
+import { sourceLevel } from './sources.js'
 
 export function screenMarket(market) {
-  const { score, breakdown } = scoreMarket(market.factors)
-  return { ...market, score, breakdown, verdict: marketVerdict(score) }
+  return { ...market, gate: marketGate(market) }
 }
 
 export function screenProperty(property, market) {
   const deal = computeDeal(property)
   const { score, breakdown, ratings } = scoreDeal(property, market, deal)
   const verdict = dealVerdict(score)
-  const correction = priceCorrection(deal)
-  return { ...property, deal, score, breakdown, ratings, verdict, correction, market }
+  const factors = strikeFactors(deal)
+  const source = sourceLevel(property.sourceLevel)
+  return { ...property, deal, score, breakdown, ratings, verdict, factors, source, market }
 }

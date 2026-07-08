@@ -1,111 +1,111 @@
-# Stonebrook Deal Scout
+# Stonebrook Multifamily Deal Scout
 
-A cost-controlled MVP for **screening value-add multifamily apartment deals** before
-wasting hours on full underwriting.
+A **map-first, value-add multifamily acquisition app** for screening apartment
+deals before spending hours underwriting. Built for Scott & Alma.
 
-This is a **static demo MVP** — manual entry, demo data, scoring logic, and clean
-dashboards. It is intentionally **not** a live crawler, not a paid-API app, not a
-scraper, and has no backend, no auth, and no keys. All state lives in the browser
-(`localStorage`).
+It is a **static Version 1 MVP** — manual data entry, seeded markets, demo deals,
+scoring logic, and premium dashboards. No backend, no accounts, no paid APIs, no
+live crawling, no API keys. Everything is stored locally in the browser.
 
-## The thesis
+## The core thesis (important)
 
-We do **not** use the old RE Mentor rule of requiring 12% cash-on-cash in Year 1.
-We evaluate whether a property can **become** a good deal after a realistic
-**18–24 month value-add stabilization plan**.
+We do **not** require 12% cash-on-cash in Year 1. Years 1–2 are for renovation,
+turnover, lease-up, vacancy reduction, management cleanup, and reserve-funded
+stabilization. The real test is:
 
-Target profile: an underperforming **C property in a B area** in a strong or
-emerging market, with fixable upside — under-market rents, vacancy upside, dated
-units, poor management, weak other income, a stale listing, a negotiable price,
-and a realistic capex path. We avoid luxury/stabilized/fully-renovated product,
-bad locations, deals that only work off the broker pro forma, deals with no rent
-upside, and appreciation-only bets.
+> **Can the property hit strong stabilized metrics in Year 3 after a realistic
+> 18–24 month plan?**
 
-## Features
+Preferred acquisition: a **C property in a B area** — underperforming, under-market
+rents, fixable vacancy/management, dated units, weak other income, a negotiable
+seller, in a **strong or emerging market**, with enough capex and reserves to
+execute. We avoid luxury/stabilized/renovated product, bad locations, deals where
+the seller already captured the upside, deals that only work on the broker pro
+forma, and appreciation-only bets.
 
-| Page | What it does |
-|------|--------------|
-| **Dashboard** | Pipeline overview, ranked deals, aggregate value created, market status |
-| **Market Gate** | Score a market 0–100 across 10 factors → Approved / Watchlist / Reject |
-| **Add Property** | Manual entry of listing-level data + value-add ratings |
-| **Scratch Screen** | Fast 0–100 read on every property, filterable by decision band |
-| **Deal Detail** | Full decision output: score, why, pain, upside, quick math, docs, risks |
-| **24-Month Plan** | Phased stabilization plan derived from the deal math |
-| **Offer / Price** | Preliminary *max supportable price* (never a final offer) + confidence |
-| **Risk Register** | Log and rank risks with mitigations |
-| **Broker Questions** | The questions/docs to request; one-click "copy as email" |
-| **Investor Summary** | One-page, print-friendly deal summary |
+## What's in Version 1
 
-### Scoring
+**16 screens:** Dashboard · Map Command Center · Market Gate · Market Layer
+Manager · Deal Sourcing Queue · Add Property · Upload OM/RR/T12 · Scratch Screen ·
+Deal Detail · 24-Month Stabilization Plan · Offer Price / Price Correction · Risk
+Register · Broker Questions · Investor Summary · Report Builder · Settings.
 
-**Market Gate (0–100)** — job growth, population growth, wage/income support,
-employer anchors, rent growth, new-supply risk, affordability, crime/safety risk,
-infrastructure investment, and your RE Indicator score. Risk factors are inverted.
-- 80–100 Approved · 60–79 Watchlist · < 60 Reject
-
-**Property scratch score (0–100)** — market strength (20), submarket quality (15),
-condition/value-add fit (15), rent upside (15), vacancy/operations upside (10),
-capex feasibility (10), broker-optimism risk (5, inverted), debt/strike factor (10).
-- 85–100 Strong lead · 70–84 Request OM · 55–69 Watchlist · 40–54 Pass unless price drops · < 40 Pass
-
-Market strength, rent upside, and vacancy upside are auto-derived from the data;
-the rest are analyst ratings.
-
-### Deal math
-
-Price/unit, monthly & annual rent upside, current/stabilized gross rent, current
-& stabilized NOI, current & stabilized cap rate, stabilized value, total project
-cost, and value created — all in `src/lib/calculations.js`. On weak listing-only
-data the app deliberately shows a **preliminary max supportable price** plus the
-required documents, broker questions, and a confidence level — not a final offer.
+- **Map Command Center** — approximate US map with colored REIndicator market
+  regions, deal pins, filter panel, and a detail drawer. Regions are approximate
+  from REIndicator screenshot review (clearly disclaimed).
+- **REIndicator legend & Market Gate** — Turquoise = Pre-Emerging · Yellow = New
+  Emerging (2 yr) · Green = Continuing Emerging (3+ yr) · Gray = Not Emerging ·
+  White = Insufficient Data. Gray markets can be **manually approved**.
+- **20 seeded markets** across the Sunbelt, Mountain West, and more — fully
+  editable in the Market Layer Manager.
+- **Three separated worlds on every deal:** Current Reality · Broker Story · Our
+  Strike Deal — never mixed. Underwriting runs off the Strike Deal.
+- **Property scratch score (0–100)** — market strength (20), submarket quality
+  (15), condition/value-add fit (15), rent upside (15), vacancy/ops upside (10),
+  capex feasibility (10), broker optimism risk (5, inverted), debt/strike (10).
+  Bands: 85+ Strong Lead · 70–84 Request OM · 55–69 Watchlist · 40–54 Pass unless
+  price drops · <40 Pass.
+- **Full deal math** — price/unit, rent upside, current & stabilized NOI/cap,
+  stabilized value, total project cost, value created, max supportable price,
+  required price reduction, DSCR, stabilized cash-on-cash.
+- **Year-3 strike factors** — 12%+ CoC, 1.4x/1.6x DSCR, 7%/8% cap, value created.
+- **Source discipline** — 4 source levels and per-field labels
+  (OM/RR/T12/BR/EXT/ASM/CALC/USER/MISS/NT).
+- **Sourcing control center** — approved-market list, broker tracker, URL queue,
+  paste box, cost guards, and **locked** V2 connectors (no live crawling in V1).
+- **Upload workflow** — polished upload UI with a demo parsed-data preview.
+- **Report Builder** — premium, printable investor one-pager (Print → save PDF).
+- **5 demo properties**, one per decision band, across two markets.
 
 ## Tech
 
-React + Vite + Tailwind. `react-router-dom` for routing. No other runtime deps.
-No backend, no Supabase, no APIs, no env vars, no secrets.
+React + Vite + Tailwind. `react-router-dom` for routing. The US map is a
+hand-built inline SVG (no map library, no tiles, no API). No other runtime deps.
 
-## Getting started
+## Run locally
 
 ```bash
 npm install
-npm run dev      # local dev server
+npm run dev      # local dev server (Vite prints the URL)
 npm run build    # production build → dist/
 npm run preview  # preview the production build
 ```
 
-Demo data (2 markets, 5 properties) seeds automatically on first run. Use
-**Reset demo data** in the sidebar to restore it at any time.
+Demo data seeds automatically on first run. **Settings → Reset demo data** restores it.
+
+## Push to GitHub
+
+```bash
+git add -A
+git commit -m "Stonebrook Multifamily Deal Scout — V1"
+git push -u origin <your-branch>
+```
 
 ## Deploy to Cloudflare Pages
 
-1. Push this repo to GitHub.
-2. In Cloudflare Pages, **Create a project** → connect the repo.
+1. Push the repo to GitHub.
+2. Cloudflare Pages → **Create a project** → connect the repo.
 3. Build settings:
-   - **Framework preset:** None (or Vite)
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
+   - **Framework preset:** None (or Vite)
 4. Deploy. `public/_redirects` (`/* /index.html 200`) is included so client-side
-   routes resolve correctly on refresh/deep-link.
+   routes resolve on refresh/deep-link. **No environment variables required.**
 
-No environment variables are required.
+## Cost control
 
-## Project structure
+No paid APIs · no hidden env vars · no uncontrolled scraper · no national
+crawling · no recurring agent jobs. All future paid features are locked
+placeholders. The MVP runs entirely on manual data, seeded markets, and demo pins.
 
-```
-src/
-  components/   Layout, DealTabs, DealHeader, shared UI primitives
-  context/      AppContext — state + localStorage persistence
-  data/         demoData.js — 2 markets, 5 seed properties
-  lib/          marketScore, dealScore, calculations, plan, screen, format, storage
-  pages/        the 10 screens
-```
+## Version 2 (locked placeholders in the UI)
 
-## Version 2 ideas
+Real OM parser · rent roll parser · T12 parser · CSV import · broker-site
+sourcing · public listing URL extraction · scheduled weekly scans · Supabase
+database · investor CRM · LOI generator · PDF export.
 
-- Real data ingestion (crawler / paid listing APIs / OM PDF parsing) behind a backend
-- Supabase (or similar) for auth, multi-user pipelines, and shared deal history
-- Full underwriting model: financing, DSCR, IRR/equity multiple, sensitivity tables
-- Rent & sales comps integration to validate market rents independently
-- Document upload + checklist tracking per deal
-- Export to PDF/Excel and shareable investor links
-- Map view and submarket heat-mapping
+---
+
+*Version 1 market regions are approximate from REIndicator screenshot review and
+must be verified before investment decisions. The app shows a preliminary max
+supportable price, not a final offer.*
