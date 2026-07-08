@@ -4,9 +4,9 @@ import { usd, pct } from '../lib/format.js'
 import { SourceTag } from './ui.jsx'
 
 const COLS = [
-  { key: 'current', label: 'Current Reality', tone: 'text-fog', desc: 'What it does today' },
-  { key: 'broker', label: 'Broker Story', tone: 'text-yellow', desc: 'What the broker claims' },
-  { key: 'strike', label: 'Our Strike Deal', tone: 'text-gold', desc: 'Our conservative read' },
+  { key: 'current', label: 'Current Reality', tone: 'text-mist', head: 'bg-offwhite', desc: 'What appears true today' },
+  { key: 'broker', label: 'Broker Story', tone: 'text-yellow', head: 'bg-yellow/10', desc: 'What the seller wants us to believe' },
+  { key: 'strike', label: 'Our Strike Deal', tone: 'text-green', head: 'bg-green/10', desc: 'Our conservative plan' },
 ]
 
 export default function TriCompare({ p }) {
@@ -29,8 +29,8 @@ export default function TriCompare({ p }) {
           <tr className="border-b border-line">
             <th className="text-left py-2 font-normal text-mist w-40"></th>
             {COLS.map((c) => (
-              <th key={c.key} className="text-right py-2 px-3">
-                <div className={`font-semibold ${c.tone} flex items-center justify-end gap-2`}>
+              <th key={c.key} className={`text-right py-2.5 px-3 rounded-t-xl ${c.head}`}>
+                <div className={`font-bold ${c.tone} flex items-center justify-end gap-2`}>
                   {c.label}<SourceTag code={prov[c.key]} />
                 </div>
                 <div className="text-[11px] text-mist font-normal">{c.desc}</div>

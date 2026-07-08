@@ -4,51 +4,50 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Bright, friendly "beautiful app" palette. Token names kept stable so
-        // every screen restyles from here. (ink = app background, charcoal = cards,
-        // stone = primary text, fog = secondary, mist = muted.)
-        ink: '#F5F3FF',       // soft lavender-white app background
-        charcoal: '#FFFFFF',  // card surface
+        // HawkTech-style: white-first, black text, orange accent.
+        // Token names kept stable so every screen restyles from here.
+        // ink = app canvas (soft off-white), charcoal/panel = white cards,
+        // stone = black text, fog = secondary, mist = muted.
+        ink: '#F7F7F4',        // soft off-white canvas
+        offwhite: '#F8F8F5',   // inset panels
+        charcoal: '#FFFFFF',   // card surface
         panel: '#FFFFFF',
-        line: '#E9E4F5',      // soft hairline
-        stone: '#2A2350',     // primary text (deep grape)
-        fog: '#544C74',       // secondary text
-        mist: '#8B84A8',      // muted text
-        softgray: '#EAE6F4',
-        // Candy accents (readable on white)
-        gold: '#F5981E',      // warm amber (primary CTA)
-        goldsoft: '#E08205',
-        green: '#1FAE6B',
-        greenbright: '#149C5B',
-        turq: '#12B5A6',
-        yellow: '#E0A100',    // readable goldenrod
-        red: '#EF5D6B',
-        grape: '#7A5AF5',     // playful purple
-        grapesoft: '#6845E0',
-        pink: '#FF6FB3',
-        sky: '#3AB6FF',
+        coal: '#181818',       // optional dark section
+        line: '#E5E7EB',       // light gray border
+        stone: '#111111',      // black text
+        fog: '#4B4B4B',        // secondary text
+        mist: '#8A8A8A',       // muted text
+        softgray: '#EFEFEC',
+        // Accent system
+        gold: '#F97316',       // orange (primary)
+        goldsoft: '#EA580C',   // deep orange
+        softorange: '#FFF3E8',
+        grape: '#F97316',      // alias → orange (legacy usages)
+        grapesoft: '#EA580C',
+        green: '#16A34A',
+        greenbright: '#15A34A',
+        turq: '#0D9488',       // pre-emerging teal (readable)
+        yellow: '#CA8A04',     // readable amber-yellow for text
+        red: '#DC2626',
+        sky: '#2563EB',
+        pink: '#F97316',
       },
       fontFamily: {
-        sans: ['ui-rounded', '"SF Pro Rounded"', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-        serif: ['ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        sans: ['ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'serif'],
       },
-      borderRadius: {
-        '4xl': '1.75rem',
-      },
+      borderRadius: { '4xl': '1.75rem' },
       boxShadow: {
-        panel: '0 12px 34px -16px rgba(90,60,180,0.28), 0 2px 8px -4px rgba(90,60,180,0.10)',
-        soft: '0 10px 24px -12px rgba(90,60,180,0.30)',
-        glow: '0 8px 24px -6px rgba(122,90,245,0.45)',
-        pop: '0 14px 30px -10px rgba(245,152,30,0.45)',
+        panel: '0 1px 2px rgba(17,17,17,0.04), 0 8px 24px -14px rgba(17,17,17,0.18)',
+        soft: '0 1px 2px rgba(17,17,17,0.04), 0 6px 18px -12px rgba(17,17,17,0.20)',
+        pop: '0 8px 22px -8px rgba(249,115,22,0.45)',
+        glow: '0 8px 22px -8px rgba(249,115,22,0.35)',
       },
       keyframes: {
         floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
-        pop: { '0%': { transform: 'scale(0.96)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+        pop: { '0%': { transform: 'scale(0.97)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
       },
-      animation: {
-        floaty: 'floaty 6s ease-in-out infinite',
-        pop: 'pop 0.25s ease-out',
-      },
+      animation: { floaty: 'floaty 6s ease-in-out infinite', pop: 'pop 0.25s ease-out' },
     },
   },
   plugins: [],

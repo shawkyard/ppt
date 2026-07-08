@@ -57,10 +57,19 @@ Register · Broker Questions · Investor Summary · Report Builder · Settings.
 - **Report Builder** — premium, printable investor one-pager (Print → save PDF).
 - **5 demo properties**, one per decision band, across two markets.
 
+## Design
+
+White-first, HawkTech-style command center — black text, orange accent
+(`#F97316`), clean rounded cards, big readable type, illustrated stroke icons,
+step numbers, and generous spacing. Every screen answers "what do I do next?"
+The look is driven by design tokens in `tailwind.config.js`, so the whole app
+re-themes centrally.
+
 ## Tech
 
 React + Vite + Tailwind. `react-router-dom` for routing. The US map is a
-hand-built inline SVG (no map library, no tiles, no API). No other runtime deps.
+hand-built inline SVG (no map library, no tiles, no API). Icons are a small
+inline SVG set (`src/components/Icon.jsx`). No other runtime deps.
 
 ## Run locally
 

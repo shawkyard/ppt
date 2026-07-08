@@ -34,11 +34,12 @@ export default function DealHeader({ p }) {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <Badge tone={p.verdict.tone}>{p.verdict.short}</Badge>
           <div className="text-right">
-            <div className={`text-3xl font-bold tnum leading-none ${toneText}`}>{p.score}</div>
-            <div className="label mt-1">scratch score</div>
+            <div className={`text-3xl font-extrabold tnum leading-none ${toneText}`}>{p.score}</div>
+            <div className="label mt-1">score</div>
           </div>
+          <Badge tone={p.verdict.tone}>{p.verdict.short}</Badge>
+          <Link to="/reports" className="btn-gold no-print hidden sm:inline-flex">Generate Report</Link>
         </div>
       </div>
       <div className="mt-6 -mx-1 flex gap-1 overflow-x-auto border-b border-line no-print">

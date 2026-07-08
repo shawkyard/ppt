@@ -20,24 +20,16 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
     <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} className="w-full h-full block" role="img" aria-label="Approximate US emerging-markets map">
       <defs>
         <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
-          <path d="M44 0H0V44" fill="none" stroke="#BFDcFa" strokeWidth="1" />
+          <path d="M44 0H0V44" fill="none" stroke="#E9E9E4" strokeWidth="1" />
         </pattern>
-        <radialGradient id="sea" cx="50%" cy="35%" r="80%">
-          <stop offset="0%" stopColor="#E8F2FF" />
-          <stop offset="100%" stopColor="#D3E7FF" />
-        </radialGradient>
-        <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FBF6EA" />
-          <stop offset="100%" stopColor="#F1E9D6" />
-        </linearGradient>
       </defs>
 
-      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#sea)" />
-      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#grid)" opacity="0.35" />
+      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="#FDFDFC" />
+      <rect x="0" y="0" width={MAP_W} height={MAP_H} fill="url(#grid)" opacity="0.5" />
 
       {/* Landmass */}
-      <path d={US_PATH} fill="url(#land)" stroke="#D8C9A6" strokeWidth="1.5" />
-      <path d={US_PATH} fill="none" stroke="#F5981E" strokeWidth="0.8" opacity="0.25" />
+      <path d={US_PATH} fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+      <path d={US_PATH} fill="none" stroke="#F97316" strokeWidth="1" opacity="0.35" />
 
       {/* Market regions (approximate blobs) */}
       {markets.map((m) => {
@@ -70,11 +62,10 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
         const x = base.x + 10, y = base.y - 8
         const isSel = selected?.type === 'property' && selected.id === p.id
         const tone = p.verdict.tone
-        const color = tone === 'green' ? '#1FAE6B' : tone === 'yellow' ? '#F0AE1A' : '#EF5D6B'
         return (
           <g key={p.id} className="cursor-pointer" onClick={(e) => { e.stopPropagation(); onSelectProperty(p.id) }}>
             <path d={`M${x} ${y} c-7 -9 -11 -13 -11 -20 a11 11 0 0 1 22 0 c0 7 -4 11 -11 20 z`}
-              fill={color} stroke="#FFFFFF" strokeWidth={isSel ? 3 : 2} transform={`translate(0,${-4})`} />
+              fill="#F97316" stroke="#FFFFFF" strokeWidth={isSel ? 3 : 2} transform={`translate(0,${-4})`} />
             <circle cx={x} cy={y - 24} r="4" fill="#FFFFFF" />
           </g>
         )

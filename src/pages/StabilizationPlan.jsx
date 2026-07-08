@@ -11,6 +11,16 @@ const YEAR_TESTS = [
   { yr: 'Year 3', label: 'Stabilized', desc: 'First stabilized operating year — the real test of the deal.' },
 ]
 
+const TIMELINE = [
+  { m: 'Month 1–3', t: 'Due diligence / takeover', tone: 'gold' },
+  { m: 'Month 4–6', t: 'Renovation wave 1', tone: 'gold' },
+  { m: 'Month 7–12', t: 'Rent increases / lease-up', tone: 'yellow' },
+  { m: 'Month 13–18', t: 'Renovation wave 2', tone: 'yellow' },
+  { m: 'Month 19–24', t: 'Stabilization', tone: 'green' },
+  { m: 'Year 3', t: 'Stabilized test', tone: 'green' },
+]
+const DOT = { gold: 'bg-gold', yellow: 'bg-yellow', green: 'bg-green' }
+
 export default function StabilizationPlan() {
   const { id } = useParams()
   const { getProperty } = useApp()
@@ -34,6 +44,23 @@ export default function StabilizationPlan() {
         <Stat label="Stabilized NOI" value={usd(d.stabilizedNOI)} sub={`${pct(d.stabilizedCapRate)} on price`} tone="green" />
         <Stat label="NOI lift" value={usdSigned(noiLift)} sub="over the plan" tone="gold" />
         <Stat label="Value created" value={usdSigned(d.valueCreated)} sub="vs. total project cost" tone={d.valueCreated > 0 ? 'green' : 'red'} />
+      </div>
+
+      {/* Horizontal timeline */}
+      <div className="panel p-6 mt-6">
+        <h3 className="text-sm font-bold text-stone mb-5">The 24-month path</h3>
+        <div className="relative">
+          <div className="absolute left-0 right-0 top-[9px] h-0.5 bg-line" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-3">
+            {TIMELINE.map((s) => (
+              <div key={s.m} className="relative text-center">
+                <span className={`mx-auto block h-5 w-5 rounded-full ring-4 ring-white ${DOT[s.tone]}`} />
+                <div className="mt-2 text-xs font-bold text-gold">{s.m}</div>
+                <div className="text-[13px] text-stone font-medium leading-snug">{s.t}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="mt-6 grid gap-3 md:grid-cols-3">

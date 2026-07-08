@@ -2,14 +2,14 @@
 import { SOURCE_LABELS } from '../lib/sources.js'
 
 export const TONE = {
-  green:    { text: 'text-greenbright', border: 'border-green/40', bg: 'bg-green/10', dot: 'bg-green', hex: '#1FAE6B' },
-  yellow:   { text: 'text-yellow',      border: 'border-yellow/40', bg: 'bg-yellow/12', dot: 'bg-yellow', hex: '#F0AE1A' },
-  turq:     { text: 'text-turq',        border: 'border-turq/40', bg: 'bg-turq/12', dot: 'bg-turq', hex: '#12B5A6' },
-  gold:     { text: 'text-gold',        border: 'border-gold/40', bg: 'bg-gold/12', dot: 'bg-gold', hex: '#F5981E' },
-  red:      { text: 'text-red',         border: 'border-red/40', bg: 'bg-red/12', dot: 'bg-red', hex: '#EF5D6B' },
-  grape:    { text: 'text-grape',       border: 'border-grape/40', bg: 'bg-grape/10', dot: 'bg-grape', hex: '#7A5AF5' },
-  mist:     { text: 'text-mist',        border: 'border-line', bg: 'bg-softgray/70', dot: 'bg-mist', hex: '#8B84A8' },
-  softgray: { text: 'text-mist',        border: 'border-line', bg: 'bg-softgray/60', dot: 'bg-mist', hex: '#AAB2C2' },
+  green:    { text: 'text-green',  border: 'border-green/40', bg: 'bg-green/10', dot: 'bg-green', hex: '#16A34A' },
+  yellow:   { text: 'text-yellow', border: 'border-yellow/40', bg: 'bg-yellow/10', dot: 'bg-yellow', hex: '#EAB308' },
+  turq:     { text: 'text-turq',   border: 'border-turq/40', bg: 'bg-turq/10', dot: 'bg-turq', hex: '#0D9488' },
+  gold:     { text: 'text-gold',   border: 'border-gold/40', bg: 'bg-softorange', dot: 'bg-gold', hex: '#F97316' },
+  red:      { text: 'text-red',    border: 'border-red/40', bg: 'bg-red/10', dot: 'bg-red', hex: '#DC2626' },
+  grape:    { text: 'text-gold',   border: 'border-gold/40', bg: 'bg-softorange', dot: 'bg-gold', hex: '#F97316' },
+  mist:     { text: 'text-mist',   border: 'border-line', bg: 'bg-offwhite', dot: 'bg-mist', hex: '#8A8A8A' },
+  softgray: { text: 'text-mist',   border: 'border-line', bg: 'bg-offwhite', dot: 'bg-mist', hex: '#AAB2C2' },
 }
 
 export function Panel({ title, action, children, className = '', bodyClass = 'p-5' }) {
@@ -54,7 +54,7 @@ export function ScoreRing({ score = 0, tone = 'gold', size = 96, label }) {
   return (
     <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ECE7F6" strokeWidth="9" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#EFEFEC" strokeWidth="9" />
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={t.hex} strokeWidth="9"
           strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - fill)} />
       </svg>

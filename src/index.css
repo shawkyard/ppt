@@ -4,42 +4,33 @@
 
 @layer base {
   html { color-scheme: light; }
-  body {
-    @apply text-fog font-sans antialiased;
-    background:
-      radial-gradient(1100px 600px at 88% -12%, #EDE6FF 0%, transparent 60%),
-      radial-gradient(900px 520px at -8% 6%, #FFE9DA 0%, transparent 55%),
-      radial-gradient(800px 500px at 50% 120%, #DCF6EF 0%, transparent 55%),
-      #F5F3FF;
-    background-attachment: fixed;
-  }
+  body { @apply bg-ink text-fog font-sans antialiased; }
   h1, h2, h3, h4 { @apply text-stone tracking-tight; }
   .tnum { font-variant-numeric: tabular-nums; }
 }
 
 @layer components {
-  .panel { @apply bg-white border border-line rounded-[22px] shadow-panel; }
-  .panel-hd { @apply px-5 py-4 border-b border-line flex items-center justify-between gap-3; }
-  .label { @apply text-[10px] uppercase tracking-[0.16em] text-mist font-bold; }
+  .panel { @apply bg-white border border-line rounded-2xl shadow-panel; }
+  .panel-hd { @apply px-6 py-4 border-b border-line flex items-center justify-between gap-3; }
+  .label { @apply text-[11px] uppercase tracking-[0.12em] text-mist font-bold; }
   .input {
-    @apply w-full bg-ink border border-line rounded-2xl px-3.5 py-2.5 text-sm text-stone
-           placeholder-mist/60 focus:outline-none focus:border-grape/60 focus:ring-2 focus:ring-grape/20;
+    @apply w-full bg-white border border-line rounded-xl px-3.5 py-2.5 text-[15px] text-stone
+           placeholder-mist/70 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20;
   }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed; }
-  .btn-gold { @apply btn text-white shadow-pop; background-image: linear-gradient(135deg, #FBB03B 0%, #F5981E 45%, #FF7A59 100%); }
-  .btn-gold:hover { filter: brightness(1.04); }
-  .btn-grape { @apply btn text-white shadow-glow; background-image: linear-gradient(135deg, #8B6BFF 0%, #7A5AF5 55%, #FF6FB3 130%); }
-  .btn-ghost { @apply btn bg-white border-2 border-line text-fog hover:border-grape/50 hover:text-stone; }
-  .btn-dark { @apply btn bg-ink border border-line text-fog hover:border-grape/40; }
-  .chip { @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold; }
-  .tag { @apply inline-flex items-center rounded-lg px-1.5 py-0.5 text-[10px] font-bold tracking-wide; }
-  .gradient-text { @apply bg-clip-text text-transparent; background-image: linear-gradient(120deg, #7A5AF5, #FF6FB3 45%, #F5981E); }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-gold { @apply btn bg-gold text-white shadow-pop hover:bg-goldsoft; }         /* primary */
+  .btn-grape { @apply btn bg-gold text-white shadow-pop hover:bg-goldsoft; }
+  .btn-ghost { @apply btn bg-white border border-gold text-gold hover:bg-softorange; } /* secondary */
+  .btn-dark { @apply btn bg-white border border-line text-fog hover:border-gold hover:text-gold; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold; }
+  .tag { @apply inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-bold tracking-wide; }
+  .gradient-text { @apply text-gold; }
 }
 
 ::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #DAD3EC; border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
-::-webkit-scrollbar-thumb:hover { background: #C4BAE4; background-clip: content-box; }
+::-webkit-scrollbar-thumb { background: #E0E0DA; border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #CFCFC7; background-clip: content-box; }
 
 @media print {
   .no-print { display: none !important; }

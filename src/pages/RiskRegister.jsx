@@ -3,10 +3,16 @@ import { useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
 import DealHeader, { DealNotFound } from '../components/DealHeader.jsx'
 import { Panel, Badge, Field } from '../components/ui.jsx'
+import Icon from '../components/Icon.jsx'
 
 const CATEGORIES = ['Market risk', 'Submarket risk', 'Rent risk', 'Vacancy risk', 'Capex risk', 'Insurance risk', 'Tax reassessment risk', 'Debt risk', 'Exit cap risk', 'Broker optimism risk', 'Missing data risk']
 const LEVELS = ['High', 'Medium', 'Low']
 const tone = (s) => (s === 'High' ? 'red' : s === 'Medium' ? 'yellow' : 'mist')
+const ICON = {
+  'Market risk': 'map', 'Submarket risk': 'pin', 'Rent risk': 'dollar', 'Vacancy risk': 'building',
+  'Capex risk': 'warning', 'Insurance risk': 'shield', 'Tax reassessment risk': 'dollar', 'Debt risk': 'dollar',
+  'Exit cap risk': 'chart', 'Broker optimism risk': 'eye', 'Missing data risk': 'doc',
+}
 
 export default function RiskRegister() {
   const { id } = useParams()
@@ -37,28 +43,32 @@ export default function RiskRegister() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <Panel title="Risk register" className="lg:col-span-2">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm min-w-[560px]">
-              <thead><tr className="border-b border-line text-left label">
-                <th className="py-2">Category</th><th className="py-2">Sev</th><th className="py-2">Likely</th><th className="py-2">Notes / mitigation</th><th className="py-2">Status</th><th></th>
-              </tr></thead>
-              <tbody>
-                {risks.map((r, i) => (
-                  <tr key={i} className="border-b border-line/40 align-top">
-                    <td className="py-2 pr-2 text-stone">{r.category}</td>
-                    <td className="py-2 pr-2"><Badge tone={tone(r.severity)}>{r.severity}</Badge></td>
-                    <td className="py-2 pr-2 text-mist">{r.likelihood}</td>
-                    <td className="py-2 pr-2 text-fog">{r.notes}<div className="text-xs text-mist mt-0.5">→ {r.mitigation}</div></td>
-                    <td className="py-2 pr-2"><Badge tone={r.status === 'Closed' ? 'green' : 'gold'}>{r.status}</Badge></td>
-                    <td className="py-2 no-print"><button className="text-mist hover:text-red text-xs" onClick={() => remove(i)}>✕</button></td>
-                  </tr>
-                ))}
-                {!risks.length && <tr><td colSpan="6" className="py-4 text-mist">No risks logged yet.</td></tr>}
-              </tbody>
-            </table>
-          </div>
-        </Panel>
+        <div className="lg:col-span-2 space-y-3">
+          {!risks.length && <Panel><p className="text-sm text-mist">No risks logged yet. Add the first one →</p></Panel>}
+          {risks.map((r, i) => {
+            const t = tone(r.severity)
+            return (
+              <div key={i} className="panel p-4 flex items-start gap-4">
+                <div className={`grid h-11 w-11 flex-none place-items-center rounded-xl bg-${t === 'mist' ? 'offwhite' : t + '/10'} text-${t === 'mist' ? 'mist' : t}`}>
+                  <Icon name={ICON[r.category] || 'warning'} className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="font-bold text-stone">{r.category}</div>
+                    <button className="text-mist hover:text-red text-xs no-print" onClick={() => remove(i)}>Remove</button>
+                  </div>
+                  <p className="mt-0.5 text-sm text-fog">{r.notes}</p>
+                  {r.mitigation && <p className="mt-1 text-xs text-mist"><span className="font-semibold text-fog">Mitigation:</span> {r.mitigation}</p>}
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <Badge tone={t}>{r.severity} severity</Badge>
+                    <Badge tone="mist">{r.likelihood} likelihood</Badge>
+                    <Badge tone={r.status === 'Closed' ? 'green' : 'gold'}>{r.status}</Badge>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
 
         <Panel title="Add a risk" className="no-print">
           <form onSubmit={add} className="space-y-3">

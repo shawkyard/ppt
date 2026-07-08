@@ -72,7 +72,7 @@ export default function AddProperty() {
       </PageHeader>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Panel title="Basics">
+        <Panel title="Step 1 · Property basics">
           <div className="grid grid-cols-2 gap-4">
             <Field label="Property name" className="col-span-2"><input className="input" required value={f.name} onChange={(e) => set({ name: e.target.value })} placeholder="Oakleaf Village" /></Field>
             <Field label="Address"><input className="input" value={f.address} onChange={(e) => set({ address: e.target.value })} /></Field>
@@ -98,7 +98,7 @@ export default function AddProperty() {
           </div>
         </Panel>
 
-        <Panel title="Price & capital stack">
+        <Panel title="Step 2 · Listing-level financials">
           <div className="grid grid-cols-2 gap-4">
             <Field label="Asking price ($)"><Num v={f.askingPrice} onChange={(x) => set({ askingPrice: x })} /></Field>
             <Field label="Exit cap rate"><Num v={f.exitCapRate} step="0.001" onChange={(x) => set({ exitCapRate: x })} /></Field>
@@ -111,7 +111,7 @@ export default function AddProperty() {
           </div>
         </Panel>
 
-        <Panel title="Three worlds — keep them separate" className="lg:col-span-2">
+        <Panel title="Step 3 · Three worlds (current · broker · strike)" className="lg:col-span-2">
           <div className="grid gap-4 md:grid-cols-3">
             <ScenarioCol title="Current Reality" tone="text-fog" s={f.scenarios.current} onChange={(s) => setScenario('current', s)} />
             <ScenarioCol title="Broker Story" tone="text-yellow" s={f.scenarios.broker} onChange={(s) => setScenario('broker', s)} />
@@ -119,7 +119,7 @@ export default function AddProperty() {
           </div>
         </Panel>
 
-        <Panel title="Value-add ratings (0–10)">
+        <Panel title="Step 4 · Value-add assumptions">
           <Callout tone="gold" title="Auto-derived">Market strength, rent upside, and vacancy upside are computed from your data. Rate the rest.</Callout>
           <div className="mt-4 space-y-3">
             {RATINGS.map((r) => (
@@ -132,7 +132,7 @@ export default function AddProperty() {
           </div>
         </Panel>
 
-        <Panel title="Screening narrative">
+        <Panel title="Step 5 · Screening narrative & missing docs">
           <div className="space-y-4">
             <Field label="Current pain"><textarea className="input h-16 resize-none" value={f.pain} onChange={(e) => set({ pain: e.target.value })} /></Field>
             <Field label="Fixable upside"><textarea className="input h-16 resize-none" value={f.fixableUpside} onChange={(e) => set({ fixableUpside: e.target.value })} /></Field>
