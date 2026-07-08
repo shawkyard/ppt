@@ -1,131 +1,167 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
 import { Panel, Badge, PageHeader, Callout, LockedTag, Field } from '../components/ui.jsx'
+import Icon from '../components/Icon.jsx'
+import { screenListings, parseCsv, SAMPLE_CSV } from '../lib/sourcingRules.js'
+import { usd, pct } from '../lib/format.js'
 
 const CONNECTORS = [
-  { name: 'Public broker websites', note: 'Approved-market broker scans' },
+  { name: 'Public broker websites', note: 'Compliant scans of permitted sources' },
   { name: 'Uploaded CSV', note: 'Bulk listing import' },
   { name: 'Pasted listing URLs', note: 'Single-URL extraction' },
   { name: 'OM uploads', note: 'Offering-memorandum parsing' },
   { name: 'Scheduled weekly scans', note: 'Recurring in-market sweeps' },
-  { name: 'Market-specific sourcing agents', note: 'Per-market hunt agents' },
+  { name: 'Market-specific agents', note: 'Per-market hunt agents' },
 ]
 
+const RULE_FIELDS = [
+  { key: 'unitsMin', label: 'Min units', step: 1 },
+  { key: 'unitsMax', label: 'Max units', step: 1 },
+  { key: 'pricePerUnitMax', label: 'Max price / unit ($)', step: 5000 },
+  { key: 'askingMin', label: 'Min asking ($)', step: 500000 },
+  { key: 'askingMax', label: 'Max asking ($)', step: 1000000 },
+  { key: 'minRentGapPct', label: 'Min rent upside (0–1)', step: 0.01 },
+  { key: 'staleDaysBonus', label: 'Stale after (days)', step: 5 },
+  { key: 'returnTopN', label: 'Return top N', step: 1 },
+]
+
+function listingToProperty(r, markets) {
+  const l = r.listing
+  const units = Number(l.units) || 0
+  const cur = Number(l.currentRent) || 0
+  const mkt = Number(l.marketRent) || cur
+  return {
+    name: l.name || 'Untitled listing', address: l.address || '', city: r.market?.marketName || l.market || '',
+    marketId: r.market?.id || markets[0]?.id, propertyClass: (l.class || 'C').toUpperCase(), areaClass: 'B', yearBuilt: 1990,
+    units, askingPrice: Number(l.price) || 0, exitCapRate: 0.06, estimatedCapexPerUnit: 12000, closingCostsPct: 0.025,
+    reserves: 200000, ltv: 0.65, interestRate: 0.065, amortYears: 30, riskSpread: 0.0075,
+    sourceLevel: 'listing', listingAgeDays: Number(l.dom) || 0, dealStatus: 'New',
+    scenarios: {
+      current: { avgRent: cur, occupancy: 0.9, expenseRatio: 0.5, otherIncomeAnnual: units * 300 },
+      broker: { avgRent: Math.round(mkt * 1.03), occupancy: 0.95, expenseRatio: 0.44, otherIncomeAnnual: units * 900 },
+      strike: { avgRent: mkt, occupancy: 0.93, expenseRatio: 0.47, otherIncomeAnnual: units * 650 },
+    },
+    provenance: { current: 'EXT', broker: 'BR', strike: 'CALC' },
+    submarketQuality: 7, conditionFit: 7, capexFeasibility: 7, brokerOptimismRisk: 4, debtStrikeFactor: 7,
+    pain: '', fixableUpside: '', marketReason: '', nextAction: 'Request OM + T-12.',
+    missingDocs: ['T-12', 'Rent roll', 'Capex history'], risks: [],
+  }
+}
+
 export default function DealSourcingQueue() {
-  const { screenedMarkets, settings, updateSettings } = useApp()
+  const { screenedMarkets, settings, updateSettings, addProperty } = useApp()
+  const navigate = useNavigate()
+  const rules = settings.sourcingRules
   const approved = screenedMarkets.filter((m) => m.gate.gate === 'hunt')
-  const [url, setUrl] = useState('')
-  const [urls, setUrls] = useState([])
-  const [notes, setNotes] = useState('')
+  const [csv, setCsv] = useState(SAMPLE_CSV)
+  const [result, setResult] = useState(null)
+
+  const setRule = (k, v) => updateSettings({ sourcingRules: { ...rules, [k]: Number(v) } })
+  const run = () => setResult(screenListings(parseCsv(csv), rules, screenedMarkets))
+  const addOne = (r) => { const id = addProperty(listingToProperty(r, screenedMarkets)); navigate(`/deal/${id}`) }
+  const addAllTop = () => { result?.topN.forEach((r) => addProperty(listingToProperty(r, screenedMarkets))); navigate('/scratch') }
 
   return (
     <div>
       <PageHeader title="Deal Sourcing Queue"
-        subtitle="Controlled, cost-safe sourcing. Version 1 runs in Manual / Assisted mode — no live national crawling, no paid APIs. Future connectors are shown as locked modules.">
-        <Link to="/add" className="btn-gold">Add Property manually</Link>
+        subtitle="Controlled, rule-based sourcing. Set your strict rules once, then screen any listings you paste or import — only deals that pass your criteria reach the pipeline. No live national crawling.">
+        <Link to="/add" className="btn-ghost">Add manually</Link>
       </PageHeader>
 
       <div className="grid gap-3 md:grid-cols-3 mb-6">
-        <Callout tone="red" title="Cost control">Only run sourcing inside approved markets.</Callout>
-        <Callout tone="red" title="Cost control">Return only the top 5 properties. Never crawl the whole country.</Callout>
-        <Callout tone="red" title="Cost control">Do not run paid searches without approval.</Callout>
+        <Callout tone="red" title="Cost control">Only source inside approved markets.</Callout>
+        <Callout tone="red" title="Cost control">Return only the top {rules.returnTopN}. Never crawl the whole country.</Callout>
+        <Callout tone="red" title="Cost control">No paid searches without approval.</Callout>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
-          <Panel title="Sourcing controls">
-            <div className="grid grid-cols-2 gap-4">
-              <Field label="Sourcing mode">
-                <select className="input" value={settings.sourcingMode} onChange={(e) => updateSettings({ sourcingMode: e.target.value })}>
-                  <option>Manual / Assisted</option>
-                  <option disabled>Automated (locked · V2)</option>
-                </select>
-              </Field>
-              <Field label="Live scraping">
-                <div className="flex items-center gap-2 h-[38px]"><LockedTag /><span className="text-xs text-mist">disabled in V1</span></div>
-              </Field>
-              <Field label="Run budget (USD)" help="Kept at $0 in V1 — no paid searches.">
-                <input type="number" className="input tnum" value={settings.runBudgetUSD} onChange={(e) => updateSettings({ runBudgetUSD: Number(e.target.value) })} />
-              </Field>
-              <Field label="Max properties per run">
-                <input type="number" className="input tnum" value={settings.maxPropertiesPerRun} onChange={(e) => updateSettings({ maxPropertiesPerRun: Number(e.target.value) })} />
-              </Field>
-              <Field label="Return top N">
-                <input type="number" className="input tnum" value={settings.returnTopN} onChange={(e) => updateSettings({ returnTopN: Number(e.target.value) })} />
-              </Field>
-              <Field label="Approved markets only">
-                <label className="flex items-center gap-2 h-[38px] text-sm text-fog">
-                  <input type="checkbox" checked={settings.approvedMarketsOnly} onChange={(e) => updateSettings({ approvedMarketsOnly: e.target.checked })} className="accent-gold" /> Enforce
-                </label>
-              </Field>
+          {/* Rulebook */}
+          <Panel title="Sourcing rulebook" action={<Badge tone="gold">strict</Badge>}>
+            <div className="flex flex-wrap gap-4 mb-4">
+              <label className="flex items-center gap-2 text-sm text-fog">
+                <input type="checkbox" className="accent-gold" checked={rules.approvedMarketsOnly}
+                  onChange={(e) => updateSettings({ sourcingRules: { ...rules, approvedMarketsOnly: e.target.checked } })} />
+                Approved (Green) markets only
+              </label>
+              <div className="text-sm text-fog flex items-center gap-2">Avoid classes:
+                <span className="tnum font-semibold text-stone">{rules.avoidClasses.join(', ') || 'none'}</span></div>
             </div>
-          </Panel>
-
-          <Panel title="Public listing URL queue">
-            <div className="flex gap-2">
-              <input className="input" placeholder="Paste a listing URL…" value={url} onChange={(e) => setUrl(e.target.value)} />
-              <button className="btn-dark flex-none" onClick={() => { if (url.trim()) { setUrls((u) => [...u, url.trim()]); setUrl('') } }}>Queue</button>
-            </div>
-            <ul className="mt-3 space-y-1.5">
-              {urls.map((u, i) => (
-                <li key={i} className="flex items-center justify-between rounded-lg border border-line bg-ink px-3 py-2 text-sm">
-                  <span className="text-fog truncate">{u}</span>
-                  <span className="flex items-center gap-2"><Badge tone="mist">queued</Badge><button className="text-mist hover:text-red text-xs" onClick={() => setUrls((x) => x.filter((_, j) => j !== i))}>✕</button></span>
-                </li>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {RULE_FIELDS.map((f) => (
+                <Field key={f.key} label={f.label}>
+                  <input type="number" step={f.step} className="input tnum" value={rules[f.key]} onChange={(e) => setRule(f.key, e.target.value)} />
+                </Field>
               ))}
-              {!urls.length && <li className="text-sm text-mist">No URLs queued. Extraction is a V1 placeholder — paste, then Add Property manually.</li>}
-            </ul>
+            </div>
           </Panel>
 
-          <Panel title="Manual listing / broker notes paste">
-            <textarea className="input h-28 resize-none" placeholder="Paste raw listing text or broker notes here to keep them with your queue…" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          {/* Screener */}
+          <Panel title="Screen listings against the rules"
+            action={<button className="text-xs text-gold font-bold hover:underline" onClick={() => setCsv(SAMPLE_CSV)}>Load sample</button>}>
+            <p className="text-sm text-mist mb-2">Paste a CSV of candidate listings (compliant sources only). Columns: <code className="text-fog">name, market, units, price, currentRent, marketRent, class, dom</code></p>
+            <textarea className="input h-36 font-mono text-xs" value={csv} onChange={(e) => setCsv(e.target.value)} />
             <div className="mt-3 flex gap-2">
-              <Link to="/add" className="btn-gold text-sm">Turn into a property →</Link>
-              <Link to="/upload" className="btn-ghost text-sm">Upload documents →</Link>
+              <button className="btn-gold" onClick={run}><Icon name="search" className="w-4 h-4" /> Run rules</button>
+              <Link to="/upload" className="btn-ghost">Upload OM / CSV →</Link>
             </div>
           </Panel>
 
-          <Panel title="Future connectors — locked in Version 1">
-            <div className="grid sm:grid-cols-2 gap-3">
-              {CONNECTORS.map((c) => (
-                <div key={c.name} className="rounded-lg border border-line bg-ink p-3 opacity-90">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-stone">{c.name}</span><LockedTag />
+          {/* Results */}
+          {result && (
+            <Panel title={`Results — ${result.passed.length} pass, ${result.results.length - result.passed.length} rejected`}
+              action={result.topN.length > 0 && <button className="btn-gold text-xs" onClick={addAllTop}>Add top {result.topN.length} to pipeline</button>}>
+              <div className="space-y-3">
+                {result.results.map((r, i) => (
+                  <div key={i} className={`rounded-xl border p-4 ${r.pass ? 'border-green/40 bg-green/5' : 'border-line bg-offwhite'}`}>
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Badge tone={r.pass ? 'green' : 'red'}>{r.pass ? `PASS · fit ${r.fitScore}` : 'REJECT'}</Badge>
+                          {r.stale && <Badge tone="gold">stale — negotiable</Badge>}
+                        </div>
+                        <div className="mt-1 font-bold text-stone">{r.listing.name}</div>
+                        <div className="text-xs text-mist">{r.market ? `${r.market.marketName}, ${r.market.state}` : (r.listing.market || 'market not matched')}</div>
+                      </div>
+                      {r.pass && <button className="btn-ghost text-xs" onClick={() => addOne(r)}>Add →</button>}
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {r.checks.map((c) => (
+                        <span key={c.key} className={`chip ${c.ok ? 'border-green/40 bg-green/10 text-green' : 'border-red/40 bg-red/10 text-red'}`}>
+                          {c.ok ? '✓' : '✕'} {c.label}<span className="text-mist font-normal">· {c.detail}</span>
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="text-xs text-mist mt-1">{c.note}</div>
-                </div>
-              ))}
-            </div>
-          </Panel>
+                ))}
+              </div>
+            </Panel>
+          )}
         </div>
 
         <div className="space-y-6">
           <Panel title={`Approved markets (${approved.length})`}>
-            <div className="space-y-2 max-h-72 overflow-y-auto">
+            <div className="space-y-2 max-h-64 overflow-y-auto">
               {approved.map((m) => (
                 <div key={m.id} className="flex items-center gap-2 text-sm">
                   <span className="h-2.5 w-2.5 rounded-full" style={{ background: '#27B36B' }} />
-                  <span className="text-fog flex-1">{m.marketName}</span>
-                  <span className="text-xs text-mist">{m.state}</span>
+                  <span className="text-fog flex-1">{m.marketName}</span><span className="text-xs text-mist">{m.state}</span>
                 </div>
               ))}
             </div>
             <Link to="/markets" className="btn-ghost w-full text-xs mt-3">Market gate →</Link>
           </Panel>
 
-          <Panel title="Broker source tracker">
-            <div className="space-y-2 text-sm">
-              {['Marcus & Millichap', 'CBRE Multifamily', 'Berkadia', 'Local/regional brokers'].map((b) => (
-                <div key={b} className="flex items-center justify-between rounded-lg border border-line bg-ink px-3 py-2">
-                  <span className="text-fog">{b}</span><Badge tone="mist">manual</Badge>
+          <Panel title="Live fetching — Version 2">
+            <p className="text-sm text-mist mb-3">Actual fetching runs later via a compliant connector (official APIs / permitted feeds), obeying ToS, robots.txt, and your budget + top-{rules.returnTopN} caps. Locked in V1.</p>
+            <div className="space-y-2">
+              {CONNECTORS.map((c) => (
+                <div key={c.name} className="flex items-center justify-between rounded-lg border border-line bg-offwhite px-3 py-2">
+                  <span className="text-sm text-fog">{c.name}</span><LockedTag />
                 </div>
               ))}
             </div>
-          </Panel>
-
-          <Panel title="OM request queue">
-            <p className="text-sm text-mist">OM requests are tracked per deal on the Broker Questions tab. Strong leads and Request-OM deals should have their OM requested first.</p>
           </Panel>
         </div>
       </div>

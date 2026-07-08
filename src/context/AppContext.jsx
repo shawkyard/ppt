@@ -3,6 +3,7 @@ import { demoMarkets } from '../data/markets.js'
 import { demoProperties } from '../data/properties.js'
 import { loadState, saveState } from '../lib/storage.js'
 import { screenMarket, screenProperty } from '../lib/screen.js'
+import { DEFAULT_RULES } from '../lib/sourcingRules.js'
 
 const AppContext = createContext(null)
 const uid = (p) => `${p}-${Math.random().toString(36).slice(2, 8)}`
@@ -16,6 +17,7 @@ const DEFAULT_SETTINGS = {
   approvedMarketsOnly: true,
   investorName: 'Scott & Alma',
   fundName: 'Stonebrook Multifamily',
+  sourcingRules: { ...DEFAULT_RULES },
 }
 
 export function AppProvider({ children }) {
