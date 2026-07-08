@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
 import { Panel, Badge, ScoreRing, WeightBar, PageHeader, SourceTag } from '../components/ui.jsx'
+import Thumb from '../components/Thumb.jsx'
 import { usd, pct, usdSigned } from '../lib/format.js'
 
 const FILTERS = [
@@ -18,11 +19,14 @@ function Card({ p }) {
   return (
     <Panel>
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <Link to={`/deal/${p.id}`} className="text-base font-semibold text-stone hover:text-gold">{p.name}</Link>
-          <div className="text-xs text-mist">{p.city} · {p.units} units · {p.propertyClass} in {p.areaClass}</div>
-          <div className="mt-2 flex items-center gap-2"><Badge tone={p.verdict.tone}>{p.verdict.label}</Badge></div>
-          <div className="mt-1.5 text-[11px] text-mist flex items-center gap-1.5">Source: <SourceTag code={p.provenance?.current} /> {p.source.label}</div>
+        <div className="flex items-start gap-3 min-w-0">
+          <Thumb name={p.name} className="h-12 w-12" />
+          <div className="min-w-0">
+            <Link to={`/deal/${p.id}`} className="text-base font-semibold text-stone hover:text-gold">{p.name}</Link>
+            <div className="text-xs text-mist">{p.city} · {p.units} units · {p.propertyClass} in {p.areaClass}</div>
+            <div className="mt-2 flex items-center gap-2"><Badge tone={p.verdict.tone}>{p.verdict.label}</Badge></div>
+            <div className="mt-1.5 text-[11px] text-mist flex items-center gap-1.5">Source: <SourceTag code={p.provenance?.current} /> {p.source.label}</div>
+          </div>
         </div>
         <ScoreRing score={p.score} tone={p.verdict.tone} size={84} label="score" />
       </div>

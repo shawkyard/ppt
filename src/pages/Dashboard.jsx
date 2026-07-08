@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
 import { Panel, Badge, ScoreRing, EmptyState } from '../components/ui.jsx'
 import Icon from '../components/Icon.jsx'
+import Thumb from '../components/Thumb.jsx'
 import USMap from '../components/USMap.jsx'
 import { INDICATOR_ORDER, INDICATORS } from '../lib/reindicator.js'
 import { usd, usdShort } from '../lib/format.js'
@@ -36,9 +37,12 @@ function DealCard({ p }) {
   return (
     <div className="panel p-5 flex flex-col">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <Link to={`/deal/${p.id}`} className="text-lg font-bold text-stone hover:text-gold">{p.name}</Link>
-          <div className="text-sm text-mist mt-0.5 flex items-center gap-1.5"><Icon name="pin" className="w-4 h-4 text-gold" />{p.market?.marketName}, {p.market?.state}</div>
+        <div className="flex items-start gap-3 min-w-0">
+          <Thumb name={p.name} className="h-12 w-12" />
+          <div className="min-w-0">
+            <Link to={`/deal/${p.id}`} className="text-lg font-bold text-stone hover:text-gold">{p.name}</Link>
+            <div className="text-sm text-mist mt-0.5 flex items-center gap-1.5"><Icon name="pin" className="w-4 h-4 text-gold" />{p.market?.marketName}, {p.market?.state}</div>
+          </div>
         </div>
         <ScoreRing score={p.score} tone={p.verdict.tone} size={72} label="score" />
       </div>
