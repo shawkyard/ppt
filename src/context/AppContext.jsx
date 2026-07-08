@@ -22,6 +22,8 @@ export function AppProvider({ children }) {
   const [markets, setMarkets] = useState([])
   const [properties, setProperties] = useState([])
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
+  // Manual map-layer values: { [layerId]: { [year]: { [marketId]: 'HIGH'|'MEDIUM'|'LOW'|'NA' } } }
+  const [layerData, setLayerData] = useState({})
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export function AppProvider({ children }) {
       setMarkets(saved.markets)
       setProperties(saved.properties || [])
       setSettings({ ...DEFAULT_SETTINGS, ...(saved.settings || {}) })
+      setLayerData(saved.layerData || {})
     } else {
       setMarkets(demoMarkets)
       setProperties(demoProperties)
@@ -38,8 +41,8 @@ export function AppProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    if (ready) saveState({ markets, properties, settings })
-  }, [markets, properties, settings, ready])
+    if (ready) saveState({ markets, properties, settings, layerData })
+  }, [markets, properties, settings, layerData, ready])
 
   const screenedMarkets = useMemo(() => markets.map(screenMarket), [markets])
   const screenedProperties = useMemo(() => properties.map((p) => {
@@ -47,8 +50,16 @@ export function AppProvider({ children }) {
     return screenProperty(p, m)
   }), [properties, screenedMarkets])
 
+  const setLayerValue = (layerId, year, marketId, bucket) => setLayerData((prev) => {
+    const next = { ...prev, [layerId]: { ...(prev[layerId] || {}) } }
+    const yr = { ...(next[layerId][year] || {}) }
+    if (bucket == null) delete yr[marketId]; else yr[marketId] = bucket
+    next[layerId][year] = yr
+    return next
+  })
+
   const api = useMemo(() => ({
-    ready, markets, properties, settings, screenedMarkets, screenedProperties,
+    ready, markets, properties, settings, layerData, setLayerValue, screenedMarkets, screenedProperties,
     getMarket: (id) => screenedMarkets.find((m) => m.id === id),
     getProperty: (id) => screenedProperties.find((p) => p.id === id),
 
@@ -62,8 +73,8 @@ export function AppProvider({ children }) {
 
     updateSettings: (patch) => setSettings((s) => ({ ...s, ...patch })),
 
-    resetDemo: () => { setMarkets(demoMarkets); setProperties(demoProperties); setSettings(DEFAULT_SETTINGS) },
-  }), [ready, markets, properties, settings, screenedMarkets, screenedProperties])
+    resetDemo: () => { setMarkets(demoMarkets); setProperties(demoProperties); setSettings(DEFAULT_SETTINGS); setLayerData({}) },
+  }), [ready, markets, properties, settings, layerData, screenedMarkets, screenedProperties])
 
   return <AppContext.Provider value={api}>{children}</AppContext.Provider>
 }
