@@ -13,8 +13,9 @@ const US_PATH =
   'L452 419 L437 455 L416 432 L380 404 L344 371 L328 371 L297 375 L261 358 L235 358 ' +
   'L222 339 L199 331 L178 283 L163 244 L163 193 L163 149 Z'
 
-export default function USMap({ markets, properties, selected, onSelectMarket, onSelectProperty }) {
+export default function USMap({ markets, properties, selected, onSelectMarket, onSelectProperty, colorFor }) {
   const [hover, setHover] = useState(null)
+  const bubbleColor = (m) => (colorFor ? colorFor(m) : (INDICATORS[m.indicatorColor] || INDICATORS.white).color)
 
   return (
     <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} className="w-full h-full block" role="img" aria-label="Approximate US emerging-markets map">
@@ -34,15 +35,15 @@ export default function USMap({ markets, properties, selected, onSelectMarket, o
       {/* Market regions (approximate blobs) */}
       {markets.map((m) => {
         const { x, y } = project(m.coordinates)
-        const ind = INDICATORS[m.indicatorColor] || INDICATORS.white
+        const color = bubbleColor(m)
         const isSel = selected?.type === 'market' && selected.id === m.id
         const isHover = hover === m.id
         const r = m.radius || 24
         return (
           <g key={m.id} className="cursor-pointer" onClick={() => onSelectMarket(m.id)}
              onMouseEnter={() => setHover(m.id)} onMouseLeave={() => setHover(null)}>
-            <circle cx={x} cy={y} r={r} fill={ind.color} fillOpacity={isSel || isHover ? 0.78 : 0.55}
-              stroke={ind.color} strokeWidth={isSel ? 3 : 1.8} strokeOpacity="1" />
+            <circle cx={x} cy={y} r={r} fill={color} fillOpacity={isSel || isHover ? 0.78 : 0.55}
+              stroke={color} strokeWidth={isSel ? 3 : 1.8} strokeOpacity="1" />
             {(isSel || isHover) && (
               <g>
                 <rect x={x + r + 4} y={y - 13} width={m.marketName.length * 6.6 + 18} height="24" rx="12"

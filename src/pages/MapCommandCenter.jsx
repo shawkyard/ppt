@@ -4,17 +4,18 @@ import { useApp } from '../context/AppContext.jsx'
 import USMap from '../components/USMap.jsx'
 import { Badge, Callout } from '../components/ui.jsx'
 import { INDICATOR_ORDER, INDICATORS, GATE_TONE } from '../lib/reindicator.js'
+import { MAP_LAYERS, LOCKED_LAYERS, getLayer } from '../lib/mapLayers.js'
 import { usd } from '../lib/format.js'
 
-function Legend() {
+function Legend({ layer }) {
   return (
-    <div className="absolute bottom-3 left-3 rounded-lg border border-line bg-ink/90 backdrop-blur px-3 py-2.5 text-xs">
-      <div className="label mb-1.5">Emerging Markets — REIndicator</div>
-      {INDICATOR_ORDER.map((k) => (
-        <div key={k} className="flex items-center gap-2 py-0.5">
-          <span className="h-2.5 w-2.5 rounded-sm" style={{ background: INDICATORS[k].color }} />
-          <span className="text-fog">{INDICATORS[k].label}</span>
-          <span className="text-mist">{INDICATORS[k].sub}</span>
+    <div className="absolute bottom-3 left-3 rounded-xl border border-line bg-white/95 backdrop-blur px-3 py-2.5 text-xs shadow-soft">
+      <div className="label mb-1.5">{layer.name}</div>
+      {layer.legend.map((e) => (
+        <div key={e.key} className="flex items-center gap-2 py-0.5">
+          <span className="h-2.5 w-2.5 rounded-sm" style={{ background: e.color }} />
+          <span className="text-fog">{e.label}</span>
+          {e.sub && <span className="text-mist">{e.sub}</span>}
         </div>
       ))}
     </div>
@@ -101,6 +102,8 @@ export default function MapCommandCenter() {
   const [confidence, setConfidence] = useState('all')
   const [showPins, setShowPins] = useState(true)
   const [selected, setSelected] = useState(null)
+  const [layerId, setLayerId] = useState('status')
+  const layer = getLayer(layerId)
 
   const states = useMemo(() => ['all', ...Array.from(new Set(screenedMarkets.map((m) => m.state))).sort()], [screenedMarkets])
 
@@ -167,16 +170,25 @@ export default function MapCommandCenter() {
 
         {/* Map */}
         <div className="panel relative overflow-hidden">
-          <div className="absolute top-3 left-3 z-10 rounded-lg border border-line bg-ink/90 backdrop-blur px-3 py-2">
-            <div className="text-sm font-semibold text-stone">Emerging Markets 2025</div>
-            <div className="text-[11px] text-mist">Approximate · REIndicator review</div>
+          <div className="absolute top-3 left-3 z-10 rounded-xl border border-line bg-white/95 backdrop-blur px-3 py-2 shadow-soft">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-wide text-gold">Display Data</span>
+            </div>
+            <select value={layerId} onChange={(e) => setLayerId(e.target.value)}
+              className="mt-1 bg-transparent text-sm font-bold text-stone focus:outline-none cursor-pointer">
+              {MAP_LAYERS.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+              <optgroup label="Live data — V2 (locked)">
+                {LOCKED_LAYERS.map((l) => <option key={l} disabled>🔒 {l}</option>)}
+              </optgroup>
+            </select>
+            <div className="text-[11px] text-mist">Approximate · verify before investing</div>
           </div>
           <div className="aspect-[5/3]">
-            <USMap markets={visibleMarkets} properties={visibleProperties} selected={selected}
+            <USMap markets={visibleMarkets} properties={visibleProperties} selected={selected} colorFor={layer.colorFor}
               onSelectMarket={(id) => setSelected({ type: 'market', id })}
               onSelectProperty={(id) => setSelected({ type: 'property', id })} />
           </div>
-          <Legend />
+          <Legend layer={layer} />
         </div>
 
         {/* Drawer */}
