@@ -7,6 +7,7 @@ const TABS = [
   { seg: 'offer', label: 'Offer / Price' },
   { seg: 'risk', label: 'Risk Register' },
   { seg: 'questions', label: 'Broker Questions' },
+  { seg: 'signals', label: 'Signals & Outreach' },
   { seg: 'summary', label: 'Investor Summary' },
 ]
 

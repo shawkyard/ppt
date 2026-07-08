@@ -15,6 +15,7 @@ const NAV_GROUPS = [
     { to: '/add', label: 'Add Property', icon: 'plus' },
     { to: '/upload', label: 'Upload OM / RR / T12', icon: 'upload' },
     { to: '/scratch', label: 'Scratch Screen', icon: 'bolt' },
+    { to: '/motivated', label: 'Motivated Sellers', icon: 'target' },
   ]},
   { title: 'Deal Room', items: [
     { to: '/reports', label: 'Report Builder', icon: 'doc' },
