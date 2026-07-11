@@ -22,6 +22,10 @@ await page.addInitScript(() => { window.__CAPTURE__ = true; });
 await page.goto('file://' + join(__dir, htmlFile));
 await page.waitForFunction(() => typeof window.renderFrame === 'function');
 
+// Match the viewport to the canvas so any aspect ratio (1:1, 16:9, 9:16) captures cleanly.
+const dims = await page.evaluate(() => { const c = document.getElementById('c'); return { w: c.width, h: c.height }; });
+await page.setViewportSize({ width: dims.w, height: dims.h });
+
 const canvas = page.locator('#c');
 for (let i = 0; i < TOTAL; i++) {
   const t = i / FPS;

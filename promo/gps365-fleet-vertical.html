@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GPS365 — Fleet Owners (Facebook ad)</title>
+<style>
+  html,body{margin:0;background:#060d1a;overflow:hidden}
+  #c{display:block;width:1080px;height:1920px}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// ------------------------------------------------------------------
+// GPS365 — Facebook ad for Fleet Owners. 1080x1080, ~32s.
+// Act 1: the pain of running blind.  Act 2: Stop Guessing / Start Knowing.
+// Act 3: six ways GPS365 pays for itself.  Act 4: the KPIs.  Act 5: CTA.
+// Copy + numbers pulled from gps365.ai/industries/fleet-owners.
+// Deterministic: renderFrame(t) draws the frame at time t seconds.
+// ------------------------------------------------------------------
+const W=1080,H=1920;
+const g=document.getElementById('c').getContext('2d');
+
+// GPS365 brand
+const NAVY0='#060d1a', NAVY1='#0a1a33', BLUE='#2f6bff', BLUE_D='#1b46d8', SKY='#5b9bff';
+const INK='#eaf1fb', MUTED='#93a7c4', DIM2='#5b6f8c';
+const WHITE='#ffffff', GREEN='#25c281', AMBER='#f5a524', RED='#ff5a4d', CARD='#0f2138', LINE='#1e3556';
+const SANS="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOutCubic=t=>1-Math.pow(1-t,3);
+const easeInOutCubic=t=>t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const easeOutExpo=t=>t>=1?1:1-Math.pow(2,-10*t);
+const ep=(lt,s,d,e=easeOutCubic)=>e(clamp((lt-s)/d,0,1));
+function hx(c,a){const r=parseInt(c.slice(1,3),16),gg=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);return `rgba(${r},${gg},${b},${a})`;}
+
+function setFont(s,w){g.font=`${w} ${s}px ${SANS}`;}
+function measureSpaced(str,sp){let w=0;for(const ch of str)w+=g.measureText(ch).width+sp;return w-sp;}
+function text(str,x,y,{size=48,weight=400,color=INK,align='center',alpha=1,spacing=0,italic=false}={}){
+  if(alpha<=0)return; g.save(); g.globalAlpha*=alpha; g.font=`${italic?'italic ':''}${weight} ${size}px ${SANS}`; g.fillStyle=color; g.textBaseline='alphabetic';
+  if(spacing===0){g.textAlign=align; g.fillText(str,x,y);}
+  else{const tot=measureSpaced(str,spacing); let sx=align==='center'?x-tot/2:align==='right'?x-tot:x; g.textAlign='left';
+    for(const ch of str){g.fillText(ch,sx,y); sx+=g.measureText(ch).width+spacing;}}
+  g.restore();
+}
+function roundRect(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function envelope(lt,dur,fin=0.5,fout=0.45){return clamp(lt/fin,0,1)*clamp((dur-lt)/fout,0,1);}
+
+// ---- live-map background: routes with moving truck dots ----
+const ROUTES=[];
+(function(){let s=99;const r=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+  for(let i=0;i<6;i++)ROUTES.push({y:120+r()*840, sp:30+r()*55, ph:r()*W, dir:r()>0.5?1:-1});})();
+
+function background(t){
+  const gr=g.createLinearGradient(0,0,W,H);
+  gr.addColorStop(0,'#0a1830'); gr.addColorStop(0.55,NAVY0); gr.addColorStop(1,'#04070f');
+  g.fillStyle=gr; g.fillRect(0,0,W,H);
+  // faint street grid
+  g.save(); g.strokeStyle=hx(SKY,0.05); g.lineWidth=1;
+  const off=(t*8)%84;
+  for(let x=-84+off;x<W;x+=84){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();}
+  for(let y=-84+off;y<H;y+=84){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
+  g.restore();
+  // moving truck dots along routes (the "live fleet")
+  g.save();
+  for(const rt of ROUTES){
+    g.strokeStyle=hx(SKY,0.05); g.lineWidth=2; g.beginPath();g.moveTo(0,rt.y);g.lineTo(W,rt.y);g.stroke();
+    let x=((t*rt.sp*rt.dir + rt.ph)%(W+160)+(W+160))%(W+160)-80;
+    // trail
+    const trail=g.createLinearGradient(x-70*rt.dir,0,x,0);
+    trail.addColorStop(0,hx(BLUE,0)); trail.addColorStop(1,hx(BLUE,0.5));
+    g.strokeStyle=trail; g.lineWidth=3; g.beginPath();g.moveTo(x-70*rt.dir,rt.y);g.lineTo(x,rt.y);g.stroke();
+    g.fillStyle=hx(BLUE,0.12); g.beginPath();g.arc(x,rt.y,7,0,6.283);g.fill();
+    g.fillStyle=hx(SKY,0.55); g.beginPath();g.arc(x,rt.y,3,0,6.283);g.fill();
+  }
+  g.restore();
+  const vg=g.createRadialGradient(W/2,H*0.44,H*0.2,W/2,H*0.5,W*0.75);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(2,4,9,0.72)');
+  g.fillStyle=vg; g.fillRect(0,0,W,H);
+}
+// mood accent: red glow during pain, blue after
+function mood(t){
+  const shift=clamp((t-10.4)/1.2,0,1);
+  const col=shift<0.5?RED:BLUE; const a=lerp(0.12,0.10,shift);
+  g.save(); const rg=g.createRadialGradient(W/2,H+120,120,W/2,H+120,760);
+  rg.addColorStop(0,hx(shift<0.5?RED:BLUE,0.18)); rg.addColorStop(1,'rgba(0,0,0,0)');
+  g.globalAlpha=1; g.fillStyle=rg; g.fillRect(0,0,W,H); g.restore();
+}
+
+function underline(cx,y,frac,{width=520,alpha=1,color=BLUE}={}){
+  const half=width/2*easeOutExpo(frac); g.save(); g.globalAlpha=alpha;
+  const lg=g.createLinearGradient(cx-half,0,cx+half,0);
+  lg.addColorStop(0,hx(color,0));lg.addColorStop(0.5,hx(color,0.95));lg.addColorStop(1,hx(color,0));
+  g.strokeStyle=lg; g.lineWidth=3; g.beginPath();g.moveTo(cx-half,y);g.lineTo(cx+half,y);g.stroke(); g.restore();
+}
+
+// ---------------- vector icons (centered at x,y, box size s) ----------------
+function icon(name,x,y,s,color,{alpha=1,lw=3.4}={}){
+  g.save(); g.globalAlpha*=alpha; g.strokeStyle=color; g.fillStyle=color; g.lineWidth=lw; g.lineJoin='round'; g.lineCap='round';
+  const u=s/2;
+  if(name==='pin'){ g.beginPath(); g.arc(x,y-u*0.15,u*0.62,Math.PI*0.15,Math.PI*0.85,true); g.lineTo(x,y+u*0.9); g.closePath(); g.stroke();
+    g.beginPath(); g.arc(x,y-u*0.2,u*0.24,0,6.283); g.stroke(); }
+  else if(name==='drop'){ g.beginPath(); g.moveTo(x,y-u); g.bezierCurveTo(x+u*0.9,y-u*0.1,x+u*0.7,y+u,x,y+u); g.bezierCurveTo(x-u*0.7,y+u,x-u*0.9,y-u*0.1,x,y-u); g.closePath(); g.stroke();
+    g.beginPath(); g.arc(x-u*0.2,y+u*0.25,u*0.22,Math.PI*0.2,Math.PI*1.1); g.stroke(); }
+  else if(name==='gear'){ const teeth=8; g.beginPath();
+    for(let i=0;i<teeth;i++){const a0=i/teeth*6.283; const a1=(i+0.5)/teeth*6.283;
+      g.lineTo(x+Math.cos(a0)*u, y+Math.sin(a0)*u); g.lineTo(x+Math.cos(a0+0.18)*u*0.72, y+Math.sin(a0+0.18)*u*0.72);
+      g.lineTo(x+Math.cos(a1-0.18)*u*0.72, y+Math.sin(a1-0.18)*u*0.72); g.lineTo(x+Math.cos(a1)*u, y+Math.sin(a1)*u);}
+    g.closePath(); g.stroke(); g.beginPath(); g.arc(x,y,u*0.34,0,6.283); g.stroke(); }
+  else if(name==='doc'){ const w=u*1.1,h=u*1.5,cx=x-w/2,cy=y-h/2, fold=u*0.5;
+    g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+w-fold,cy); g.lineTo(cx+w,cy+fold); g.lineTo(cx+w,cy+h); g.lineTo(cx,cy+h); g.closePath(); g.stroke();
+    g.beginPath(); g.moveTo(cx+w-fold,cy); g.lineTo(cx+w-fold,cy+fold); g.lineTo(cx+w,cy+fold); g.stroke();
+    g.lineWidth=lw*0.7; for(let i=0;i<3;i++){g.beginPath();g.moveTo(cx+u*0.28,cy+h*0.45+i*u*0.34);g.lineTo(cx+w-u*0.28,cy+h*0.45+i*u*0.34);g.stroke();} }
+  else if(name==='shield'){ g.beginPath(); g.moveTo(x,y-u); g.lineTo(x+u*0.82,y-u*0.55); g.lineTo(x+u*0.82,y+u*0.1);
+    g.bezierCurveTo(x+u*0.82,y+u*0.7,x+u*0.4,y+u,x,y+u*1.05); g.bezierCurveTo(x-u*0.4,y+u,x-u*0.82,y+u*0.7,x-u*0.82,y+u*0.1);
+    g.lineTo(x-u*0.82,y-u*0.55); g.closePath(); g.stroke();
+    g.lineWidth=lw; g.beginPath(); g.moveTo(x-u*0.34,y+u*0.05); g.lineTo(x-u*0.05,y+u*0.34); g.lineTo(x+u*0.42,y-u*0.3); g.stroke(); }
+  else if(name==='phone'){ const w=u*1.0,h=u*1.7; roundRect(x-w/2,y-h/2,w,h,u*0.24); g.stroke();
+    g.lineWidth=lw*0.8; g.beginPath();g.moveTo(x-u*0.16,y-h/2+u*0.16);g.lineTo(x+u*0.16,y-h/2+u*0.16);g.stroke();
+    g.beginPath(); g.arc(x,y+h/2-u*0.28,u*0.1,0,6.283); g.fill(); }
+  else if(name==='alert'){ g.beginPath(); g.moveTo(x,y-u); g.lineTo(x+u,y+u*0.75); g.lineTo(x-u,y+u*0.75); g.closePath(); g.stroke();
+    g.lineWidth=lw; g.beginPath();g.moveTo(x,y-u*0.32);g.lineTo(x,y+u*0.18);g.stroke(); g.beginPath();g.arc(x,y+u*0.5,lw*0.7,0,6.283);g.fill(); }
+  else if(name==='eye-off'){ g.beginPath(); g.moveTo(x-u,y); g.bezierCurveTo(x-u*0.4,y-u*0.7,x+u*0.4,y-u*0.7,x+u,y); g.bezierCurveTo(x+u*0.4,y+u*0.7,x-u*0.4,y+u*0.7,x-u,y); g.closePath(); g.stroke();
+    g.beginPath(); g.arc(x,y,u*0.32,0,6.283); g.stroke(); g.lineWidth=lw*1.1; g.beginPath();g.moveTo(x-u,y-u*0.9);g.lineTo(x+u,y+u*0.9);g.stroke(); }
+  g.restore();
+}
+
+function badge(cx,y,label,frac){ const a=easeOutCubic(frac); if(a<=0)return;
+  setFont(24,600); const w=g.measureText(label).width+66, h=48;
+  g.save(); g.globalAlpha=a; roundRect(cx-w/2,y-h/2,w,h,h/2); g.fillStyle=hx(GREEN,0.12); g.fill(); g.strokeStyle=hx(GREEN,0.55); g.lineWidth=1.5; g.stroke();
+  // check
+  g.strokeStyle=GREEN; g.lineWidth=2.6; g.lineCap='round'; const ix=cx-w/2+24;
+  g.beginPath();g.moveTo(ix-6,y);g.lineTo(ix-1,y+6);g.lineTo(ix+8,y-7);g.stroke(); g.restore();
+  text(label,cx+14,y+8,{size:24,weight:600,color:INK,align:'center',alpha:a});
+}
+
+// ===================== SCENES =====================
+const SCENES=[
+  {start:0.0,  dur:4.4, draw:sHook},
+  {start:4.4,  dur:5.9, draw:sPain},
+  {start:10.3, dur:4.2, draw:sTurn},
+  {start:14.5, dur:8.6, draw:sValue},
+  {start:23.1, dur:5.3, draw:sKPI},
+  {start:28.4, dur:3.6, draw:sCTA},
+];
+
+function sHook(lt,dur){
+  const a=envelope(lt,dur,0.6,0.5);
+  icon('eye-off',W/2,H/2-190,120,RED,{alpha:a*ep(lt,0.1,0.9),lw:5});
+  text('Right now —',W/2,H/2-40,{size:52,weight:500,color:MUTED,align:'center',alpha:a*ep(lt,0.35,0.9)});
+  text('do you know where',W/2,H/2+46,{size:72,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.55,0.9)});
+  text('every truck is?',W/2,H/2+130,{size:72,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.7,0.9)});
+  text('Most fleet owners are running blind.',W/2,H/2+236,{size:32,weight:400,color:RED,align:'center',alpha:a*ep(lt,1.0,1.0)});
+}
+
+const PAINS=[
+  ['route','Unauthorized detours','Every wrong turn burns fuel — and customer trust.'],
+  ['drop','15–30% of your fuel budget, wasted','Idling, speeding, bad routes. Thousands per truck a year.'],
+  ['gear','Breakdowns cost 4× more','A surprise repair costs far more than prevention.'],
+  ['doc','Buried in IFTA paperwork','Manual logs and compliance reports, just to stay legal.'],
+];
+function sPain(lt,dur){
+  const a=envelope(lt,dur,0.4,0.5);
+  text('The problems every fleet owner knows',W/2,430,{size:38,weight:700,color:INK,align:'center',alpha:a*ep(lt,0.05,0.8)});
+  text('too well',W/2,486,{size:38,weight:700,color:RED,align:'center',alpha:a*ep(lt,0.12,0.8),italic:true});
+  const x=80, w=W-160, y0=590, rh=205, gap=34;
+  for(let i=0;i<PAINS.length;i++){
+    const f=ep(lt,0.5+i*0.42,0.7); if(f<=0)continue;
+    const y=y0+i*(rh+gap); g.save(); g.globalAlpha=a*f; g.translate((1-f)*40,0);
+    roundRect(x,y,w,rh,20); g.fillStyle=hx(CARD,0.92); g.fill(); g.strokeStyle=hx(RED,0.3); g.lineWidth=1.5; g.stroke();
+    g.fillStyle=hx(RED,0.9); roundRect(x,y,7,rh,3); g.fill();
+    g.restore();
+    const iconName = PAINS[i][0]==='route'?'alert':PAINS[i][0];
+    icon(iconName, x+100, y+rh/2, 74, RED, {alpha:a*f});
+    text(PAINS[i][1], x+188, y+85, {size:37,weight:700,color:INK,align:'left',alpha:a*f});
+    text(PAINS[i][2], x+188, y+138, {size:27,weight:400,color:MUTED,align:'left',alpha:a*f});
+  }
+}
+
+function logo(cx,cy,scale,alpha){
+  g.save(); g.globalAlpha*=alpha;
+  const fs=76*scale, pinBox=58*scale, gap=30*scale;
+  g.font=`800 ${fs}px ${SANS}`; const tw=g.measureText('GPS365').width;
+  const total=pinBox+gap+tw, startX=cx-total/2;
+  icon('pin', startX+pinBox/2, cy, pinBox, BLUE, {alpha:1, lw:4.5*scale});
+  text('GPS365', startX+pinBox+gap, cy+fs*0.34, {size:fs, weight:800, color:WHITE, align:'left'});
+  g.restore();
+}
+function sTurn(lt,dur){
+  const a=envelope(lt,dur,0.5,0.5);
+  text('Stop Guessing.',W/2,H/2-120,{size:82,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.1,0.8)});
+  text('Start Knowing.',W/2,H/2-16,{size:88,weight:800,color:SKY,align:'center',alpha:a*ep(lt,0.35,0.8),italic:true});
+  underline(W/2,H/2+40,ep(lt,0.6,1.0),{width:560,alpha:a});
+  logo(W/2,H/2+150,1.0,a*ep(lt,0.7,0.9));
+  text('Plug in the OBD device. See your whole fleet in 2 minutes.',W/2,H/2+250,{size:30,weight:400,color:MUTED,align:'center',alpha:a*ep(lt,0.95,1.0)});
+}
+
+const VALUES=[
+  ['pin','Know where every truck is','Real-time GPS','every 5 sec'],
+  ['drop','Cut fuel costs','18% on average','−18%'],
+  ['gear','Never miss maintenance','Alerts on real engine hours','auto'],
+  ['doc','IFTA reports in 3 clicks','Mileage tracked by state','3 clicks'],
+  ['alert','Instant theft & tamper alerts','Recover trucks fast','24/7'],
+  ['phone','Manage from your phone','iOS & Android included','free'],
+];
+function sValue(lt,dur){
+  const a=envelope(lt,dur,0.4,0.5);
+  text('Six ways GPS365',W/2,380,{size:44,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.05,0.7)});
+  text('pays for itself',W/2,438,{size:44,weight:800,color:SKY,align:'center',alpha:a*ep(lt,0.12,0.7),italic:true});
+  const x=70, w=W-140, y0=530, rh=178, gap=24;
+  for(let i=0;i<VALUES.length;i++){
+    const f=ep(lt,0.5+i*0.5,0.7); if(f<=0)continue;
+    const y=y0+i*(rh+gap); const pop=easeOutCubic(f);
+    g.save(); g.globalAlpha=a*f; g.translate((1-pop)*36,0);
+    roundRect(x,y,w,rh,18); g.fillStyle=hx(CARD,0.92); g.fill(); g.strokeStyle=hx(BLUE,0.35); g.lineWidth=1.5; g.stroke();
+    g.restore();
+    // icon badge
+    g.save(); g.globalAlpha=a*f; roundRect(x+24,y+rh/2-40,80,80,16); g.fillStyle=hx(BLUE,0.14); g.fill(); g.restore();
+    icon(VALUES[i][0], x+64, y+rh/2, 50, SKY, {alpha:a*f});
+    text(VALUES[i][1], x+130, y+rh/2-8, {size:36,weight:700,color:INK,align:'left',alpha:a*f});
+    text(VALUES[i][2], x+130, y+rh/2+38, {size:26,weight:400,color:MUTED,align:'left',alpha:a*f});
+    // KPI tag right
+    const tag=VALUES[i][3]; setFont(26,700); const tw=g.measureText(tag).width+40;
+    g.save(); g.globalAlpha=a*f; roundRect(x+w-tw-24,y+rh/2-26,tw,52,26); g.fillStyle=hx(GREEN,0.14); g.fill(); g.strokeStyle=hx(GREEN,0.5); g.lineWidth=1.4; g.stroke(); g.restore();
+    text(tag, x+w-tw/2-24, y+rh/2+10, {size:26,weight:700,color:GREEN,align:'center',alpha:a*f});
+  }
+}
+
+function kpiCard(x,y,w,h,value,label,frac,accent){
+  const a=easeOutCubic(frac); if(a<=0)return; const oy=(1-a)*22;
+  g.save(); g.globalAlpha=a; g.translate(0,oy);
+  roundRect(x,y,w,h,20); g.fillStyle=hx(CARD,0.95); g.fill(); g.strokeStyle=hx(accent,0.4); g.lineWidth=1.5; g.stroke();
+  g.fillStyle=accent; roundRect(x,y,w,6,3); g.fill(); g.restore();
+  text(value,x+w/2,y+h*0.56,{size:66,weight:800,color:accent,align:'center',alpha:a});
+  text(label,x+w/2,y+h*0.8,{size:24,weight:600,color:MUTED,align:'center',alpha:a});
+}
+function sKPI(lt,dur){
+  const a=envelope(lt,dur,0.45,0.45);
+  text('The numbers it drives',W/2,470,{size:48,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.05,0.8)});
+  const gp=30, w=(W-160-gp)/2, h=300, x0=80, y0=600;
+  const f18=ep(lt,0.3,1.4), f67=ep(lt,0.45,1.4);
+  kpiCard(x0,        y0, w,h, Math.round(18*f18)+'%', 'Avg fuel reduction', ep(lt,0.3,0.7), SKY);
+  kpiCard(x0+w+gp,   y0, w,h, '$'+Math.round(67*f67)+'K', 'Avg annual savings', ep(lt,0.45,0.7), GREEN);
+  kpiCard(x0,        y0+h+gp, w,h, Math.round(30*ep(lt,0.6,1.4))+' days', 'To full ROI', ep(lt,0.6,0.7), SKY);
+  kpiCard(x0+w+gp,   y0+h+gp, w,h, (Math.round(124*ep(lt,0.75,1.4))/10).toFixed(1).replace('.0','')+'K+', 'Vehicles tracked', ep(lt,0.75,0.7), GREEN);
+  // proof line
+  const pf=ep(lt,1.5,0.9);
+  const py=y0+2*h+gp+92;
+  text('★ 4.9 rating', W/2-250, py, {size:30,weight:700,color:AMBER,align:'center',alpha:a*pf});
+  text('95% theft recovery', W/2+165, py, {size:30,weight:700,color:GREEN,align:'center',alpha:a*pf});
+}
+
+function sCTA(lt,dur){
+  const a=envelope(lt,dur,0.45,0.55);
+  logo(W/2,H/2-230,1.05,a*ep(lt,0.05,0.8));
+  text('Your Fleet Is Ready.',W/2,H/2-90,{size:72,weight:800,color:INK,align:'center',alpha:a*ep(lt,0.15,0.8)});
+  text('Are You?',W/2,H/2+2,{size:78,weight:800,color:SKY,align:'center',alpha:a*ep(lt,0.3,0.8),italic:true});
+  // button
+  const bf=ep(lt,0.5,0.7); const bw=430,bh=92,bx=W/2-bw/2,by=H/2+70;
+  g.save(); g.globalAlpha=a*bf;
+  const bg=g.createLinearGradient(bx,0,bx+bw,0); bg.addColorStop(0,BLUE); bg.addColorStop(1,BLUE_D);
+  roundRect(bx,by,bw,bh,bh/2); g.fillStyle=bg; g.fill(); g.restore();
+  text('Start Free Trial',W/2,by+58,{size:38,weight:800,color:WHITE,align:'center',alpha:a*bf});
+  // badges
+  const by2=H/2+230;
+  badge(W/2-300,by2,'14-day free trial',ep(lt,0.7,0.6));
+  badge(W/2,     by2,'No contracts',ep(lt,0.82,0.6));
+  badge(W/2+250, by2,'2-min setup',ep(lt,0.94,0.6));
+  text('gps365.ai',W/2,by2+90,{size:34,weight:700,color:MUTED,align:'center',alpha:a*ep(lt,1.0,0.9),spacing:2});
+}
+
+function renderFrame(t){
+  g.globalAlpha=1; background(t); mood(t);
+  for(const s of SCENES){const lt=t-s.start; if(lt>=0&&lt<=s.dur){g.save();s.draw(lt,s.dur);g.restore();}}
+  g.strokeStyle=hx(BLUE,0.12); g.lineWidth=2; g.strokeRect(24,24,W-48,H-48);
+}
+window.renderFrame=renderFrame;
+let _live=null;
+function loop(ts){if(_live===null)_live=ts; renderFrame(((ts-_live)/1000)%32); requestAnimationFrame(loop);}
+if(!window.__CAPTURE__) requestAnimationFrame(loop);
+</script>
+</body>
+</html>
