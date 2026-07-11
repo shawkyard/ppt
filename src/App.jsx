@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import MarketGate from './pages/MarketGate.jsx'
 import AddProperty from './pages/AddProperty.jsx'
 import ScratchScreen from './pages/ScratchScreen.jsx'
+import HiddenValue from './pages/HiddenValue.jsx'
 import DealDetail from './pages/DealDetail.jsx'
 import StabilizationPlan from './pages/StabilizationPlan.jsx'
 import OfferPrice from './pages/OfferPrice.jsx'
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/markets" element={<MarketGate />} />
         <Route path="/scratch" element={<ScratchScreen />} />
+        <Route path="/hidden-value" element={<HiddenValue />} />
         <Route path="/add" element={<AddProperty />} />
         <Route path="/deal/:id" element={<DealDetail />} />
         <Route path="/deal/:id/plan" element={<StabilizationPlan />} />

@@ -6,6 +6,7 @@ const NAV = [
   { to: '/', label: 'Dashboard', end: true },
   { to: '/markets', label: 'Market Gate' },
   { to: '/scratch', label: 'Scratch Screen' },
+  { to: '/hidden-value', label: 'Hidden Value Finder' },
   { to: '/add', label: 'Add Property' },
 ]
 

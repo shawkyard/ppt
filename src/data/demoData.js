@@ -37,6 +37,76 @@ export const demoMarkets = [
       reIndicator: 6,
     },
   },
+
+  // ---- Utah markets (statewide expansion) ---------------------------------
+  {
+    id: 'mkt-ogd',
+    name: 'Ogden–Clearfield, UT',
+    thesis: 'Cheaper Wasatch Front basis anchored by Hill AFB + aerospace. FrontRunner transit, in-migration spillover from Salt Lake, and older stock with basement-ADU and value-add upside.',
+    factors: {
+      jobGrowth: 8,
+      populationGrowth: 8,
+      wageSupport: 7,
+      employerAnchors: 7,     // Hill AFB, aerospace/defense, Weber State
+      rentGrowth: 7,
+      supplyRisk: 3,
+      affordability: 6,
+      crimeRisk: 3,
+      infrastructure: 7,
+      reIndicator: 8,
+    },
+  },
+  {
+    id: 'mkt-slc',
+    name: 'Salt Lake City, UT',
+    thesis: 'Diversified "Silicon Slopes" economy — tech, finance, healthcare, university. Strong demand and transit, but pricey and carrying a heavier new-supply pipeline downtown.',
+    factors: {
+      jobGrowth: 9,
+      populationGrowth: 8,
+      wageSupport: 8,
+      employerAnchors: 9,
+      rentGrowth: 8,
+      supplyRisk: 6,          // meaningful multifamily pipeline
+      affordability: 4,       // expensive
+      crimeRisk: 4,
+      infrastructure: 9,      // TRAX, airport, rail
+      reIndicator: 8,
+    },
+  },
+  {
+    id: 'mkt-pro',
+    name: 'Provo–Orem, UT',
+    thesis: 'Fastest-growing, youngest metro in the country — BYU + a deep tech bench (Qualtrics/others). Very safe, strong household formation; watch wage support and new supply.',
+    factors: {
+      jobGrowth: 9,
+      populationGrowth: 9,
+      wageSupport: 6,
+      employerAnchors: 7,
+      rentGrowth: 8,
+      supplyRisk: 6,
+      affordability: 5,
+      crimeRisk: 2,           // very low crime
+      infrastructure: 7,
+      reIndicator: 8,
+    },
+  },
+  {
+    id: 'mkt-stg',
+    name: 'St. George, UT',
+    thesis: 'Sun Belt retiree + remote-worker in-migration boom in the state\'s southwest. Fast population growth and safe, but thinner employer base and lower wages relative to price.',
+    factors: {
+      jobGrowth: 8,
+      populationGrowth: 9,
+      wageSupport: 5,
+      employerAnchors: 5,     // Intermountain Health, tourism, few large anchors
+      rentGrowth: 7,
+      supplyRisk: 5,
+      affordability: 4,
+      crimeRisk: 2,
+      infrastructure: 6,
+      reIndicator: 7,
+    },
+  },
 ]
 
 export const demoProperties = [
