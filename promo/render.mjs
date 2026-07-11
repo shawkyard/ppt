@@ -7,7 +7,7 @@ import { dirname, join } from 'path';
 import fs from 'fs';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const FPS = 30, DUR = 30, TOTAL = FPS * DUR;
+const FPS = 30, DUR = Number(process.argv[4]) || 30, TOTAL = FPS * DUR;
 const outDir = process.argv[2] || join(__dir, 'frames');
 const htmlFile = process.argv[3] || 'promo.html';
 fs.rmSync(outDir, { recursive: true, force: true });
