@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Prewire — 30s promo</title>
+<style>
+  html,body{margin:0;background:#05070c;overflow:hidden}
+  #c{display:block;width:1920px;height:1080px}
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// ------------------------------------------------------------------
+// Prewire — 30s promo. Hiring intelligence for data centers.
+// Predicts which data centers are hiring skilled workers BEFORE the
+// jobs are posted publicly, so recruiters reach candidates first.
+// Deterministic canvas render: renderFrame(t) draws the frame at time t.
+// ------------------------------------------------------------------
+const W=1920,H=1080;
+const cv=document.getElementById('c');
+const g=cv.getContext('2d');
+
+// Tech / energy palette
+const BG0='#05070c', BG1='#0a121c';
+const CYAN='#31e2d2', CYAN2='#22c9e6', AMBER='#ffb454', GREEN='#4fe08a', RED='#ff6a5c';
+const INK='#e9eef4', MUTED='#93a4b8', DIM='#54627a', PANEL='#0e1826', LINE='#1d2e42';
+const SANS="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+const MONO="ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace";
+
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOutCubic=t=>1-Math.pow(1-t,3);
+const easeInOutCubic=t=>t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const easeOutExpo=t=>t>=1?1:1-Math.pow(2,-10*t);
+const ep=(lt,s,d,e=easeOutCubic)=>e(clamp((lt-s)/d,0,1));
+function hex(c,a){const r=parseInt(c.slice(1,3),16),gg=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);return `rgba(${r},${gg},${b},${a})`;}
+
+function setFont(s,w,f){g.font=`${w} ${s}px ${f}`;}
+function measureSpaced(str,sp){let w=0;for(const ch of str)w+=g.measureText(ch).width+sp;return w-sp;}
+function text(str,x,y,{size=48,weight=400,family=SANS,color=INK,align='center',alpha=1,spacing=0}={}){
+  if(alpha<=0)return; g.save(); g.globalAlpha*=alpha; setFont(size,weight,family); g.fillStyle=color; g.textBaseline='alphabetic';
+  if(spacing===0){g.textAlign=align; g.fillText(str,x,y);}
+  else{const tot=measureSpaced(str,spacing); let sx=align==='center'?x-tot/2:align==='right'?x-tot:x; g.textAlign='left';
+    for(const ch of str){g.fillText(ch,sx,y); sx+=g.measureText(ch).width+spacing;}}
+  g.restore();
+}
+function roundRect(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function envelope(lt,dur,fin=0.5,fout=0.45){return clamp(lt/fin,0,1)*clamp((dur-lt)/fout,0,1);}
+
+// fixed background network of data-center nodes
+const NODES=[];
+(function(){ let s=1234; const rnd=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+  for(let i=0;i<22;i++) NODES.push({x:rnd()*W, y:120+rnd()*(H-240), p:rnd()});
+})();
+
+function background(t){
+  const grd=g.createLinearGradient(0,0,W,H);
+  grd.addColorStop(0,'#070c14'); grd.addColorStop(0.5,BG0); grd.addColorStop(1,'#04060a');
+  g.fillStyle=grd; g.fillRect(0,0,W,H);
+  // blueprint grid, slow drift
+  const off=(t*10)%90;
+  g.save(); g.strokeStyle=hex(CYAN,0.045); g.lineWidth=1;
+  for(let x=-90+off;x<W;x+=90){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();}
+  for(let y=-90+off;y<H;y+=90){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
+  g.restore();
+  // network nodes + links (subtle)
+  g.save();
+  for(let i=0;i<NODES.length;i++){for(let j=i+1;j<NODES.length;j++){
+    const a=NODES[i],b=NODES[j]; const dx=a.x-b.x,dy=a.y-b.y; const d=Math.hypot(dx,dy);
+    if(d<230){g.strokeStyle=hex(CYAN,0.05*(1-d/230)); g.lineWidth=1; g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();}
+  }}
+  for(const n of NODES){const pulse=0.35+0.35*Math.sin(t*1.5+n.p*6.28);
+    g.fillStyle=hex(CYAN,0.12*pulse); g.beginPath();g.arc(n.x,n.y,2.5,0,6.283);g.fill();}
+  g.restore();
+  const vg=g.createRadialGradient(W/2,H*0.46,H*0.22,W/2,H*0.5,W*0.75);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(2,4,8,0.72)');
+  g.fillStyle=vg; g.fillRect(0,0,W,H);
+}
+
+function underline(y,frac,{width=560,alpha=1,color=CYAN}={}){
+  const half=width/2*easeOutExpo(frac); g.save(); g.globalAlpha=alpha;
+  const lg=g.createLinearGradient(W/2-half,0,W/2+half,0);
+  lg.addColorStop(0,hex(color,0));lg.addColorStop(0.5,hex(color,0.9));lg.addColorStop(1,hex(color,0));
+  g.strokeStyle=lg; g.lineWidth=2; g.beginPath();g.moveTo(W/2-half,y);g.lineTo(W/2+half,y);g.stroke(); g.restore();
+}
+
+// Prewire mark: node with concentric radar rings
+function mark(cx,cy,frac,alpha){
+  g.save(); g.globalAlpha=alpha;
+  for(let i=0;i<3;i++){
+    const rr=easeOutCubic(clamp(frac*1.3-i*0.18,0,1));
+    const rad=20+i*26; if(rr<=0)continue;
+    g.strokeStyle=hex(CYAN,0.7*(1-i*0.26)*rr); g.lineWidth=3-i*0.6;
+    g.beginPath(); g.arc(cx,cy,rad*rr+ (1-rr)*8,-Math.PI*0.15,Math.PI*1.15); g.stroke();
+  }
+  const core=easeOutCubic(clamp(frac*2,0,1));
+  g.fillStyle=hex(CYAN,0.95); g.beginPath();g.arc(cx,cy,9*core,0,6.283);g.fill();
+  g.fillStyle=hex(CYAN,0.25*core); g.beginPath();g.arc(cx,cy,20*core,0,6.283);g.fill();
+  g.restore();
+}
+
+function glowNode(x,y,r,color,intensity){
+  g.save();
+  const gr=g.createRadialGradient(x,y,0,x,y,r*4);
+  gr.addColorStop(0,hex(color,0.5*intensity)); gr.addColorStop(1,hex(color,0));
+  g.fillStyle=gr; g.beginPath();g.arc(x,y,r*4,0,6.283);g.fill();
+  g.fillStyle=hex(color,intensity); g.beginPath();g.arc(x,y,r,0,6.283);g.fill();
+  g.restore();
+}
+
+// ===================== SCENES =====================
+const SCENES=[
+  {start:0.0, dur:4.4, draw:sceneHook},
+  {start:4.4, dur:4.2, draw:sceneProblem},
+  {start:8.6, dur:4.0, draw:sceneBrand},
+  {start:12.6,dur:6.0, draw:sceneSignals},
+  {start:18.6,dur:5.8, draw:sceneLead},
+  {start:24.4,dur:5.6, draw:sceneCTA},
+];
+
+function sceneHook(lt,dur){
+  const a=envelope(lt,dur,0.6,0.5);
+  text('THE JOB POSTS PUBLICLY.',W/2,H/2-30,{size:80,weight:700,family:SANS,color:INK,align:'center',alpha:a*ep(lt,0.1,0.8),spacing:1});
+  underline(H/2+26,ep(lt,0.5,1.0),{width:680,alpha:a});
+  text('By then, the race is already over.',W/2,H/2+104,{size:40,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,0.9,1.0),spacing:1});
+  // small "Day 0" tag + fleeing candidate dots
+  const tx=W/2, ty=H/2+210;
+  text('CANDIDATES GONE IN DAYS',tx,ty,{size:22,weight:600,family:MONO,color:RED,align:'center',alpha:a*ep(lt,1.1,0.9),spacing:4});
+}
+
+function sceneProblem(lt,dur){
+  const a=envelope(lt,dur);
+  // rising demand: bars of data-center capacity spiking, last ones amber
+  const n=16, bw=54, gap=14, totalW=n*(bw+gap)-gap, x0=W/2-totalW/2, base=H/2+40, maxH=210;
+  for(let i=0;i<n;i++){
+    const grow=ep(lt,0.2+i*0.05,1.2);
+    const h=(30+Math.pow(i/(n-1),1.7)*maxH)*grow;
+    const hot=i>=n-4;
+    g.save(); g.globalAlpha=a;
+    g.fillStyle=hot?hex(AMBER,0.85):hex(CYAN,0.5+0.02*i);
+    roundRect(x0+i*(bw+gap),base-h,bw,h,4); g.fill();
+    if(hot){g.fillStyle=hex(AMBER,0.18); roundRect(x0+i*(bw+gap),base-h-8,bw,8,3); g.fill();}
+    g.restore();
+  }
+  text('Data centers scale faster than they can hire.',W/2,H/2+150,{size:52,weight:700,family:SANS,color:INK,align:'center',alpha:a*ep(lt,0.4,1.0)});
+  text('Skilled techs, electricians and engineers are gone before the role is even public.',W/2,H/2+212,{size:30,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,0.9,1.0),spacing:1});
+}
+
+function sceneBrand(lt,dur){
+  const a=envelope(lt,dur,0.55,0.5);
+  mark(W/2,H/2-140,ep(lt,0.1,1.2),a);
+  text('PREWIRE',W/2,H/2+30,{size:110,weight:700,family:SANS,color:INK,align:'center',alpha:a*ep(lt,0.45,0.9),spacing:14});
+  underline(H/2+78,ep(lt,0.75,1.0),{width:520,alpha:a});
+  text('Hiring intelligence for data centers.',W/2,H/2+148,{size:36,weight:400,family:SANS,color:CYAN,align:'center',alpha:a*ep(lt,1.0,1.0),spacing:2});
+  text('Know who is hiring before the job goes live.',W/2,H/2+206,{size:28,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,1.2,1.0),spacing:1});
+}
+
+const SIGNALS=['Power & substation filings','Construction & permit activity','Capex & cloud-region expansions','Headcount & exec-hire shifts'];
+function sceneSignals(lt,dur){
+  const a=envelope(lt,dur);
+  text('WE READ THE SIGNALS',W/2,168,{size:30,weight:700,family:MONO,color:CYAN,align:'center',alpha:a*ep(lt,0.1,0.8),spacing:8});
+  text('— months before HR posts the job.',W/2,214,{size:26,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,0.3,0.9),spacing:1});
+
+  // left: signal list
+  const lx=250, ly0=360, dy=96;
+  for(let i=0;i<SIGNALS.length;i++){
+    const f=ep(lt,0.5+i*0.18,0.8); if(f<=0)continue;
+    const y=ly0+i*dy; g.save(); g.globalAlpha=a*f; g.translate((1-f)*-30,0);
+    glowNode(lx,y-8,6,CYAN,0.9);
+    text(SIGNALS[i],lx+34,y,{size:32,weight:500,family:SANS,color:INK,align:'left',alpha:a*f});
+    g.restore();
+  }
+
+  // right: radar map panel with a highlighted site
+  const px=1080,py=310,pw=620,ph=470;
+  g.save(); g.globalAlpha=a*ep(lt,0.2,0.8);
+  roundRect(px,py,pw,ph,16); g.fillStyle=hex(PANEL,0.9); g.fill(); g.strokeStyle=hex(LINE,1); g.lineWidth=1.5; g.stroke();
+  // inner grid
+  g.save(); g.beginPath(); roundRect(px,py,pw,ph,16); g.clip();
+  g.strokeStyle=hex(CYAN,0.06);
+  for(let x=px;x<px+pw;x+=44){g.beginPath();g.moveTo(x,py);g.lineTo(x,py+ph);g.stroke();}
+  for(let y=py;y<py+ph;y+=44){g.beginPath();g.moveTo(px,y);g.lineTo(px+pw,y);g.stroke();}
+  // scattered sites
+  const cx=px+pw*0.52, cy=py+ph*0.52;
+  const sites=[[0.22,0.30],[0.7,0.24],[0.38,0.7],[0.8,0.66],[0.6,0.45],[0.28,0.55]];
+  for(const [sxf,syf] of sites){ const sx=px+pw*sxf, sy=py+ph*syf; glowNode(sx,sy,3.5,CYAN,0.4); }
+  // radar sweep
+  const ang=(lt*1.6)%(Math.PI*2);
+  const rg=g.createConicGradient ? null : null;
+  g.save(); g.translate(cx,cy);
+  for(let k=0;k<40;k++){const aa=ang-k*0.03; g.strokeStyle=hex(CYAN,0.14*(1-k/40)); g.lineWidth=2; g.beginPath();g.moveTo(0,0);g.lineTo(Math.cos(aa)*260,Math.sin(aa)*260);g.stroke();}
+  g.restore();
+  g.strokeStyle=hex(CYAN,0.15); for(let r=60;r<=240;r+=60){g.beginPath();g.arc(cx,cy,r,0,6.283);g.stroke();}
+  // highlighted target site (Loudoun) lights up amber->green
+  const hx=px+pw*0.6, hy=py+ph*0.42;
+  const lit=ep(lt,2.2,1.2);
+  if(lit>0){
+    const col=lit>0.6?GREEN:AMBER;
+    glowNode(hx,hy,6,col,0.6+0.4*lit);
+    g.strokeStyle=hex(col,0.7*lit); g.lineWidth=2;
+    const rr=10+lit*26; g.beginPath();g.arc(hx,hy,rr,0,6.283);g.stroke();
+  }
+  g.restore(); // unclip
+  // callout — anchored to the LEFT of the target node so it stays inside the panel
+  if(lit>0.2){ const ca=a*ep(lt,2.5,0.8);
+    const bw2=326, bx=hx-18-bw2, by=hy-24;
+    // connector line from box to node
+    g.save(); g.globalAlpha=ca; g.strokeStyle=hex(GREEN,0.6); g.lineWidth=1.5;
+    g.beginPath(); g.moveTo(bx+bw2,by); g.lineTo(hx-8,hy); g.stroke(); g.restore();
+    g.save(); g.globalAlpha=ca; roundRect(bx,by-32,bw2,64,10); g.fillStyle=hex('#0c1a1e',0.96); g.fill(); g.strokeStyle=hex(GREEN,0.6); g.lineWidth=1.5; g.stroke(); g.restore();
+    text('Loudoun County, VA',bx+18,by-4,{size:25,weight:600,family:SANS,color:INK,align:'left',alpha:ca});
+    text('SURGE PREDICTED · 92%',bx+18,by+22,{size:18,weight:600,family:MONO,color:GREEN,align:'left',alpha:ca,spacing:0.5});
+  }
+  g.restore();
+}
+
+function chip(cx,cy,w,h,top,bottom,frac,accent){
+  const a=easeOutCubic(frac); if(a<=0)return; const oy=(1-a)*22;
+  g.save(); g.globalAlpha=a; g.translate(0,oy);
+  roundRect(cx-w/2,cy-h/2,w,h,14); g.fillStyle=hex(PANEL,0.92); g.fill(); g.strokeStyle=hex(LINE,1); g.lineWidth=1.5; g.stroke();
+  g.fillStyle=accent; roundRect(cx-w/2,cy-h/2,5,h,3); g.fill(); g.restore();
+  text(top,cx+8,cy-2,{size:42,weight:700,family:SANS,color:INK,align:'center',alpha:a});
+  text(bottom,cx+8,cy+34,{size:20,weight:600,family:MONO,color:MUTED,align:'center',alpha:a,spacing:0.5});
+}
+
+function sceneLead(lt,dur){
+  const a=envelope(lt,dur);
+  text('YOUR HEAD START',W/2,220,{size:30,weight:700,family:MONO,color:CYAN,align:'center',alpha:a*ep(lt,0.1,0.8),spacing:8});
+  // timeline
+  const y=430, x1=W/2-560, x2=W/2+560;
+  g.save(); g.globalAlpha=a;
+  g.strokeStyle=hex(LINE,1); g.lineWidth=4; g.beginPath();g.moveTo(x1,y);g.lineTo(x2,y);g.stroke();
+  // progress fill (signal -> posting)
+  const prog=ep(lt,0.3,1.6); const xp=lerp(x1,x2,prog);
+  const lg=g.createLinearGradient(x1,0,x2,0); lg.addColorStop(0,CYAN); lg.addColorStop(1,hex(CYAN,0.2));
+  g.strokeStyle=lg; g.lineWidth=4; g.beginPath();g.moveTo(x1,y);g.lineTo(xp,y);g.stroke();
+  g.restore();
+  // left marker: signal detected
+  glowNode(x1,y,8,CYAN,a);
+  text('SIGNAL DETECTED',x1,y-40,{size:24,weight:700,family:MONO,color:CYAN,align:'center',alpha:a*ep(lt,0.2,0.8),spacing:1});
+  text('Prewire flags the site',x1,y+52,{size:22,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,0.4,0.9)});
+  // right marker: public posting
+  g.save(); g.globalAlpha=a*ep(lt,0.9,0.8); g.strokeStyle=hex(DIM,1); g.lineWidth=3; g.beginPath();g.arc(x2,y,8,0,6.283);g.stroke(); g.restore();
+  text('PUBLIC JOB POSTING',x2,y-40,{size:24,weight:700,family:MONO,color:MUTED,align:'center',alpha:a*ep(lt,0.9,0.8),spacing:1});
+  text('Everyone else starts here',x2,y+52,{size:22,weight:400,family:SANS,color:DIM,align:'center',alpha:a*ep(lt,1.0,0.9)});
+  // gap bracket
+  const gm=ep(lt,1.3,0.8);
+  if(gm>0){ text('6-WEEK MEDIAN LEAD TIME',W/2,y-90,{size:30,weight:700,family:SANS,color:AMBER,align:'center',alpha:a*gm,spacing:2}); }
+  // chips
+  const cy=y+230, cw=400, gp=28;
+  chip(W/2-cw-gp,cy,cw,110,'40+ / wk','SITES FLAGGED EARLY',ep(lt,1.6,0.8),CYAN);
+  chip(W/2,       cy,cw,110,'6 weeks','AHEAD OF PUBLIC POSTINGS',ep(lt,1.85,0.8),AMBER);
+  chip(W/2+cw+gp,cy,cw,110,'3.2×','MORE PLACEMENTS',ep(lt,2.1,0.8),GREEN);
+}
+
+function sceneCTA(lt,dur){
+  const a=envelope(lt,dur,0.5,0.55);
+  mark(W/2,H/2-150,1,a*0.95);
+  text('REACH THEM FIRST.',W/2,H/2+20,{size:78,weight:700,family:SANS,color:INK,align:'center',alpha:a,spacing:1});
+  underline(H/2+62,ep(lt,0.3,1.0),{width:520,alpha:a});
+  text('PREWIRE',W/2,H/2+150,{size:52,weight:700,family:SANS,color:CYAN,align:'center',alpha:a*ep(lt,0.4,0.9),spacing:10});
+  text('Predict the hire before the job is posted.',W/2,H/2+210,{size:30,weight:400,family:SANS,color:MUTED,align:'center',alpha:a*ep(lt,0.6,0.9),spacing:1});
+}
+
+function renderFrame(t){
+  g.globalAlpha=1; background(t);
+  for(const s of SCENES){const lt=t-s.start; if(lt>=0&&lt<=s.dur){g.save();s.draw(lt,s.dur);g.restore();}}
+  g.strokeStyle=hex(CYAN,0.10); g.lineWidth=2; g.strokeRect(28,28,W-56,H-56);
+}
+window.renderFrame=renderFrame;
+let _live=null;
+function loop(ts){if(_live===null)_live=ts; renderFrame(((ts-_live)/1000)%30); requestAnimationFrame(loop);}
+if(!window.__CAPTURE__) requestAnimationFrame(loop);
+</script>
+</body>
+</html>

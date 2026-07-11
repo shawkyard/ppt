@@ -9,6 +9,7 @@ import fs from 'fs';
 const __dir = dirname(fileURLToPath(import.meta.url));
 const FPS = 30, DUR = 30, TOTAL = FPS * DUR;
 const outDir = process.argv[2] || join(__dir, 'frames');
+const htmlFile = process.argv[3] || 'promo.html';
 fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -18,7 +19,7 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
 await page.addInitScript(() => { window.__CAPTURE__ = true; });
-await page.goto('file://' + join(__dir, 'promo.html'));
+await page.goto('file://' + join(__dir, htmlFile));
 await page.waitForFunction(() => typeof window.renderFrame === 'function');
 
 const canvas = page.locator('#c');
