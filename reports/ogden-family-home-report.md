@@ -40,6 +40,37 @@ Everything below is labeled **Verified / Likely / Possible / Unknown / No indica
 
 ---
 
+## 1.5 Candidate leads found (2 strong, corroborated across multiple sources)
+
+**Important on confidence:** every listing portal blocks automated page loads (403), so I could not read a single listing page directly. The details below come from **search-engine summaries of the listing text, cross-checked across 2–4 independent queries each**, plus the real, clickable listing URLs (Zillow zpid, MLS#, KSL id) so you can verify in one click. Treat all specifics as **Likely / Medium confidence — buyer or agent must confirm price, status, and bed/bath before touring.**
+
+### 🥇 Lead A — 2730 Fowler Ave, Ogden, UT 84403 — *best fit to your criteria*
+- **~$349,999 · 3 bed / 2 bath · ~1,680 sqft · built 1945 · detached garage · east Ogden**
+- Described as a renovated/move-in-ready bungalow on a quiet street ("modern updates, energy efficiency"). East Ogden 84403 is generally a desirable bench area.
+- **Why it's a lead:** it's the cleanest match to your hard requirements — **detached single-family + garage + 3bd/2ba**, at **$349,999 vs. Ogden's ~$403k median.** Below median in a fast (13-DOM) market.
+- **Estimated monthly all-in:** ~$2,450 PITI, ~$2,990 with utilities + maintenance reserve (10% down, 6.75%).
+- **Confirm before touring:** bed count (one source said 2 bed, the majority said 3 — resolve this first), what "renovated" actually covers, roof/HVAC/sewer age, and that it's still active at this price.
+- **Verify:** [Zillow](https://www.zillow.com/homedetails/2730-Fowler-Ave-Ogden-UT-84403/11962753_zpid/) · [KSL Homes](https://homes.ksl.com/listing/40626610) · [Movoto](https://www.movoto.com/ogden-ut/2730-fowler-ave-ogden-ut-84403/pid_lxpxdyucoh/)
+- **Confidence: Medium.**
+
+### 🥈 Lead B — 1856 E 5775 S, South Ogden, UT 84403 — *best value / most bedrooms*
+- **~$360,000–$365,000 · 4 bed / 2 full bath · ~1,632 sqft · built 1973 · tri-level twin home · carport + 2 sheds · no HOA · listed ~June 4, 2026**
+- **Why it's a lead:** a **4-bed / 2-bath in South Ogden for ~$365k is well under the ~$450k South Ogden median** — strong price-per-bedroom value, and no HOA.
+- **Caveats (why it's #2):** it's described as a **twin home (attached / half-duplex), not fully detached**, has a **carport rather than a garage**, and a **small ~3,920 sqft lot.** It bends two of your preferences (detached + garage).
+- **Estimated monthly all-in:** ~$2,555 PITI, ~$3,110 with utilities + maintenance reserve.
+- **Confirm before touring:** exact price ($360k vs $365k), that it's attached/twin (party wall, any shared maintenance), parking reality (carport only), and whether there's a basement.
+- **Verify:** [Coldwell Banker — MLS 2162940](https://www.coldwellbankerhomes.com/ut/south-ogden/1856-e-5775-s/pid_71756424/) · [RealtyTrac](https://www.realtytrac.com/property/ut/ogden/84403/1856-e-5775-s/183643512/)
+- **Confidence: Medium.**
+
+### Also-noted lead (needs an address before I can score it)
+- A **North Ogden 3bd/2ba rambler, "1939 character" + new roof, on a ~0.32-acre lot** appeared in Harvest Park Group's North Ogden listings but the summary didn't expose the street address/price. A larger lot + new roof in North Ogden near budget would be worth chasing — send me the address or the Harvest Park Group link and I'll run it.
+
+### Rejected from the leads (failed a hard minimum)
+- **845 Binford St, Ogden 84401** — 4 bed but **only 1 bath**, built 1936, appears **off-market**. Fails 2-bath minimum. ([Trulia](https://www.trulia.com/p/ut/ogden/845-binford-st-ogden-ut-84401--2075532753))
+- **4576 Monroe Blvd, South Ogden 84403** — 4 bed but **only 1 bath** (2,160 sqft). Fails 2-bath minimum.
+
+---
+
 ## 2. Verified market-level intelligence (the real value I can provide)
 
 ### 2.1 Market prices and pace — June 2026
@@ -234,7 +265,9 @@ With that I can also pull the **per-parcel** facts that make or break a deal: We
 
 Every home should pass this before making the top tier: would a young family enjoy it for years; is the house worth the price against **verified** comps; is there a credible reason it's a better deal than competitors; do any risks erase the savings; do garage/lot/basement/floor-plan add real value; will it hold broad resale appeal; is it genuinely special or merely adequate?
 
-**Based on the available evidence, the buyer should tour first a cosmetically-dated but structurally-sound detached home in Ogden city, or a price-reduced / long-days-on-market detached home in South or North Ogden that has slipped into the $340–380k band — because the budget sits below the median in all three cities, and in this segment the "spectacular for the money" home will be one whose fixable, cosmetic flaws have scared off other buyers, not a turnkey listing in the core bench neighborhoods.** The specific address for that recommendation requires the verified listing data described in Section 12, which I could not obtain through automated access and will not fabricate.
+**Based on the available evidence, the first property the buyer should tour is 2730 Fowler Ave, Ogden, UT 84403 (~$349,999) — because it is the cleanest match to the hard requirements (detached single-family, 3 bed / 2 bath, detached garage), it is renovated/move-in-ready per the listing, and at ~$350k it sits comfortably below Ogden's ~$403k median in a fast-moving market where in-budget, move-in-ready homes are the scarce prize.** The close second to tour is **1856 E 5775 S, South Ogden (~$365k)** for buyers who will trade "detached + garage" for **an extra bedroom and clear price-per-bedroom value** under South Ogden's ~$450k median.
+
+Both are **Medium confidence** — I reached them through cross-checked search summaries, not by loading the listing pages (all blocked). Before touring, confirm the two items flagged for each (Section 1.5): Fowler Ave's **bed count** and renovation scope; and 5775 S's **exact price, attached/twin status, and carport-only parking.** Send me the live listing links or your agent's MLS export and I'll run both through the full 100-point score, comps, and offer strategy in Sections 4–11.
 
 ---
 
