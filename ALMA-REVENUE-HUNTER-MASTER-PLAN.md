@@ -195,7 +195,7 @@ black → white → orange/coral → charcoal → white → black.
 | 4 | **Farm mechanism** | Show the system + proof | Pages built for who you serve | Audience research→pages→visibility→capture→qualified inquiries | Audience/industry page examples (contextual) | `LIGHT-03…06`, `WASATCH-09…19`, `BBP-01/02` | See Website & Audience Page Packages | Carousel of examples |
 | 5 | **Grow video** | Momentum | Turn opportunity into momentum | Connect hunt + farm to convert, recover, retain, expand | **Rocket ignition video** | new video | Build My Growth System | Short hero |
 | 6 | **Grow mechanism** | Revenue loop | How growth compounds | Opportunity→engage→convert→follow-up→retain→expand→new intelligence | Loop diagram | `DARK-11` automation, `WASATCH-01`, Grow pages | Explore Growth Systems | Vertical loop |
-| 7 | Featured agents | Lead with agents | Meet Alma's hunters | 6 mission categories, not 100 cards | Agent cards | D8 | Explore Agents | 2-up cards |
+| 7 | Featured agents | Lead with agents | **What can Alma hunt for?** | 6 hunt cards (Buyers · Buying Signals · Projects · Hiring Demand · Lost Revenue · Past Customers) + "Need something more specialized?" (scarce equipment, real estate, partnerships, acquisitions, local markets, custom) | Agent cards | D8 | Tell Alma What to Hunt | 2-up cards |
 | 8 | Built for your industry | Self-select | Built for your industry | Filter/guided picker, not 100 links | Filterable UI | `LIGHT-07`/`WASATCH-03` hubs | Find My Industry | Search + chips |
 | 9 | Results & proof | Credibility | Real hunts. Real pages. Real results. | Verified/redacted only, labeled | Report/opportunity cards, before/after | `DARK-03/04`, `WASATCH-06`, `OGDEN-01` | View a Sample Report | Stacked cards |
 | 10 | Packages | Purchase | Choose how you start | DFY-first, floor pricing | Package cards | D10 | Compare Packages | Comparison accordion |
@@ -206,23 +206,49 @@ black → white → orange/coral → charcoal → white → black.
 
 ---
 
-# Deliverable 8 — Agent Catalog Structure
+# Deliverable 8 — Agent Catalog Structure *(APPROVED — firm architecture)*
 
-**Naming system:** `Alma {Mission} Hunter` (e.g. *Alma Signal Hunter*, *Alma Recovery Hunter*). One family, one OS.
+**Firm principle:** Draw a hard line between **agents that hunt** and **agents that only support the hunt.**
+The site presents a small number of powerful hunting agents that work across many industries — never 100 unrelated bots.
 
-**Categories (mission-based, not 100 cards):**
-1. **Buyer & Lead Hunters** — companies + decision-makers with a reason to buy.
-2. **Signal Hunters** — hiring, expansion, project-award, permit, funding, acquisition, vendor-change signals.
-3. **Revenue Recovery Hunters** — unbilled work, inactive customers, missed follow-ups.
-4. **Recruiting Hunters** — employers with immediate/emerging staffing demand.
-5. **Sourcing Hunters** — scarce equipment, inventory, real-estate, hard-to-find opportunities.
-6. **Local Market Hunters** — qualified prospects in a city/region/territory.
+## Alma is the commander & orchestrator
+Alma learns the business → chooses the hunting strategy → assigns specialist agents → combines their findings →
+produces the final opportunity report → recommends the next action. The customer tells Alma what they need; Alma
+organizes the expedition. Customers do not need to understand the underlying agents.
 
-**Initial featured agents (launch set):** Lead & Buyer Intelligence, Buying-Signal, Hiring-Signal,
-Revenue-Recovery, Local-Market, Real-Estate Sourcing. (Source content: `WASATCH-01/02`, `DARK-01/09/10`.)
+**Naming (decided):** keep it a simple hierarchy — **Alma Revenue Hunter**, *powered by specialist agents*
+(Buyer Hunter, Signal Hunter, …). **No gimmicky personas** ("Steve the Signal Agent"). Alma is the recognizable intelligence.
 
-**Product-page template:** see D14. **Filters:** mission, industry, geography, one-time vs ongoing, deliverable type.
-**Purchase options:** one-time expedition · managed (recurring) · add to a combined system. **Related:** each agent links to relevant Farm + Grow services.
+## The 8 agents that actually hunt
+| # | Agent | Hunts for | Customer promise | Best for |
+|---|---|---|---|---|
+| 1 | **Buyer Hunter** | ICP companies by industry/geo/size/need; high-value target accounts | *Find the companies most likely to need what you sell.* | B2B services, tech, contractors, pro services, manufacturers, agencies, recruiters |
+| 2 | **Signal Hunter** ⭐ | Funding, expansion, new locations, acquisitions, leadership/tech/vendor changes, hiring surges, new contracts, regulatory changes | *Find buyers showing signs that a need is developing now.* | **Flagship** — where the system most differs from ordinary lead lists |
+| 3 | **Project & Expansion Hunter** | Construction projects, permits, data-center dev, facility/branch expansion, gov contracts, project awards, equipment installs | *Find projects and expansions before competitors hear about them.* | Electrical/low-voltage contractors, staffing, suppliers, equipment vendors, logistics, infra |
+| 4 | **Hiring Demand Hunter** | Hiring surges, new facilities, project labor, hard-to-fill roles, seasonal/contractor demand, workforce expansion | *Find employers whose workforce needs are beginning to grow.* | Recruiting/staffing, subcontractors, skilled trades, consulting, outsourcing |
+| 5 | **Revenue Recovery Hunter** | (Authorized company data) unbilled work, un-followed quotes, missing invoices, unpaid balances, lost proposals | *Find revenue that may already belong to your business.* | Contractors, home-service, IT, agencies, consultants, field service |
+| 6 | **Customer Reactivation Hunter** | Past customers, dormant accounts, expired contracts, old quotes, single-service buyers, cross-sell | *Find customers and prospects you already know — but may have forgotten.* | Almost every established business |
+| 7 | **Scarcity & Sourcing Hunter** | Long-lead equipment, transformers, switchgear, generators, BESS, semiconductor equipment, off-market supply | *Find difficult-to-source assets before the market catches up.* | Industrial buyers, contractors, brokers, manufacturers, developers, investors |
+| 8 | **Local Market Hunter** | Local ICP matches, outdated sites, weak search presence, new registrations, territory prospects | *Find qualified opportunities inside your actual service territory.* | Website/IT services, commercial services, contractors, local agencies, regional teams |
+
+## Support agents (capabilities, NOT headline products)
+Marketed as part of Alma's intelligence, never as separate products: **Business Context Agent** (what should Alma look
+for?), **Market Mapper**, **Decision-Maker Finder** (finds the people connected to an opportunity, not the opportunity),
+**Verification Agent**, **Opportunity Scoring Agent**, **Outreach Agent** (acts on findings — doesn't hunt), **Report
+Builder** (opportunity cards, ranked lists, exec reports, CSV, next actions).
+
+## What customers actually purchase — a Hunting Expedition
+Customers don't buy an internal agent; they buy an **expedition** (e.g. "Find 25 companies preparing to expand," "Find
+completed jobs never billed," "Find buyers for available transformers"). Alma deploys the right agents behind the scenes.
+Intake questions: what you sell · who buys · where · what to find · which signals · how many · contact info? · outreach
+prepared? · one-time or ongoing.
+
+## Launch lineup
+**Feature 6 prominently:** Buyer · Signal · Project & Expansion · Hiring Demand · Revenue Recovery · Reactivation.
+**Under "Specialized Hunts":** Scarcity & Sourcing · Local Market. (Source content: `WASATCH-01/02`, `DARK-01/09/10/11`.)
+
+**Product-page template:** see D14. **Purchase options:** one-time expedition · managed (recurring) · add to a combined system.
+**Related:** each agent links to relevant Farm + Grow services.
 
 ---
 
