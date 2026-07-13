@@ -434,6 +434,17 @@ All identical skeleton to WASATCH-09/10/11 (see template note), swapped copy + s
 
 *Wasatch verticals captured so far: 8 of ~20 (HVAC, Plumbing, Electrical, Roofing, Auto, Legal, Real Estate, Fitness).*
 
+## Batch 16 — 3 more Wasatch verticals (+1 dup) · 4 shots
+
+Same blue vertical template, swapped copy + sub-industry chips:
+- **WASATCH-17 · Construction & Trades** — "The Best Crews Stay Busy — But Only If the Leads Keep Coming" (General Contractor, Home Builder, Remodeling, Commercial, Concrete, Framing, Drywall, Flooring, Painting, Demolition)
+- **WASATCH-18 · Salons & Spas** — "Your Chair Should Never Be Empty — AI Makes Sure It Isn't" (Hair Salons, Barbershops, Day Spa, Med Spas, Nail Salons, Lash & Brow, Massage, Skincare, Tattoo, Tanning)
+- **WASATCH-19 · IT & B2B Services** — "Your Ideal Client Has a Problem Right Now — But They Can't Find You" (IT Services, MSP, Cybersecurity, Cloud, Consulting, Staffing, Marketing Agency, Accounting, HR, SaaS, Web Dev)
+
+**(dup)** WASATCH-03 (Industries hub) — re-capture.
+
+*Wasatch verticals now: 11 of ~20 (+ Construction, Salons & Spas, IT & B2B).*
+
 ---
 
 ## Reusable templates spotted (important for assembly)
@@ -466,7 +477,7 @@ All identical skeleton to WASATCH-09/10/11 (see template note), swapped copy + s
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 65 unique pages catalogued across 7 skins/brands (~75 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. THREE reusable templates (Service-Page, two Vertical-Landing variants) + industry hubs. Utah Gold Card (marketplace) and Wasatch ROI AI (flagship) are distinct products, not re-skins. Many of the 65 are template instances (8+ Wasatch verticals, 4 BBP-Light verticals, 4 dark service pages) — the true "distinct layout" count is far smaller.*
+*Status: 68 unique pages catalogued across 7 skins/brands (~80 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. THREE reusable templates (Service-Page, two Vertical-Landing variants) + industry hubs. Utah Gold Card (marketplace) and Wasatch ROI AI (flagship) are distinct products, not re-skins. Many of the 65 are template instances (8+ Wasatch verticals, 4 BBP-Light verticals, 4 dark service pages) — the true "distinct layout" count is far smaller.*
 
 ### Corporate structure (as revealed by the pages)
 **Wasatch Group AI** umbrella = **Better Business Partners LLC** + **Raidius IT**. Three leaders:
