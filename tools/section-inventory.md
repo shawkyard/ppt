@@ -166,6 +166,43 @@ Reusable overlay that appears site-wide.
 
 ---
 
+## Batch 5 — more BBP (dark service pages + light) · 5 shots
+
+**(dup) AI Chatbots** — re-capture of **DARK-01**, no new content.
+
+**DARK-10 · AI Lead Generation ("AI-Powered Lead Generation That Fills Your Pipeline While You Sleep")**
+Uses the **Service-Page Template** (see below): `hero` · `problem` Your Pipeline Is Dry Because Outreach Is Broken ·
+`capabilities` AI Lead Generation Systems Built for Your Market (6) · `stats` Businesses That Control Their Pipeline (800+/3-5x/80%/40%) ·
+`audience` Who Uses AI Lead Generation · `capabilities` What Changes When Your Pipeline Is Full · `stats` Pipeline Metrics table ·
+`how-it-works` · `roi-tool` · `proof` · `pricing` · `faq` · `cross-sell` · `cta` · `band` · `footer`
+
+**DARK-11 · Business Automation ("Automate the Work That's Eating Your Day")**
+Service-Page Template: `hero` · `problem` Your Team Is Doing Work That Should Be Automated ·
+`capabilities` Automation That Runs Your Business While You Sleep · `stats` Automation Is the Competitive Advantage (19%/10+/90%/$50K+) ·
+`audience` Who Uses Business Automation · `capabilities` What Changes When You Automate · `stats` Metrics table ·
+`how-it-works` · `roi-tool` · `proof` · `pricing` · `faq` · `cross-sell` · `cta` · `band` · `footer`
+
+**LIGHT-02 · Web Apps ("Custom software for your business — without the big price tag")** *(BBP-Light)*
+`nav`+`hero` · `capabilities` What kind of app do you need? (Booking & Scheduling, Customer Portals, Business Dashboards,
+E-Commerce & Ordering, Quote & Proposal Tools, Directory & Listing Apps) ·
+`how-it-works` How we build it (Discovery call · Scope & quote · Build & review · Launch & support) ·
+`cta` Have an app idea? · `cta` Ready to Get Started? ($495 + $199/mo) · `band` · `footer`
+
+**LIGHT-03 · Real Estate vertical landing ("Your Real Estate Deserves More Leads")** *(BBP-Light — an audience-specific sales page, the actual product)*
+`nav`+`hero` (with demo video) · `stats` bar (<60s · 5x · 24/7) · `problem` Problems We Solve for Real Estate (costing you money / how we fix it) ·
+`roi-tool` See Your Real Return (Real Estate ROI Calculator) · `audience` Real Estate Specialties (Residential, Luxury, Commercial, Property Mgmt, Investors, New Construction) ·
+`pricing` Transparent Pricing (Full-Service $0 setup/$395/mo · AI Agent Add-On $199 down/$99/mo) · `lead-capture` Get Your Free Real Estate Site (form) ·
+`cta` Ready to Stop Losing Clients? · `band` · `footer`
+
+---
+
+## Reusable templates spotted (important for assembly)
+
+- **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
+- **Vertical Landing Template (BBP-Light):** LIGHT-03 Real Estate is a per-industry sales page (`hero+video → stats → problems → ROI calc → specialties → pricing → lead form → cta`). This is the "audience-specific sales page" product itself — one template, many industries (matches the Examples/Transformations lists).
+
+---
+
 ## Recurring elements to dedupe (appear on almost every page)
 
 - **`footer`** — captured 15+ times. Keep ONE (BBP-Dark footer: Solutions / Industries / Company + contact).
@@ -188,4 +225,4 @@ Reusable overlay that appears site-wide.
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 21 shots catalogued across 4 skins. More expected — user assembling full content library before revealing the grand plan.*
+*Status: 25 unique pages catalogued across 4 skins (26 captures incl. 1 dup). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified.*
