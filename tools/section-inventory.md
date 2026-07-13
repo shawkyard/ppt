@@ -26,6 +26,7 @@ They exist across **3 visual skins** captured so far:
 | **ALMA** | orange + cream, sans | Hunters / Gatherers / Both / Results / Pricing / Resources | $200/mo |
 | **BBP-Serif** | navy + gold, serif display | What We Build / Concepts / Packages / Portfolio / About | $295 / $495 / $995+ |
 | **BBP-Dark** | dark navy + orange | How It Works / Transformations / Case Studies / Examples / Pricing | $395/mo, $0 setup |
+| **BBP-Light** | white + orange, sans | How It Works / Transformations / Case Studies / Examples / Pricing | $495 setup + $199/mo |
 
 **Open decision (carry forward):** which skin is the master for the final combined
 site. Working assumption = **BBP-Dark** (newest, most complete, has nav/pricing/
@@ -128,12 +129,50 @@ Spartan Funding, YourLocalPro.site, Goodwill Loyalty, Cornerstone Regenerative, 
 
 ---
 
+## Batch 4 — mixed (BBP-Dark + new BBP-Light) · 5 shots
+
+**DARK-06 · Pricing ("The Audience Revenue System — Honest pricing. No tiers per buyer.")**
+`nav`+`hero` The Audience Revenue System ·
+`pricing` Core packages — 6 tiers: Revenue Opportunity Audit ($495 one-time) · Restricted Landing-Page Pilot ($595+$95/mo) ·
+Audience Revenue Launch ($2,295+$449/mo) · Audience Revenue Engine ($3,595+$695/mo, **Most Popular**) ·
+AI Growth System ($7,495+$1,395/mo) · Custom AI Revenue Platform ($14,995+$2,795/mo) ·
+`pricing` Add-ons & modular products (extra page, enhanced chatbot, lead-router forms, ROI calc, CRM-light, dashboard/portal, AI messaging engine, AI phone agent, managed IT) ·
+`faq` Pricing questions, answered straight · `cta` Not sure which package fits? (Run My Revenue Audit) · `band` · `footer`
+
+**DARK-07 · "Free Executive Audit" modal** *(UI component, not a page)*
+`lead-capture` two-field audit form (email + website URL → Send Me My Free Audit) · **Alma AI** chatbot widget (bottom-right).
+Reusable overlay that appears site-wide.
+
+**DARK-08 · Get Started / checkout ("Pay your first month. We start tomorrow.")**
+`nav`+`hero` Pay your first month. We start tomorrow. ·
+`pricing` Starter ("10 for 245", $245/mo) · Flagship ("20 for 20", $395/mo, **Best Value**) ·
+`lead-capture` $395 Stripe checkout card (feature list + name/email + Pay $395 & start) ·
+`proof` 3 trust cards (24-hr kickoff · No sales calls · Premium quality) · `band` · `footer`
+
+**DARK-09 · AI Agents ("AI Agents That Run Your Business While You Focus on Growing It")**
+*(Twin of DARK-01 chatbot page, for AI agents.)*
+`hero` · `problem` Your Most Valuable People Are Doing Work a Machine Should Do · `capabilities` Custom AI Agents for Every Business Function (6) ·
+`stats` The Gap Between AI-Enabled and AI-Left-Behind (10x/40%/$2.6T/24/7) · `capabilities` Real Workflows AI Agents Are Handling ·
+`capabilities` What AI Agents Deliver · `stats` KPIs That Shift (table) · `how-it-works` · `roi-tool` Estimate Your Return ·
+`proof` Real Results (testimonials) · `pricing` Choose Your Starting Point · `faq` Common Questions · `cross-sell` Explore What Else We Build ·
+`cta` · `band` · `footer`
+
+**LIGHT-01 · Home / overview ("A professional website, live in days — not months")** *(new BBP-Light skin)*
+`nav`+`hero` A professional website, live in days — not months ·
+`capabilities` Everything you need. Nothing you don't. (up to 30 pages, custom design, mobile-responsive, full SEO, forms & lead capture, fully white-label, you own it, monthly updates) ·
+`audience` We've built sites for every industry (Healthcare & Wellness, IT & Technology, Fleet & Logistics, Home Services, Restaurants & Food, Fitness & Gyms) ·
+`how-it-works` How it works (1 tell us · 2 design & build · 3 review & approve · 4 launch & support) ·
+`cta` Ready for a website that works? · `cta` Ready to Get Started? ($495 setup + $199/mo · AI add-ons $199 down + $99/mo) · `band` · `footer`
+
+---
+
 ## Recurring elements to dedupe (appear on almost every page)
 
 - **`footer`** — captured 15+ times. Keep ONE (BBP-Dark footer: Solutions / Industries / Company + contact).
 - **`band` "Stop Losing Customers to Competitors"** — on every BBP-Dark page. Keep ONE as pre-footer CTA.
-- **`pricing`** — 3 versions ($200 / $295–995 / $395). Pick ONE tier system.
-- **`how-it-works`** — 3 versions (ALMA 4-step, ALMA 6-step timeline, DARK 4-step). Pick ONE.
+- **`pricing`** — now ~5 conflicting systems: ALMA $200/mo · BBP-Serif $295/$495/$995+ · BBP-Dark $395/mo "20 for 20" · BBP-Dark 6-tier $495–$14,995 · BBP-Light $495 setup + $199/mo. **Needs a single canonical offer decided before assembly.**
+- **`how-it-works`** — 4+ versions (ALMA 4-step, ALMA 6-step timeline, DARK-02 4-step, LIGHT 4-step). Pick ONE.
+- **`lead-capture` / Alma AI chatbot** (DARK-07) — a site-wide overlay, place once globally, not in the page stack.
 
 ## Provisional combined running order (updates as batches arrive)
 
@@ -149,4 +188,4 @@ Spartan Funding, YourLocalPro.site, Goodwill Loyalty, Cornerstone Regenerative, 
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 16 shots catalogued across 3 skins. ~25 more expected.*
+*Status: 21 shots catalogued across 4 skins. More expected — user assembling full content library before revealing the grand plan.*
