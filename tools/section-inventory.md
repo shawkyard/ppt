@@ -405,10 +405,42 @@ People revealed: **Scott** (Wasatch ROI AI / BBP websites & AI, 279-321-2965, sa
 
 ---
 
+## Batch 14 — Wasatch About + own vertical template (HVAC/Plumbing/Electrical) (+1 dup) · 5 shots
+
+**WASATCH-08 · About / Team ("Three Leaders. One Practical Growth System")**
+`nav`+`hero` · `proof` 3 leader cards: **Alma Dubon** (Client Success, Ops & Biz Dev — heart of BBP) · **Scott Hawkyard** (AI Revenue Strategy, Audience Pages, ROI Modeling) · **Jeff Downey** (President/CEO Raidius I.T. — PCI & HIPAA-certified IT/security, Farmington UT, 801-773-9777) ·
+`capabilities` Why the Combination Matters + "new collaborative service brand" legal disclaimer · `cta` Request a Revenue Review · `band` · `footer`
+
+**WASATCH-09 / 10 / 11 · Vertical landing pages (Wasatch's OWN vertical template, blue)**
+Same skeleton across all three, swapped copy + sub-industry nav chips + per-industry example pages & ROI calc:
+- **WASATCH-09 · HVAC** — "How Many Booked Jobs Are Lost Between the First Call and the Final Follow-Up?" (chips: HVAC, Heating, Cooling, Ventilation, Refrigeration, Mechanical, Ductwork, IAQ, Heat Pumps, Boilers, Mini Splits, Commercial HVAC)
+- **WASATCH-10 · Plumbing** — "Every Minute a Leak Goes Unanswered Is Revenue Going Down the Drain" (chips: Plumbing, Drain Cleaning, Water Heater, Sewer Lines, Repiping, Gas Line, Commercial, Water Treatment, Leak Detection, Backflow)
+- **WASATCH-11 · Electrical** — "Your Next Big Job Is Calling Right Now — Is Anyone Answering?" (chips: Residential Wiring, Commercial, Panel Upgrades, EV Chargers, Generators, Lighting, Smart Home, Industrial, Solar)
+
+Skeleton = `hero` → sub-industry chips → `problem` Revenue You're Losing Right Now (6) → `capabilities` What AI Does for Your Business (6) → `capabilities` Pages We'd Build (example audience pages) → `pricing` Three Ways to Work ($395 / $395/mo / TBD) → `roi-tool` ROI calculator → `stats` Why This Is the Best Deal (vs agency/DIY/freelancer) → `cta` → `band` → `footer`
+
+**(dup)** WASATCH-04 (AI Evaluation) — re-capture.
+
+---
+
+## Batch 15 — 5 more Wasatch vertical landing pages (same blue template) · 5 shots
+
+All identical skeleton to WASATCH-09/10/11 (see template note), swapped copy + sub-industry chips + example pages + ROI calc:
+- **WASATCH-12 · Roofing & Exteriors** — "Storm Season Brings a Flood of Leads — Are You Catching Them All?" (Storm Damage, Shingle/Metal/Flat Roofing, Gutters, Siding, Windows, Skylights, Commercial)
+- **WASATCH-13 · Auto & Collision** — "Every Car That Drives Past Your Shop Could Be a Customer" (Auto Repair, Collision, Detailing, Tire, Oil Change, Brakes, Transmission, Body Shop, Paint Protection, Fleet)
+- **WASATCH-14 · Legal & Professional** — "Your Next Client Is Searching for Help Right Now" (Personal Injury, Family, Criminal Defense, Estate Planning, Business, Immigration, Employment, Real Estate Law, Tax)
+- **WASATCH-15 · Real Estate** — "Every Listing Deserves Its Own Sales Page" (Residential/Commercial, Property Mgmt, Luxury, First-Time Buyers, Investment, New Construction, Relocation, Land)
+- **WASATCH-16 · Fitness & Wellness** — "January Resolutions Fade — But a Great System Keeps Members Coming Back" (Gyms, CrossFit, Yoga, Pilates, Personal Training, Martial Arts, Swimming, Dance, Wellness, PT)
+
+*Wasatch verticals captured so far: 8 of ~20 (HVAC, Plumbing, Electrical, Roofing, Auto, Legal, Real Estate, Fitness).*
+
+---
+
 ## Reusable templates spotted (important for assembly)
 
 - **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
 - **Vertical Landing Template (BBP-Light):** CONFIRMED across LIGHT-03 Real Estate, LIGHT-04 Healthcare, LIGHT-05 Legal, LIGHT-06 Restaurants — identical skeleton (`hero+video → stats → problems → ROI calc → specialties → pricing → lead form → cta`), swapped copy + per-industry ROI calc + accent color (Legal = purple). **LIGHT-07 is the hub** listing all **38 industries** that use this template. So this one template = 38 pages, driven by per-industry data. This IS the core product ("audience-specific sales page").
+- **Vertical Landing Template (Wasatch-blue):** a SECOND vertical template (WASATCH-09/10/11 HVAC/Plumbing/Electrical) with sub-industry nav chips + ROI calc. **WASATCH-03 hub** lists 20 industries on it. Same product idea, different skin/structure from the BBP-Light one → these two will need reconciling into one canonical vertical template.
 
 ---
 
@@ -434,10 +466,11 @@ People revealed: **Scott** (Wasatch ROI AI / BBP websites & AI, 279-321-2965, sa
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 56 unique pages catalogued across 7 skins/brands (~65 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates + a 38-industry hub. Utah Gold Card (marketplace) and Wasatch ROI AI (flagship) are distinct products, not re-skins.*
+*Status: 65 unique pages catalogued across 7 skins/brands (~75 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. THREE reusable templates (Service-Page, two Vertical-Landing variants) + industry hubs. Utah Gold Card (marketplace) and Wasatch ROI AI (flagship) are distinct products, not re-skins. Many of the 65 are template instances (8+ Wasatch verticals, 4 BBP-Light verticals, 4 dark service pages) — the true "distinct layout" count is far smaller.*
 
 ### Corporate structure (as revealed by the pages)
-**Wasatch Group AI** umbrella = **Better Business Partners LLC** (Scott — web/AI, ALMA voice) + **Raidius IT** (Jeff — IT/security).
+**Wasatch Group AI** umbrella = **Better Business Partners LLC** + **Raidius IT**. Three leaders:
+**Alma Dubon** (client success/ops, BBP), **Scott Hawkyard** (AI revenue strategy/audience pages/ROI, 279-321-2965), **Jeff Downey** (President/CEO Raidius IT — IT/security, 801-773-9777).
 Brands/products seen: **Wasatch ROI AI** (flagship), **Better Business Partners** (5 skins: ALMA / BBP-Serif / BBP-Dark / BBP-Light), **Ogden Web Solutions**, **Utah Gold Card** (marketplace). Shared clients recur across portfolios (Artecore, Sushi Totto, Intermountain Testing, Tom Hawkyard, etc.).
 
 ### Page map so far (by skin)
