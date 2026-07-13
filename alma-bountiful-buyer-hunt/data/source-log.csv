@@ -4,3 +4,7 @@ timestamp,source_type,query_or_target,result,url
 2026-07-13,Portal fetch,Redfin North Salt Lake single-story,HTTP 403 Forbidden (automation blocked),https://www.redfin.com/city/14303/UT/North-Salt-Lake/single-story
 2026-07-13,Portal fetch,Homes.com North Salt Lake,HTTP 403 Forbidden (automation blocked),https://www.homes.com/north-salt-lake-ut/
 2026-07-13,Broker/aggregator,harvestparkgroup.com Bountiful rambler page,Marketing/landing page; IDX requires interactive session,https://www.harvestparkgroup.com/davis-county-utah-real-estate-for-sale/bountiful/rambler-ranch-style-homes/
+2026-07-13,Portal fetch (Run 2 wider),"KSL Homes Bountiful <=575k 2+bd",HTTP 403 Forbidden (automation blocked),https://homes.ksl.com/search/city/Bountiful
+2026-07-13,Portal fetch (Run 2 wider),"UtahRealEstate.com (Utah MLS public) Bountiful <=575k",HTTP 403 Forbidden (automation blocked),https://www.utahrealestate.com/search/map.search
+2026-07-13,Portal fetch (Run 2 wider),"bestutahrealestate.com single-story Bountiful IDX",HTTP 403 Forbidden (automation blocked),https://bestutahrealestate.com/utah/bountiful/single-story
+2026-07-13,Web search (Run 2 wider),"rambler NSL/Centerville 2bd <=575k address MLS",Marketing landing pages only; no verifiable specific listing,

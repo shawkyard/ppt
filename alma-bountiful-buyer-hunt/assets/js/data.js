@@ -251,7 +251,11 @@ window.ALMA = {
     { ts: "2026-07-13", type: "Web search", query: "55+ patio community NSL/Centerville single story for sale", result: "Community leads (Eaglewood, others); no verifiable individual listings", url: "" },
     { ts: "2026-07-13", type: "Portal fetch", query: "Redfin — North Salt Lake single-story", result: "HTTP 403 Forbidden (automation blocked)", url: "https://www.redfin.com/city/14303/UT/North-Salt-Lake/single-story" },
     { ts: "2026-07-13", type: "Portal fetch", query: "Homes.com — North Salt Lake", result: "HTTP 403 Forbidden (automation blocked)", url: "https://www.homes.com/north-salt-lake-ut/" },
-    { ts: "2026-07-13", type: "Broker/aggregator", query: "harvestparkgroup.com / bestutahrealestate.com / utahrealtygroup.com rambler & 55+ pages", result: "Marketing/landing pages; IDX search requires interactive session — not machine-verifiable here", url: "https://www.harvestparkgroup.com/davis-county-utah-real-estate-for-sale/bountiful/rambler-ranch-style-homes/" }
+    { ts: "2026-07-13", type: "Broker/aggregator", query: "harvestparkgroup.com / bestutahrealestate.com / utahrealtygroup.com rambler & 55+ pages", result: "Marketing/landing pages; IDX search requires interactive session — not machine-verifiable here", url: "https://www.harvestparkgroup.com/davis-county-utah-real-estate-for-sale/bountiful/rambler-ranch-style-homes/" },
+    { ts: "2026-07-13", type: "Portal fetch (Run 2 wider)", query: "KSL Homes — Bountiful, ≤$575k, 2+ bd (loosened filter)", result: "HTTP 403 Forbidden (automation blocked)", url: "https://homes.ksl.com/search/city/Bountiful" },
+    { ts: "2026-07-13", type: "Portal fetch (Run 2 wider)", query: "UtahRealEstate.com (Utah MLS public) — Bountiful, ≤$575k, 2+ bd", result: "HTTP 403 Forbidden (automation blocked)", url: "https://www.utahrealestate.com/search/map.search" },
+    { ts: "2026-07-13", type: "Portal fetch (Run 2 wider)", query: "bestutahrealestate.com single-story Bountiful IDX", result: "HTTP 403 Forbidden (automation blocked)", url: "https://bestutahrealestate.com/utah/bountiful/single-story" },
+    { ts: "2026-07-13", type: "Web search (Run 2 wider)", query: "rambler Bountiful/NSL/Centerville 2bd ≤$575k address MLS 2026", result: "Marketing landing pages only; a general 'ramblers ~$500k–$700k' range with no verifiable specific listing", url: "" }
   ],
 
   /* Concrete research queue for an authorized user to complete verification. */
