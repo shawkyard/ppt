@@ -28,6 +28,7 @@ They exist across **3 visual skins** captured so far:
 | **BBP-Dark** | dark navy + orange | How It Works / Transformations / Case Studies / Examples / Pricing | $395/mo, $0 setup |
 | **BBP-Light** | white + orange, sans | How It Works / Transformations / Case Studies / Examples / Pricing | $495 setup + $199/mo |
 | **Ogden Web Solutions** | cream + dark, own logo/footer (Ogden, UT) | Work / Services / Pricing / Free Tools / Contact | (see portfolio) |
+| **Utah Gold Card** | gold + black, serif, "Premium B2B Network" | Directory / Offers / How It Works / Become an Advertiser / About | tiers $2K–$10K (advertiser-funded) |
 
 **Open decision (carry forward):** which skin is the master for the final combined
 site. Working assumption = **BBP-Dark** (newest, most complete, has nav/pricing/
@@ -323,6 +324,34 @@ checklist (5-second impression, lead leaks, message match, sample audience pages
 
 ---
 
+## Batch 11 — Utah Gold Card (new brand: curated B2B directory) · 5 shots
+
+A **different product**, not just a skin: a concierge B2B marketplace/directory where advertisers list and
+"Gold Card" holders redeem sponsored services. Still same company ("Ask Alma" widget; Wasatch ROI AI listed as an advertiser).
+Distinct nav (Directory / Offers / How It Works / Become an Advertiser / About) + gold/black serif identity + its own footer & legal disclaimer.
+
+**GOLD-01 · Homepage ("The Gold Card that opens doors to trusted Utah businesses")**
+`nav`+`hero` (gold-card visual) · `stats` ($2,000 value · 50+ audience pages · 11 workflow statuses) ·
+`capabilities` Explore by category (10: AI Sales Websites, IT & Cybersecurity, Marketing & Lead Gen, Professional Services, Finance & Accounting, Legal, Insurance & Risk, HR/Recruiting, Facilities, Logistics) ·
+`proof` Featured providers (Wasatch ROI AI, Raidius IT) · `how-it-works` Three steps (Activate → Find provider → Request offer) ·
+`cta` dual-path (For Businesses tiers $2K–$10K / For Service Providers become advertiser) · `footer`
+
+**GOLD-02 · Directory ("Utah B2B Directory")**
+`nav`+`hero` · `lead-capture`/search + filters (category, territory, featured, audience tag, industry, online/in-person) · `proof` provider result cards · `cta` Get listed · `footer`
+
+**GOLD-03 · How It Works ("A concierge B2B network — two simple journeys")**
+`nav`+`hero` (card) · `how-it-works` For Cardholders (Receive → Scan → Activate & pick offer → Concierge review, 4 steps) ·
+`how-it-works` For Advertisers (Apply → Audience-specific landing pages → Get matched → Manage pipeline CRM-lite, 4 steps) · `footer`
+
+**GOLD-04 · Become an Advertiser / Apply**
+`nav`+`hero` (feature pills: premium listing, audience pages 5–15, sponsored offer, lead capture & CRM-lite) ·
+`lead-capture` multi-section application form (Business basics · What you offer · Your Gold Card offer · Listing package: Standard/Premium/Featured/Enterprise) · `footer`
+
+**GOLD-05 · About ("A new way for Utah businesses to meet the providers that move the needle")**
+`nav`+`hero` · `capabilities` 4 value cards (Concierge-vetted · Premium by design · Sponsored not transactional · Utah-first) · `proof` Our position narrative · `cta` Apply to advertise / Contact concierge · `footer`
+
+---
+
 ## Reusable templates spotted (important for assembly)
 
 - **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
@@ -352,7 +381,7 @@ checklist (5-second impression, lead leaks, message match, sample audience pages
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 43 unique pages catalogued across 5 skins/brands (~50 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub.*
+*Status: 48 unique pages catalogued across 6 skins/brands (~55 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub. Utah Gold Card is a distinct PRODUCT (marketplace), not just a re-skin.*
 
 ### Page map so far (by skin)
 - **ALMA (6):** Grow, Hunters, Playbooks, Gatherers, Both
@@ -360,5 +389,6 @@ checklist (5-second impression, lead leaks, message match, sample audience pages
 - **BBP-Dark (16):** AI Chatbots, AI Agents, Lead Gen, Automation *(service template)* · How It Works, Transformations, Case Studies, Examples · Pricing (6-tier), Checkout, Free Audit modal · About/Round Two, Founder's Philosophy, Blog · Homepage, Weekly Build Report campaign
 - **BBP-Light (8):** Home overview, Web Apps, Industries hub, Contact · Real Estate, Healthcare, Legal, Restaurants *(vertical template)*
 - **Ogden Web Solutions (8):** Portfolio, Services, Pricing, Free Tools, Contact, Sales Toolkit, Partner Program, Free Scan — a **complete standalone site**, shares pricing/tagline with BBP-Dark homepage
+- **Utah Gold Card (5):** Homepage, Directory, How It Works, Become an Advertiser, About — a **separate PRODUCT** (concierge B2B directory/marketplace); the company's other brands appear inside it as advertisers
 
 > **Emerging shape:** this isn't one site — it's the *same company iterating the same offer* across 5 brand skins. Ogden and BBP-Dark look like the two most complete/current sites. Likely grand-plan question = pick ONE canonical brand + one pricing model, then use the two templates (service ×4, vertical ×38) + standard spine (home/about/pricing/portfolio/case-studies/blog/tools/contact).
