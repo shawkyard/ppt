@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Property Detail — Alma AI Revenue Hunter (Private Buyer Research)</title>
+  <link rel="stylesheet" href="assets/css/alma.css">
+</head>
+<body>
+  <a class="skip" href="#detail">Skip to property detail</a>
+  <header class="masthead">
+    <div class="wrap">
+      <div class="brandmark" data-brandmark></div>
+      <div class="brand-text">
+        <h1>Property Detail</h1>
+        <p class="tagline">Alma AI Revenue Hunter — full property profile</p>
+      </div>
+      <span class="privacy-pill">PRIVATE BUYER RESEARCH</span>
+    </div>
+  </header>
+  <nav class="nav"><div class="wrap"><a href="index.html">← Back to report</a></div></nav>
+
+  <main class="wrap" id="detail" style="padding:30px 0 60px">
+    <div id="detail-root"></div>
+  </main>
+
+  <footer class="site"><div class="wrap">
+    <div><strong>Alma AI Revenue Hunter</strong> — Private Buyer Research. All figures are estimates and clearly labeled.</div>
+  </div></footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/score.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+  (function () {
+    var A = window.ALMA, S = window.AlmaScore;
+    function qp(k){ return new URLSearchParams(location.search).get(k); }
+    function money(n){ return n==null ? "—" : "$"+Number(n).toLocaleString("en-US"); }
+    function u(v){ return (v==null||v==="") ? "Unknown" : v; }
+    function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+    function vlabel(v){
+      var t=esc(v); if(/requires/i.test(t)) return '<span class="vlabel req">'+t+'</span>';
+      if(/confirmed/i.test(t)) return '<span class="vlabel confirmed">'+t+'</span>';
+      if(/unknown|n\/a|^$/i.test(t)) return '<span class="vlabel unknown">'+(t||"Unknown")+'</span>'; return t;
+    }
+    function row(t,v){ return '<div><dt>'+esc(t)+'</dt><dd>'+vlabel(v)+'</dd></div>'; }
+    function money_row(t,v){ return '<div><dt>'+esc(t)+'</dt><dd>'+money(v)+'</dd></div>'; }
+
+    var id = qp("id");
+    var l = null;
+    if (id === "template" || !id) l = A.template;
+    else l = (A.listings||[]).filter(function(x){return x.id===id;})[0] || null;
+
+    var root = document.getElementById("detail-root");
+    if (!l) {
+      root.innerHTML = '<div class="empty"><div class="big">🦈</div><h2>No such property</h2>'+
+        '<p style="color:var(--muted)">No verified listing has this id yet. Return to the report and add verified records to the data file.</p>'+
+        '<p><a class="btn btn-primary" href="index.html">Back to report</a></p></div>';
+      return;
+    }
+
+    var total = S.total(l.scores);
+    var banner = l.isTemplate ? '<div class="callout dark"><h3 style="margin-top:0">🦈 TEMPLATE — this is NOT a real property</h3>'+
+      '<p style="max-width:none;margin:0">This page demonstrates the full 56-field property profile and the live scoring engine. '+
+      'Every value reads "Requires Verification" because no listing has been fabricated. Replace with a verified record to populate.</p></div>' : '';
+
+    var comp = (l.comparables&&l.comparables.length)
+      ? '<div class="table-scroll"><table><thead><tr><th>Address</th><th>Sold</th><th class="num">Price</th><th class="num">SqFt</th><th class="num">$/SqFt</th><th>Adj. notes</th></tr></thead><tbody>'+
+        l.comparables.map(function(c){return '<tr><td>'+esc(c.address)+'</td><td>'+esc(c.soldDate)+'</td><td class="num">'+money(c.price)+'</td><td class="num">'+u(c.sqft)+'</td><td class="num">'+u(c.ppsf)+'</td><td>'+esc(c.notes)+'</td></tr>';}).join("")+
+        '</tbody></table></div>'
+      : '<p style="color:var(--muted)">No comparable sales verified yet. Per §12, comps must be real sales within ~0.5–1.5 mi, last 6–12 months, similar type/age/sqft. Never fabricated.</p>';
+
+    function list(items, fallback){
+      if(items&&items.length) return '<ul>'+items.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>';
+      return '<p style="color:var(--muted)">'+fallback+'</p>';
+    }
+
+    root.innerHTML =
+      banner +
+      '<p class="eyebrow">Rank '+(l.rank||"—")+' · Score '+total+'/100 · '+esc(u(l.confidence))+' confidence</p>'+
+      '<h2 style="margin-bottom:4px">'+esc(l.address)+'</h2>'+
+      '<p class="lead">'+esc(l.city)+' · <strong>'+money(l.price)+'</strong> · '+esc(u(l.propertyType))+'</p>'+
+      '<p><span class="badge '+({Template:"template"}[l.classification]||"watch")+'">'+esc(l.classification||"—")+'</span> '+
+      '<span class="vlabel req">Status: '+esc(l.status)+'</span> <span class="vlabel">Checked: '+esc(l.statusCheckedAt)+'</span></p>'+
+
+      '<div class="grid cols-2">'+
+        '<div class="panel"><h3>Price &amp; value</h3><dl class="dl">'+
+          money_row("List price", l.price)+money_row("Original price", l.originalPrice)+
+          money_row("Est. market value (base)", l.marketValue&&l.marketValue.base)+
+          money_row("Est. value low", l.marketValue&&l.marketValue.low)+
+          money_row("Est. value high", l.marketValue&&l.marketValue.high)+
+          row("Value gap vs. list", (l.marketValue&&l.marketValue.gapVsList)||"Requires Verification")+
+          row("Price / sqft", (l.marketValue&&l.marketValue.pricePerSqft)||"Requires Verification")+
+          row("Comp median $/sqft", (l.marketValue&&l.marketValue.compMedianPpsf)||"Requires Verification")+
+          row("Days on market", l.daysOnMarket==null?"Unknown":l.daysOnMarket)+
+        '</dl></div>'+
+        '<div class="panel"><h3>Property facts</h3><dl class="dl">'+
+          row("Bedrooms", l.beds)+row("Bathrooms", l.baths)+row("Year built", l.yearBuilt)+
+          row("Total sqft", l.sqftTotal)+row("Main-level sqft", l.sqftMain)+
+          row("Basement sqft", l.sqftBasement)+row("Finished basement sqft", l.sqftBasementFinished)+
+          row("Lot size", l.lotSize)+row("Garage spaces", l.garageSpaces)+
+          row("Est. property taxes", l.taxesEst)+row("Insurance considerations", l.insuranceNotes)+
+        '</dl></div>'+
+      '</div>'+
+
+      '<div class="grid cols-2" style="margin-top:18px">'+
+        '<div class="panel"><h3>Accessibility &amp; aging-in-place (§7)</h3><dl class="dl">'+
+          row("Main-level bedroom(s)", l.access&&l.access.mainLevelBedrooms)+
+          row("Main-level bathroom(s)", l.access&&l.access.mainLevelBathrooms)+
+          row("Laundry location", l.access&&l.access.laundryLocation)+
+          row("Front-entry steps", l.access&&l.access.entrySteps)+
+          row("Garage-to-house steps", l.access&&l.access.garageEntrySteps)+
+          row("Shower / bath access", l.access&&l.access.shower)+
+          row("Interior stairs for daily living", l.access&&l.access.interiorStairsForDailyLiving)+
+          row("Exterior-maintenance burden", l.access&&l.access.exteriorMaintenance)+
+          row("Snow removal", l.access&&l.access.snowRemoval)+
+        '</dl></div>'+
+        '<div class="panel"><h3>HOA (§9)</h3><dl class="dl">'+
+          money_row("Fee", l.hoa&&l.hoa.fee)+row("Period", l.hoa&&l.hoa.period)+
+          row("Services", (l.hoa&&l.hoa.services&&l.hoa.services.join(", "))||"Requires Verification")+
+          row("Age-restricted", l.hoa&&l.hoa.ageRestricted)+
+          row("Rental restriction", l.hoa&&l.hoa.rentalRestriction)+
+          row("Pet restriction", l.hoa&&l.hoa.petRestriction)+
+          money_row("Est. 5-year HOA cost", l.hoa&&l.hoa.fiveYearCost)+
+          row("Resale impact", l.hoa&&l.hoa.resaleImpact)+
+        '</dl></div>'+
+      '</div>'+
+
+      '<div class="grid cols-2" style="margin-top:18px">'+
+        '<div class="panel"><h3>Condition (§8)</h3>'+
+          '<p>'+vlabel(l.condition&&l.condition.summary)+'</p>'+
+          '<p><strong>Repair estimate:</strong> '+esc((l.condition&&l.condition.repairEstimate)||"Preliminary only")+'</p>'+
+          list(l.condition&&l.condition.items, "No condition items recorded. Label each Confirmed / Possible / Visual concern / Unknown / Inspection item.")+
+        '</div>'+
+        '<div class="panel"><h3>Nearby services &amp; risks (§7 / §10)</h3><dl class="dl">'+
+          row("Grocery", l.services&&l.services.grocery)+row("Pharmacy", l.services&&l.services.pharmacy)+
+          row("Clinic", l.services&&l.services.clinic)+row("Hospital", l.services&&l.services.hospital)+
+          row("Freeway access", l.services&&l.services.freewayAccess)+
+        '</dl>'+list(l.risks, "No environmental/location risks recorded yet (flood, slope, traffic, rail/airport noise, easements).")+
+        '</div>'+
+      '</div>'+
+
+      '<div class="panel" style="margin-top:18px"><h3>Comparable sales (§12) — preliminary, not an appraisal</h3>'+comp+'</div>'+
+
+      '<div class="grid cols-2" style="margin-top:18px">'+
+        '<div class="panel"><h3>Resale scenarios (§13) — estimates, not promises</h3><dl class="dl">'+
+          money_row("3-yr conservative", l.resale3yr&&l.resale3yr.conservative)+
+          money_row("3-yr base", l.resale3yr&&l.resale3yr.base)+
+          money_row("3-yr strong", l.resale3yr&&l.resale3yr.strong)+
+          money_row("5-yr conservative", l.resale5yr&&l.resale5yr.conservative)+
+          money_row("5-yr base", l.resale5yr&&l.resale5yr.base)+
+          money_row("5-yr strong", l.resale5yr&&l.resale5yr.strong)+
+        '</dl><p>'+vlabel(l.resaleAnalysis)+'</p></div>'+
+        '<div class="panel"><h3>Negotiation (§14)</h3><dl class="dl">'+
+          money_row("Competitive offer", l.offerRange&&l.offerRange.competitive)+
+          money_row("Value offer", l.offerRange&&l.offerRange.value)+
+          money_row("Aggressive offer", l.offerRange&&l.offerRange.aggressive)+
+          row("Prob. accept ≤ $500k", l.offerRange&&l.offerRange.probAcceptUnder500k)+
+        '</dl><p>'+vlabel(l.negotiationAnalysis)+'</p></div>'+
+      '</div>'+
+
+      '<div class="grid cols-2" style="margin-top:18px">'+
+        '<div class="panel"><h3>Top reasons to consider</h3>'+list(l.reasonsToConsider,"None recorded yet.")+'</div>'+
+        '<div class="panel"><h3>Top concerns</h3>'+list(l.topConcerns,"None recorded yet.")+'</div>'+
+      '</div>'+
+      '<div class="grid cols-2" style="margin-top:18px">'+
+        '<div class="panel"><h3>Questions for the listing agent</h3>'+list(l.questionsForAgent,"None recorded yet.")+'</div>'+
+        '<div class="panel"><h3>Verify at showing</h3>'+list(l.itemsToVerify,"None recorded yet.")+'</div>'+
+      '</div>'+
+
+      '<div class="panel" style="margin-top:18px"><h3>Listing &amp; verification</h3><dl class="dl">'+
+        row("MLS number", l.mls)+row("Listing brokerage", l.brokerage)+row("Listing agent", l.agent)+
+        row("Public agent contact", l.agentContact)+row("Status checked", l.statusCheckedAt)+
+      '</dl>'+
+      '<p><strong>Recommended next action:</strong> '+esc(l.nextAction)+'</p>'+
+      (l.sources&&l.sources.length ? '<p><strong>Sources:</strong> '+l.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label||s.url)+'</a>';}).join(" · ")+'</p>' : '<p style="color:var(--muted)">No source links yet — every fact must carry a source URL + timestamp (§17).</p>')+
+      '</div>'+
+      '<p style="margin-top:24px"><a class="btn btn-primary" href="index.html">← Back to full report</a></p>';
+  })();
+  </script>
+</body>
+</html>

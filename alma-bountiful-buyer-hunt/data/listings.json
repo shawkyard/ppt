@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "brand": "Alma AI Revenue Hunter",
+    "reportType": "Private Buyer Research",
+    "searchDate": "2026-07-13",
+    "primaryCities": ["Bountiful, UT", "North Salt Lake, UT", "Centerville, UT", "Woods Cross, UT"],
+    "nearbyCities": ["West Bountiful, UT", "South Farmington, UT", "adjacent Davis County"],
+    "priceMax": 500000,
+    "minBeds": 2,
+    "minBaths": 2,
+    "counts": { "reviewed": 0, "verifiedActive": 0, "primaryRecommendations": 0, "portalsBlocked": 2 },
+    "dataAccess": {
+      "mlsAuthorized": false,
+      "portalsAccessible": false,
+      "note": "On 2026-07-13, Redfin and Homes.com returned HTTP 403 to automated access and no authorized MLS feed was available; individual listings could not meet two-source verification. No property, MLS number, price, status, agent, HOA fee, or comparable has been fabricated (integrity rule, spec §22)."
+    },
+    "integrity": "This file intentionally contains ZERO verified listings. The report's scoring engine, tables, map, and exports are fully functional and will populate the moment verified records (shaped like the schema below) are added."
+  },
+  "listingSchema": {
+    "id": "string",
+    "rank": "number|null",
+    "classification": "Exceptional Match | Strong Match | Good Match With Questions | Conditional Match | Value Opportunity Requiring Work | Negotiation Watchlist | Backup-Offer Opportunity | Nearby Exceptional Opportunity | Community Watchlist | Rejected",
+    "confidence": "high | medium | low",
+    "status": "Active and verified | Active according to one source | Coming soon | Backup offers | Pending | Temporarily off market | Withdrawn | Expired | Status uncertain | Sold",
+    "statusCheckedAt": "ISO datetime",
+    "address": "string", "city": "string",
+    "price": "number", "originalPrice": "number", "priceHistory": [{ "date": "", "price": 0 }],
+    "offerRange": { "competitive": 0, "value": 0, "aggressive": 0, "probAcceptUnder500k": "string" },
+    "marketValue": { "low": 0, "base": 0, "high": 0, "gapVsList": "string", "pricePerSqft": 0, "compMedianPpsf": 0, "confidence": "string" },
+    "resale3yr": { "conservative": 0, "base": 0, "strong": 0 },
+    "resale5yr": { "conservative": 0, "base": 0, "strong": 0 },
+    "beds": 0, "baths": 0, "propertyType": "string", "yearBuilt": 0,
+    "sqftTotal": 0, "sqftMain": 0, "sqftBasement": 0, "sqftBasementFinished": 0,
+    "lotSize": "string", "garageSpaces": 0,
+    "hoa": { "fee": 0, "period": "month", "services": [], "ageRestricted": "string", "rentalRestriction": "string", "petRestriction": "string", "fiveYearCost": 0, "resaleImpact": "string" },
+    "taxesEst": "string", "insuranceNotes": "string", "daysOnMarket": 0,
+    "mls": "string", "brokerage": "string", "agent": "string", "agentContact": "string",
+    "access": { "mainLevelBedrooms": "", "mainLevelBathrooms": "", "laundryLocation": "", "entrySteps": "", "garageEntrySteps": "", "shower": "", "interiorStairsForDailyLiving": "", "exteriorMaintenance": "", "snowRemoval": "" },
+    "condition": { "summary": "", "repairEstimate": "", "items": [] },
+    "services": { "grocery": "", "pharmacy": "", "clinic": "", "hospital": "", "freewayAccess": "" },
+    "risks": [], "comparables": [{ "address": "", "soldDate": "", "price": 0, "sqft": 0, "ppsf": 0, "notes": "" }],
+    "resaleAnalysis": "string", "negotiationAnalysis": "string",
+    "reasonsToConsider": [], "topConcerns": [], "questionsForAgent": [], "itemsToVerify": [],
+    "nextAction": "string", "sources": [{ "label": "", "url": "", "ts": "" }],
+    "lat": null, "lng": null,
+    "scores": { "A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0, "H": 0 }
+  },
+  "listings": [],
+  "communities": [
+    { "name": "Eaglewood Estates / Eaglewood area", "city": "North Salt Lake, UT", "confidence": "low", "likelihood": "Medium", "ageRestricted": "No", "source": "Web search 2026-07-13 (unverified lead)" },
+    { "name": "Bountiful East Bench rambler pockets (Val Verda, 400 E / 1500 S)", "city": "Bountiful, UT", "confidence": "low", "likelihood": "High", "ageRestricted": "No", "source": "Web search 2026-07-13 (unverified lead)" },
+    { "name": "Centerville single-level pockets", "city": "Centerville, UT", "confidence": "low", "likelihood": "Medium", "ageRestricted": "Some newer may be 55+", "source": "Web search 2026-07-13 (unverified lead)" }
+  ],
+  "rejected": [
+    { "address": "Bridlewood Villas (55+ patio homes)", "city": "West Jordan, UT", "reason": "Out of target area", "source": "Web search 2026-07-13" },
+    { "address": "Harvest Gardens (55+ main-floor community)", "city": "Riverton, UT", "reason": "Out of target area", "source": "Web search 2026-07-13" },
+    { "address": "Redfin/Homes.com single-story result sets", "city": "Target cities", "reason": "Portal HTTP 403 — could not open/verify individual listings", "source": "Redfin, Homes.com" }
+  ],
+  "sources": [
+    { "ts": "2026-07-13", "type": "Web search", "target": "rambler/patio Bountiful <$500k", "result": "Aggregate marketing only" },
+    { "ts": "2026-07-13", "type": "Web search", "target": "55+ patio NSL/Centerville", "result": "Community leads only" },
+    { "ts": "2026-07-13", "type": "Portal fetch", "target": "Redfin North Salt Lake single-story", "result": "HTTP 403" },
+    { "ts": "2026-07-13", "type": "Portal fetch", "target": "Homes.com North Salt Lake", "result": "HTTP 403" }
+  ]
+}

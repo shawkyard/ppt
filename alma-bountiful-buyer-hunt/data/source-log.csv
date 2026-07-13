@@ -1,0 +1,6 @@
+timestamp,source_type,query_or_target,result,url
+2026-07-13,Web search,"single level rambler/patio home Bountiful UT under 500000 2bd main-level",Aggregate marketing pages only; no verifiable individual listings,
+2026-07-13,Web search,"55+ patio community NSL/Centerville single story for sale",Community leads (Eaglewood etc.); no verifiable individual listings,
+2026-07-13,Portal fetch,Redfin North Salt Lake single-story,HTTP 403 Forbidden (automation blocked),https://www.redfin.com/city/14303/UT/North-Salt-Lake/single-story
+2026-07-13,Portal fetch,Homes.com North Salt Lake,HTTP 403 Forbidden (automation blocked),https://www.homes.com/north-salt-lake-ut/
+2026-07-13,Broker/aggregator,harvestparkgroup.com Bountiful rambler page,Marketing/landing page; IDX requires interactive session,https://www.harvestparkgroup.com/davis-county-utah-real-estate-for-sale/bountiful/rambler-ranch-style-homes/

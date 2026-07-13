@@ -1,0 +1,4 @@
+address_or_item,city,price,reason_rejected,watch_for_price_drop,could_qualify_after_clarification,source
+Bridlewood Villas (55+ patio homes),West Jordan UT,Unknown,Out of target area (Salt Lake County),No,No,Web search 2026-07-13
+Harvest Gardens (55+ main-floor community),Riverton UT,Unknown,Out of target area (far south Salt Lake County),No,No,Web search 2026-07-13
+Redfin/Homes.com single-story result sets,Target cities,Various,Portal returned HTTP 403 to automation; individual listings could not be opened or verified,No,Yes,Redfin & Homes.com

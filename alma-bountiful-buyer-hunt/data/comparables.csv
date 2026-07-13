@@ -1,0 +1,2 @@
+subject_address,comp_address,sold_date,sold_price,sqft,price_per_sqft,beds,baths,distance_miles,similarity_notes,adjustment_notes,source_url
+# No comparable sales verified on the 2026-07-13 run. Per spec §12/§22, comps must be REAL closed sales (within ~0.5-1.5 mi, last 6-12 months, similar type/age/sqft). None are fabricated. Add verified rows using the header above.
