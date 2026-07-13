@@ -29,6 +29,7 @@ They exist across **3 visual skins** captured so far:
 | **BBP-Light** | white + orange, sans | How It Works / Transformations / Case Studies / Examples / Pricing | $495 setup + $199/mo |
 | **Ogden Web Solutions** | cream + dark, own logo/footer (Ogden, UT) | Work / Services / Pricing / Free Tools / Contact | (see portfolio) |
 | **Utah Gold Card** | gold + black, serif, "Premium B2B Network" | Directory / Offers / How It Works / Become an Advertiser / About | tiers $2K–$10K (advertiser-funded) |
+| **Wasatch ROI AI** | blue accent, light, flagship product | How It Works / Industries / AI Evaluation / Career Ads / Portfolio / Secure AI / About | $395 eval + $395/mo (20 pages) |
 
 **Open decision (carry forward):** which skin is the master for the final combined
 site. Working assumption = **BBP-Dark** (newest, most complete, has nav/pricing/
@@ -352,6 +353,58 @@ Distinct nav (Directory / Offers / How It Works / Become an Advertiser / About) 
 
 ---
 
+## Batch 12 — Gold Card Activate + new brand Wasatch ROI AI (+ 1 dup) · 5 shots
+
+**Corporate structure now explicit** (from Wasatch ROI AI home): *"Two Successful Companies. One Unified Mission"* =
+**Better Business Partners** (web/AI) + **Raidius IT** (IT infrastructure/security). Wasatch ROI AI is the flagship umbrella
+product; ALMA, Ogden Web Solutions, Utah Gold Card are sibling brands. Phone here differs: (279) 321-2965 / sales@wasatchroi.co.
+
+**GOLD-06 · Activate Card ("Activate your card and unlock sponsored business services")**
+`nav`+`hero` + checklist (one redemption · concierge review · no purchase) + gold-card visual ·
+`lead-capture` Step 1 of 2 Verify your card (Card ID + QR token) · `footer`
+
+**WASATCH-01 · Wasatch ROI AI Homepage ("AI that finds, qualifies, and closes your leads")** *(new brand, blue)*
+`nav`+`hero` (live lead/chat widget) · `proof` Two Companies, One Mission (BBP + Raidius IT) · `capabilities` Together we deliver everything · `stats` (6/<2/1x/7-7) ·
+`pricing` Three paths ($395 AI Evaluation · $395/mo 20 Audience Pages · AI Services custom) · `capabilities` Everything AI can do ·
+`capabilities` Enterprise IT support without the price tag · `proof` Why our audience pages convert · `audience` Built for any business ·
+`stats` Why this is the best deal · `how-it-works` Evaluation to revenue in days · `proof` Real people deploying AI · `pricing` Two ways to start · `faq` · `band` Stop Losing Customers to Slower Competitors · `footer`
+
+**WASATCH-02 · Wasatch ROI AI How It Works ("From Evaluation to Revenue. Simple. Clear. Fast.")**
+`nav`+`hero` · `how-it-works` Step 1 AI Evaluation & Report ($395 one-time) + sample report sections · `pricing` Step 2 20 Audience Pages ($395/mo, two options) ·
+`capabilities` Step 3 AI Services & Automation (12 services: AI Chatbot, AI Phone Agent, Lead Gen, Business Process, Follow-Up, Reactivation, Review Gen, Scheduling, CRM, Analytics, Security, Custom Workflows) ·
+`capabilities` IT Infrastructure & Security (Raidius IT: Cybersecurity, Managed IT, Data Backup, VoIP, Managed Print, IT Procurement) ·
+`how-it-works` Typical Timeline (Order → Analysis → Report → Pages Live) · `proof` What We Don't Promise (disclaimers) · `band` · `footer`
+
+**(dup)** GOLD-05 (About) — re-capture.
+
+---
+
+## Batch 13 — Wasatch ROI AI full site · 5 shots
+
+People revealed: **Scott** (Wasatch ROI AI / BBP websites & AI, 279-321-2965, sales@wasatchroiai.com) +
+**Jeff** (Raidius IT — IT/security, 801-773-9777, raidius-it.com). (Earlier: **Alma** = CEO/founder brand voice.)
+
+**WASATCH-03 · Industries ("AI Systems + 20 Audience Pages For Any Business")**
+`nav`+`hero` · `stats` (20+/20/24-7/<7 days) · `audience` 20-industry grid (HVAC, Plumbing, Electrical, Roofing, Landscaping, Auto & Collision, Medical & Dental, Legal, Real Estate, IT & B2B, Restaurants, Fitness, Construction, Salons & Spas, Veterinary, Insurance, Financial, Pest Control, Moving, Solar) · `cta` Don't See Your Industry? · `band` · `footer`
+
+**WASATCH-04 · AI Evaluation ("Find Every AI Opportunity Hiding in Your Business" — $395)**
+`nav`+`hero` · `capabilities` What's Included (9 cards: Business Systems Analysis, Website Review, Audience Opportunity Mapping, AI Readiness, Revenue Gap, Competitive Positioning, Written Report, Walkthrough Call, Action Plan) ·
+`capabilities` What We Analyze grid · `lead-capture` Request Your AI Evaluation form · `how-it-works` What Happens After You Order (4 steps) · `cta` Ready to go further? · `band` · `footer`
+
+**WASATCH-05 · Current Ads & Offers**
+`nav`+`hero` · `proof` promo flyer (WasatchROI AI + Raidius IT Joint Venture: $295 setup/$95/mo, 25% off first IT service; Scott 279-321-2965 / Jeff 801-773-9777) ·
+`capabilities` What's Included · `cta` Ready to get started? / Want a custom quote? · `band` · `footer`
+
+**WASATCH-06 · Portfolio ("See What a Better Business Website Can Become")**
+`nav`+`hero` · `proof` featured (Better Business Partners) · `proof` Live Website Builds grid (DD Talks, Spartan Funding, Tom Hawkyard RE, Katrina's Textiles, The Hand of Good, Goodwill Rewards, GSL Crisis Hub) ·
+`proof` Before & After Transformations (GPS365 Pro, Swahn Health, Intermountain Testing, Artecore Salon, Sushi Totto) · `cta` Ready for your transformation? · `band` · `footer`
+
+**WASATCH-07 · Secure AI ("Use AI for Growth Without Letting Company Info Scatter")**
+`nav`+`hero` · `problem` Common Problems (6: personal AI accounts, trapped knowledge, unreviewed AI responses, no rules, no offboarding, no data plan) ·
+`capabilities` A Better Starting Point (6) · `proof` Where Jeff Supports Implementation + regulated-field disclaimer · `cta` Review My Business AI Use · `band` · `footer`
+
+---
+
 ## Reusable templates spotted (important for assembly)
 
 - **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
@@ -381,7 +434,11 @@ Distinct nav (Directory / Offers / How It Works / Become an Advertiser / About) 
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 48 unique pages catalogued across 6 skins/brands (~55 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub. Utah Gold Card is a distinct PRODUCT (marketplace), not just a re-skin.*
+*Status: 56 unique pages catalogued across 7 skins/brands (~65 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates + a 38-industry hub. Utah Gold Card (marketplace) and Wasatch ROI AI (flagship) are distinct products, not re-skins.*
+
+### Corporate structure (as revealed by the pages)
+**Wasatch Group AI** umbrella = **Better Business Partners LLC** (Scott — web/AI, ALMA voice) + **Raidius IT** (Jeff — IT/security).
+Brands/products seen: **Wasatch ROI AI** (flagship), **Better Business Partners** (5 skins: ALMA / BBP-Serif / BBP-Dark / BBP-Light), **Ogden Web Solutions**, **Utah Gold Card** (marketplace). Shared clients recur across portfolios (Artecore, Sushi Totto, Intermountain Testing, Tom Hawkyard, etc.).
 
 ### Page map so far (by skin)
 - **ALMA (6):** Grow, Hunters, Playbooks, Gatherers, Both
@@ -389,6 +446,7 @@ Distinct nav (Directory / Offers / How It Works / Become an Advertiser / About) 
 - **BBP-Dark (16):** AI Chatbots, AI Agents, Lead Gen, Automation *(service template)* · How It Works, Transformations, Case Studies, Examples · Pricing (6-tier), Checkout, Free Audit modal · About/Round Two, Founder's Philosophy, Blog · Homepage, Weekly Build Report campaign
 - **BBP-Light (8):** Home overview, Web Apps, Industries hub, Contact · Real Estate, Healthcare, Legal, Restaurants *(vertical template)*
 - **Ogden Web Solutions (8):** Portfolio, Services, Pricing, Free Tools, Contact, Sales Toolkit, Partner Program, Free Scan — a **complete standalone site**, shares pricing/tagline with BBP-Dark homepage
-- **Utah Gold Card (5):** Homepage, Directory, How It Works, Become an Advertiser, About — a **separate PRODUCT** (concierge B2B directory/marketplace); the company's other brands appear inside it as advertisers
+- **Utah Gold Card (6):** Homepage, Directory, How It Works, Become an Advertiser, About, Activate Card — a **separate PRODUCT** (concierge B2B directory/marketplace); the company's other brands appear inside it as advertisers
+- **Wasatch ROI AI (7):** Homepage, How It Works, Industries, AI Evaluation, Current Ads, Portfolio, Secure AI — the **flagship** brand (BBP + Raidius IT joint venture); $395 eval + $395/mo model
 
 > **Emerging shape:** this isn't one site — it's the *same company iterating the same offer* across 5 brand skins. Ogden and BBP-Dark look like the two most complete/current sites. Likely grand-plan question = pick ONE canonical brand + one pricing model, then use the two templates (service ×4, vertical ×38) + standard spine (home/about/pricing/portfolio/case-studies/blog/tools/contact).
