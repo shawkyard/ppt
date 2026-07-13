@@ -1,0 +1,334 @@
+<title>Alma Revenue Hunter — Phase-One Plan</title>
+<style>
+  :root{
+    --bg:#0e0e10; --bg2:#16161a; --panel:#1b1b20; --panel2:#212127;
+    --ink:#f4f2ef; --mut:#a8a6a1; --faint:#75736e; --line:#2c2c33; --line2:#3a3a42;
+    --hunt:#f0466e; --farm:#f97316; --grow:#f6b13a;
+    --accent:#f97316; --accent2:#fb7185; --gold:#e2b04a;
+    --good:#3ec48b; --warn:#e2b04a; --crit:#f0466e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.4);
+    --r:14px;
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --bg:#f6f4f0; --bg2:#efece6; --panel:#ffffff; --panel2:#faf8f4;
+      --ink:#1a1917; --mut:#5f5d57; --faint:#8f8c85; --line:#e5e1d9; --line2:#d6d1c7;
+      --shadow:0 1px 2px rgba(30,20,10,.06),0 12px 34px rgba(30,20,10,.08);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f6f4f0; --bg2:#efece6; --panel:#ffffff; --panel2:#faf8f4;
+    --ink:#1a1917; --mut:#5f5d57; --faint:#8f8c85; --line:#e5e1d9; --line2:#d6d1c7;
+    --shadow:0 1px 2px rgba(30,20,10,.06),0 12px 34px rgba(30,20,10,.08);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e0e10; --bg2:#16161a; --panel:#1b1b20; --panel2:#212127;
+    --ink:#f4f2ef; --mut:#a8a6a1; --faint:#75736e; --line:#2c2c33; --line2:#3a3a42;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* top bar */
+  header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;gap:14px;padding:12px 22px}
+  .mark{font-family:var(--serif);font-weight:600;font-size:16px;letter-spacing:.01em;white-space:nowrap}
+  .mark em{font-style:italic;color:var(--accent)}
+  .top nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+  .top nav a{color:var(--mut);font-size:11.5px;font-family:var(--mono);letter-spacing:.03em;padding:4px 7px;border-radius:6px}
+  .top nav a:hover{color:var(--ink);background:var(--panel);text-decoration:none}
+  .tbtn{border:1px solid var(--line2);background:var(--panel);color:var(--ink);border-radius:8px;padding:5px 9px;font-size:11.5px;cursor:pointer}
+
+  /* hero */
+  .hero{background:radial-gradient(120% 140% at 80% -10%,rgba(249,115,22,.18),transparent 55%),linear-gradient(180deg,var(--bg2),var(--bg));border-bottom:1px solid var(--line)}
+  .hero .wrap{padding:52px 22px 40px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,50px);line-height:1.05;margin:.35em 0 .15em;text-wrap:balance;letter-spacing:-.01em}
+  .hero .thesis{font-size:clamp(17px,2.4vw,22px);color:var(--ink)}
+  .hero .thesis b{color:var(--accent)}
+  .hero p.sub{color:var(--mut);max-width:60ch;margin:14px 0 0}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.03em;border:1px solid var(--line2);background:var(--panel);border-radius:20px;padding:5px 11px;color:var(--mut);display:inline-flex;gap:6px;align-items:center}
+  .chip b{color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%}
+
+  /* HFG legend */
+  .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+  .lg{border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;background:var(--panel);position:relative;overflow:hidden}
+  .lg::before{content:"";position:absolute;inset:0 auto 0 0;width:4px}
+  .lg.h::before{background:var(--hunt)} .lg.f::before{background:var(--farm)} .lg.g::before{background:var(--gold)}
+  .lg .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .lg.h .k{color:var(--hunt)} .lg.f .k{color:var(--farm)} .lg.g .k{color:var(--gold)}
+  .lg h3{margin:.3em 0 .2em;font-size:16px}
+  .lg p{margin:0;color:var(--mut);font-size:13px}
+  .lg .sym{font-size:12px;color:var(--faint);margin-top:6px;font-style:italic}
+
+  /* sections */
+  section.d{padding:40px 0;border-top:1px solid var(--line)}
+  .d .num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em;font-weight:700}
+  .d h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,3vw,29px);margin:.2em 0 .1em;letter-spacing:-.01em;text-wrap:balance}
+  .d .lede{color:var(--mut);max-width:74ch;margin:0 0 18px}
+
+  /* tables */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:560px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--panel2);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+  code,.id{font-family:var(--mono);font-size:12px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);padding:1px 5px;border-radius:5px;white-space:nowrap}
+  .tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
+  .t-h{background:color-mix(in srgb,var(--hunt) 16%,transparent);color:var(--hunt)}
+  .t-f{background:color-mix(in srgb,var(--farm) 16%,transparent);color:var(--farm)}
+  .t-g{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--gold)}
+  .t-keep{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+  .t-arch{background:color-mix(in srgb,var(--faint) 22%,transparent);color:var(--mut)}
+  .t-draft{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+
+  /* card grids */
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  .card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:15px 16px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 5px;font-size:14.5px}
+  .card p{margin:0;color:var(--mut);font-size:13px}
+  .card .mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600}
+
+  ul.clean{margin:0;padding-left:18px}
+  ul.clean li{margin:4px 0;color:var(--ink)}
+  ul.clean li b{color:var(--ink)}
+  .muted{color:var(--mut)}
+
+  /* decision callouts */
+  .decision{border:1px solid var(--line2);border-left:4px solid var(--warn);border-radius:10px;background:var(--panel);padding:13px 15px;margin:10px 0}
+  .decision.block{border-left-color:var(--crit)}
+  .decision .h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .decision .h .q{font-weight:650;font-size:14.5px}
+  .decision .rec{color:var(--mut);font-size:13px;margin:5px 0 0}
+  .decision .rec b{color:var(--good)}
+  .flag{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px}
+  .flag.block{background:color-mix(in srgb,var(--crit) 18%,transparent);color:var(--crit)}
+  .flag.soft{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+
+  /* storyboard rail */
+  .rail{display:flex;flex-direction:column;gap:8px}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:12px 14px;position:relative;overflow:hidden}
+  .step::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--line2)}
+  .step.h::before{background:var(--hunt)} .step.f::before{background:var(--farm)} .step.g::before{background:var(--gold)}
+  .step .n{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--faint);line-height:1}
+  .step h4{margin:0 0 3px;font-size:14.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .step p{margin:0;color:var(--mut);font-size:12.5px}
+  .step .src{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:4px}
+  .step .cta{font-size:11px;font-family:var(--mono);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:20px;padding:1px 8px;white-space:nowrap}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 50px;color:var(--faint);font-size:12.5px}
+  footer .wrap{display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+  footer b{color:var(--mut)}
+
+  @media (max-width:760px){
+    .legend,.g2,.g3{grid-template-columns:1fr}
+    .top nav{display:none}
+    .step{grid-template-columns:38px 1fr}
+  }
+</style>
+
+<header class="top"><div class="wrap">
+  <span class="mark">Alma <em>Revenue&nbsp;Hunter</em> · Phase-One Plan</span>
+  <nav>
+    <a href="#map">Map</a><a href="#d1">Brief</a><a href="#d3">Dedup</a><a href="#d4">Matrix</a>
+    <a href="#d6">Sitemap</a><a href="#d7">Storyboard</a><a href="#d8">Agents</a><a href="#d10">Pricing</a>
+    <a href="#d13">Tech</a><a href="#d15">Decisions</a>
+  </nav>
+  <button class="tbtn" id="theme">◐</button>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Phase-One Consolidation Strategy · Review-first · No build</div>
+  <h1>Consolidating 7 sites into one revenue platform</h1>
+  <p class="thesis"><b>Your website waits. Alma hunts.</b></p>
+  <p class="sub">Sixty-eight catalogued pages across seven brands, folded into one coherent Hunt · Farm · Grow ecommerce experience led by Alma Revenue Hunter, by Prestige Sales Experts.</p>
+  <div class="chips">
+    <span class="chip"><span class="dot" style="background:var(--good)"></span> <b>68</b> pages catalogued</span>
+    <span class="chip"><b>7</b> brands → <b>1</b></span>
+    <span class="chip">Floor <b>$1,995</b> setup + <b>$395</b>/mo</span>
+    <span class="chip">15 deliverables</span>
+    <span class="chip"><span class="dot" style="background:var(--warn)"></span> 10 open decisions</span>
+  </div>
+
+  <div class="legend">
+    <div class="lg h"><div class="k">Hunt · lead</div><h3>Find revenue opportunities</h3><p>Agents find buyers, signals, decision-makers, projects, unbilled work &amp; reactivation.</p><div class="sym">Symbol — great white shark</div></div>
+    <div class="lg f"><div class="k">Farm</div><h3>Attract the buyers Alma finds</h3><p>Websites, audience &amp; industry pages, SEO/AI-search, lead capture.</p><div class="sym">Symbol — commercial electromagnet</div></div>
+    <div class="lg g"><div class="k">Grow</div><h3>Turn opportunity into momentum</h3><p>Automation, conversion, reactivation, loyalty, retention, revenue recovery.</p><div class="sym">Symbol — rocket ignition</div></div>
+  </div>
+</div></div>
+
+<main class="wrap">
+
+  <section class="d" id="map">
+    <div class="num">MAP</div>
+    <h2>How the 7 catalogued brands feed the platform</h2>
+    <p class="lede">The 68 pages collapse to a handful of templates plus one book of work. Consolidation is a de-dup-and-retheme job, not a rebuild.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Brief's source</th><th>Catalogued brand(s)</th><th>Role in platform</th></tr></thead>
+      <tbody>
+        <tr><td><b>Alma Revenue Hunter</b> <span class="muted">(lead)</span></td><td><code>ALMA-*</code> (batch 1, Hunt/Gather/Grow)</td><td>Front door, personality, IA spine — revived &amp; upgraded</td></tr>
+        <tr><td><b>Prestige Sales Experts</b> <span class="muted">(umbrella)</span></td><td>Better Business Partners / Wasatch Group AI</td><td>Company entity: footer, legal, checkout, About</td></tr>
+        <tr><td>Hawkyard Digital</td><td><code>BBP-*</code>, <code>WASATCH-*</code>, <code>OGDEN-*</code></td><td>Farm (web/audience) + Hunt (agent) source content</td></tr>
+        <tr><td>Lead-intelligence / agents</td><td><code>WASATCH-*</code>, <code>DARK-01/09/10/11</code></td><td>Hunt + Grow agent catalog</td></tr>
+        <tr><td>Website-service sites</td><td><code>LIGHT-*</code>, <code>OGDEN-*</code>, BBP-Serif, <code>DARK-16</code></td><td>Farm catalog</td></tr>
+        <tr><td>Directory / marketplace</td><td><code>GOLD-*</code> (Utah Gold Card)</td><td><span class="tag t-arch">Deferred</span> separate product — not v1</td></tr>
+        <tr><td>Case studies / reports</td><td><code>DARK-03/04</code>, <code>WASATCH-06</code>, <code>OGDEN-01</code>, <code>BBP-05</code></td><td>Results / Proof</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="d" id="d1">
+    <div class="num">DELIVERABLE 01</div>
+    <h2>Executive Brand Brief</h2>
+    <div class="grid g2">
+      <div class="card"><span class="mono">The business</span><p style="margin-top:6px">Prestige Sales Experts is a done-for-you revenue company. Its customer-facing line is <b>Alma Revenue Hunter</b>: one intelligence system + a fleet of specialist agents that finds opportunities, builds the web presence that attracts buyers, and installs the systems that convert them.</p></div>
+      <div class="card"><span class="mono">What Alma is</span><p style="margin-top:6px">One intelligence system — not 100 bots. Studies a business, learns its ideal buyers, detects signals, finds companies &amp; decision-makers, explains <i>why an opportunity exists now</i>, recommends the next action. DFY today, DIY later.</p></div>
+      <div class="card"><span class="mono">The customer</span><p style="margin-top:6px">Owners &amp; revenue leaders of small–mid businesses across ~100 industries who have a website and maybe a CRM, but no fleet actively hunting revenue.</p></div>
+      <div class="card"><span class="mono">The difference (5-sec thesis)</span><p style="margin-top:6px"><b>Your website waits. Alma hunts.</b> Everyone has a website; almost nobody has intelligent agents finding opportunities before competitors see them.</p></div>
+    </div>
+    <p class="muted" style="margin-top:14px"><b>Primary offer:</b> Start a Hunting Expedition (DFY). <b>Secondary:</b> Farm, Grow, and combined Hunt+Farm / full Hunt·Farm·Grow systems.</p>
+  </section>
+
+  <section class="d" id="d3">
+    <div class="num">DELIVERABLE 03</div>
+    <h2>Duplication Report</h2>
+    <p class="lede">The sprawl is mostly the same templates repeated. Keep one canonical of each; retheme or archive the rest.</p>
+    <div class="grid g3">
+      <div class="card"><span class="mono t-f">Repeated template</span><h4>Vertical landing page ×2 families</h4><p>BBP-Light 38-industry set + Wasatch 20-industry blue set → <b>one</b> canonical Farm industry template.</p></div>
+      <div class="card"><span class="mono t-h">Repeated template</span><h4>Dark "service page" ×4</h4><p><code>DARK-01/09/10/11</code> (Chatbots/Agents/Lead-Gen/Automation) are one skeleton → <b>one</b> agent-service template.</p></div>
+      <div class="card"><span class="mono">Repeated section</span><h4>Footer ×15 · CTA band · audit form</h4><p>Collapse to one footer, one pre-footer CTA, one "Start an Expedition" intake.</p></div>
+    </div>
+    <div class="decision block" style="margin-top:14px">
+      <div class="h"><span class="flag block">Conflict</span><span class="q">Five pricing systems &amp; seven brand names</span></div>
+      <p class="rec">Prices range $200/mo → $14,995. <b>Resolution:</b> canonical floor <b>$1,995 + $395/mo</b>; everything else archived or reframed as DRAFT. All brand names retire into <b>Alma Revenue Hunter by Prestige Sales Experts</b>.</p>
+    </div>
+  </section>
+
+  <section class="d" id="d4">
+    <div class="num">DELIVERABLE 04</div>
+    <h2>Keep · Combine · Rewrite · Archive Matrix</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Source content</th><th>Action</th><th>Destination</th></tr></thead>
+      <tbody>
+        <tr><td><code>ALMA-01/02</code> Hunt/Farm/Grow narrative</td><td><span class="tag t-keep">Keep + Rewrite</span></td><td>Home + Hunt hero</td></tr>
+        <tr><td><code>WASATCH-01</code> flagship home (paths, ROI, proof)</td><td><span class="tag t-keep">Combine → source</span></td><td>Home §2/§6/§10</td></tr>
+        <tr><td><code>DARK-01/09/10/11</code> service pages</td><td><span class="tag t-f">Combine → 1 template</span></td><td>Agent product pages</td></tr>
+        <tr><td><code>WASATCH-09…19</code> + <code>LIGHT-03…06</code> verticals</td><td><span class="tag t-f">Combine → 1 template + data</span></td><td>Industries (Farm)</td></tr>
+        <tr><td>Portfolios <code>DARK-03/04</code>, <code>WASATCH-06</code>, <code>OGDEN-01</code></td><td><span class="tag t-keep">Combine → Results</span></td><td>Results / case studies</td></tr>
+        <tr><td>Pricing <code>DARK-06</code>/<code>OGDEN-03</code>/<code>BBP-04</code></td><td><span class="tag t-draft">Rewrite → 1</span></td><td>Pricing (verified floor)</td></tr>
+        <tr><td><code>GOLD-*</code> Utah Gold Card</td><td><span class="tag t-arch">Archive (defer)</span></td><td>Future-product archive</td></tr>
+        <tr><td>Utah-specific geo/phones, neon flyer <code>WASATCH-05</code></td><td><span class="tag t-arch">Archive / Discard</span></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="d" id="d6">
+    <div class="num">DELIVERABLE 05 · 06</div>
+    <h2>Content Architecture &amp; Sitemap</h2>
+    <p class="lede">Nine buckets. Primary nav: Hunt · Farm · Grow · Agents · Industries · Results · Pricing · Learn · <b>Start an Expedition</b>.</p>
+    <div class="grid g3">
+      <div class="card"><span class="mono t-h">Hunt</span><p style="margin-top:6px">Lead/buyer intelligence, signal detection (hiring/expansion/project/permit/funding/acquisition), decision-maker discovery, revenue recovery, reactivation, local/national, scarcity &amp; real-estate sourcing, managed hunting.</p></div>
+      <div class="card"><span class="mono t-f">Farm</span><p style="margin-top:6px">Websites, audience &amp; industry pages, landing pages, SEO / AI-search / local SEO, calculators, lead magnets, forms, content hubs, ecommerce pages, personalization.</p></div>
+      <div class="card"><span class="mono t-g">Grow</span><p style="margin-top:6px">Follow-up &amp; sales automation, conversion, reactivation, loyalty, retention, revenue recovery, cross/upsell, lifecycle, reporting/attribution, portals, referrals, reviews.</p></div>
+      <div class="card"><span class="mono">Agents</span><p style="margin-top:6px">The catalog, grouped by mission (see Deliverable 08).</p></div>
+      <div class="card"><span class="mono">Industries</span><p style="margin-top:6px">~100 industries in 25 groups on one data-driven template.</p></div>
+      <div class="card"><span class="mono">Results · Pricing · Learn · Company</span><p style="margin-top:6px">Proof (verified/redacted), package framework, learning center &amp; tools, About Alma / About Prestige / Contact / legal.</p></div>
+    </div>
+  </section>
+
+  <section class="d" id="d7">
+    <div class="num">DELIVERABLE 07</div>
+    <h2>Homepage Storyboard</h2>
+    <p class="lede">One connected journey — two Hunt, two Farm, two Grow — with color rhythm black → white → orange → charcoal → white → black.</p>
+    <div class="rail">
+      <div class="step h"><div class="n">1</div><div><h4><span class="tag t-h">Hunt</span> Hero — video</h4><p><b>Your website waits. Alma hunts.</b> Agents find buyers &amp; reasons to act before competitors. <span class="src">Shark video · from ALMA-02 / WASATCH-01</span></p></div><div class="cta">Start an Expedition</div></div>
+      <div class="step h"><div class="n">2</div><div><h4><span class="tag t-h">Hunt</span> Mechanism</h4><p>Context→buyers→signals→companies→decision-makers→action, with example expeditions. <span class="src">ALMA-02, WASATCH-01, DARK-01/09/10/11</span></p></div><div class="cta">Choose Your Hunt</div></div>
+      <div class="step f"><div class="n">3</div><div><h4><span class="tag t-f">Farm</span> Video</h4><p>Attract the buyers Alma finds — websites &amp; audience pages = a magnet. <span class="src">Electromagnet video · ALMA-01, LIGHT-01</span></p></div><div class="cta">Build My Revenue Farm</div></div>
+      <div class="step f"><div class="n">4</div><div><h4><span class="tag t-f">Farm</span> Mechanism + proof</h4><p>Audience research→pages→visibility→capture→qualified inquiries, with contextual examples. <span class="src">LIGHT-03…06, WASATCH-09…19, BBP-01/02</span></p></div><div class="cta">See Page Packages</div></div>
+      <div class="step g"><div class="n">5</div><div><h4><span class="tag t-g">Grow</span> Video</h4><p>Turn opportunity into momentum — connect hunt + farm to conversion &amp; retention. <span class="src">Rocket ignition video</span></p></div><div class="cta">Build My Growth System</div></div>
+      <div class="step g"><div class="n">6</div><div><h4><span class="tag t-g">Grow</span> Mechanism (revenue loop)</h4><p>Opportunity→engage→convert→follow-up→retain→expand→new intelligence. <span class="src">DARK-11, WASATCH-01, Grow pages</span></p></div><div class="cta">Explore Growth Systems</div></div>
+      <div class="step"><div class="n">7–14</div><div><h4>Featured Agents · Industries · Results · Packages · How to Start · DIY soon · Learn · Final CTA</h4><p>Lead with agents (6 mission categories), filterable industry picker, verified/redacted proof, floor pricing, 3-step start, DIY early-access, learning center, and a shark-return close: <b>Revenue is out there. Send Alma to find it.</b></p></div><div class="cta">Start an Expedition</div></div>
+    </div>
+  </section>
+
+  <section class="d" id="d8">
+    <div class="num">DELIVERABLE 08 · 09</div>
+    <h2>Agent Catalog &amp; Industry Architecture</h2>
+    <p class="lede">Naming: <code>Alma {Mission} Hunter</code> — one family, one OS. Six mission categories, not 100 cards.</p>
+    <div class="grid g3">
+      <div class="card"><h4>Buyer &amp; Lead Hunters</h4><p class="muted">Companies + decision-makers with a reason to buy.</p></div>
+      <div class="card"><h4>Signal Hunters</h4><p class="muted">Hiring, expansion, project-award, permit, funding, acquisition, vendor-change.</p></div>
+      <div class="card"><h4>Revenue Recovery Hunters</h4><p class="muted">Unbilled work, inactive customers, missed follow-ups.</p></div>
+      <div class="card"><h4>Recruiting Hunters</h4><p class="muted">Employers with immediate/emerging staffing demand.</p></div>
+      <div class="card"><h4>Sourcing Hunters</h4><p class="muted">Scarce equipment, inventory, real-estate, hard-to-find opportunities.</p></div>
+      <div class="card"><h4>Local Market Hunters</h4><p class="muted">Qualified prospects in a city / region / territory.</p></div>
+    </div>
+    <p class="muted" style="margin-top:14px"><b>Industries:</b> 25 groups, ~100 industries on one data-driven template. <b>11 launch-ready</b> from existing content — HVAC, Plumbing, Electrical, Roofing, Auto, Legal, Real Estate, Fitness, Construction, Salons/Spas, IT&nbsp;&amp;&nbsp;B2B — then Healthcare, Restaurants, Dental, Financial, Insurance, Property Mgmt, Recruiting.</p>
+  </section>
+
+  <section class="d" id="d10">
+    <div class="num">DELIVERABLE 10</div>
+    <h2>Package &amp; Pricing Framework</h2>
+    <p class="lede">DFY-first. Floor <b>$1,995 + $395/mo</b> is owner-verified; every other number is flagged for approval.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Package</th><th>What it is</th><th>Setup</th><th>Recurring</th></tr></thead>
+      <tbody>
+        <tr><td><b>Start a Hunting Expedition</b></td><td>One-time focused hunt (one buyer/signal/market)</td><td>from <b>$1,995</b></td><td>—</td></tr>
+        <tr><td><b>Managed Revenue Hunt</b></td><td>Ongoing search / verify / score / report</td><td>from <b>$1,995</b></td><td>from <b>$395/mo</b></td></tr>
+        <tr><td><b>Build a Revenue Farm</b></td><td>Website / audience-page / inbound system</td><td><span class="tag t-draft">Draft</span></td><td>from <b>$395/mo</b></td></tr>
+        <tr><td><b>Hunt + Farm System</b></td><td>Outbound discovery + matching pages</td><td><span class="tag t-draft">Draft</span></td><td><span class="tag t-draft">Draft</span></td></tr>
+        <tr><td><b>Complete Hunt·Farm·Grow</b></td><td>Custom full revenue OS</td><td><span class="tag t-draft">Draft · custom</span></td><td><span class="tag t-draft">Draft · custom</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="margin-top:10px"><span class="flag soft">Draft — owner approval required</span> on all tier numbers above the verified floor.</p>
+  </section>
+
+  <section class="d" id="d13">
+    <div class="num">DELIVERABLE 11 · 12 · 13</div>
+    <h2>Ecommerce, Assets &amp; Technical Plan</h2>
+    <div class="grid g3">
+      <div class="card"><span class="mono">Ecommerce flow</span><p style="margin-top:6px">Browse → select + add-ons → intake → Stripe (setup + subscription) → confirm → onboard → fulfill (DFY) → reports → manage/upgrade.</p></div>
+      <div class="card"><span class="mono">Visual assets</span><p style="margin-top:6px"><b>To create:</b> shark, electromagnet &amp; rocket videos, Alma signature. <b>Have:</b> Alma photo, portfolios, report visuals (redact + label). All video: fallback + captions + reduced-motion.</p></div>
+      <div class="card"><span class="mono">Technical</span><p style="margin-top:6px">Manus builds; <b>GitHub + Cloudflare are permanent.</b> Pages (prod+staging), Workers (Stripe webhooks/intake), D1/R2/KV, Turnstile. Site survives Manus being paused.</p></div>
+    </div>
+  </section>
+
+  <section class="d" id="d15">
+    <div class="num">DELIVERABLE 14 · 15</div>
+    <h2>Open Decisions — needed before the build</h2>
+    <p class="lede">These are the calls that gate the Manus build prompt. Recommendation given for each.</p>
+
+    <div class="decision block"><div class="h"><span class="flag block">Blocks build</span><span class="q">1 · Pricing tiers above the floor</span></div><p class="rec"><b>Recommend:</b> draft 3–5 tiers for sign-off. Floor confirmed at $1,995 + $395/mo; everything else is DRAFT.</p></div>
+    <div class="decision block"><div class="h"><span class="flag block">Blocks build</span><span class="q">2 · Utah Gold Card in v1?</span></div><p class="rec"><b>Recommend:</b> <b>defer</b> — it's a marketplace, a different product.</p></div>
+    <div class="decision block"><div class="h"><span class="flag block">Blocks build</span><span class="q">3 · Which proof is verified vs redacted vs illustrative?</span></div><p class="rec"><b>Recommend:</b> lead with redacted + illustrative, clearly labeled. Results page can't ship without this.</p></div>
+    <div class="decision block"><div class="h"><span class="flag block">Blocks build</span><span class="q">4 · Hunting data-source compliance</span></div><p class="rec"><b>Recommend:</b> public + authorized sources only, with legal language.</p></div>
+    <div class="decision"><div class="h"><span class="flag soft">Decide soon</span><span class="q">5 · Absorb Wasatch ROI AI / Raidius IT, or keep as sub-brands?</span></div><p class="rec"><b>Recommend:</b> absorb into Alma; Raidius becomes a Grow/IT capability.</p></div>
+    <div class="decision"><div class="h"><span class="flag soft">Decide soon</span><span class="q">6 · Videos at launch, or stills-first?</span></div><p class="rec"><b>Recommend:</b> stills-first, add cinematic video post-launch.</p></div>
+    <div class="decision"><div class="h"><span class="flag soft">Decide soon</span><span class="q">7 · Launch industry set</span></div><p class="rec"><b>Recommend:</b> the 11 with existing content, then expand.</p></div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <div><b>Alma Revenue Hunter</b> by Prestige Sales Experts — Phase-One plan. Living document; source of truth is <code>ALMA-REVENUE-HUNTER-MASTER-PLAN.md</code> + <code>tools/section-inventory.md</code>.</div>
+  <div>Review-first · No build until approved</div>
+</div></footer>
+
+<script>
+  document.getElementById('theme').addEventListener('click',function(){
+    var r=document.documentElement,cur=r.getAttribute('data-theme');
+    var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+    r.setAttribute('data-theme',dark?'light':'dark');
+  });
+</script>
