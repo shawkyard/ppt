@@ -6,15 +6,20 @@
    ========================================================================= */
 
 :root {
-  --ink:        #0e0e0f;   /* near-black */
-  --charcoal:   #22242a;
-  --charcoal-2: #2e3138;
+  --ink:        #0a0a0b;   /* logo near-black */
+  --charcoal:   #17181c;
+  --charcoal-2: #26282d;
+  --steel:      #6c7178;   /* chrome mid */
+  --steel-lt:   #c9ced6;   /* chrome highlight */
   --ivory:      #f6f2ea;   /* warm white */
   --ivory-2:    #efe9dd;
   --paper:      #fffdf9;
-  --orange:     #c8501e;   /* burnt orange accent */
-  --orange-2:   #e2621f;
-  --orange-ink: #8f3813;
+  --orange:     #cf4d12;   /* accessible molten (AA w/ white on large text & UI) */
+  --orange-2:   #e2530f;
+  --molten:     #ff7a1a;   /* bright glow — decorative on dark only */
+  --amber:      #ffb347;   /* highlight */
+  --glow:       #ff5e0e;
+  --orange-ink: #8f3312;   /* deep — text on light backgrounds */
   --line:       #d8cfbf;
   --line-dk:    #3a3d45;
   --muted:      #55524b;   /* NOT tiny gray text — used at >=16px only */
@@ -61,16 +66,29 @@ strong { font-weight: 700; }
 
 /* ---------- Header / brand ---------- */
 .masthead {
-  background: linear-gradient(160deg, var(--ink) 0%, var(--charcoal) 65%, var(--charcoal-2) 100%);
+  background:
+    radial-gradient(120% 160% at 12% 0%, rgba(255,122,26,.28) 0%, rgba(194,65,12,.10) 34%, rgba(0,0,0,0) 60%),
+    linear-gradient(160deg, #08080a 0%, var(--charcoal) 70%, var(--charcoal-2) 100%);
   color: var(--ivory);
-  border-bottom: 4px solid var(--orange);
+  border-bottom: 4px solid var(--molten);
+  box-shadow: inset 0 -1px 0 rgba(255,122,26,.4);
 }
 .masthead .wrap { display: flex; align-items: center; gap: 22px; padding-top: 26px; padding-bottom: 26px; flex-wrap: wrap; }
-.brandmark { width: 74px; height: 74px; flex: 0 0 auto; }
-.brandmark svg { width: 100%; height: 100%; display: block; }
-.brand-text h1 { color: var(--ivory); margin: 0; font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
-.brand-text .tagline { color: var(--orange-2); font-weight: 700; margin: 2px 0 0; font-size: 1rem; letter-spacing: .02em; }
-.brand-text .sub { color: #cfc9bd; margin: 6px 0 0; font-size: 1rem; }
+/* real full-lockup logo (shown when assets/images/alma-logo.png is present) */
+.full-logo { max-width: min(680px, 100%); height: auto; display: block; filter: drop-shadow(0 6px 22px rgba(255,94,14,.25)); }
+/* fallback brand lockup */
+.brand-fallback { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.brandmark { width: 88px; height: 88px; flex: 0 0 auto; filter: drop-shadow(0 4px 16px rgba(255,94,14,.4)); }
+.brandmark svg, .brandmark img { width: 100%; height: 100%; display: block; }
+.brand-text h1 {
+  margin: 0; font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.02;
+  background: linear-gradient(92deg, #f6f2ea 0%, #c9ced6 38%, var(--molten) 62%, var(--glow) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
+.brand-text .tagline { color: var(--amber); font-weight: 800; margin: 6px 0 0; font-size: .95rem; letter-spacing: .18em; text-transform: uppercase; }
+.brand-text .sub { color: #d7d1c4; margin: 6px 0 0; font-size: 1rem; }
+.brand-text .url { color: var(--molten); font-weight: 700; letter-spacing: .04em; font-size: .9rem; margin: 4px 0 0; }
 .privacy-pill {
   margin-left: auto; align-self: flex-start;
   background: var(--orange); color: #fff; font-weight: 800;
@@ -215,6 +233,15 @@ footer.site {
 footer.site a { color: var(--orange-2); }
 footer.site .wrap { display: grid; gap: 10px; }
 
+/* ---------- Agent contact card ---------- */
+.agent-card { display: flex; gap: clamp(16px, 3vw, 30px); align-items: center; flex-wrap: wrap; border-left: 8px solid var(--orange); }
+.agent-brand { flex: 0 0 auto; }
+.agent-headshot { width: 108px; height: 108px; border-radius: 16px; object-fit: cover; border: 3px solid var(--orange); display: block; }
+.agent-logo { width: 108px; height: 108px; align-items: center; justify-content: center; }
+.agent-logo svg { width: 100%; height: 100%; display: block; }
+.agent-info { flex: 1 1 260px; }
+@media (max-width: 560px) { .agent-card { flex-direction: column; text-align: center; align-items: center; } .agent-info .btn-row { justify-content: center; } }
+
 /* empty state */
 .empty {
   text-align: center; padding: 48px 20px; border: 2px dashed var(--line); border-radius: var(--radius);
@@ -241,7 +268,9 @@ ul.q li { margin-bottom: 8px; }
   body { background: #fff; color: #000; font-size: 12pt; }
   .nav, .skip, .btn-row, .no-print { display: none !important; }
   .masthead { background: #fff; color: #000; border-bottom: 3px solid #000; }
-  .brand-text h1, .brand-text .tagline { color: #000; }
+  .brand-text h1 { color: #000 !important; -webkit-text-fill-color: #000 !important; background: none !important; }
+  .brand-text .tagline, .brand-text .url { color: #000 !important; }
+  .full-logo { filter: none; }
   .privacy-pill { background:#000; color:#fff; }
   section.block { break-inside: avoid; border-top: 1px solid #999; }
   .panel, .listing-card, .stat, .callout { box-shadow: none; border: 1px solid #999; break-inside: avoid; }

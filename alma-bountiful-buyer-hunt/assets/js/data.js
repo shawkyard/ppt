@@ -19,7 +19,9 @@ window.ALMA = {
     brand: "Alma AI Revenue Hunter",
     tagline: "Alma hunts beyond the ordinary listing search.",
     reportType: "Private Buyer Research",
-    realtor: { name: "Chad Buttars", note: "Contact details withheld from this page per privacy rules (§20)." },
+    realtor: { name: "Chad Buttars", team: "Chad Buttars Team", brokerage: "Utah Executive Real Estate LC, South Ogden, UT",
+               phone: "801-941-8400", email: "ChadButtarsTeam@gmail.com",
+               note: "Agent contact shown on this private (noindex) report per owner authorization." },
     searchDate: "2026-07-13",
     generatedAt: "2026-07-13T00:00:00Z",          // set at build time
     statusCheckedAt: "2026-07-13 (initial run)",

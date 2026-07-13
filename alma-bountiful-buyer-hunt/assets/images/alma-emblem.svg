@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Alma AI Revenue Hunter — great white shark bursting through a molten ring">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#ff7a1a" stop-opacity=".55"/>
+      <stop offset="55%" stop-color="#c2410c" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd08a"/>
+      <stop offset="35%" stop-color="#ff7a1a"/>
+      <stop offset="70%" stop-color="#e2530f"/>
+      <stop offset="100%" stop-color="#8f2f08"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#c9ced6"/>
+      <stop offset="28%" stop-color="#6c7178"/>
+      <stop offset="60%" stop-color="#26282d"/>
+      <stop offset="100%" stop-color="#0b0b0c"/>
+    </linearGradient>
+    <linearGradient id="belly" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff9a3c"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="110" cy="110" r="105" fill="#0a0a0b"/>
+  <circle cx="110" cy="110" r="105" fill="url(#glow)"/>
+
+  <!-- molten broken ring, gap at the nose (upper right) -->
+  <path d="M150 30 A88 88 0 1 0 176 150" fill="none" stroke="url(#ring)" stroke-width="15" stroke-linecap="round"/>
+  <!-- segmented plates on lower ring -->
+  <g stroke="#0a0a0b" stroke-width="3" opacity=".8">
+    <line x1="70" y1="188" x2="80" y2="176"/><line x1="92" y1="196" x2="98" y2="182"/>
+    <line x1="116" y1="196" x2="118" y2="182"/><line x1="140" y1="188" x2="138" y2="175"/>
+  </g>
+
+  <!-- shark: nose upper-right, tail lower-left -->
+  <g>
+    <!-- tail (caudal fin) -->
+    <path d="M40 78 L20 58 L34 96 L18 150 L44 118 Z" fill="url(#chrome)" stroke="#000" stroke-width="1.5"/>
+    <!-- body -->
+    <path d="M44 112 C60 84 92 66 128 66 C150 66 168 74 182 66 C176 82 168 92 156 96
+             C168 104 176 116 178 132 C162 122 150 120 138 124 C120 132 92 132 72 122
+             C58 116 50 116 44 112 Z" fill="url(#chrome)" stroke="#000" stroke-width="1.5"/>
+    <!-- dorsal fin -->
+    <path d="M96 66 L104 30 L124 60 Z" fill="url(#chrome)" stroke="#000" stroke-width="1.5"/>
+    <!-- pectoral fin -->
+    <path d="M112 118 L118 152 L136 122 Z" fill="url(#chrome)" stroke="#000" stroke-width="1.5"/>
+    <!-- orange rim light along the belly -->
+    <path d="M72 122 C92 132 120 132 138 124 C150 120 162 122 178 132" fill="none" stroke="url(#belly)" stroke-width="4" stroke-linecap="round" opacity=".95"/>
+    <!-- gill slits -->
+    <g stroke="#ff8a3d" stroke-width="2" opacity=".85">
+      <path d="M150 82 l-4 12"/><path d="M156 84 l-4 12"/><path d="M162 86 l-4 12"/>
+    </g>
+    <!-- mouth + teeth -->
+    <path d="M170 92 L182 90 L176 100 Z" fill="#0a0a0b"/>
+    <path d="M170 93 l3 4 l3 -3 l3 4" fill="none" stroke="#f6f2ea" stroke-width="1"/>
+    <!-- eye -->
+    <circle cx="162" cy="84" r="3.2" fill="#ffb347"/>
+    <circle cx="162.6" cy="84.4" r="1.4" fill="#0a0a0b"/>
+  </g>
+</svg>

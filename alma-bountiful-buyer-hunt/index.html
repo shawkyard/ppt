@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <title>Alma AI Revenue Hunter — Private Buyer Research (South Davis County, UT)</title>
   <meta name="description" content="Private buyer research report. Not for public distribution.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230e0e0f'/%3E%3Cpath fill='%23e2621f' d='M20 60c14-3 22-10 28-22 3 8 2 15-1 20 9-1 16-5 21-12-2 11-10 20-22 24-13 4-27 2-37-5-2-2-1-5 11-5z'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230a0a0b'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%23ff7a1a' stroke-width='5'/%3E%3Cpath fill='%23ff6a00' d='M22 60c15-3 23-11 29-23 3 8 2 15-1 20 9-1 16-5 21-12-2 12-11 21-24 25-13 4-27 2-37-5-2-2-1-5 12-5z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="assets/css/alma.css">
 </head>
 <body>
@@ -15,11 +15,18 @@
 
   <header class="masthead">
     <div class="wrap">
-      <div class="brandmark" data-brandmark></div>
-      <div class="brand-text">
-        <h1>Alma AI Revenue Hunter</h1>
-        <p class="tagline">Alma hunts beyond the ordinary listing search.</p>
-        <p class="sub">Comprehensive home-search &amp; buyer-opportunity report — South Davis County, Utah</p>
+      <!-- Real brand lockup shows when assets/images/alma-logo.png is added; SVG emblem is the fallback -->
+      <img class="full-logo" src="assets/images/alma-logo.png"
+           alt="Alma AI Revenue Hunter — Hunt · Gather · Close · Grow — PrestigeSalesExperts.com"
+           onerror="this.style.display='none';document.getElementById('brandFallback').style.display='flex'">
+      <div class="brand-fallback" id="brandFallback" style="display:none">
+        <div class="brandmark"><img src="assets/images/alma-emblem.svg" alt="Alma great white shark emblem"></div>
+        <div class="brand-text">
+          <h1>Alma AI Revenue Hunter</h1>
+          <p class="tagline">Hunt · Gather · Close · Grow</p>
+          <p class="sub">Alma hunts beyond the ordinary listing search — South Davis County, Utah</p>
+          <p class="url">www.PrestigeSalesExperts.com</p>
+        </div>
       </div>
       <span class="privacy-pill">PRIVATE BUYER RESEARCH</span>
     </div>
@@ -40,6 +47,33 @@
   </nav>
 
   <main class="wrap" id="main">
+
+    <!-- AGENT CONTACT (shown per owner authorization; report remains noindex) -->
+    <section class="block" id="agent" style="padding-top:26px;border-top:0">
+      <div class="panel agent-card">
+        <div class="agent-brand">
+          <img class="agent-headshot" src="assets/images/agent-headshot.jpg" alt="Chad Buttars"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="agent-logo" style="display:flex" aria-hidden="true">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Chad Buttars Team monogram">
+              <rect x="4" y="4" width="112" height="112" rx="20" fill="#0e0e0f" stroke="#c8501e" stroke-width="4"/>
+              <path d="M22 84c16-3 24-11 30-24 3 8 2 15-1 20 8-1 15-6 20-13-2 12-11 22-24 26-4 1-7-2-6-4z" fill="#e2621f" opacity=".9"/>
+              <text x="60" y="66" text-anchor="middle" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#f6f2ea">CB</text>
+              <text x="60" y="96" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" letter-spacing="2" fill="#cfc9bd">TEAM</text>
+            </svg>
+          </span>
+        </div>
+        <div class="agent-info">
+          <p class="eyebrow">Your Real Estate Agent</p>
+          <h2 style="margin:0 0 4px">Chad Buttars <span style="font-weight:600;color:var(--muted);font-size:1.1rem">· Chad Buttars Team</span></h2>
+          <p style="margin:0 0 14px">Utah Executive Real Estate · South Ogden, Utah</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="tel:+18019418400" aria-label="Call Chad Buttars at 801-941-8400">📞&nbsp; 801-941-8400</a>
+            <a class="btn btn-ghost" href="mailto:ChadButtarsTeam@gmail.com" aria-label="Email Chad Buttars Team">✉&nbsp; ChadButtarsTeam@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 1. EXECUTIVE SUMMARY -->
     <section class="block" id="exec">
@@ -199,8 +233,8 @@
   <footer class="site">
     <div class="wrap">
       <div><strong>Alma AI Revenue Hunter</strong> — Private Buyer Research. Not indexed, not for public distribution.</div>
-      <div>Represented by realtor Chad Buttars. Contact details intentionally withheld from this page. Buyer identity &amp; age not shown.</div>
-      <div>Generated <span data-search-date>2026-07-13</span>. All figures are estimates, clearly labeled; no listing, MLS number, price, or comparable is fabricated.</div>
+      <div><strong>Chad Buttars Team</strong> · Utah Executive Real Estate, South Ogden UT · <a href="tel:+18019418400">801-941-8400</a> · <a href="mailto:ChadButtarsTeam@gmail.com">ChadButtarsTeam@gmail.com</a></div>
+      <div>Buyer identity &amp; age not shown. Generated <span data-search-date>2026-07-13</span>. All figures are estimates, clearly labeled; no listing, MLS number, price, or comparable is fabricated.</div>
     </div>
   </footer>
 

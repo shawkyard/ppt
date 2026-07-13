@@ -1,0 +1,9 @@
+# Alma AI Revenue Hunter — static report. No build step required.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
