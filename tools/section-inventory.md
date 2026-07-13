@@ -27,6 +27,7 @@ They exist across **3 visual skins** captured so far:
 | **BBP-Serif** | navy + gold, serif display | What We Build / Concepts / Packages / Portfolio / About | $295 / $495 / $995+ |
 | **BBP-Dark** | dark navy + orange | How It Works / Transformations / Case Studies / Examples / Pricing | $395/mo, $0 setup |
 | **BBP-Light** | white + orange, sans | How It Works / Transformations / Case Studies / Examples / Pricing | $495 setup + $199/mo |
+| **Ogden Web Solutions** | cream + dark, own logo/footer (Ogden, UT) | Work / Services / Pricing / Free Tools / Contact | (see portfolio) |
 
 **Open decision (carry forward):** which skin is the master for the final combined
 site. Working assumption = **BBP-Dark** (newest, most complete, has nav/pricing/
@@ -246,6 +247,82 @@ Photography, Cleaning, Moving, Auto Repair, Marketing Agencies, Window Cleaning)
 
 ---
 
+## Batch 8 — Contact, Homepage, campaign page + new brand (Ogden) · 5 shots
+
+**LIGHT-08 · Contact ("Let's Build Something That Makes You Money")** *(BBP-Light)*
+`band` top bar (Skip the form — start your $395/mo) · `hero` · `capabilities` 4 contact-method cards (Text · Email · AI Chat 24/7 · Response Time) ·
+`lead-capture` Send us a message form (name, business, phone, email, service, message) · `how-it-works` What happens next? (4 steps) ·
+`cta` Prefer to Talk? Call Us (dark) · `band` · `footer`
+
+**DARK-15 · "The Weekly Build Report" (campaign / long-form sales letter)** *(BBP-Dark variant)*
+`hero` We Don't Build Websites. We Build Sales Machines (30 sites / 7 days) · `stats` (20/1/96+/72hr/100%/$0) ·
+`capabilities` One System, Eight Ads, 20 Min Per Site · `stats` We Measure Revenue not Pretty · `proof` Real Sites, Real Results, Real Revenue ·
+`cta` Get In Early Before It Gets Expensive · `audience` We Know Exactly Who We Serve · `problem` The Solution Everyone Needs, Almost Nobody Has · `how-it-works` What's Coming Next
+
+**DARK-16 · Homepage ("We help local businesses make more money online")** *(BBP-Dark — the main home)*
+`nav`+`hero` (animated revenue-engine node graphic) · `capabilities` A website is just the start. Revenue is the system ·
+`capabilities` More than a homepage. A full digital toolkit (Websites, Audience Pages, Web Apps, Videos, Graphics & Branding, Lead Capture & Follow-Up) ·
+`audience` One website. Different pages for the people you want to win · `proof` See what a better business website can become (portfolio grid) ·
+`capabilities` Software that makes a business easier to run · `audience` Built for the way your industry actually sells ·
+`capabilities` Meet Alma AI — and the agents that close (6 agents) · `pricing` Start where you are. Scale as you grow ($1,495 / $2,495 / $4,995) ·
+`lead-capture` Two fields. Twenty seconds. audit · `faq` Everything you're wondering about · `cta` Let's make your website make you money · `footer`
+
+**OGDEN-01 · Portfolio / Work ("Real websites. Real businesses. Real results.")** *(NEW brand: Ogden Web Solutions — captured 2×)*
+`nav` (Work/Services/Pricing/Free Tools/Contact) · `hero` · filter chips (All, Websites, AI Follow-Up, Audience Pages, Local SEO) ·
+`proof` large portfolio grid (~22 live-preview cards, each with Problem / What we built / Why it matters:
+Utah Gold Card, Wasatch ROI AI, GPS365 AI, BBP LLC, Tom Hawkyard, Artecore Institute, Artecore Salon, Wasatch Graphics, Basilius IT,
+Spartan Funding, DD Talks, IMS Testing, Cornerstone Chiro, Cornerstone Stem Cells 1&2, Dental Implants & Perio, ADHD Specialist,
+Katrina's Antiques, Hand of Good Tattoo, Night Ranger Band, Sushi Totto, Rox&Tech Newsletter) ·
+`cta` Want one built for your business? · `cta` Let's make your website make you money · `footer` (Ogden Web Solutions, Ogden UT)
+
+---
+
+## Batch 9 — Ogden Web Solutions full site · 5 shots
+
+Ogden shares pricing ($1,495 / $2,495 / $4,995) and tagline ("make your website make you money") with the
+DARK-16 homepage — likely the **same brand, its own complete site** (partner/reseller-facing). Every page ends with the same
+`cta` "Let's make your website make you money" + `footer`.
+
+**OGDEN-02 · Services ("Every piece of a revenue system")**
+`nav`+`hero` · `how-it-works` 5-step revenue flow (Better Website → Audience Pages → Lead Capture → AI/CRM Follow-Up → Appointments & Sales) ·
+`capabilities` 8 services (Business Websites, Audience Pages, Lead Generation, AI Follow-Up, CRM Automation, Local SEO, Web Apps, Video & Graphics) ·
+`how-it-works` idea→launch (Free Scan · Plan · Build · Launch & Grow) · `cta` Not sure which pieces? · `cta`+`footer`
+
+**OGDEN-03 · Pricing ("One honest price list. Start where you are")**
+`nav`+`hero` · `band` limited free-audit offer · `pricing` 3 tiers (Starter $1,495 · Growth $2,495 · Revenue $4,995) ·
+`pricing` full comparison table (Website Foundation / Leads & Follow-Up / Build Quality & Support) · `cta` Need a custom platform? · `faq` Pricing questions · `cta`+`footer`
+
+**OGDEN-04 · Free Tools ("Free tools that show you exactly where you're losing money")**
+`nav`+`hero` · `lead-capture` featured Free Website Audit · `capabilities` "Ten ways to check your website's health" — 9 tool cards
+(Website Inspection, Lead Leak Calculator, Local SEO Quick Check, Website ROI Calculator, Follow-Up Speed Checker, Audience Page Opportunity Finder, Competitor Comparison, Homepage First Impression Score, CTA Strength Checker) ·
+`cta` Prefer a human? · `cta`+`footer`
+
+**OGDEN-05 · Contact ("Let's build something that makes you money")** *(Ogden version of LIGHT-08)*
+`nav`+`hero` · `capabilities` 3 contact cards (Call/Text · Text Us · Response Time) · `lead-capture` Send us a message form ·
+`how-it-works` What happens next (4 steps) + Browse live portfolio link · `cta`+`footer`
+
+**OGDEN-06 · Sales Toolkit / Partner ("Everything you need to close the deal")**
+`nav`+`hero` · `capabilities` 3 cards (Live Examples · Free Scan Offer · One Price List) ·
+`how-it-works` 30-second pitch talk track (4 points) · `faq` objection handling ("We already have a website" / "We don't need AI" / "We're too small" / "We don't want a long project") ·
+`cta` Want the full partner toolkit? Become a Partner (20% recurring) · `cta`+`footer`
+
+---
+
+## Batch 10 — Ogden Partner + Free Scan (+ 3 dups) · 5 shots
+
+**OGDEN-07 · Partner / Referral Program ("Refer local businesses. Earn 20% for life")**
+`nav`+`hero` · `capabilities` Why partner with us (6 cards: Easy offer, Real local demand, Portfolio examples, Clear packages, Referral tracking, Sales enablement) ·
+`how-it-works` Simple, transparent, recurring (Refer → We do the work → You earn 20% for life) · `lead-capture` Apply to be a partner form · `cta`+`footer`
+
+**OGDEN-08 · Free Website Scan / Audit ("Two fields. Twenty seconds. A real look at your website")**
+`nav`+`hero` + `lead-capture` scan form (URL + email + name, on-screen AI audit in ~30s → hand-reviewed report in 24h) ·
+checklist (5-second impression, lead leaks, message match, sample audience pages, honest next step) · `capabilities` 3 trust cards (Hand-reviewed · 24-hr turnaround · No card) ·
+`proof` pull-quote "We don't send a generic PDF…" · `cta`+`footer`
+
+**(dups)** OGDEN-06 (Sales Toolkit), OGDEN-05 (Contact), OGDEN-04 (Free Tools) — no new content.
+
+---
+
 ## Reusable templates spotted (important for assembly)
 
 - **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
@@ -275,10 +352,13 @@ Photography, Cleaning, Moving, Auto Repair, Marketing Agencies, Window Cleaning)
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 32 unique pages catalogued across 4 skins (36 captures incl. 4 dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub.*
+*Status: 43 unique pages catalogued across 5 skins/brands (~50 captures incl. dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub.*
 
 ### Page map so far (by skin)
 - **ALMA (6):** Grow, Hunters, Playbooks, Gatherers, Both
 - **BBP-Serif (5):** What We Build, Everything We Build, Concepts menu, Packages, Portfolio
-- **BBP-Dark (14):** AI Chatbots, AI Agents, Lead Gen, Automation *(service template)* · How It Works, Transformations, Case Studies, Examples · Pricing (6-tier), Checkout, Free Audit modal · About/Round Two, Founder's Philosophy, Blog
-- **BBP-Light (7):** Home overview, Web Apps, Industries hub · Real Estate, Healthcare, Legal, Restaurants *(vertical template)*
+- **BBP-Dark (16):** AI Chatbots, AI Agents, Lead Gen, Automation *(service template)* · How It Works, Transformations, Case Studies, Examples · Pricing (6-tier), Checkout, Free Audit modal · About/Round Two, Founder's Philosophy, Blog · Homepage, Weekly Build Report campaign
+- **BBP-Light (8):** Home overview, Web Apps, Industries hub, Contact · Real Estate, Healthcare, Legal, Restaurants *(vertical template)*
+- **Ogden Web Solutions (8):** Portfolio, Services, Pricing, Free Tools, Contact, Sales Toolkit, Partner Program, Free Scan — a **complete standalone site**, shares pricing/tagline with BBP-Dark homepage
+
+> **Emerging shape:** this isn't one site — it's the *same company iterating the same offer* across 5 brand skins. Ogden and BBP-Dark look like the two most complete/current sites. Likely grand-plan question = pick ONE canonical brand + one pricing model, then use the two templates (service ×4, vertical ×38) + standard spine (home/about/pricing/portfolio/case-studies/blog/tools/contact).
