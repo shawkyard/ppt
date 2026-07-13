@@ -61,6 +61,50 @@ window.ALMA = {
     "No minimum square footage; financing not assumed."
   ],
 
+  /* ---- Search criteria, documented across runs (Run 1 strict, Run 2 expanded) ---- */
+  searchCriteria: {
+    run1: {
+      label: "Run 1 — Strict (original brief)",
+      date: "2026-07-13",
+      cities: ["Bountiful", "North Salt Lake", "Centerville", "Woods Cross"],
+      priceMax: 500000,
+      beds: "2 or more (legal)",
+      baths: "2 or more total; at least one full/¾ on main",
+      style: "Single-level: rambler / ranch / patio home / one-level. Primary bed, full or ¾ bath, kitchen, living, laundry, garage & main entrance all on the MAIN level. Basement OK if not needed for daily living.",
+      status: ["Active", "Coming Soon", "Backup"],
+      keywords: ["main level", "main-floor living", "no stairs", "zero step", "rambler", "patio home", "55+", "single level"],
+      result: "No individual listing could be verified (portals 403; no MLS feed). Inventory at these constraints is genuinely thin."
+    },
+    run2: {
+      label: "Run 2 — Expanded / flexed (to surface inventory + negotiation targets)",
+      date: "2026-07-13",
+      whatChanged: "Loosened to widen the net, per client direction to 'go up in price and flex parameters.' Anything above the $500k budget is a NEGOTIATION target, clearly labeled, only pursued where evidence supports getting it to/under budget.",
+      flex: [
+        "Price ceiling raised $500,000 → $575,000. $0–500k = in budget; $500,001–575,000 = Negotiation Watchlist (must show a credible path to ≤$500k).",
+        "Bed/bath: allow the 2nd bedroom OR 2nd bath to be on a lower level (accessibility deduction applied and disclosed) — as long as a full/¾ bath + primary bed + kitchen + living + laundry remain on the main level.",
+        "Home style: add 'main-level primary' two-story, split-entry, and homes marketed for their basement that actually have a complete main-floor living package.",
+        "Property type: add twin homes, single-level townhomes, ground-floor condos, and 55+ community homes.",
+        "Geography: add West Bountiful, Farmington, Fruit Heights, Kaysville, and Davis County within ~15 min of the primary cities (kept in a separate 'Nearby' bucket so it doesn't dilute primaries).",
+        "Include stale (DOM > 45), price-reduced, back-on-market, expired, withdrawn, and cancelled — these are the best negotiation leads."
+      ],
+      status: ["Active", "Coming Soon", "Backup", "Expired (6 mo)", "Withdrawn", "Cancelled", "Back on Market"]
+    }
+  },
+
+  /* ---- Negotiation playbook (spec §14): evidence to hunt + how Chad uses it ---- */
+  negotiationPlaybook: [
+    { signal: "Days on market > 45 (vs. a faster local median)", meaning: "Listing is stale; seller fatigue.", use: "Open below list; cite DOM and current competing inventory in the offer cover." },
+    { signal: "One or more price reductions", meaning: "Seller has already signaled flexibility.", use: "Anchor to the trajectory — offer near where the next cut would land, not the current number." },
+    { signal: "Back on market after a failed pending", meaning: "A prior buyer walked (often inspection/appraisal).", use: "Ask the listing agent why it fell through; use disclosed issues for a credit or lower price." },
+    { signal: "Expired, then relisted", meaning: "It was mispriced before.", use: "Comp it hard; justify a value offer with the CMA, not the aspirational list price." },
+    { signal: "Vacant / estate / relocation / 'motivated' language", meaning: "Carrying costs or timeline pressure.", use: "Compete on certainty and speed (clean terms, flexible close) to win price concessions." },
+    { signal: "List price above adjusted comparable value", meaning: "Overpriced vs. the market.", use: "Submit the comp set with the offer; frame the gap objectively." },
+    { signal: "Deferred maintenance / dated or poor photos", meaning: "Condition or presentation weakness others skip.", use: "Price in cost-to-cure; request repair credits or a rate buydown instead of chasing price alone." },
+    { signal: "HOA special assessment pending", meaning: "Known future cost.", use: "Ask the seller to pay/credit the assessment at closing." },
+    { signal: "Seasonal timing (fall/winter close)", meaning: "Thinner buyer pool.", use: "Fewer competing offers = more room to negotiate terms and price." },
+    { signal: "Seller-paid closing / rate buydown room", meaning: "Payment relief without moving list price.", use: "For a financing buyer, a 2-1 buydown can beat a small price cut on monthly cost — ask for it." }
+  ],
+
   /* ---- Scoring rubric (spec §15) — max points per component ---- */
   rubric: {
     A: { name: "Mandatory Buyer Fit", max: 25 },

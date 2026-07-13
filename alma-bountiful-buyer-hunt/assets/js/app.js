@@ -304,6 +304,41 @@
     if (cls) el.className = cls;
   }
 
+  /* ---------- Search criteria (Run 1 / Run 2) ---------- */
+  function renderCriteria() {
+    var box = $("criteria"); if (!box || !A.searchCriteria) return;
+    var r1 = A.searchCriteria.run1, r2 = A.searchCriteria.run2;
+    box.appendChild(h("div", { class: "panel" }, [
+      h("h3", { style: "margin-top:0" }, [r1.label]),
+      h("dl", { class: "dl" }, [
+        dd("Cities", r1.cities.join(" · ")), dd("Max price", money(r1.priceMax)),
+        dd("Bedrooms", r1.beds), dd("Bathrooms", r1.baths),
+        dd("Status", r1.status.join(" · ")), dd("Style", r1.style),
+        dd("MLS keywords", r1.keywords.join(", "))
+      ]),
+      h("p", { style: "margin:6px 0 0" }, [h("span", { class: "vlabel req" }, ["Result: " + r1.result])])
+    ]));
+    box.appendChild(h("div", { class: "panel" }, [
+      h("h3", { style: "margin-top:0" }, [r2.label]),
+      h("p", null, [r2.whatChanged]),
+      h("ul", null, r2.flex.map(function (x) { return h("li", null, [x]); })),
+      h("p", { style: "margin:6px 0 0" }, ["Status scanned: ", h("strong", null, [r2.status.join(" · ")])])
+    ]));
+  }
+
+  /* ---------- Negotiation playbook ---------- */
+  function renderPlaybook() {
+    var box = $("playbook"); if (!box || !A.negotiationPlaybook) return;
+    var table = h("table", null, []);
+    table.appendChild(h("caption", null, ["Evidence to hunt on every property, and how Chad turns it into price/terms (spec §14)."]));
+    table.appendChild(h("thead", null, [h("tr", null,
+      ["Signal to look for", "What it means", "How to use it"].map(function (c) { return h("th", null, [c]); }))]));
+    table.appendChild(h("tbody", null, A.negotiationPlaybook.map(function (p) {
+      return h("tr", null, [h("td", null, [p.signal]), h("td", null, [p.meaning]), h("td", null, [p.use])]);
+    })));
+    box.appendChild(h("div", { class: "table-scroll" }, [table]));
+  }
+
   /* ---------- Scrollspy nav ---------- */
   function scrollspy() {
     var links = Array.prototype.slice.call(document.querySelectorAll(".nav a[href^='#']"));
@@ -327,6 +362,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     injectBrandmarks(); fillMeta();
     renderStats(); renderRanked(); renderComparison(); renderMap();
+    renderCriteria(); renderPlaybook();
     renderCommunities(); renderHidden(); renderRejected(); renderSources();
     fillList("assumptions-list", A.assumptions);
     fillList("queue-list", A.researchQueue);
