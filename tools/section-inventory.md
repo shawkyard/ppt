@@ -196,10 +196,60 @@ E-Commerce & Ordering, Quote & Proposal Tools, Directory & Listing Apps) ·
 
 ---
 
+## Batch 6 — vertical landing pages + industries hub + About · 5 shots
+
+**LIGHT-04 · Healthcare vertical** *(Vertical Landing Template)*
+`nav`+`hero` Your Healthcare Deserves More Leads (video) · `stats` (40% fewer no-shows · 24/7 booking · 12+ new patients/wk) ·
+`problem` Problems We Solve for Healthcare · `roi-tool` Healthcare ROI Calculator · `audience` Healthcare Specialties (Primary Care, Specialty Clinics, Mental Health, Physical Therapy, Urgent Care, Telehealth) ·
+`pricing` Transparent Pricing · `lead-capture` Get Your Free Healthcare Site · `cta` Ready to Stop Losing Clients? · `band` · `footer`
+
+**LIGHT-05 · Legal vertical** *(Vertical Landing Template — note **purple** accent variant vs standard orange)*
+`nav`+`hero` Your Legal Deserves More Leads (video) · `stats` (3x qualified cases · 24/7 · 60% cost cut) ·
+`problem` Problems We Solve for Legal · `roi-tool` Legal ROI Calculator · `audience` Legal Specialties (Personal Injury, Family Law, Criminal Defense, Immigration, Business Law, Estate Planning) ·
+`pricing` · `lead-capture` Get Your Free Legal Site · `cta` · `band` · `footer`
+
+**LIGHT-06 · Restaurants vertical** *(Vertical Landing Template)*
+`nav`+`hero` Your Restaurants Deserves More Leads (video) · `stats` (47+ reservations/wk · 4.9★ · 25% repeat) ·
+`problem` Problems We Solve for Restaurants · `roi-tool` Restaurants ROI Calculator · `audience` Restaurants Specialties (Fine Dining, Casual Dining, Fast Casual, Bars & Nightlife, Catering, Food Trucks) ·
+`pricing` · `lead-capture` Get Your Free Restaurants Site · `cta` · `band` · `footer`
+
+**LIGHT-07 · Industries index / hub ("We Build Websites for Your Industry")** *(the hub that links all vertical pages)*
+`hero` 38 industries. One agency. Unlimited ROI. · `audience` 38-card industry grid, each "View Page"
+(Roofing, Electrical, Plumbing, HVAC, Solar, Auto Dealers, Insurance, Real Estate, Flooring, Landscaping, Dental, Chiropractic,
+Restaurants, Gyms, Law Firms, Accounting, Pest Control, Window & Door, Painting, General Contractors, Med Spa, PT, Mental Health,
+Home Health, Optometry, Mortgage Brokers, Property Mgmt, Credit Repair, Commercial RE, Financial Advisors, Staffing, Veterinary,
+Photography, Cleaning, Moving, Auto Repair, Marketing Agencies, Window Cleaning) ·
+`cta` Don't see your industry? We'll build it (+ Chamber 25% off) · `band` · `footer`
+
+**DARK-12 · About / Founder's Message ("Better Business Partners. Round Two.")**
+`hero` Round Two · `stats` (33+ yrs · 1,200+ businesses · 100% client code ownership · 24/7) ·
+`proof` Origin story (1993 CD-ROM credit bureau) + philosophy quotes · `how-it-works` timeline (1993 CD-ROM · 2004 Web-Based · 2024 AI Growth Lab) ·
+`capabilities` The Promise (We Actually Care, Growth Over Features, You Own Everything, Fast & Reliable, AI-First Thinking, Small Business Focused) ·
+`proof` founder quote · `cta` Let's grow your business · `proof` The Woman Behind Alma AI (founder bio: Air Force vet, surgeon, CEO) · `band` · `footer`
+
+---
+
+## Batch 7 — Founder's Philosophy + Blog (+ 3 dups) · 5 shots
+
+**DARK-13 · Founder's Philosophy ("A Website Should Not Just Explain What You Do. It Should Help You Sell.")**
+`hero` Founder's Philosophy · `proof`/long-form manifesto (33 yrs, intangible value, before/after) ·
+`capabilities` "That means…" list (before/after, tangible value, speak to each audience, explain pain, value prop, proof, clarity) ·
+`how-it-works` The 5 standards (make money? / save money? / save time? / measurable? / improvable?) ·
+`cta` closing statement box "We help businesses show their value better → buy with confidence" + Get My Website Scan · `band` · `footer`
+
+**DARK-14 · Blog index ("AI, Websites & Growth For Small Business")**
+`nav`+`hero` · `proof` featured post (AI Agents vs. Chatbots) · category filter chips ·
+`proof` ~21-post article grid (AI phone agents, website conversion, LinkedIn outbound, source-code ownership, dental case study, ROI calcs, TAM+ICP, sales cycle, reviews, loyalty, SEO, etc.) ·
+`cta` Did AI change your business? Submit Your Story · `lead-capture` Get AI Growth Tips Every Week (newsletter) · `band` · `footer`
+
+**(dups)** DARK-06 (pricing), DARK-13 (philosophy, re-capture), DARK-08 (checkout) — no new content.
+
+---
+
 ## Reusable templates spotted (important for assembly)
 
 - **Service-Page Template (BBP-Dark):** DARK-01 Chatbots, DARK-09 AI Agents, DARK-10 Lead Gen, DARK-11 Automation are the **same 14-section skeleton** with swapped copy: `hero → problem → capabilities(6) → stats → who-uses → what-changes → metrics-table → how-it-works → roi-tool → testimonials → pricing → faq → cross-sell → cta`. One layout, N services. Treat as a single component fed by data.
-- **Vertical Landing Template (BBP-Light):** LIGHT-03 Real Estate is a per-industry sales page (`hero+video → stats → problems → ROI calc → specialties → pricing → lead form → cta`). This is the "audience-specific sales page" product itself — one template, many industries (matches the Examples/Transformations lists).
+- **Vertical Landing Template (BBP-Light):** CONFIRMED across LIGHT-03 Real Estate, LIGHT-04 Healthcare, LIGHT-05 Legal, LIGHT-06 Restaurants — identical skeleton (`hero+video → stats → problems → ROI calc → specialties → pricing → lead form → cta`), swapped copy + per-industry ROI calc + accent color (Legal = purple). **LIGHT-07 is the hub** listing all **38 industries** that use this template. So this one template = 38 pages, driven by per-industry data. This IS the core product ("audience-specific sales page").
 
 ---
 
@@ -225,4 +275,10 @@ E-Commerce & Ordering, Quote & Proposal Tools, Directory & Listing Apps) ·
 10. `cta`/`band` — Stop Losing Customers → Get free audit
 11. `footer` — one only
 
-*Status: 25 unique pages catalogued across 4 skins (26 captures incl. 1 dup). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified.*
+*Status: 32 unique pages catalogued across 4 skins (36 captures incl. 4 dups). More expected — user assembling full content library before revealing the grand plan. Two reusable page templates identified (Service-Page, Vertical-Landing) + a 38-industry hub.*
+
+### Page map so far (by skin)
+- **ALMA (6):** Grow, Hunters, Playbooks, Gatherers, Both
+- **BBP-Serif (5):** What We Build, Everything We Build, Concepts menu, Packages, Portfolio
+- **BBP-Dark (14):** AI Chatbots, AI Agents, Lead Gen, Automation *(service template)* · How It Works, Transformations, Case Studies, Examples · Pricing (6-tier), Checkout, Free Audit modal · About/Round Two, Founder's Philosophy, Blog
+- **BBP-Light (7):** Home overview, Web Apps, Industries hub · Real Estate, Healthcare, Legal, Restaurants *(vertical template)*
