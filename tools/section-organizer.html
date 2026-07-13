@@ -1,0 +1,738 @@
+<title>Section Organizer — assemble a page from screenshots</title>
+<style>
+  :root {
+    --bg: #f4f4f7;
+    --panel: #ffffff;
+    --panel-2: #fafafb;
+    --ink: #1b1b24;
+    --muted: #6a6a78;
+    --faint: #9a9aa8;
+    --border: #e4e4ec;
+    --border-strong: #d2d2dc;
+    --accent: #5952e0;
+    --accent-soft: #ecebfb;
+    --cut: #f0466e;
+    --cut-soft: #fde6ec;
+    --good: #17936b;
+    --shadow: 0 1px 2px rgba(20,20,40,.06), 0 8px 24px rgba(20,20,40,.06);
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --ui: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --r: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131319; --panel: #1c1c24; --panel-2: #20202a;
+      --ink: #eaeaf2; --muted: #9c9cac; --faint: #6f6f7e;
+      --border: #2c2c38; --border-strong: #3a3a48;
+      --accent: #8b85ff; --accent-soft: #26244a;
+      --cut: #ff6a8b; --cut-soft: #3a1f2a;
+      --good: #35c496;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f4f7; --panel: #ffffff; --panel-2: #fafafb;
+    --ink: #1b1b24; --muted: #6a6a78; --faint: #9a9aa8;
+    --border: #e4e4ec; --border-strong: #d2d2dc;
+    --accent: #5952e0; --accent-soft: #ecebfb;
+    --cut: #f0466e; --cut-soft: #fde6ec; --good: #17936b;
+    --shadow: 0 1px 2px rgba(20,20,40,.06), 0 8px 24px rgba(20,20,40,.06);
+  }
+  :root[data-theme="dark"] {
+    --bg: #131319; --panel: #1c1c24; --panel-2: #20202a;
+    --ink: #eaeaf2; --muted: #9c9cac; --faint: #6f6f7e;
+    --border: #2c2c38; --border-strong: #3a3a48;
+    --accent: #8b85ff; --accent-soft: #26244a;
+    --cut: #ff6a8b; --cut-soft: #3a1f2a; --good: #35c496;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--ui); font-size: 14px; line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .label {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  button { font-family: var(--ui); cursor: pointer; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--panel); color: var(--ink);
+    border: 1px solid var(--border-strong); border-radius: 8px;
+    padding: 6px 11px; font-size: 12.5px; font-weight: 550;
+    transition: border-color .12s, background .12s, transform .05s;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.06); }
+  .btn.ghost { border-color: transparent; background: transparent; color: var(--muted); padding: 5px 8px; }
+  .btn.ghost:hover { background: var(--panel-2); color: var(--ink); border-color: var(--border); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn.sm { padding: 4px 8px; font-size: 11.5px; }
+
+  /* ---- top bar ---- */
+  header.top {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    background: var(--panel); position: sticky; top: 0; z-index: 30;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; margin-right: auto; }
+  .brand h1 { font-size: 15px; margin: 0; letter-spacing: -.01em; font-weight: 680; }
+  .brand .sub { font-family: var(--mono); font-size: 10.5px; color: var(--faint); letter-spacing: .04em; }
+  .top .spacer { flex: 1; }
+
+  /* ---- workspace ---- */
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(220px, .8fr) minmax(300px, 1.15fr);
+    gap: 0; height: calc(100vh - 57px);
+  }
+  .col { display: flex; flex-direction: column; min-width: 0; border-right: 1px solid var(--border); overflow: hidden; }
+  .col:last-child { border-right: none; }
+  .col-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    background: var(--panel-2); flex: 0 0 auto;
+  }
+  .col-head .count {
+    font-family: var(--mono); font-size: 10px; color: var(--muted);
+    background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
+    padding: 1px 7px; margin-left: auto;
+  }
+  .col-body { overflow-y: auto; overflow-x: hidden; padding: 12px; flex: 1 1 auto; scrollbar-width: thin; }
+
+  /* ---- dropzone / empty ---- */
+  .dropzone {
+    border: 1.5px dashed var(--border-strong); border-radius: var(--r);
+    padding: 26px 16px; text-align: center; color: var(--muted);
+    transition: border-color .15s, background .15s; cursor: pointer;
+  }
+  .dropzone:hover, .dropzone.hot { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+  .dropzone .big { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .dropzone .small { font-size: 11.5px; }
+  .empty-note { color: var(--faint); font-size: 12px; text-align: center; padding: 28px 12px; line-height: 1.6; }
+  .empty-note kbd {
+    font-family: var(--mono); font-size: 10.5px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px;
+  }
+
+  /* ---- source card ---- */
+  .source {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--r);
+    margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .source-bar { display: flex; align-items: center; gap: 6px; padding: 8px 8px 8px 10px; border-bottom: 1px solid var(--border); }
+  .source-name {
+    font-size: 12.5px; font-weight: 600; border: none; background: transparent; color: var(--ink);
+    flex: 1; min-width: 0; padding: 2px 3px; border-radius: 5px; font-family: var(--ui);
+  }
+  .source-name:focus { outline: none; background: var(--panel-2); }
+  .source-tools { display: flex; align-items: center; gap: 3px; }
+  .img-stage { position: relative; user-select: none; touch-action: none; background: repeating-conic-gradient(var(--panel-2) 0% 25%, var(--panel) 0% 50%) 0/16px 16px; }
+  .img-stage img { display: block; width: 100%; height: auto; pointer-events: none; }
+  .cutline {
+    position: absolute; left: 0; right: 0; height: 0;
+    border-top: 2px solid var(--cut); cursor: ns-resize; z-index: 5;
+  }
+  .cutline::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -6px; height: 14px;
+  }
+  .cutline .knob {
+    position: absolute; left: 8px; top: -9px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--cut); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  }
+  .cutline .rm {
+    position: absolute; right: 6px; top: -11px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--panel); border: 1px solid var(--cut); color: var(--cut);
+    font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .12s;
+  }
+  .cutline:hover .rm { opacity: 1; }
+  .stage-hint {
+    position: absolute; inset: auto 0 0 0; padding: 4px 8px; font-family: var(--mono);
+    font-size: 9.5px; letter-spacing: .05em; color: #fff; background: rgba(20,20,30,.55);
+    text-transform: uppercase; pointer-events: none;
+  }
+
+  /* ---- section palette ---- */
+  .src-group-head { display: flex; align-items: center; gap: 6px; margin: 4px 2px 7px; }
+  .src-group-head .dot { width: 8px; height: 8px; border-radius: 2px; flex: 0 0 auto; }
+  .src-group-head .nm { font-size: 12px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chips { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+  .chip {
+    display: flex; align-items: stretch; gap: 8px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 9px; padding: 6px; cursor: grab;
+    box-shadow: var(--shadow); transition: border-color .12s, transform .08s;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip:active { cursor: grabbing; }
+  .chip.dragging { opacity: .4; }
+  .chip.used { opacity: .5; }
+  .chip .thumb {
+    width: 60px; flex: 0 0 auto; height: 44px; border-radius: 5px; overflow: hidden;
+    background: var(--panel-2); border: 1px solid var(--border);
+  }
+  .chip .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .chip .meta { display: flex; flex-direction: column; justify-content: center; min-width: 0; gap: 2px; }
+  .chip .meta .t { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chip .meta .d { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+
+  /* ---- board ---- */
+  .board-wrap { flex: 1 1 auto; overflow-y: auto; padding: 14px; }
+  .board {
+    max-width: 640px; margin: 0 auto; min-height: 100%;
+    display: flex; flex-direction: column; gap: 2px;
+    border-radius: var(--r); position: relative;
+  }
+  .board.empty-board {
+    border: 1.5px dashed var(--border-strong); align-items: center; justify-content: center;
+    min-height: 260px; color: var(--faint); text-align: center; padding: 24px;
+  }
+  .board.drop-hot { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--r); }
+  .slab {
+    position: relative; background: var(--panel); border: 1px solid var(--border);
+    box-shadow: var(--shadow); overflow: hidden; border-radius: 4px;
+  }
+  .slab.dragging { opacity: .35; }
+  .slab img { display: block; width: 100%; height: auto; }
+  .slab .bar {
+    position: absolute; inset: 0 0 auto 0; display: flex; align-items: center; gap: 6px;
+    padding: 5px 7px; background: linear-gradient(to bottom, rgba(15,15,25,.72), rgba(15,15,25,0));
+    opacity: 0; transition: opacity .12s;
+  }
+  .slab:hover .bar { opacity: 1; }
+  .slab .bar .grab { cursor: grab; color: #fff; font-size: 13px; padding: 2px 4px; }
+  .slab .bar .nm { color: #fff; font-size: 11.5px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .slab .bar .x {
+    margin-left: auto; background: rgba(255,255,255,.15); border: none; color: #fff;
+    width: 22px; height: 22px; border-radius: 6px; font-size: 14px; line-height: 1;
+  }
+  .slab .bar .x:hover { background: var(--cut); }
+  .drop-marker { height: 3px; background: var(--accent); border-radius: 2px; margin: 1px 0; }
+
+  .export-row { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--border); background: var(--panel-2); flex: 0 0 auto; }
+  .export-row .w-in { width: 68px; font-family: var(--mono); font-size: 12px; text-align: right;
+    border: 1px solid var(--border-strong); background: var(--panel); color: var(--ink); border-radius: 6px; padding: 4px 6px; }
+  .export-row label { font-size: 11.5px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+  .toast {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg); padding: 9px 16px; border-radius: 8px;
+    font-size: 12.5px; font-weight: 550; box-shadow: var(--shadow); opacity: 0;
+    transition: opacity .2s, transform .2s; pointer-events: none; z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  input[type=file] { display: none; }
+
+  @media (max-width: 860px) {
+    .workspace { grid-template-columns: 1fr; height: auto; }
+    .col { border-right: none; border-bottom: 1px solid var(--border); max-height: 78vh; }
+    .col-body { max-height: 60vh; }
+  }
+</style>
+
+<header class="top">
+  <div class="brand">
+    <h1>Section Organizer</h1>
+    <span class="sub">screenshots → sliced sections → one assembled page</span>
+  </div>
+  <button class="btn ghost sm" id="themeBtn" title="Toggle theme">◐ Theme</button>
+  <button class="btn primary" id="addBtn">＋ Add screenshots</button>
+  <input type="file" id="fileInput" accept="image/*" multiple>
+</header>
+
+<div class="workspace">
+  <!-- COLUMN 1: SOURCES -->
+  <section class="col">
+    <div class="col-head">
+      <span class="label">1 · Screenshots &amp; cuts</span>
+      <span class="count" id="srcCount">0</span>
+    </div>
+    <div class="col-body" id="sourcesBody">
+      <div class="dropzone" id="dropzone">
+        <div class="big">Drop screenshots here</div>
+        <div class="small">or click to browse · or paste from clipboard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLUMN 2: SECTION PALETTE -->
+  <section class="col">
+    <div class="col-head">
+      <span class="label">2 · Section library</span>
+      <span class="count" id="secCount">0</span>
+    </div>
+    <div class="col-body" id="paletteBody">
+      <div class="empty-note">Sliced sections land here.<br>Drag them into the layout →</div>
+    </div>
+  </section>
+
+  <!-- COLUMN 3: LAYOUT BOARD -->
+  <section class="col">
+    <div class="col-head">
+      <span class="label">3 · Assembled layout</span>
+      <span class="count" id="boardCount">0</span>
+      <button class="btn ghost sm" id="clearBoard" style="margin-left:8px">Clear</button>
+    </div>
+    <div class="board-wrap" id="boardWrap">
+      <div class="board empty-board" id="board">
+        Drag sections here to stack your combined page, top to bottom.
+      </div>
+    </div>
+    <div class="export-row">
+      <label>Width <input class="w-in" id="exportW" type="number" value="1200" min="200" step="20"> px</label>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn sm" id="exportJson">⤓ JSON</button>
+      <button class="btn primary sm" id="exportPng">⤓ PNG</button>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- palette of source dot colors ----------
+  const DOTS = ["#5952e0","#17936b","#e0762b","#c8489a","#2b8fe0","#b0942b","#d24141","#6a5acd","#2aa38a","#a15be0"];
+
+  // ---------- state ----------
+  const state = { sources: [], sections: [], layout: [] }; // layout = array of section ids
+  let uid = 1;
+  const nid = () => "id" + (uid++);
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+  // ---------- theme ----------
+  const themeBtn = $("#themeBtn");
+  themeBtn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const isDark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  // ---------- toast ----------
+  const toastEl = $("#toast");
+  let toastT;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 2200);
+  }
+
+  // ---------- image loading ----------
+  function loadFiles(fileList) {
+    const files = [...fileList].filter(f => f.type.startsWith("image/"));
+    if (!files.length) return;
+    files.forEach(f => {
+      const url = URL.createObjectURL(f);
+      const img = new Image();
+      img.onload = () => {
+        const src = {
+          id: nid(),
+          name: (f.name || "screenshot").replace(/\.[a-z]+$/i, "").slice(0, 40),
+          img, url,
+          w: img.naturalWidth, h: img.naturalHeight,
+          dot: DOTS[state.sources.length % DOTS.length],
+          cuts: []
+        };
+        src.cuts = detectCuts(img);
+        state.sources.push(src);
+        renderSources();
+      };
+      img.src = url;
+    });
+  }
+
+  const fileInput = $("#fileInput");
+  $("#addBtn").addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", e => { loadFiles(e.target.files); fileInput.value = ""; });
+
+  const dropzone = $("#dropzone");
+  dropzone.addEventListener("click", () => fileInput.click());
+
+  // window-wide drag & paste
+  ["dragover", "drop"].forEach(ev => window.addEventListener(ev, e => e.preventDefault()));
+  window.addEventListener("dragenter", e => { if (dz(e)) dropzone.classList.add("hot"); });
+  window.addEventListener("dragleave", e => { if (!e.relatedTarget) dropzone.classList.remove("hot"); });
+  window.addEventListener("drop", e => {
+    dropzone.classList.remove("hot");
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) loadFiles(e.dataTransfer.files);
+  });
+  function dz(e) { return e.dataTransfer && [...(e.dataTransfer.types || [])].includes("Files"); }
+  window.addEventListener("paste", e => {
+    const items = e.clipboardData && e.clipboardData.items;
+    if (!items) return;
+    const imgs = [...items].filter(i => i.type.startsWith("image/")).map(i => i.getAsFile()).filter(Boolean);
+    if (imgs.length) loadFiles(imgs);
+  });
+
+  // ---------- auto-detect section cuts ----------
+  function detectCuts(img) {
+    const W = img.naturalWidth, H = img.naturalHeight;
+    if (!W || !H) return [];
+    const scale = Math.min(1, 420 / W);
+    const w = Math.max(1, Math.round(W * scale)), h = Math.max(1, Math.round(H * scale));
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    const ctx = c.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, w, h);
+    let data;
+    try { data = ctx.getImageData(0, 0, w, h).data; } catch (err) { return []; }
+
+    // background = most common quantized colour
+    const hist = new Map();
+    for (let i = 0; i < data.length; i += 4) {
+      const k = ((data[i] >> 4) << 8) | ((data[i + 1] >> 4) << 4) | (data[i + 2] >> 4);
+      hist.set(k, (hist.get(k) || 0) + 1);
+    }
+    let bgK = 0, bgC = -1;
+    for (const [k, v] of hist) if (v > bgC) { bgC = v; bgK = k; }
+    const bgR = ((bgK >> 8) & 15) << 4, bgG = ((bgK >> 4) & 15) << 4, bgB = (bgK & 15) << 4;
+
+    // per-row fraction of non-background pixels
+    const row = new Float32Array(h);
+    for (let y = 0; y < h; y++) {
+      let cnt = 0, base = y * w * 4;
+      for (let x = 0; x < w; x++) {
+        const i = base + x * 4;
+        if (Math.abs(data[i] - bgR) + Math.abs(data[i + 1] - bgG) + Math.abs(data[i + 2] - bgB) > 48) cnt++;
+      }
+      row[y] = cnt / w;
+    }
+
+    const emptyThresh = 0.018;
+    const gapMinPx = Math.max(6, Math.round(h * 0.018));
+    const minSec = H * 0.045;
+    const raw = [];
+    let run = -1;
+    for (let y = 0; y <= h; y++) {
+      const empty = y < h && row[y] < emptyThresh;
+      if (empty) { if (run < 0) run = y; }
+      else if (run >= 0) {
+        const len = y - run, atEdge = run <= 1 || y >= h - 1;
+        if (len >= gapMinPx && !atEdge) raw.push(Math.round(((run + y) / 2) / scale));
+        run = -1;
+      }
+    }
+    // enforce a minimum section height
+    const cuts = []; let prev = 0;
+    for (const cy of raw) { if (cy - prev >= minSec && H - cy >= minSec) { cuts.push(cy); prev = cy; } }
+    return cuts;
+  }
+
+  // ---------- render column 1 : sources ----------
+  const sourcesBody = $("#sourcesBody");
+  function renderSources() {
+    $("#srcCount").textContent = state.sources.length;
+    sourcesBody.innerHTML = "";
+    if (!state.sources.length) {
+      sourcesBody.appendChild(dropzone);
+      return;
+    }
+    state.sources.forEach(src => sourcesBody.appendChild(sourceCard(src)));
+    // keep a small dropzone at the bottom to add more
+    const dz2 = el("div", "dropzone");
+    dz2.innerHTML = '<div class="small">＋ drop or click to add more</div>';
+    dz2.addEventListener("click", () => fileInput.click());
+    sourcesBody.appendChild(dz2);
+  }
+
+  function sourceCard(src) {
+    const card = el("div", "source");
+
+    const bar = el("div", "source-bar");
+    const dot = el("span"); dot.style.cssText = `width:9px;height:9px;border-radius:3px;flex:0 0 auto;background:${src.dot}`;
+    const name = el("input", "source-name"); name.value = src.name;
+    name.addEventListener("input", () => { src.name = name.value; renderPalette(); renderBoard(); });
+    const tools = el("div", "source-tools");
+    const bAuto = el("button", "btn ghost sm", "Auto"); bAuto.title = "Re-detect section cuts";
+    bAuto.addEventListener("click", () => { src.cuts = detectCuts(src.img); renderSources(); });
+    const bClear = el("button", "btn ghost sm", "Clear"); bClear.title = "Remove all cuts";
+    bClear.addEventListener("click", () => { src.cuts = []; renderSources(); });
+    const bSlice = el("button", "btn sm", `Slice →`);
+    bSlice.addEventListener("click", () => sliceSource(src));
+    const bDel = el("button", "btn ghost sm", "✕"); bDel.title = "Remove screenshot";
+    bDel.addEventListener("click", () => removeSource(src));
+    tools.append(bAuto, bClear, bSlice, bDel);
+    bar.append(dot, name, tools);
+
+    const stage = el("div", "img-stage");
+    const im = el("img"); im.src = src.url; im.alt = src.name;
+    stage.appendChild(im);
+
+    // render cut lines once we know displayed height
+    function paintLines() {
+      stage.querySelectorAll(".cutline").forEach(n => n.remove());
+      const dispH = im.clientHeight || (stage.clientWidth * src.h / src.w);
+      src.cuts.slice().sort((a, b) => a - b).forEach((cy, idx) => {
+        const line = el("div", "cutline");
+        line.style.top = (cy / src.h * dispH) + "px";
+        line.appendChild(el("span", "knob"));
+        const rm = el("button", "rm", "✕");
+        rm.addEventListener("pointerdown", e => e.stopPropagation());
+        rm.addEventListener("click", e => { e.stopPropagation(); src.cuts.splice(src.cuts.indexOf(cy), 1); paintLines(); });
+        line.appendChild(rm);
+        // drag to move
+        line.addEventListener("pointerdown", e => {
+          if (e.target === rm) return;
+          e.preventDefault(); e.stopPropagation();
+          line.setPointerCapture(e.pointerId);
+          const rect = stage.getBoundingClientRect();
+          const move = ev => {
+            let ny = (ev.clientY - rect.top) / rect.height * src.h;
+            ny = Math.max(4, Math.min(src.h - 4, ny));
+            const i = src.cuts.indexOf(cy); if (i >= 0) src.cuts[i] = Math.round(ny);
+            line.style.top = (src.cuts[i] / src.h * rect.height) + "px";
+          };
+          const up = () => { document.removeEventListener("pointermove", move); document.removeEventListener("pointerup", up); paintLines(); };
+          document.addEventListener("pointermove", move); document.addEventListener("pointerup", up);
+        });
+        stage.appendChild(line);
+      });
+    }
+    // click empty area to add a cut
+    let downY = null, moved = false;
+    stage.addEventListener("pointerdown", e => {
+      if (e.target.closest(".cutline")) return;
+      downY = e.clientY; moved = false;
+    });
+    stage.addEventListener("pointermove", e => { if (downY != null && Math.abs(e.clientY - downY) > 4) moved = true; });
+    stage.addEventListener("click", e => {
+      if (e.target.closest(".cutline") || moved) { downY = null; return; }
+      const rect = stage.getBoundingClientRect();
+      const cy = Math.round((e.clientY - rect.top) / rect.height * src.h);
+      src.cuts.push(Math.max(4, Math.min(src.h - 4, cy)));
+      paintLines();
+    });
+
+    const hint = el("div", "stage-hint", `${src.cuts.length + 1} sections · click to add cut · drag a line to move`);
+    stage.appendChild(hint);
+
+    if (im.complete) requestAnimationFrame(paintLines);
+    else im.addEventListener("load", () => requestAnimationFrame(paintLines));
+    // repaint on container resize
+    if (window.ResizeObserver) new ResizeObserver(() => paintLines()).observe(stage);
+
+    card.append(bar, stage);
+    return card;
+  }
+
+  function removeSource(src) {
+    state.sources = state.sources.filter(s => s !== src);
+    // drop its sections + any board placements
+    const gone = new Set(state.sections.filter(s => s.sourceId === src.id).map(s => s.id));
+    state.sections = state.sections.filter(s => s.sourceId !== src.id);
+    state.layout = state.layout.filter(id => !gone.has(id));
+    URL.revokeObjectURL(src.url);
+    renderSources(); renderPalette(); renderBoard();
+  }
+
+  // ---------- slicing ----------
+  function sliceSource(src) {
+    // remove existing sections for this source (re-slice)
+    const gone = new Set(state.sections.filter(s => s.sourceId === src.id).map(s => s.id));
+    state.sections = state.sections.filter(s => s.sourceId !== src.id);
+    state.layout = state.layout.filter(id => !gone.has(id));
+
+    const bounds = [0, ...src.cuts.slice().sort((a, b) => a - b), src.h];
+    let n = 0;
+    for (let i = 0; i < bounds.length - 1; i++) {
+      const y0 = bounds[i], y1 = bounds[i + 1];
+      if (y1 - y0 < 4) continue;
+      n++;
+      const c = document.createElement("canvas");
+      c.width = src.w; c.height = y1 - y0;
+      c.getContext("2d").drawImage(src.img, 0, y0, src.w, y1 - y0, 0, 0, src.w, y1 - y0);
+      state.sections.push({
+        id: nid(), sourceId: src.id, sourceName: src.name, dot: src.dot,
+        idx: n, w: src.w, h: y1 - y0,
+        dataURL: c.toDataURL("image/png"), name: `${src.name} · ${n}`
+      });
+    }
+    renderPalette();
+    toast(`Sliced “${src.name}” into ${n} section${n === 1 ? "" : "s"}`);
+  }
+
+  // ---------- render column 2 : palette ----------
+  const paletteBody = $("#paletteBody");
+  function renderPalette() {
+    $("#secCount").textContent = state.sections.length;
+    paletteBody.innerHTML = "";
+    if (!state.sections.length) {
+      paletteBody.innerHTML = '<div class="empty-note">Sliced sections land here.<br>Drag them into the layout →</div>';
+      return;
+    }
+    const used = new Set(state.layout);
+    // group by source, in source order
+    state.sources.forEach(src => {
+      const secs = state.sections.filter(s => s.sourceId === src.id);
+      if (!secs.length) return;
+      const head = el("div", "src-group-head");
+      const d = el("span", "dot"); d.style.background = src.dot;
+      head.append(d, el("span", "nm", src.name));
+      paletteBody.appendChild(head);
+      const wrap = el("div", "chips");
+      secs.forEach(sec => wrap.appendChild(chip(sec, used.has(sec.id))));
+      paletteBody.appendChild(wrap);
+    });
+  }
+
+  function chip(sec, isUsed) {
+    const c = el("div", "chip" + (isUsed ? " used" : ""));
+    c.draggable = true;
+    const thumb = el("div", "thumb"); const t = el("img"); t.src = sec.dataURL; thumb.appendChild(t);
+    const meta = el("div", "meta");
+    meta.append(el("div", "t", sec.name), el("div", "d", `${sec.w}×${sec.h}px`));
+    c.append(thumb, meta);
+    c.addEventListener("dragstart", e => {
+      dragData = { type: "new", id: sec.id };
+      e.dataTransfer.effectAllowed = "copy";
+      e.dataTransfer.setData("text/plain", sec.id);
+      c.classList.add("dragging");
+    });
+    c.addEventListener("dragend", () => c.classList.remove("dragging"));
+    c.title = "Drag into the layout";
+    return c;
+  }
+
+  // ---------- column 3 : board ----------
+  let dragData = null; // {type:'new'|'move', id, index?}
+  const boardWrap = $("#boardWrap");
+  const board = $("#board");
+
+  function renderBoard() {
+    $("#boardCount").textContent = state.layout.length;
+    board.innerHTML = "";
+    if (!state.layout.length) {
+      board.className = "board empty-board";
+      board.textContent = "Drag sections here to stack your combined page, top to bottom.";
+      return;
+    }
+    board.className = "board";
+    state.layout.forEach((sid, index) => {
+      const sec = state.sections.find(s => s.id === sid);
+      if (!sec) return;
+      const slab = el("div", "slab");
+      slab.draggable = true;
+      const im = el("img"); im.src = sec.dataURL; im.alt = sec.name;
+      const bar = el("div", "bar");
+      const grab = el("span", "grab", "⠿");
+      const nm = el("span", "nm", sec.name);
+      const x = el("button", "x", "✕");
+      x.addEventListener("click", () => { state.layout.splice(index, 1); renderBoard(); renderPalette(); });
+      bar.append(grab, nm, x);
+      slab.append(bar, im);
+      slab.addEventListener("dragstart", e => {
+        dragData = { type: "move", id: sid, index };
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", sid);
+        slab.classList.add("dragging");
+      });
+      slab.addEventListener("dragend", () => slab.classList.remove("dragging"));
+      board.appendChild(slab);
+    });
+  }
+
+  function dropIndex(clientY) {
+    const slabs = [...board.querySelectorAll(".slab")];
+    for (let i = 0; i < slabs.length; i++) {
+      const r = slabs[i].getBoundingClientRect();
+      if (clientY < r.top + r.height / 2) return i;
+    }
+    return slabs.length;
+  }
+
+  boardWrap.addEventListener("dragover", e => {
+    if (!dragData) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = dragData.type === "new" ? "copy" : "move";
+    board.classList.add("drop-hot");
+    showMarker(e.clientY);
+  });
+  boardWrap.addEventListener("dragleave", e => { if (!boardWrap.contains(e.relatedTarget)) { board.classList.remove("drop-hot"); clearMarker(); } });
+  boardWrap.addEventListener("drop", e => {
+    if (!dragData) return;
+    e.preventDefault();
+    board.classList.remove("drop-hot"); clearMarker();
+    let idx = state.layout.length ? dropIndex(e.clientY) : 0;
+    if (dragData.type === "new") {
+      state.layout.splice(idx, 0, dragData.id);
+    } else {
+      const from = dragData.index;
+      const [moved] = state.layout.splice(from, 1);
+      if (from < idx) idx--;
+      state.layout.splice(idx, 0, moved);
+    }
+    dragData = null;
+    renderBoard(); renderPalette();
+  });
+
+  let marker = null;
+  function showMarker(clientY) {
+    if (!state.layout.length) return;
+    clearMarker();
+    const idx = dropIndex(clientY);
+    marker = el("div", "drop-marker");
+    const slabs = board.querySelectorAll(".slab");
+    if (idx >= slabs.length) board.appendChild(marker);
+    else board.insertBefore(marker, slabs[idx]);
+  }
+  function clearMarker() { if (marker) { marker.remove(); marker = null; } }
+
+  $("#clearBoard").addEventListener("click", () => {
+    if (!state.layout.length) return;
+    state.layout = []; renderBoard(); renderPalette();
+  });
+
+  // ---------- export ----------
+  $("#exportPng").addEventListener("click", () => {
+    if (!state.layout.length) { toast("Add sections to the layout first"); return; }
+    const targetW = Math.max(200, parseInt($("#exportW").value, 10) || 1200);
+    const secs = state.layout.map(id => state.sections.find(s => s.id === id)).filter(Boolean);
+    let totalH = 0;
+    const scaled = secs.map(s => { const h = Math.round(s.h * targetW / s.w); totalH += h; return h; });
+    const c = document.createElement("canvas");
+    c.width = targetW; c.height = totalH;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, targetW, totalH);
+    let y = 0, pending = secs.length;
+    if (!pending) return;
+    secs.forEach((s, i) => {
+      const img = new Image();
+      const yy = y; y += scaled[i];
+      img.onload = () => {
+        ctx.drawImage(img, 0, yy, targetW, scaled[i]);
+        if (--pending === 0) downloadURL(c.toDataURL("image/png"), "assembled-page.png");
+      };
+      img.src = s.dataURL;
+    });
+    toast("Rendering PNG…");
+  });
+
+  $("#exportJson").addEventListener("click", () => {
+    const out = {
+      exportedAt: new Date().toISOString(),
+      widthPx: parseInt($("#exportW").value, 10) || 1200,
+      sections: state.layout.map((id, order) => {
+        const s = state.sections.find(x => x.id === id);
+        return s ? { order: order + 1, name: s.name, source: s.sourceName, w: s.w, h: s.h } : null;
+      }).filter(Boolean)
+    };
+    downloadURL("data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(out, null, 2)), "layout.json");
+  });
+
+  function downloadURL(url, filename) {
+    const a = document.createElement("a"); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // ---------- init ----------
+  renderSources(); renderPalette(); renderBoard();
+})();
+</script>
