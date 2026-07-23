@@ -1,7 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 56" role="img" aria-label="BBP Legal">
-  <!-- PLACEHOLDER matched to BBP palette — replace with the real BBP Legal logo (keep filename) -->
-  <rect x="0" y="6" width="44" height="44" rx="7" fill="#e8611e"/>
-  <text x="22" y="37" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#141216">B</text>
-  <text x="58" y="30" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#ffffff" letter-spacing="1">BBP LEGAL</text>
-  <text x="58" y="46" font-family="Arial, sans-serif" font-size="10.5" fill="#f28c46" letter-spacing="2.5">LEGAL INTELLIGENCE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="BBP Legal — Legal Intelligence">
+  <!-- BBP LEGAL wordmark + emblem. Designed for a dark background (topbar). -->
+  <defs>
+    <linearGradient id="bbpOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4772a"/>
+      <stop offset="1" stop-color="#d9530e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem: badge with an inset keyline and a scales-of-justice mark -->
+  <rect x="4" y="6" width="52" height="52" rx="13" fill="url(#bbpOrange)"/>
+  <rect x="9.5" y="11.5" width="41" height="41" rx="9" fill="none" stroke="#f6efe4" stroke-opacity="0.28" stroke-width="1.4"/>
+  <g stroke="#f6efe4" stroke-width="2.4" stroke-linecap="round" fill="none">
+    <!-- top beam -->
+    <line x1="18" y1="24" x2="42" y2="24"/>
+    <!-- center post -->
+    <line x1="30" y1="20" x2="30" y2="44"/>
+    <!-- base foot -->
+    <line x1="23" y1="46" x2="37" y2="46"/>
+    <!-- hanging pans -->
+    <path d="M14 24 L18 33 A6 6 0 0 0 30 33"/>
+    <path d="M46 24 L42 33 A6 6 0 0 1 30 33"/>
+  </g>
+  <circle cx="30" cy="18.5" r="2.6" fill="#f6efe4"/>
+
+  <!-- Wordmark -->
+  <text x="72" y="34" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="700" fill="#ffffff" letter-spacing="1.5">BBP</text>
+  <text x="138" y="34" font-family="Georgia,'Times New Roman',serif" font-size="27" font-weight="400" fill="#f4772a" letter-spacing="3">LEGAL</text>
+  <!-- rule + tagline -->
+  <rect x="72" y="42" width="150" height="1.4" fill="#f4772a" opacity="0.55"/>
+  <text x="72" y="55" font-family="Arial,Helvetica,sans-serif" font-size="9.5" fill="#c9bcab" letter-spacing="3.4">CASE-WINNING INTELLIGENCE</text>
 </svg>
