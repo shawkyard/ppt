@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BBP Legal — Report Template</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/brand.css">
+<link rel="stylesheet" href="/assets/report.css">
+<!-- STEP 1: set this attorney's accent color -->
+<style>:root{ --accent:#c19a4b; }</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brandlock"><img src="/assets/bbp-logo.svg" alt="BBP Legal"></div>
+  <div class="cobrand">
+    <span class="divider"></span>
+    <div class="attorney">
+      <!-- STEP 2: attorney name + tagline -->
+      <div class="name">Prepared for [ATTORNEY NAME]</div>
+      <div class="sub">Confidential lead intelligence</div>
+    </div>
+    <!-- STEP 3: drop the attorney logo at reports/<slug>/attorney-logo.svg -->
+    <img class="alogo" src="attorney-logo.svg" alt="[ATTORNEY NAME]">
+  </div>
+</div></header>
+
+<section class="report-hero"><div class="wrap">
+  <div class="kicker">[PRACTICE-AREA] Case Hunter</div>
+  <h1>[STATE] Daily Opportunity Report</h1>
+  <div class="sub">[DATE] · [SCOPE]</div>
+</div></section>
+
+<main class="wrap">
+  <div class="notice red"><strong>Read first.</strong> Standard HOLD / compliance banner — copy from reports/cleveland/index.html.</div>
+  <p class="lede">TO CREATE A NEW ATTORNEY:</p>
+  <ul class="tight">
+    <li>Copy this <code>_template</code> folder to <code>reports/&lt;slug&gt;/</code>.</li>
+    <li>Set <code>--accent</code> (STEP 1), the name/tagline (STEP 2), and drop <code>attorney-logo.svg</code> (STEP 3).</li>
+    <li>Fill lead cards from that attorney's scored report (structure in reports/cleveland/index.html).</li>
+    <li>Add a card for them on the home page (<code>/index.html</code>).</li>
+  </ul>
+</main>
+
+<footer class="sitefoot"><div class="wrap"><div class="disc"><strong>BBP Legal.</strong> Template — not a live report.</div></div></footer>
+</body>
+</html>

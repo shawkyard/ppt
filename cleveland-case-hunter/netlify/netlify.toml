@@ -1,0 +1,29 @@
+# BBP Legal — Netlify configuration
+# Static site; the zip root is the publish root.
+
+[build]
+  publish = "."
+
+# Pretty URLs: /reports/cleveland/ serves reports/cleveland/index.html
+[build.processing]
+  skip_processing = false
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Reports are confidential client intelligence — ask crawlers to stay out.
+    X-Robots-Tag = "noindex, nofollow"
+
+# Long-cache static assets (logos/css); reports stay fresh.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/reports/*"
+  [headers.values]
+    Cache-Control = "no-cache"

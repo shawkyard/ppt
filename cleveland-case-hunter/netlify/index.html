@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BBP Legal — Client Report Portal</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/brand.css">
+<link rel="stylesheet" href="/assets/report.css">
+<style>
+  .hero-home { background: linear-gradient(180deg,var(--brand-navy),var(--brand-navy-2)); color:#fff; }
+  .hero-home .wrap { padding: 56px 24px; }
+  .hero-home h1 { color:#fff; font-size: clamp(30px,5vw,46px); max-width: 720px; }
+  .hero-home p { color:#cdd7e2; font-size:17px; max-width:640px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; margin:26px 0; }
+  .ccard { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; display:flex; flex-direction:column; gap:8px; }
+  .ccard.live { border-top:4px solid var(--brand-gold); }
+  .ccard.slot { border:1px dashed var(--line); box-shadow:none; background:#fbfcfd; color:var(--muted); }
+  .ccard h3 { margin:0; }
+  .ccard .st { font-size:12px; text-transform:uppercase; letter-spacing:.05em; }
+  .ccard .st.on { color:var(--green); } .ccard .st.off{ color:var(--muted); }
+  .ccard .meta2 { font-size:13px; color:var(--muted); }
+  .ccard a.btn { margin-top:auto; }
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brandlock"><img src="/assets/bbp-logo.svg" alt="BBP Legal"></div>
+  <div class="cobrand"><div class="attorney"><div class="name">Client Report Portal</div><div class="sub">Daily Utah legal-intelligence reports</div></div></div>
+</div></header>
+
+<section class="hero-home"><div class="wrap">
+  <h1>Serious-case intelligence, delivered every morning.</h1>
+  <p>BBP Legal scans lawful Utah public sources daily and delivers each attorney a private, co-branded opportunity report — updated automatically at 4:00&nbsp;a.m. MST.</p>
+</div></section>
+
+<main class="wrap">
+  <div class="section"><h2><span class="num">★</span> Client Reports</h2></div>
+  <p class="lede">Each attorney gets a private link with BBP branding and their own logo. Below: one live client plus placeholder slots illustrating the 10-attorney model.</p>
+
+  <div class="cards">
+    <div class="ccard live">
+      <div class="st on">● Live · updated 2026-07-23</div>
+      <h3>Catherine Cleveland</h3>
+      <div class="meta2">Criminal defense · Utah · 7 leads today</div>
+      <a class="btn" href="/reports/cleveland/">Open report →</a>
+    </div>
+
+    <div class="ccard slot"><div class="st off">Placeholder slot</div><h3>Attorney #2</h3><div class="meta2">Add slug → /reports/attorney-2/</div></div>
+    <div class="ccard slot"><div class="st off">Placeholder slot</div><h3>Attorney #3</h3><div class="meta2">Add slug → /reports/attorney-3/</div></div>
+    <div class="ccard slot"><div class="st off">Placeholder slot</div><h3>Attorney #4</h3><div class="meta2">…up to 10 (then 50 states)</div></div>
+  </div>
+
+  <div class="section"><h2><span class="num">i</span> How it works</h2></div>
+  <ul class="tight">
+    <li><strong>Daily scan (4:00 a.m. MST):</strong> lawful Utah public sources are searched and scored on a 100-point model.</li>
+    <li><strong>Per-attorney tailoring:</strong> each report is filtered to the attorney's practice areas and geography, then co-branded with their logo.</li>
+    <li><strong>Private links:</strong> each report lives at its own URL (<code>/reports/&lt;slug&gt;/</code>), served over HTTPS on Netlify.</li>
+    <li><strong>Compliance-first:</strong> no XChange automation, no solicitations sent, every lead gated behind attorney review and the Utah Rules of Professional Conduct. See our <a href="/methodology/">Utah data-sources &amp; methodology</a>.</li>
+  </ul>
+</main>
+
+<footer class="sitefoot"><div class="wrap">
+  <div class="disc"><strong>BBP Legal.</strong> Lead intelligence from lawful public sources — not legal advice. No Utah XChange automation. All persons referenced in reports are accused / alleged and presumed innocent.</div>
+  <div><a href="/methodology/">Methodology</a></div>
+</div></footer>
+</body>
+</html>

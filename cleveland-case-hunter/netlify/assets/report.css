@@ -1,0 +1,64 @@
+/* ============================================================
+   REPORT LAYOUT  (shared by every attorney report)
+   ============================================================ */
+
+.report-hero { background: linear-gradient(180deg, var(--brand-navy) 0%, var(--brand-navy-2) 100%); color: #fff; }
+.report-hero .wrap { padding: 34px 24px 40px; }
+.report-hero .kicker { color: var(--brand-gold-2); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.report-hero h1 { color: #fff; font-size: clamp(26px, 4vw, 40px); margin-bottom: 6px; }
+.report-hero .sub { color: #cdd7e2; font-size: 15px; }
+.report-hero .meta { margin-top: 18px; display: flex; gap: 26px; flex-wrap: wrap; }
+.report-hero .meta div { border-left: 2px solid var(--accent); padding-left: 12px; }
+.report-hero .meta .n { font-family: var(--serif); font-size: 22px; color: #fff; }
+.report-hero .meta .l { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #9fb0c1; }
+
+/* banner / disclaimer */
+.notice { background: var(--amber-bg); border: 1px solid #e7d3a6; border-left: 5px solid var(--accent); border-radius: var(--radius); padding: 16px 18px; margin: 24px 0; font-size: 14px; }
+.notice strong { color: var(--brand-navy); }
+.notice.red { background: var(--danger-bg); border-color: #e6bcbc; border-left-color: var(--danger); }
+
+/* section headings */
+.section { margin: 40px 0 8px; }
+.section h2 { font-size: 22px; display: flex; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--line); }
+.section h2 .num { font-size: 13px; font-weight: 700; color: #fff; background: var(--brand-navy); border-radius: 6px; padding: 2px 9px; font-family: var(--sans); }
+.section .lede { color: var(--muted); font-size: 14px; margin: 8px 0 4px; }
+
+/* lead card */
+.lead { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin: 16px 0; overflow: hidden; }
+.lead-head { display: flex; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line-2); }
+.score-box { flex: 0 0 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; padding: 12px 6px; }
+.score-box .s { font-family: var(--serif); font-size: 32px; line-height: 1; }
+.score-box .of { font-size: 10px; opacity: .8; }
+.lead-title { padding: 14px 18px; flex: 1; min-width: 0; }
+.lead-title .name { font-family: var(--serif); font-size: 19px; color: var(--brand-navy); }
+.lead-title .idline { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.lead-title .badges { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+.b-hold { background: var(--danger-bg); color: var(--danger); border: 1px solid #e6bcbc; }
+.b-review { background: var(--amber-bg); color: var(--amber); border: 1px solid #e7d3a6; }
+.b-develop { background: var(--green-bg); color: var(--green); border: 1px solid #bcd6c5; }
+.b-venue { background: var(--danger-bg); color: var(--danger); border: 1px solid #e6bcbc; }
+.b-monitor{ background: var(--slate-bg); color: var(--slate); border: 1px solid #d2d7dd; }
+
+.lead-body { padding: 6px 18px 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 2px 22px; margin: 10px 0; }
+.f { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.f .k { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.f .v { font-size: 14px; color: var(--brand-ink); }
+.f .v.strong { font-weight: 600; }
+.callout { margin-top: 10px; font-size: 13.5px; }
+.callout .lab { font-weight: 700; color: var(--brand-navy); }
+.callout.risk { background: var(--danger-bg); border-radius: 8px; padding: 10px 12px; }
+.callout.action { background: var(--line-2); border-radius: 8px; padding: 10px 12px; }
+
+/* generic table (score model, sources) */
+table.tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+table.tbl th { background: var(--brand-navy); color: #fff; text-align: left; padding: 8px 10px; font-weight: 600; font-size: 12px; letter-spacing: .03em; }
+table.tbl td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.tbl tr:nth-child(even) td { background: #fafbfc; }
+.scroll-x { overflow-x: auto; }
+
+/* small list */
+ul.tight { margin: 8px 0; padding-left: 20px; }
+ul.tight li { margin: 5px 0; font-size: 14px; }
+.src { font-size: 12.5px; color: var(--muted); }
