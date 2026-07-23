@@ -30,13 +30,15 @@ netlify.toml               Config: clean URLs, security + noindex headers, cachi
 
 ## 1. Match BBP branding (30 seconds)
 
-Open **`assets/brand.css`** and replace the six `--brand-*` hex values at the top with your
-real BBP Legal colors. Replace **`assets/bbp-logo.svg`** with your real logo (keep the
-filename, or point the `<img>` tags at a PNG/SVG). Every page updates automatically.
+The palette in **`assets/brand.css`** is matched to BBP Legal — **black / burnt-orange
+(#e8611e) / warm cream** with serif headlines and orange italic accent lines. If you have
+exact brand hexes, fine-tune the six `--brand-*` values at the top. Replace
+**`assets/bbp-logo.svg`** with your real logo (keep the filename, or point the `<img>` tags
+at a PNG/SVG). Every page updates automatically.
 
-> These colors are professional placeholders. I could not read `bbplegal-dbcgt5ax.manus.space`
-> from the build environment (network policy blocked it), so send me the hex codes + logo and
-> I'll lock it exactly — or just drop them in here yourself.
+> Colors were matched visually from the BBP Legal site (the build environment's network
+> policy blocked a direct fetch). Send the exact brand hex codes + logo file and I'll drop
+> them in for pixel-exact fidelity.
 
 ## 2. Add an attorney (per-client branding)
 

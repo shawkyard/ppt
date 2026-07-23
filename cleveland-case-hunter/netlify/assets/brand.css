@@ -9,29 +9,31 @@
    ============================================================ */
 
 :root {
-  /* --- BBP master brand (PLACEHOLDER — swap for real values) --- */
-  --brand-navy:      #0e2033;   /* primary dark  */
-  --brand-navy-2:    #16324f;   /* dark tint     */
-  --brand-gold:      #c19a4b;   /* accent / rule */
-  --brand-gold-2:    #d9bd7f;   /* accent light  */
-  --brand-ink:       #1a1f26;   /* body text     */
-  --brand-paper:     #f5f6f8;   /* page bg        */
+  /* --- BBP master brand (matched to bbplegal — black / burnt-orange / cream) ---
+     Names kept as --brand-navy / --brand-gold for backward compatibility;
+     the VALUES are the real BBP palette. Fine-tune hexes if you have exacts. */
+  --brand-navy:      #141216;   /* primary dark (near-black, warm)  */
+  --brand-navy-2:    #26222a;   /* dark tint / gradient end         */
+  --brand-gold:      #e8611e;   /* BBP burnt orange — accent/rule   */
+  --brand-gold-2:    #f28c46;   /* light orange (accents on dark)   */
+  --brand-ink:       #211d1a;   /* body text (warm near-black)      */
+  --brand-paper:     #f6efe4;   /* warm cream page bg               */
 
-  /* --- derived neutrals (usually leave as-is) --- */
+  /* --- derived neutrals (warm) --- */
   --card:   #ffffff;
-  --muted:  #5b6672;
-  --line:   #e3e7ec;
-  --line-2: #eef1f4;
+  --muted:  #6b6259;
+  --line:   #e6ddcf;
+  --line-2: #f0e9dd;
 
-  /* --- semantic status colors --- */
-  --danger:  #9c2b2b;   /* HOLD / Do Not Contact */
-  --danger-bg:#f7e7e7;
-  --amber:   #a9701a;   /* Review Today */
-  --amber-bg:#fbf1de;
+  /* --- semantic status colors (kept distinct from brand orange) --- */
+  --danger:  #a12b21;   /* HOLD / Do Not Contact */
+  --danger-bg:#f7e6e2;
+  --amber:   #b07d12;   /* Review Today (gold-yellow, not brand orange) */
+  --amber-bg:#f8efd6;
   --green:   #2f6a43;   /* Develop / Verify */
   --green-bg:#e6f0e9;
-  --slate:   #4a5568;   /* Monitor / neutral */
-  --slate-bg:#eceef1;
+  --slate:   #5a5148;   /* Monitor / neutral */
+  --slate-bg:#ece6dc;
 
   /* --- per-attorney accent (overridden per report) --- */
   --accent: var(--brand-gold);
@@ -54,8 +56,12 @@ body {
   font-size: 16px;
 }
 h1,h2,h3,h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; color: var(--brand-navy); margin: 0 0 .4em; }
-a { color: var(--brand-navy-2); }
+a { color: var(--brand-gold); }
 img { max-width: 100%; }
+
+/* BBP signature: orange italic serif accent line under a headline */
+.accent-italic { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--brand-gold); }
+.report-hero .accent-italic, .hero-home .accent-italic { color: var(--brand-gold-2); }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
