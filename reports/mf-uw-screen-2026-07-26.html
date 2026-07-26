@@ -1,0 +1,468 @@
+<title>MF Underwriting Screen — CREXi Export, 26 Jul 2026</title>
+<style>
+  :root{
+    --ink:#0b0d0f; --charcoal:#16191d; --graphite:#22262c; --slateline:#2e343c;
+    --mist:#8b929c; --fog:#c7ccd3; --white:#f4f6f8;
+    --gold:#c8a95a; --goldsoft:#a4894a;
+    --approve:#4f9d69; --warn:#c9a227; --danger:#b4544b;
+    --approve-bg:rgba(79,157,105,.12); --warn-bg:rgba(201,162,39,.12); --danger-bg:rgba(180,84,75,.12);
+    --gold-bg:rgba(200,169,90,.12);
+    --serif:ui-serif,Georgia,Cambria,"Times New Roman",serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:dark}
+  body{margin:0;background:var(--ink);color:var(--fog);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.55;font-size:15px}
+  .tnum{font-variant-numeric:tabular-nums}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--goldsoft);text-decoration:underline}
+
+  /* ---- Masthead ---- */
+  header.mast{border-bottom:1px solid var(--slateline);
+    background:linear-gradient(180deg,#0e1114 0%,var(--ink) 100%)}
+  .mast .wrap{padding-top:40px;padding-bottom:34px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--gold);border-radius:5px;
+    display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-weight:700;font-size:15px}
+  .brand .name{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);font-weight:600}
+  h1{font-family:var(--serif);font-weight:600;color:var(--white);
+    font-size:clamp(28px,4vw,42px);line-height:1.08;margin:0 0 12px;letter-spacing:-.01em;text-wrap:balance}
+  .sub{color:var(--mist);max-width:70ch;font-size:15px;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:12.5px;color:var(--mist)}
+  .meta b{color:var(--fog);font-weight:600}
+
+  section{padding:40px 0}
+  section+section{border-top:1px solid rgba(46,52,60,.5)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    font-weight:600;margin:0 0 6px}
+  h2{font-family:var(--serif);font-weight:600;color:var(--white);font-size:24px;margin:0 0 6px;letter-spacing:-.01em}
+  h2+.lede{color:var(--mist);margin:0 0 26px;max-width:74ch}
+
+  /* ---- Funnel ---- */
+  .funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .fcard{background:var(--charcoal);border:1px solid var(--slateline);border-radius:10px;padding:18px 18px 16px;
+    position:relative;overflow:hidden}
+  .fcard .stripe{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--slateline)}
+  .fcard.total .stripe{background:var(--gold)}
+  .fcard.reject .stripe{background:var(--danger)}
+  .fcard.sub .stripe{background:var(--warn)}
+  .fcard.keep .stripe{background:var(--approve)}
+  .fcard .fig{font-size:34px;font-weight:600;color:var(--white);font-family:var(--serif);line-height:1}
+  .fcard .flabel{font-size:12px;color:var(--fog);margin-top:8px;font-weight:600}
+  .fcard .fnote{font-size:12px;color:var(--mist);margin-top:3px}
+
+  /* ---- Table ---- */
+  .tablewrap{overflow-x:auto;border:1px solid var(--slateline);border-radius:10px;background:var(--charcoal)}
+  table{border-collapse:collapse;width:100%;min-width:820px;font-size:13.5px}
+  thead th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+    font-weight:600;padding:13px 14px;border-bottom:1px solid var(--slateline);white-space:nowrap;background:#13161a}
+  tbody td{padding:12px 14px;border-bottom:1px solid rgba(46,52,60,.5);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(255,255,255,.02)}
+  td.num{text-align:right;white-space:nowrap}
+  .pname{color:var(--white);font-weight:600}
+  .ploc{color:var(--mist);font-size:12px;margin-top:2px}
+  .rank{color:var(--gold);font-family:var(--serif);font-weight:600;font-size:15px}
+
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;
+    font-size:11px;font-weight:600;white-space:nowrap;border:1px solid transparent}
+  .pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .pill.om{color:var(--approve);background:var(--approve-bg);border-color:rgba(79,157,105,.35)}
+  .pill.watch{color:var(--warn);background:var(--warn-bg);border-color:rgba(201,162,39,.35)}
+  .pill.pass{color:var(--danger);background:var(--danger-bg);border-color:rgba(180,84,75,.35)}
+  .pill.data{color:var(--fog);background:rgba(139,146,156,.14);border-color:rgba(139,146,156,.35)}
+
+  /* ---- Lead cards ---- */
+  .leads{display:flex;flex-direction:column;gap:16px}
+  .lead{background:var(--charcoal);border:1px solid var(--slateline);border-radius:12px;overflow:hidden}
+  .lead-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;padding:18px 20px;
+    border-bottom:1px solid rgba(46,52,60,.6);background:linear-gradient(180deg,rgba(255,255,255,.015),transparent)}
+  .lead-hd .idx{font-family:var(--serif);color:var(--gold);font-weight:600;font-size:18px}
+  .lead-hd .t{color:var(--white);font-weight:600;font-size:17px;font-family:var(--serif)}
+  .lead-hd .loc{color:var(--mist);font-size:13px}
+  .lead-hd .spacer{flex:1}
+  .lead-body{padding:18px 20px;display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+  .stats{display:grid;grid-template-columns:repeat(3,auto);gap:16px 26px;align-content:start}
+  .stat .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);font-weight:600}
+  .stat .v{color:var(--white);font-size:18px;font-weight:600;margin-top:3px}
+  .stat .v small{font-size:12px;color:var(--mist);font-weight:500}
+  .rd h4{margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .rd p{margin:0 0 12px;font-size:13.5px;color:var(--fog)}
+  .rd p:last-child{margin-bottom:0}
+  .rd .risk{color:var(--fog)}
+  .asks{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+  .asks li{font-size:11.5px;color:var(--fog);background:var(--graphite);border:1px solid var(--slateline);
+    border-radius:6px;padding:4px 9px}
+
+  /* ---- Notes / callout ---- */
+  .callout{background:var(--gold-bg);border:1px solid rgba(200,169,90,.35);border-radius:10px;
+    padding:16px 18px;font-size:13.5px;color:var(--fog)}
+  .callout b{color:var(--white)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .mini{background:var(--charcoal);border:1px solid var(--slateline);border-radius:10px;padding:16px 18px}
+  .mini h3{margin:0 0 4px;font-size:14px;color:var(--white)}
+  .mini p{margin:0;font-size:13px;color:var(--mist)}
+  ul.tidy{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--fog)}
+  ul.tidy li{margin:4px 0}
+
+  footer{border-top:1px solid var(--slateline);padding:26px 0 44px;color:var(--mist);font-size:12px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+  @media (max-width:820px){
+    .funnel{grid-template-columns:1fr 1fr}
+    .lead-body{grid-template-columns:1fr}
+    .two{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">S</div>
+      <div class="name">Stonebrook Deal Scout · Underwriting Screen</div>
+    </div>
+    <h1>Multifamily underwriting screen — CREXi inventory pull</h1>
+    <p class="sub">A first-pass value-add screen of a 51-property CREXi export, run against the Stonebrook
+      mandate: an underperforming <b style="color:var(--fog)">C asset in a B pocket</b> of a strong or emerging
+      market, with fixable rent, vacancy, and other-income upside — bought at a basis a realistic 18–24 month
+      plan can turn into value. This is a screen, not underwriting: the export carries no rents, vacancy, or
+      operating statements, so nothing here clears past "request the OM."</p>
+    <div class="meta">
+      <span><b>Source</b> Sales_Export_20260726 (CREXi)</span>
+      <span><b>Universe</b> 51 listings tagged Multifamily</span>
+      <span><b>Screened</b> 26 Jul 2026</span>
+      <span><b>Basis</b> listing-level data only</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Screen funnel</p>
+    <h2>51 listings in, 3 leads worth an OM out</h2>
+    <p class="lede">The mandate is the first filter, and it does most of the work. Half the export never was an
+      apartment deal — raw land, RV/mobile-home parks, motels, and mixed-use — and another quarter is
+      duplex/tri/four-plex product below the scale a professional value-add business plan needs.</p>
+    <div class="funnel">
+      <div class="fcard total"><div class="stripe"></div><div class="fig tnum">51</div>
+        <div class="flabel">Listings in export</div><div class="fnote">all tagged "Multifamily" on CREXi</div></div>
+      <div class="fcard reject"><div class="stripe"></div><div class="fig tnum">25</div>
+        <div class="flabel">Reject — wrong asset class</div><div class="fnote">land, RV/MHP, motels, mixed-use</div></div>
+      <div class="fcard sub"><div class="stripe"></div><div class="fig tnum">14</div>
+        <div class="flabel">Sub-scale</div><div class="fnote">duplex / tri / four-plex, below mandate</div></div>
+      <div class="fcard keep"><div class="stripe"></div><div class="fig tnum">12</div>
+        <div class="flabel">Operating apartments screened</div><div class="fnote">3 request OM · 4 watch · 4 pass · 1 needs data</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Ranked screen</p>
+    <h2>The 12 operating apartments, ranked</h2>
+    <p class="lede">Ranked on thesis fit given only what the export shows: in-place cap and price/unit where posted,
+      basis per square foot, days on market as price-reset leverage, and market quality. Rent gap, vacancy, and
+      value-created can't be scored until an OM and T-12 arrive — that's the point of the screen.</p>
+    <div class="tablewrap">
+      <table class="tnum">
+        <thead>
+          <tr>
+            <th>#</th><th>Property</th><th>Disposition</th>
+            <th class="num">Ask</th><th class="num">Units</th><th class="num">$/unit</th>
+            <th class="num">In-place cap</th><th class="num">DOM</th><th>Read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank">1</td>
+            <td><div class="pname">George Commons</div><div class="ploc">Vincennes, IN</div></td>
+            <td><span class="pill om">Request OM</span></td>
+            <td class="num">$2,400,000</td><td class="num">32</td><td class="num">$75,000</td>
+            <td class="num">7.8%</td><td class="num">223</td>
+            <td>Healthy in-place yield, low basis/unit, very stale = leverage.</td>
+          </tr>
+          <tr>
+            <td class="rank">2</td>
+            <td><div class="pname">Briggs Flats</div><div class="ploc">Indianapolis, IN</div></td>
+            <td><span class="pill om">Request OM</span></td>
+            <td class="num">—</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">7.3%</td><td class="num">116</td>
+            <td>Best market of the set; price not posted — get it.</td>
+          </tr>
+          <tr>
+            <td class="rank">3</td>
+            <td><div class="pname">Tiffany Square Apartments</div><div class="ploc">Shreveport, LA</div></td>
+            <td><span class="pill om">Request OM</span></td>
+            <td class="num">$2,600,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">—</td><td class="num">30</td>
+            <td>Real scale at ~$44/sf — value-add canvas; soft metro.</td>
+          </tr>
+          <tr>
+            <td class="rank">4</td>
+            <td><div class="pname">613 Gastel Circle</div><div class="ploc">Edinburg, TX</div></td>
+            <td><span class="pill watch">Watchlist</span></td>
+            <td class="num">$1,747,500</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">—</td><td class="num">11</td>
+            <td>RGV growth pocket; too fresh to expect price give.</td>
+          </tr>
+          <tr>
+            <td class="rank">5</td>
+            <td><div class="pname">611 Cameron Street</div><div class="ploc">Weslaco, TX</div></td>
+            <td><span class="pill watch">Watchlist</span></td>
+            <td class="num">$1,050,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">—</td><td class="num">509</td>
+            <td>509 DOM — strong reset leverage; lead with a low number.</td>
+          </tr>
+          <tr>
+            <td class="rank">6</td>
+            <td><div class="pname">3417 Avenue O</div><div class="ploc">Galveston, TX</div></td>
+            <td><span class="pill watch">Watchlist</span></td>
+            <td class="num">$1,000,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">6.4%</td><td class="num">80</td>
+            <td>Seller financing offered; coastal insurance is the swing.</td>
+          </tr>
+          <tr>
+            <td class="rank">7</td>
+            <td><div class="pname">1586 E 22 St</div><div class="ploc">Brooklyn, NY</div></td>
+            <td><span class="pill watch">Watchlist</span></td>
+            <td class="num">$1,900,000</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">—</td><td class="num">185</td>
+            <td>Rent-stabilization risk; default lean is pass.</td>
+          </tr>
+          <tr>
+            <td class="rank">8</td>
+            <td><div class="pname">Twin Terrace Village</div><div class="ploc">Logan, UT</div></td>
+            <td><span class="pill pass">Pass</span></td>
+            <td class="num">$14,995,000</td><td class="num">65</td><td class="num">$230,692</td>
+            <td class="num">5.2%</td><td class="num">155</td>
+            <td>Priced like stabilized core; no value-add lever.</td>
+          </tr>
+          <tr>
+            <td class="rank">9</td>
+            <td><div class="pname">Logan Area MF Portfolio</div><div class="ploc">Logan, UT</div></td>
+            <td><span class="pill pass">Pass</span></td>
+            <td class="num">$37,000,000</td><td class="num">159</td><td class="num">$232,704</td>
+            <td class="num">5.6%</td><td class="num">169</td>
+            <td>Institutional core at a sub-6 cap — off-mandate.</td>
+          </tr>
+          <tr>
+            <td class="rank">10</td>
+            <td><div class="pname">Logan Canyon Apartments</div><div class="ploc">Logan, UT</div></td>
+            <td><span class="pill pass">Pass</span></td>
+            <td class="num">$3,000,000</td><td class="num">16</td><td class="num">$187,500</td>
+            <td class="num">5.8%</td><td class="num">152</td>
+            <td>High basis/unit, tight market, no fixable upside shown.</td>
+          </tr>
+          <tr>
+            <td class="rank">11</td>
+            <td><div class="pname">Green Creek Townhomes</div><div class="ploc">Logan, UT</div></td>
+            <td><span class="pill pass">Pass</span></td>
+            <td class="num">$2,293,564</td><td class="num">8</td><td class="num">$286,696</td>
+            <td class="num">5.5%</td><td class="num">152</td>
+            <td>$287k/unit at 5.5% — richest, thinnest of the Logan set.</td>
+          </tr>
+          <tr>
+            <td class="rank">12</td>
+            <td><div class="pname">The Shay</div><div class="ploc">Oklahoma City, OK</div></td>
+            <td><span class="pill data">Needs data</span></td>
+            <td class="num">—</td><td class="num">—</td><td class="num">—</td>
+            <td class="num">—</td><td class="num">169</td>
+            <td>No price, size, or financials posted — pull the listing.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--mist);margin-top:12px">Units and $/unit shown where CREXi posted a
+      price-per-unit; implied unit counts are derived (ask ÷ price-per-unit) and must be confirmed on the rent roll.
+      In-place cap is the broker's stated cap — treat as unverified until the T-12 is in hand.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Tier 1 · request the OM now</p>
+    <h2>The three leads worth analyst time</h2>
+    <p class="lede">Each of these passes the mandate on the data available and has a specific reason to move. None
+      is underwritten — the cards below carry the exact documents to request so the deal math can actually be run.</p>
+    <div class="leads">
+
+      <article class="lead">
+        <div class="lead-hd">
+          <span class="idx">1</span><span class="t">George Commons</span>
+          <span class="loc">1321 N 3rd St, Vincennes, IN · 1980s garden</span>
+          <span class="spacer"></span><span class="pill om">Request OM</span>
+        </div>
+        <div class="lead-body">
+          <div class="stats tnum">
+            <div class="stat"><div class="k">Ask</div><div class="v">$2.40M</div></div>
+            <div class="stat"><div class="k">Units (implied)</div><div class="v">~32</div></div>
+            <div class="stat"><div class="k">Price / unit</div><div class="v">$75,000</div></div>
+            <div class="stat"><div class="k">In-place cap</div><div class="v">7.8%</div></div>
+            <div class="stat"><div class="k">Days on market</div><div class="v">223</div></div>
+            <div class="stat"><div class="k">Basis</div><div class="v">$156<small>/sf</small></div></div>
+          </div>
+          <div class="rd">
+            <h4>Why it fits</h4>
+            <p>The cleanest thesis fit in the export: a healthy 7.8% stated in-place cap, a low $75k/unit basis, and
+              223 days on market — stale enough to negotiate hard. Midwest cash-flow profile in the spirit of the
+              Toledo comps in the model.</p>
+            <h4>Key risk to test</h4>
+            <p class="risk">Vincennes is a small tertiary market (~16k population). Demand depth and rent-growth
+              ceiling are the whole question — verify absorption and market rents before assuming any upside.</p>
+            <h4>Request before scoring</h4>
+            <ul class="asks">
+              <li>T-12 operating statement</li><li>Rent roll w/ lease dates</li><li>Unit mix &amp; reno status</li>
+              <li>Real vs. billable other income</li><li>Deferred-maintenance / capex list</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="lead">
+        <div class="lead-hd">
+          <span class="idx">2</span><span class="t">Briggs Flats</span>
+          <span class="loc">550 Fletcher Ave, Indianapolis, IN</span>
+          <span class="spacer"></span><span class="pill om">Request OM</span>
+        </div>
+        <div class="lead-body">
+          <div class="stats tnum">
+            <div class="stat"><div class="k">Ask</div><div class="v">not posted</div></div>
+            <div class="stat"><div class="k">In-place cap</div><div class="v">7.3%</div></div>
+            <div class="stat"><div class="k">Building</div><div class="v">15,652<small>sf</small></div></div>
+            <div class="stat"><div class="k">Lot</div><div class="v">0.59<small>ac</small></div></div>
+            <div class="stat"><div class="k">Days on market</div><div class="v">116</div></div>
+          </div>
+          <div class="rd">
+            <h4>Why it fits</h4>
+            <p>Indianapolis is the strongest market in the whole pull — a genuine Sunbelt-adjacent Midwest growth
+              metro with real employer diversity and rent growth. A 7.3% stated cap on an operating building here is
+              worth a call on its own.</p>
+            <h4>Key risk to test</h4>
+            <p class="risk">No asking price is posted — the deal can't be ranked until it is. Everything hinges on
+              the number relative to the 7.3% cap and the submarket.</p>
+            <h4>Request before scoring</h4>
+            <ul class="asks">
+              <li>Asking price / whisper</li><li>Unit count &amp; mix</li><li>T-12</li>
+              <li>Rent roll</li><li>Capex history</li><li>Submarket (which pocket of Indy)</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="lead">
+        <div class="lead-hd">
+          <span class="idx">3</span><span class="t">Tiffany Square Apartments</span>
+          <span class="loc">7200 Jewella Ave, Shreveport, LA</span>
+          <span class="spacer"></span><span class="pill om">Request OM</span>
+        </div>
+        <div class="lead-body">
+          <div class="stats tnum">
+            <div class="stat"><div class="k">Ask</div><div class="v">$2.60M</div></div>
+            <div class="stat"><div class="k">Building</div><div class="v">58,500<small>sf</small></div></div>
+            <div class="stat"><div class="k">Basis</div><div class="v">$44<small>/sf</small></div></div>
+            <div class="stat"><div class="k">Lot</div><div class="v">3.4<small>ac</small></div></div>
+            <div class="stat"><div class="k">Days on market</div><div class="v">30</div></div>
+          </div>
+          <div class="rd">
+            <h4>Why it fits</h4>
+            <p>Real scale — 58,500 sf on 3.4 acres — at roughly $44/sf, one of the lowest bases in the export. That
+              is the raw canvas a value-add plan is built on: cheap in, room to renovate and re-tenant.</p>
+            <h4>Key risk to test</h4>
+            <p class="risk">Shreveport is a soft, slow-to-declining metro — market strength is the weak leg of the
+              thesis here. Verify submarket, crime, and real occupancy before the low basis seduces. No income posted.</p>
+            <h4>Request before scoring</h4>
+            <ul class="asks">
+              <li>Unit count &amp; mix</li><li>T-12</li><li>Rent roll &amp; occupancy</li>
+              <li>Capex / condition</li><li>Submarket &amp; crime read</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Tier 2 · watchlist</p>
+    <h2>Four to hold — pursue on price or on data</h2>
+    <p class="lede">Plausible on asset class but not yet earning an OM: each needs either a price reset or a data
+      point that could just as easily kill it.</p>
+    <div class="two">
+      <div class="mini"><h3>613 Gastel Circle — Edinburg, TX</h3>
+        <p>$1.75M · 13,356 sf · 11 DOM. Rio Grande Valley growth submarket, but only 11 days listed — no
+          negotiating leverage yet. Request the OM; revisit pricing if it goes stale.</p></div>
+      <div class="mini"><h3>611 Cameron Street — Weslaco, TX</h3>
+        <p>$1.05M · 7,168 sf · <b style="color:var(--warn)">509 DOM</b>. The stalest listing in the pull — that is
+          real reset leverage. RGV market. Pull the OM and open with a materially low number.</p></div>
+      <div class="mini"><h3>3417 Avenue O — Galveston, TX</h3>
+        <p>$1.0M · 6.4% cap · seller financing offered. Decent in-place yield plus financing optionality. The swing
+          factor is coastal flood/windstorm insurance — get a bindable quote before anything else.</p></div>
+      <div class="mini"><h3>1586 E 22 St — Brooklyn, NY</h3>
+        <p>$1.9M · 185 DOM · no financials. NYC rent-stabilization exposure and a likely sub-5 cap put this against
+          the mandate. Only pursue after confirming regulatory status and in-place rents; default lean is pass.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Tier 3 · pass on thesis</p>
+    <h2>The Logan, UT cluster — priced core, no lever</h2>
+    <p class="lede">Four Logan-area listings share one profile, and it is exactly the one the mandate exists to
+      avoid: sub-6% caps at $187k–$287k per unit in a tight, small market. That is stabilized, fully-priced
+      product — a yield-and-appreciation bet, not a value-add screen. This is the "Summit Residences" pattern from
+      the model: nothing to fix, priced to a low cap, no going-in margin.</p>
+    <div class="callout">
+      <b>Twin Terrace Village</b> ($14.995M · 65u · 5.2% · $230,692/u) · <b>Logan Area MF Portfolio</b>
+      ($37.0M · 159u · 5.6% · $232,704/u) · <b>Logan Canyon Apartments</b> ($3.0M · 16u · 5.8% · $187,500/u) ·
+      <b>Green Creek Townhomes</b> ($2.29M · 8u · 5.5% · $286,696/u). All pass unless a basis reset of 20%+ appears.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Appendix · filtered out</p>
+    <h2>Why 39 listings never reached the screen</h2>
+    <div class="two" style="margin-bottom:16px">
+      <div class="mini"><h3>25 rejected — wrong asset class</h3>
+        <p>The "Multifamily" tag on CREXi is broad. These are not apartment operating deals:</p>
+        <ul class="tidy">
+          <li><b>Raw / entitlement land (7):</b> Southington CT, Odessa TX, two San Benito TX, McAllen TX, plus zoned-for-MF parcels in Tempe AZ &amp; Grundy VA.</li>
+          <li><b>RV parks, mobile-home parks &amp; campgrounds (7):</b> Stampede (Tombstone AZ), Lake Murray (Ardmore OK), Cedar Creek (Crab Orchard KY), Lost Alaskan (Alpine TX), Seven Lakes (Buchanan Dam TX), Hattiesburg KOA, plus the SC workforce/MHP portfolio site.</li>
+          <li><b>Hotels / motels (3):</b> Carthage Motel TX, Crystal Inn St. Petersburg FL, 326 6th Ave N St. Petersburg FL.</li>
+          <li><b>Mixed-use / non-apartment dominant (8):</b> Daytona lakefront dev, Lagrangeville NY, Lakehills TX, Jacksonville FL, Coral Gables office/MF, Dripping Springs TX, Green River UT (business+hospitality), Selma TX (vacant, hospitality/retail).</li>
+        </ul>
+      </div>
+      <div class="mini"><h3>14 sub-scale — below the mandate</h3>
+        <p>Real apartments, but duplex / triplex / four-plex product too small for a professional value-add
+          business plan. Track only if a portfolio roll-up thesis emerges:</p>
+        <ul class="tidy">
+          <li>Houston tri-plex ($450k), New Orleans 3-plex (11.5% cap, $324.5k), Kansas City duplex ($499k)</li>
+          <li>RGV small MF: Mission ×2, McAllen, Alamo TX</li>
+          <li>Coastal FL small MF: LBTS short-term-rental (2.3% cap), Placido Place, Pompano, Lauderhill</li>
+          <li>Other: Alvord TX, Chicago S. Marquette ($161k), Houston Kittridge ($235k)</li>
+        </ul>
+        <p style="margin-top:10px">Notable outlier: the New Orleans 3-plex shows an 11.5% cap, but at 3 units it's
+          below scale — a candidate only inside a neighborhood roll-up.</p>
+      </div>
+    </div>
+    <div class="callout"><b>Bottom line.</b> Of 51 listings, three deserve an analyst's time this week —
+      <b>George Commons (Vincennes)</b>, <b>Briggs Flats (Indianapolis)</b>, and <b>Tiffany Square (Shreveport)</b> —
+      each contingent on the OM and T-12. Nothing in this export is underwritable from the listing data alone; the
+      screen's job is to say where to spend the next hour, not to price a deal.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Stonebrook Deal Scout · preliminary screen — not investment advice, not a final offer</span>
+    <span>CREXi export · 51 listings · screened 26 Jul 2026</span>
+  </div>
+</footer>
