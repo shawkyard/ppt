@@ -1,0 +1,551 @@
+<title>Deal Stories — MF Value-Add Leads · CREXi 26 Jul 2026</title>
+<style>
+:root{
+  --ink:#0b0d0f; --charcoal:#14171b; --graphite:#1c2025; --slateline:#2e343c;
+  --mist:#8b929c; --fog:#c7ccd3; --white:#f4f6f8;
+  --gold:#c8a95a; --goldsoft:#a4894a; --goldglow:rgba(200,169,90,.18);
+  --approve:#5aa974; --warn:#c9a227; --danger:#c05a50;
+  --s-base:#3a4550; --s-reno:#c8a95a; --s-other:#5aa974; --s-mgmt:#8b7bd8;
+  --v-buy:#3a4550; --v-cap:#c8a95a; --v-clo:#6b7280; --v-stab:#5aa974;
+  --serif:ui-serif,Georgia,Cambria,"Times New Roman",serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--fog);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;line-height:1.6;font-size:15.5px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.tnum{font-variant-numeric:tabular-nums}
+a{color:var(--gold);text-decoration:none}
+h2,h3{color:var(--white);letter-spacing:-.01em}
+
+/* cover */
+.cover{position:relative;border-bottom:1px solid var(--slateline);overflow:hidden;
+  background:radial-gradient(120% 90% at 82% -10%,rgba(200,169,90,.10),transparent 60%),linear-gradient(180deg,#0e1114,var(--ink))}
+.cover .wrap{padding:52px 26px 46px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:34px}
+.brand .mark{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:6px;display:grid;place-items:center;
+  color:var(--gold);font-family:var(--serif);font-weight:700;font-size:16px}
+.brand .name{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);font-weight:600}
+.cover h1{font-family:var(--serif);font-weight:600;color:var(--white);margin:0 0 16px;
+  font-size:clamp(32px,5.4vw,60px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance;max-width:16ch}
+.cover .lede{color:var(--fog);max-width:60ch;font-size:17px;margin:0 0 26px}
+.cover .lede b{color:var(--white);font-weight:600}
+.cover-meta{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:12.5px;color:var(--mist);
+  border-top:1px solid var(--slateline);padding-top:20px}
+.cover-meta b{color:var(--fog);font-weight:600}
+
+/* integrity banner */
+.integrity{background:var(--goldglow);border-top:1px solid rgba(200,169,90,.3);border-bottom:1px solid rgba(200,169,90,.3)}
+.integrity .wrap{padding:12px 26px;font-size:12.5px;color:var(--fog);display:flex;gap:10px;align-items:baseline}
+.integrity b{color:var(--white)}
+.integrity .ico{color:var(--gold);font-weight:700}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:11.5px;
+  font-weight:600;white-space:nowrap;border:1px solid transparent}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.om{color:var(--approve);background:rgba(90,169,116,.14);border-color:rgba(90,169,116,.4)}
+.pill.watch{color:var(--warn);background:rgba(201,162,39,.14);border-color:rgba(201,162,39,.4)}
+.pill.pass{color:var(--danger);background:rgba(192,90,80,.14);border-color:rgba(192,90,80,.4)}
+
+/* lead sections */
+.lead{padding:64px 0;border-bottom:1px solid rgba(46,52,60,.55)}
+.lead-top{display:grid;grid-template-columns:340px 1fr;gap:34px;align-items:center;margin-bottom:30px}
+.lead-illus{background:var(--charcoal);border:1px solid var(--slateline);border-radius:14px;padding:18px;
+  box-shadow:0 20px 50px -30px rgba(0,0,0,.8)}
+.illus{width:100%;height:auto;display:block}
+.lead-idx{font-family:var(--serif);color:var(--goldsoft);font-size:13px;letter-spacing:.1em;margin-bottom:8px}
+.lead-title h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.6vw,40px);margin:0 0 8px;line-height:1.05}
+.lead-loc{color:var(--fog);font-size:15px}
+.lead-arch{color:var(--mist);font-size:13px;margin-top:3px}
+.lead-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px}
+.crexi{font-size:12.5px;font-weight:600;border:1px solid var(--slateline);border-radius:8px;padding:6px 12px;color:var(--fog)}
+.crexi:hover{border-color:var(--gold);color:var(--white)}
+
+.statband{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--slateline);
+  border:1px solid var(--slateline);border-radius:12px;overflow:hidden;margin-bottom:34px}
+.st{background:var(--charcoal);padding:15px 16px}
+.st-k{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--mist);font-weight:600}
+.st-v{color:var(--white);font-size:19px;font-weight:600;margin-top:5px;font-variant-numeric:tabular-nums}
+
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 10px}
+.kicker.mt{margin-top:28px}
+.lead-story p{margin:0 0 15px;font-size:15.5px;color:var(--fog)}
+.lead-story .comps{color:var(--fog)}
+.levers,.risks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.levers li,.risks li{position:relative;padding-left:22px;font-size:14.5px;color:var(--fog)}
+.levers li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;
+  background:var(--gold);transform:rotate(45deg)}
+.risks li::before{content:"";position:absolute;left:2px;top:7px;width:9px;height:9px;border-radius:50%;
+  border:1.5px solid var(--danger)}
+
+.lead-charts{display:flex;flex-direction:column;gap:18px;position:sticky;top:18px}
+.chart{background:var(--charcoal);border:1px solid var(--slateline);border-radius:12px;padding:16px 17px}
+.chart-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);font-weight:600}
+.chart-tag{color:var(--goldsoft);border:1px solid rgba(164,137,74,.4);border-radius:5px;padding:1px 7px;
+  font-size:9.5px;letter-spacing:.08em}
+
+/* rent bridge */
+.bartrack{display:flex;height:46px;border-radius:8px;overflow:hidden;border:1px solid var(--slateline)}
+.seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;transition:filter .2s}
+.seg-v{font-size:11px;font-weight:700;color:#0b0d0f;white-space:nowrap;padding:0 4px;
+  text-shadow:0 1px 0 rgba(255,255,255,.15)}
+.s-base{background:var(--s-base)} .s-base .seg-v{color:var(--fog);text-shadow:none}
+.s-reno{background:var(--s-reno)} .s-other{background:var(--s-other)} .s-mgmt{background:var(--s-mgmt)}
+.bridge-ends{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:var(--mist);
+  font-variant-numeric:tabular-nums}
+.bridge-ends .up{color:var(--approve);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:12px}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--mist)}
+.dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+.dot.s-base{background:var(--s-base)} .dot.s-reno{background:var(--s-reno)}
+.dot.s-other{background:var(--s-other)} .dot.s-mgmt{background:var(--s-mgmt)}
+.dot.v-buy{background:var(--v-buy)} .dot.v-cap{background:var(--v-cap)} .dot.v-clo{background:var(--v-clo)}
+
+/* capex */
+.cx-row{display:grid;grid-template-columns:1fr 90px auto;gap:12px;align-items:center;margin-bottom:9px}
+.cx-l{font-size:12.5px;color:var(--fog)}
+.cx-bar{background:var(--graphite);border-radius:5px;height:10px;overflow:hidden}
+.cx-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldsoft),var(--gold));border-radius:5px}
+.cx-v{font-size:12.5px;color:var(--white);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.cx-tot{display:flex;justify-content:space-between;border-top:1px solid var(--slateline);margin-top:12px;
+  padding-top:11px;font-size:13.5px;color:var(--white);font-weight:600}
+.cx-tot small{color:var(--mist);font-weight:500}
+
+/* value bridge */
+.vb-row{display:grid;grid-template-columns:96px 1fr 66px;gap:11px;align-items:center;margin-bottom:11px}
+.vb-l{font-size:11.5px;color:var(--mist);font-weight:600}
+.vb-track{display:flex;height:22px;background:var(--graphite);border-radius:6px;overflow:hidden}
+.vb-track i{display:block;height:100%}
+.v-buy{background:var(--v-buy)} .v-cap{background:var(--v-cap)} .v-clo{background:var(--v-clo)} .v-stab{background:var(--v-stab)}
+.vb-v{font-size:12.5px;color:var(--white);font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.vb-legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:4px 0 12px}
+.vb-created{display:flex;justify-content:space-between;align-items:center;border-radius:8px;padding:10px 13px;
+  font-size:13px;font-weight:700}
+.vb-created.pos{background:rgba(90,169,116,.13);border:1px solid rgba(90,169,116,.4);color:var(--approve)}
+.vb-created.neg{background:rgba(192,90,80,.13);border:1px solid rgba(192,90,80,.4);color:var(--danger)}
+.vb-note{font-size:12px;color:var(--mist);margin:11px 0 0;line-height:1.55}
+.pricebox p{font-size:13px;color:var(--fog);margin:0}.pricebox b{color:var(--white)}
+
+/* gantt */
+.gantt{display:grid;grid-template-columns:150px repeat(8,1fr);gap:4px;font-size:11px}
+.g-cell{min-height:22px}
+.g-corner{color:var(--mist);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  display:flex;align-items:center}
+.g-qh{color:var(--mist);text-align:center;font-weight:600;font-size:10px;
+  border-bottom:1px solid var(--slateline);padding-bottom:3px}
+.g-row-l{color:var(--fog);font-size:12px;display:flex;align-items:center}
+.g-bar{border-radius:5px;height:20px;align-self:center}
+.g-a{background:linear-gradient(90deg,#3a4550,#4a5764)}
+.g-b{background:linear-gradient(90deg,#8b7bd8,#7367c4)}
+.g-c{background:linear-gradient(90deg,var(--goldsoft),var(--gold))}
+.g-d{background:linear-gradient(90deg,#5aa974,#4a9364)}
+.g-e{background:linear-gradient(90deg,#c9a227,#b18f1f)}
+
+/* watchlist */
+.watch-sec{padding:60px 0}
+.watch-sec .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px}
+.watch-sec h2{font-family:var(--serif);font-size:28px;margin:0 0 8px}
+.watch-sec .lede{color:var(--mist);max-width:72ch;margin:0 0 28px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wcard{background:var(--charcoal);border:1px solid var(--slateline);border-radius:12px;padding:20px 21px}
+.w-hd{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.w-hd h3{font-family:var(--serif);font-size:19px;margin:0}
+.w-loc{color:var(--mist);font-size:12.5px;margin-top:2px}
+.w-stats{color:var(--gold);font-size:12.5px;font-weight:600;margin-top:10px;font-variant-numeric:tabular-nums}
+.wcard p{font-size:14px;color:var(--fog);margin:12px 0 0}
+
+/* method / footer */
+.method{border-top:1px solid var(--slateline);background:linear-gradient(180deg,var(--ink),#0e1114)}
+.method .wrap{padding:46px 26px}
+.method h2{font-family:var(--serif);font-size:24px;margin:0 0 14px}
+.method ul{margin:0;padding-left:20px;color:var(--mist);font-size:13.5px;max-width:80ch}
+.method li{margin:7px 0}
+footer{border-top:1px solid var(--slateline);padding:24px 0 46px;color:var(--mist);font-size:12px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+
+/* reveal */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+
+@media (max-width:900px){
+  .lead-top{grid-template-columns:1fr;gap:20px}
+  .lead-grid{grid-template-columns:1fr;gap:26px}
+  .lead-charts{position:static}
+  .statband{grid-template-columns:repeat(3,1fr)}
+  .wgrid{grid-template-columns:1fr}
+}
+@media (max-width:560px){ .statband{grid-template-columns:repeat(2,1fr)} .gantt{font-size:9.5px} }
+</style>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="brand"><div class="mark">S</div><div class="name">Stonebrook Deal Scout · Deal Stories</div></div>
+    <h1>Three deals worth a phone call</h1>
+    <p class="lede">The screen narrowed 51 CREXi listings to three value-add apartment leads. This is the story of
+      each one — the thesis, the local comps, how the rents come up, what it costs to fix, and the 24-month path
+      to stabilization — plus four on the watchlist. Built as a working memo to decide <b>where the next hour
+      goes</b>, not to price a deal.</p>
+    <div class="cover-meta">
+      <span><b>Leads</b> George Commons · Briggs Flats · Tiffany Square</span>
+      <span><b>Watchlist</b> 4</span>
+      <span><b>Screened</b> 26 Jul 2026</span>
+      <span><b>Source</b> CREXi export (51 listings)</span>
+    </div>
+  </div>
+</header>
+
+<div class="integrity">
+  <div class="wrap"><span class="ico">▲</span>
+    <span><b>Read every number as an analyst estimate for discussion.</b> The CREXi export carries no rents,
+    vacancy, or operating statements. Rent bridges, capex budgets, comps, and value-creation figures are
+    hypotheses built to frame the OM request — confirm all of them against the T-12, rent roll, and independent
+    comps before acting. Property photos live on each linked CREXi listing.</span>
+  </div>
+</div>
+
+
+  <section class="lead" id="lead-01">
+    <div class="wrap">
+      <div class="lead-top">
+        <div class="lead-illus"><svg viewBox="0 0 320 150" class="illus" role="img" aria-label="Illustration of a 1980s two-story garden apartment">
+  <g fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linejoin="round">
+    <path d="M12 132 h296" stroke="var(--slateline)" stroke-width="1"/>
+    <!-- bldg A -->
+    <path d="M20 132 V70 h96 V132"/>
+    <path d="M14 72 L68 44 L122 72" fill="rgba(200,169,90,.06)"/>
+    <path d="M36 132 V96 h20 v36 M80 132 V96 h20 v36"/>
+    <path d="M34 84 h18 v-14 h-18z M80 84 h18 v-14 h-18z"/>
+    <path d="M66 132 V70"/>
+    <!-- bldg B (behind/right) -->
+    <path d="M140 132 V60 h120 V132"/>
+    <path d="M132 62 L200 30 L268 62" fill="rgba(200,169,90,.06)"/>
+    <path d="M160 132 V92 h22 v40 M214 132 V92 h22 v40"/>
+    <path d="M158 80 h22 v-16 h-22z M212 80 h22 v-16 h-22z M186 80 h22 v-16 h-22z"/>
+    <path d="M200 132 V60"/>
+    <!-- tree -->
+    <circle cx="290" cy="112" r="12" stroke-width="1.2"/><path d="M290 124 v10"/>
+  </g>
+</svg></div>
+        <div class="lead-title">
+          <div class="lead-idx">01 / 03</div>
+          <h2>George Commons</h2>
+          <div class="lead-loc">1321 N 3rd St · Vincennes, IN</div>
+          <div class="lead-arch">1980s two-story garden · ~32 units (implied)</div>
+          <div class="lead-actions">
+            <span class="pill om">Request OM</span>
+            <a class="crexi" href="https://www.crexi.com/properties/2301918/indiana-george-commons" target="_blank" rel="noopener">View listing &amp; photos on CREXi &nbsp;&#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="statband"><div class="st"><div class="st-k">Asking</div><div class="st-v">$2.40M</div></div><div class="st"><div class="st-k">Units (impl.)</div><div class="st-v">~32</div></div><div class="st"><div class="st-k">$/unit</div><div class="st-v">$75,000</div></div><div class="st"><div class="st-k">Stated cap</div><div class="st-v">7.8%</div></div><div class="st"><div class="st-k">Days on mkt</div><div class="st-v">223</div></div><div class="st"><div class="st-k">Basis</div><div class="st-v">$156/sf</div></div></div>
+
+      <div class="lead-grid">
+        <div class="lead-story">
+          <p class="kicker">The story</p>
+          <p>George Commons is the cleanest cash-flow buy in the pull, and it hides its catch in plain sight. A 7.8% stated in-place cap on a $75k/unit basis is a strong going-in yield for a stabilized-ish Midwest garden asset — and 223 days on market means the seller has already waited two-thirds of a year for a buyer who hasn&#x27;t come. That is your leverage.</p><p>But the value-add math is honest only if you respect the exit. At a tertiary-market 8.0% exit cap, the renovation plan barely clears its own cost at full ask — so this is not an appreciation play. It&#x27;s a yield play where entry discipline is the entire return. Underwrite it as: buy below ask, harvest a 9%+ in-place yield on your basis, and treat the rent lift as margin of safety, not the thesis.</p><p>One data flag before anyone falls in love: the export shows 15,360 sf against ~32 units — about 480 sf/unit, which doesn&#x27;t reconcile with garden apartments. Either the unit count or the building SF is wrong. The rent roll settles it, and it changes everything downstream.</p>
+          <p class="kicker mt">Local comps — original read</p>
+          <p class="comps">Vincennes is a ~16,000-person county seat whose demand floor is Vincennes University (~3,600 students) plus regional healthcare and light manufacturing. The comp set is thin and the renovated 2BR ceiling is realistically ~$850–900 — verify against VU off-campus product and Knox County workforce rentals before assuming any push.</p>
+          <p class="kicker mt">How to get rents up</p>
+          <ul class="levers"><li>Light-to-moderate interior renovations (LVP, cabinets, counters, fixtures) to justify a market rent bump</li><li>Institute RUBS — bill back water/sewer/trash, a near-universal gap in mom-and-pop tertiary assets</li><li>Capture other income: laundry, pet fees, covered parking, application/admin</li><li>Close the physical-vs-economic occupancy gap with professional management and tighter collections</li></ul>
+          <p class="kicker mt">Key risks to underwrite</p>
+          <ul class="risks"><li>Tertiary demand depth — single-employer/university sensitivity</li><li>Soft exit cap (model 8%+); little appreciation cushion</li><li>Unit-count / building-SF mismatch must be resolved on the rent roll</li></ul>
+        </div>
+        <aside class="lead-charts">
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Rent bridge · $/unit/mo</span>
+        <span class="chart-tag">est.</span></div>
+      <div class="bartrack"><div class="seg s-base" style="width:80.92%" title="In-place: $700"><span class="seg-v">$700</span></div><div class="seg s-reno" style="width:12.72%" title="Renovation: +$110"><span class="seg-v">+$110</span></div><div class="seg s-other" style="width:4.62%" title="Other income: +$40"></div><div class="seg s-mgmt" style="width:1.73%" title="Mgmt / LTL: +$15"></div></div>
+      <div class="bridge-ends"><span>In-place $700</span>
+        <span class="up">+$165 &nbsp;(&plus;24%)</span>
+        <span>Stabilized $865</span></div>
+      <div class="legend"><span class="lg"><i class="dot s-base"></i>In-place</span><span class="lg"><i class="dot s-reno"></i>Renovation</span><span class="lg"><i class="dot s-other"></i>Other income</span><span class="lg"><i class="dot s-mgmt"></i>Mgmt / LTL</span></div>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Cost to fix · scope of work</span><span class="chart-tag">est.</span></div>
+      <div class="cx-row"><span class="cx-l">Interiors · 32 × $12k</span><span class="cx-bar"><i style="width:100.0%"></i></span><span class="cx-v">$384k</span></div><div class="cx-row"><span class="cx-l">Exterior / roofs / paint / parking</span><span class="cx-bar"><i style="width:39.1%"></i></span><span class="cx-v">$150k</span></div><div class="cx-row"><span class="cx-l">Deferred &amp; mechanical contingency</span><span class="cx-bar"><i style="width:28.6%"></i></span><span class="cx-v">$110k</span></div><div class="cx-row"><span class="cx-l">Amenity / office / signage</span><span class="cx-bar"><i style="width:14.6%"></i></span><span class="cx-v">$56k</span></div>
+      <div class="cx-tot"><span>Total capital budget</span>
+        <span>$700k <small>· ~$22,000/unit</small></span></div>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Value creation · $M</span><span class="chart-tag">est.</span></div>
+      <div class="vb-row">
+        <span class="vb-l">Total basis</span>
+        <span class="vb-track">
+          <i class="v-buy" style="width:69.7%"></i><i class="v-cap" style="width:23.8%"></i><i class="v-clo" style="width:3.7%"></i>
+        </span>
+        <span class="vb-v">$2.86M</span>
+      </div>
+      <div class="vb-row">
+        <span class="vb-l">Stabilized value</span>
+        <span class="vb-track"><i class="v-stab" style="width:100.0%"></i></span>
+        <span class="vb-v">$2.94M</span>
+      </div>
+      <div class="vb-legend">
+        <span class="lg"><i class="dot v-buy"></i>Purchase $2.05M</span>
+        <span class="lg"><i class="dot v-cap"></i>Capex $0.70M</span>
+        <span class="lg"><i class="dot v-clo"></i>Closing+reserves $0.11M</span>
+      </div>
+      <div class="vb-created pos">
+        <span>Value created</span>
+        <span>+$0.08M</span>
+      </div>
+      <p class="vb-note">Modeled at a $2.05M entry (−15% vs ask, justified by 223 DOM) and a conservative 8.0% exit. Value created is thin — the real return is a ~9.1% going-in yield on basis. Overpay and it goes negative.</p>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Stabilization timeline · 24 months</span><span class="chart-tag">plan</span></div>
+      <div class="gantt"><div class="g-cell g-corner">Workstream</div><div class="g-cell g-qh">Q1</div><div class="g-cell g-qh">Q2</div><div class="g-cell g-qh">Q3</div><div class="g-cell g-qh">Q4</div><div class="g-cell g-qh">Q5</div><div class="g-cell g-qh">Q6</div><div class="g-cell g-qh">Q7</div><div class="g-cell g-qh">Q8</div><div class="g-cell g-row-l">Acquire · PCA · staffing</div><div class="g-cell g-bar g-a" style="grid-column: span 2"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Exterior &amp; deferred work</div><div class="g-cell g-bar g-b" style="grid-column: span 3"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Interior renovations (rolling)</div><div class="g-cell"></div><div class="g-cell g-bar g-c" style="grid-column: span 4"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Lease-up + RUBS / other income</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-d" style="grid-column: span 4"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Stabilize 93%+ · refi/hold</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-e" style="grid-column: span 3"></div></div>
+    </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <section class="lead" id="lead-02">
+    <div class="wrap">
+      <div class="lead-top">
+        <div class="lead-illus"><svg viewBox="0 0 320 150" class="illus" role="img" aria-label="Illustration of an urban infill flats building">
+  <g fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linejoin="round">
+    <path d="M12 132 h296" stroke="var(--slateline)" stroke-width="1"/>
+    <path d="M70 132 V34 h150 V132"/>
+    <path d="M70 34 h150" />
+    <!-- window grid -->
+    <g stroke-width="1.1">
+      <path d="M86 52 h26 v18 h-26z M132 52 h26 v18 h-26z M178 52 h26 v18 h-26z"/>
+      <path d="M86 82 h26 v18 h-26z M132 82 h26 v18 h-26z M178 82 h26 v18 h-26z"/>
+    </g>
+    <!-- storefront/entry base -->
+    <path d="M70 110 h150" />
+    <path d="M132 132 V112 h26 v20" fill="rgba(200,169,90,.08)"/>
+    <path d="M92 132 V114 h20 v18 M178 132 V114 h20 v18"/>
+    <!-- street lamp -->
+    <path d="M40 132 V88" stroke-width="1.2"/><path d="M40 88 h14" stroke-width="1.2"/><circle cx="56" cy="88" r="3"/>
+  </g>
+</svg></div>
+        <div class="lead-title">
+          <div class="lead-idx">02 / 03</div>
+          <h2>Briggs Flats</h2>
+          <div class="lead-loc">550 Fletcher Ave · Indianapolis, IN</div>
+          <div class="lead-arch">Urban infill flats · ~18 units (est.)</div>
+          <div class="lead-actions">
+            <span class="pill om">Request OM</span>
+            <a class="crexi" href="https://www.crexi.com/properties/2444187/indiana-briggs-flats" target="_blank" rel="noopener">View listing &amp; photos on CREXi &nbsp;&#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="statband"><div class="st"><div class="st-k">Asking</div><div class="st-v">not posted</div></div><div class="st"><div class="st-k">Stated cap</div><div class="st-v">7.3%</div></div><div class="st"><div class="st-k">Building</div><div class="st-v">15,652 sf</div></div><div class="st"><div class="st-k">Lot</div><div class="st-v">0.59 ac</div></div><div class="st"><div class="st-k">Days on mkt</div><div class="st-v">116</div></div><div class="st"><div class="st-k">Submarket</div><div class="st-v">near Fountain Sq</div></div></div>
+
+      <div class="lead-grid">
+        <div class="lead-story">
+          <p class="kicker">The story</p>
+          <p>Briggs Flats is the only deal in the export where appreciation — not just yield — is a real story, and it&#x27;s the only one missing the one number that matters. 550 Fletcher Ave sits on the near-southeast side, in the gravitational pull of Fountain Square and Bates-Hendricks — genuinely appreciating Indianapolis pockets with rent momentum most of the Midwest can&#x27;t match.</p><p>A 7.3% stated cap on an operating building in a growth submarket is a call-the-broker-today signal. The catch is that CREXi lists no asking price, so the deal literally cannot be ranked until you have it. Everything hinges on the number against that cap and on exactly which side of the Fountain Square line the building sits.</p><p>Underwrite this one for the tailwind, not against it: Indianapolis has real employer diversity — Eli Lilly, Salesforce, Rolls-Royce, a deep logistics base — and the rent-growth history to support pushing a renovated unit rather than merely holding it.</p>
+          <p class="kicker mt">Local comps — original read</p>
+          <p class="comps">Fletcher Ave (46203) is Fountain Square adjacency — the strongest micro-location in the pull. Metro workforce 2BR runs ~$1,050–1,250 depending on the block, and renovated infill near the square can reach higher. Original read: confirm the address is inside the appreciating ring, not one arterial removed — the rent delta across that line is large.</p>
+          <p class="kicker mt">How to get rents up</p>
+          <ul class="levers"><li>Full interior renovations to reach Fountain Square-adjacent renovated rents, not just workforce median</li><li>Add in-unit or on-site laundry where absent — a real rent driver in urban infill</li><li>Lean into the rent-growth tailwind: mark leases to market on every turn</li><li>Other income (parking, storage, pet) scaled to a walkable urban tenant base</li></ul>
+          <p class="kicker mt">Key risks to underwrite</p>
+          <ul class="risks"><li>No asking price — deal cannot be scored until posted</li><li>Micro-location: must confirm the appreciating side of Fountain Square</li><li>Older infill building — verify mechanicals, roof, and any historic overlay</li></ul>
+        </div>
+        <aside class="lead-charts">
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Rent bridge · $/unit/mo</span>
+        <span class="chart-tag">est.</span></div>
+      <div class="bartrack"><div class="seg s-base" style="width:80.00%" title="In-place: $1000"><span class="seg-v">$1000</span></div><div class="seg s-reno" style="width:14.40%" title="Renovation: +$180"><span class="seg-v">+$180</span></div><div class="seg s-other" style="width:3.60%" title="Other income: +$45"></div><div class="seg s-mgmt" style="width:2.00%" title="Mgmt / LTL: +$25"></div></div>
+      <div class="bridge-ends"><span>In-place $1000</span>
+        <span class="up">+$250 &nbsp;(&plus;25%)</span>
+        <span>Stabilized $1250</span></div>
+      <div class="legend"><span class="lg"><i class="dot s-base"></i>In-place</span><span class="lg"><i class="dot s-reno"></i>Renovation</span><span class="lg"><i class="dot s-other"></i>Other income</span><span class="lg"><i class="dot s-mgmt"></i>Mgmt / LTL</span></div>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Cost to fix · scope of work</span><span class="chart-tag">est.</span></div>
+      <div class="cx-row"><span class="cx-l">Interiors · 18 × $10k</span><span class="cx-bar"><i style="width:100.0%"></i></span><span class="cx-v">$180k</span></div><div class="cx-row"><span class="cx-l">Exterior / common areas</span><span class="cx-bar"><i style="width:25.0%"></i></span><span class="cx-v">$45k</span></div><div class="cx-row"><span class="cx-l">Contingency (older systems)</span><span class="cx-bar"><i style="width:15.0%"></i></span><span class="cx-v">$27k</span></div>
+      <div class="cx-tot"><span>Total capital budget</span>
+        <span>$252k <small>· ~$14,000/unit</small></span></div>
+    </div>
+          <div class="chart pricebox"><div class="chart-hd"><span>Price discovery</span><span class="chart-tag">gated</span></div><p>The deal is gated on one input. At the stated 7.3% cap, a $1.6M price implies ≈ $117k NOI; a $2.0M price implies ≈ $146k. Ask for the price <b>and</b> the T-12 in the same breath, then underwrite to a ≥ 7.5% going-in and an 8.0% stabilized exit for a metro this liquid.</p></div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Stabilization timeline · 24 months</span><span class="chart-tag">plan</span></div>
+      <div class="gantt"><div class="g-cell g-corner">Workstream</div><div class="g-cell g-qh">Q1</div><div class="g-cell g-qh">Q2</div><div class="g-cell g-qh">Q3</div><div class="g-cell g-qh">Q4</div><div class="g-cell g-qh">Q5</div><div class="g-cell g-qh">Q6</div><div class="g-cell g-qh">Q7</div><div class="g-cell g-qh">Q8</div><div class="g-cell g-row-l">Acquire · price + T-12 · PCA</div><div class="g-cell g-bar g-a" style="grid-column: span 2"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Exterior / common areas</div><div class="g-cell g-bar g-b" style="grid-column: span 2"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Interior renovations</div><div class="g-cell"></div><div class="g-cell g-bar g-c" style="grid-column: span 3"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Mark-to-market lease-up</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-d" style="grid-column: span 3"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Stabilize · refi/hold</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-e" style="grid-column: span 2"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  <section class="lead" id="lead-03">
+    <div class="wrap">
+      <div class="lead-top">
+        <div class="lead-illus"><svg viewBox="0 0 320 150" class="illus" role="img" aria-label="Illustration of a large multi-building garden apartment complex">
+  <g fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round">
+    <path d="M8 134 h304" stroke="var(--slateline)" stroke-width="1"/>
+    <path d="M16 134 V86 h78 V134"/><path d="M10 88 L55 64 L100 88" fill="rgba(200,169,90,.05)"/>
+    <path d="M34 134 V104 h14 v30 M66 134 V104 h14 v30"/>
+    <path d="M112 134 V70 h96 V134"/><path d="M104 72 L160 44 L216 72" fill="rgba(200,169,90,.06)"/>
+    <path d="M134 134 V98 h16 v36 M182 134 V98 h16 v36"/><path d="M160 134 V70"/>
+    <path d="M226 134 V88 h78 V134"/><path d="M220 90 L265 66 L310 90" fill="rgba(200,169,90,.05)"/>
+    <path d="M244 134 V104 h14 v30 M276 134 V104 h14 v30"/>
+    <!-- drive + tree -->
+    <path d="M100 134 q8 -14 12 0" stroke="var(--slateline)"/>
+    <circle cx="55" cy="118" r="9" stroke-width="1.1"/><path d="M55 127 v7"/>
+  </g>
+</svg></div>
+        <div class="lead-title">
+          <div class="lead-idx">03 / 03</div>
+          <h2>Tiffany Square Apartments</h2>
+          <div class="lead-loc">7200 Jewella Ave · Shreveport, LA</div>
+          <div class="lead-arch">Garden complex, multi-building · ~72 units (est.)</div>
+          <div class="lead-actions">
+            <span class="pill om">Request OM</span>
+            <a class="crexi" href="https://www.crexi.com/properties/2600351/louisiana-tiffany-square-apartments" target="_blank" rel="noopener">View listing &amp; photos on CREXi &nbsp;&#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="statband"><div class="st"><div class="st-k">Asking</div><div class="st-v">$2.60M</div></div><div class="st"><div class="st-k">Building</div><div class="st-v">58,500 sf</div></div><div class="st"><div class="st-k">Basis</div><div class="st-v">$44/sf</div></div><div class="st"><div class="st-k">Lot</div><div class="st-v">3.4 ac</div></div><div class="st"><div class="st-k">$/unit (est.)</div><div class="st-v">~$36k</div></div><div class="st"><div class="st-k">Days on mkt</div><div class="st-v">30</div></div></div>
+
+      <div class="lead-grid">
+        <div class="lead-story">
+          <p class="kicker">The story</p>
+          <p>Tiffany Square is the highest-effort, highest-conviction-on-basis play in the pull. At roughly $44 a square foot — about $36k a unit on an estimated ~72-unit garden complex — you are buying at a basis so far below replacement cost that the margin of safety is the deal. That is the canvas value-add is built on: cheap in, real scale, room to renovate and re-tenant.</p><p>The counterweight is Shreveport itself. The metro is soft, with flat-to-declining population, so market strength is the weak leg of the thesis. You are not riding a tailwind here — you are manufacturing every dollar of NOI through renovation, occupancy, and professional management in a mom-and-pop market. That&#x27;s an operator&#x27;s deal, not an allocator&#x27;s.</p><p>The demand floor that makes it thinkable: Barksdale Air Force Base, the Bossier casino corridor, and the Cyber Innovation District put a workforce base under west Shreveport. Verify the Jewella Ave submarket&#x27;s crime and real economic occupancy hard — at this basis the numbers seduce, and the submarket is where these deals are won or lost.</p>
+          <p class="kicker mt">Local comps — original read</p>
+          <p class="comps">Shreveport-Bossier renovated garden 2BR realistically runs ~$800–900. The metro&#x27;s demand is a floor, not an engine — Barksdale AFB and Bossier gaming anchor it, but there&#x27;s no rent-growth story to lean on. Original read: underwrite flat rent growth and win on basis and execution, or don&#x27;t do it at all.</p>
+          <p class="kicker mt">How to get rents up</p>
+          <ul class="levers"><li>Full reposition — this is a renovation story, not a refresh; interiors, exteriors, and site</li><li>Professionalize management in a mom-and-pop market — the single biggest NOI lever here</li><li>Build other income from near-zero: RUBS, laundry, fees</li><li>Drive economic (not just physical) occupancy — collections and loss-to-lease discipline</li></ul>
+          <p class="kicker mt">Key risks to underwrite</p>
+          <ul class="risks"><li>Soft, flat-to-declining metro — no rent-growth tailwind</li><li>Heavy, execution-intensive capex (~$1.3M) — operator-dependent</li><li>Submarket (Jewella Ave / west Shreveport) crime &amp; occupancy must be verified</li></ul>
+        </div>
+        <aside class="lead-charts">
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Rent bridge · $/unit/mo</span>
+        <span class="chart-tag">est.</span></div>
+      <div class="bartrack"><div class="seg s-base" style="width:81.25%" title="In-place: $650"><span class="seg-v">$650</span></div><div class="seg s-reno" style="width:13.75%" title="Renovation: +$110"><span class="seg-v">+$110</span></div><div class="seg s-other" style="width:5.00%" title="Other income: +$40"></div><div class="seg s-mgmt" style="width:0.00%" title="Mgmt / LTL: +$0"></div></div>
+      <div class="bridge-ends"><span>In-place $650</span>
+        <span class="up">+$150 &nbsp;(&plus;23%)</span>
+        <span>Stabilized $800</span></div>
+      <div class="legend"><span class="lg"><i class="dot s-base"></i>In-place</span><span class="lg"><i class="dot s-reno"></i>Renovation</span><span class="lg"><i class="dot s-other"></i>Other income</span><span class="lg"><i class="dot s-mgmt"></i>Mgmt / LTL</span></div>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Cost to fix · scope of work</span><span class="chart-tag">est.</span></div>
+      <div class="cx-row"><span class="cx-l">Interiors · 72 × $12k</span><span class="cx-bar"><i style="width:100.0%"></i></span><span class="cx-v">$864k</span></div><div class="cx-row"><span class="cx-l">Exterior / roofs / site</span><span class="cx-bar"><i style="width:28.9%"></i></span><span class="cx-v">$250k</span></div><div class="cx-row"><span class="cx-l">Deferred &amp; mechanical</span><span class="cx-bar"><i style="width:15.0%"></i></span><span class="cx-v">$130k</span></div><div class="cx-row"><span class="cx-l">Amenity / office / signage</span><span class="cx-bar"><i style="width:6.5%"></i></span><span class="cx-v">$56k</span></div>
+      <div class="cx-tot"><span>Total capital budget</span>
+        <span>$1,300k <small>· ~$18,000/unit</small></span></div>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Value creation · $M</span><span class="chart-tag">est.</span></div>
+      <div class="vb-row">
+        <span class="vb-l">Total basis</span>
+        <span class="vb-track">
+          <i class="v-buy" style="width:61.2%"></i><i class="v-cap" style="width:30.6%"></i><i class="v-clo" style="width:5.4%"></i>
+        </span>
+        <span class="vb-v">$4.13M</span>
+      </div>
+      <div class="vb-row">
+        <span class="vb-l">Stabilized value</span>
+        <span class="vb-track"><i class="v-stab" style="width:100.0%"></i></span>
+        <span class="vb-v">$4.25M</span>
+      </div>
+      <div class="vb-legend">
+        <span class="lg"><i class="dot v-buy"></i>Purchase $2.60M</span>
+        <span class="lg"><i class="dot v-cap"></i>Capex $1.30M</span>
+        <span class="lg"><i class="dot v-clo"></i>Closing+reserves $0.23M</span>
+      </div>
+      <div class="vb-created pos">
+        <span>Value created</span>
+        <span>+$0.12M</span>
+      </div>
+      <p class="vb-note">Modeled at ask with a heavy ~$18k/unit reposition and a soft-market 8.5% exit. Value created is thin on paper — the real cushion is the $36k/unit entry basis. This works for an operator who can execute in Shreveport, and only for them.</p>
+    </div>
+          
+    <div class="chart">
+      <div class="chart-hd"><span>Stabilization timeline · 24 months</span><span class="chart-tag">plan</span></div>
+      <div class="gantt"><div class="g-cell g-corner">Workstream</div><div class="g-cell g-qh">Q1</div><div class="g-cell g-qh">Q2</div><div class="g-cell g-qh">Q3</div><div class="g-cell g-qh">Q4</div><div class="g-cell g-qh">Q5</div><div class="g-cell g-qh">Q6</div><div class="g-cell g-qh">Q7</div><div class="g-cell g-qh">Q8</div><div class="g-cell g-row-l">Acquire · PCA · takeover mgmt</div><div class="g-cell g-bar g-a" style="grid-column: span 2"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Exterior / roofs / site by building</div><div class="g-cell g-bar g-b" style="grid-column: span 4"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Interior reposition (phased)</div><div class="g-cell"></div><div class="g-cell g-bar g-c" style="grid-column: span 5"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-row-l">Lease-up + build other income</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-d" style="grid-column: span 4"></div><div class="g-cell"></div><div class="g-cell g-row-l">Stabilize · refi/hold</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell g-bar g-e" style="grid-column: span 2"></div></div>
+    </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+<section class="watch-sec">
+  <div class="wrap">
+    <p class="eyebrow">The watchlist</p>
+    <h2>Four to hold — pursue on price or on data</h2>
+    <p class="lede">Plausible on asset class, not yet earning an OM. Each needs a price reset or a single data
+      point that could just as easily end it.</p>
+    <div class="wgrid">
+    <article class="wcard">
+      <div class="w-hd"><h3>613 Gastel Circle</h3><span class="pill watch">Watchlist</span></div>
+      <div class="w-loc">Edinburg, TX</div>
+      <div class="w-stats">$1.75M · 13,356 sf · 11 DOM</div>
+      <p>Rio Grande Valley growth submarket anchored by UTRGV and cross-border trade — but only 11 days listed, so there is no negotiating leverage yet. Original read: the RGV is one of the few genuinely growing tertiary markets in the pull; request the OM now, revisit price only if it goes stale.</p>
+    </article>
+    <article class="wcard">
+      <div class="w-hd"><h3>611 Cameron Street</h3><span class="pill watch">Watchlist</span></div>
+      <div class="w-loc">Weslaco, TX</div>
+      <div class="w-stats">$1.05M · 7,168 sf · 509 DOM</div>
+      <p>The stalest listing in the entire export at 509 days — that is real reset leverage, not a red flag by itself in a thin RGV market. Pull the OM and open with a materially low number; the seller&#x27;s clock has been running for well over a year.</p>
+    </article>
+    <article class="wcard">
+      <div class="w-hd"><h3>3417 Avenue O</h3><span class="pill watch">Watchlist</span></div>
+      <div class="w-loc">Galveston, TX</div>
+      <div class="w-stats">$1.0M · 6.4% cap · seller financing</div>
+      <p>A decent in-place yield plus seller-financing optionality is a rare combination. The entire deal swings on coastal flood and windstorm insurance — get a bindable quote before spending another hour, because on the Gulf that line item can erase the cap rate.</p>
+    </article>
+    <article class="wcard">
+      <div class="w-hd"><h3>1586 E 22 St</h3><span class="pill pass">Lean pass</span></div>
+      <div class="w-loc">Brooklyn, NY</div>
+      <div class="w-stats">$1.9M · 185 DOM · no financials</div>
+      <p>$1.9M, 185 DOM, no financials posted. NYC rent-stabilization exposure and a likely sub-5 cap put this squarely against the mandate. Only pursue after confirming regulatory status and in-place rents — the default lean is pass.</p>
+    </article></div>
+  </div>
+</section>
+
+<section class="method">
+  <div class="wrap">
+    <h2>How to read this memo</h2>
+    <ul>
+      <li><b>Rent bridge</b> — a per-unit monthly path from in-place rent to a stabilized target, split into
+        renovation premium, other income / RUBS, and management &amp; loss-to-lease capture. Estimated.</li>
+      <li><b>Cost to fix</b> — a scope-of-work capital budget by category, with an all-in per-unit figure. Estimated,
+        pending a property condition assessment.</li>
+      <li><b>Value creation</b> — total basis (purchase + capex + closing &amp; reserves) against stabilized value
+        at a conservative exit cap. Where value created is thin, the return lives in going-in yield or entry basis,
+        and the memo says so.</li>
+      <li><b>Timeline</b> — an indicative 24-month stabilization plan; workstreams overlap by design.</li>
+      <li><b>Illustrations</b> are original building-archetype line-art, not photos. Real listing imagery is one
+        click away on each CREXi link.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Stonebrook Deal Scout · preliminary screen &amp; deal stories — not investment advice, not a final offer</span>
+    <span>All financials are analyst estimates pending OM / T-12</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.lead, .wcard, .method');
+    els.forEach(function(e){e.classList.add('reveal');});
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.08});
+    els.forEach(function(e){io.observe(e);});
+  })();
+</script>
