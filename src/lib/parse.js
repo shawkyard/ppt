@@ -6,39 +6,6 @@
 import { setPath } from './schema.js'
 import { detectState } from './screen.js'
 
-const TEXT_EXT = ['txt', 'csv', 'tsv', 'md', 'json', 'log', 'text', 'yaml', 'yml']
-
-export function isProbablyText(file) {
-  const ext = (file.name.split('.').pop() || '').toLowerCase()
-  if (TEXT_EXT.includes(ext)) return true
-  return (file.type || '').startsWith('text/')
-}
-
-export function readFileToText(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve({ name: file.name, ok: true, text: String(reader.result || '') })
-    reader.onerror = () => resolve({ name: file.name, ok: false, text: '' })
-    reader.readAsText(file)
-  })
-}
-
-export async function readFiles(fileList) {
-  const files = Array.from(fileList || [])
-  const results = []
-  for (const f of files) {
-    if (isProbablyText(f)) {
-      results.push(await readFileToText(f))
-    } else {
-      results.push({
-        name: f.name, ok: false, text: '',
-        note: 'Binary format — extract the text (copy from the PDF/spreadsheet) and paste it below.',
-      })
-    }
-  }
-  return results
-}
-
 // ---- number parsing ----
 function parseMoneyToken(tok) {
   if (tok == null) return null
@@ -106,14 +73,21 @@ export function parseText(rawText) {
     info.push({ key, label, value: res.value, snippet: res.snippet })
   }
 
-  // Property name — explicit label, else first non-empty line if it looks like a name.
+  // Property name — explicit label, else the first heading line that looks like a
+  // park name (skip file markers and generic OM boilerplate).
   const nameM = text.match(/(?:property\s*name|park\s*name|community|property)\s*[:\-]\s*(.+)/i)
   if (nameM) {
     fields.push({ path: 'propertyName', label: 'Property name', value: nameM[1].split(/[\n|]/)[0].trim().slice(0, 80), snippet: nameM[0].trim().slice(0, 80), provenance: 'reported' })
   } else {
-    const firstLine = text.split(/\n/).map((l) => l.trim()).find((l) => l.length > 2)
-    if (firstLine && firstLine.length < 80 && /rv|park|resort|campground|camp|ranch|lake|river/i.test(firstLine)) {
-      fields.push({ path: 'propertyName', label: 'Property name (from heading)', value: firstLine, snippet: firstLine, provenance: 'seller' })
+    const BOILERPLATE = /^(offering\s+memorandum|confidential|executive\s+summary|for\s+sale|investment\s+(summary|offering)|prepared\s+(for|by)|table\s+of\s+contents|disclaimer|property\s+overview|financial|=+)/i
+    const NAME_HINT = /\b(rv|resort|park|campground|camp\b|ranch|lake|river|koa|glamp|marina|springs|cove|pines|hollow|meadows|acres)\b/i
+    const candidate = text.split(/\n/)
+      .map((l) => l.replace(/^=+\s*|\s*=+$/g, '').trim())
+      .filter((l) => l.length >= 3 && l.length <= 70 && !BOILERPLATE.test(l) && !/[:$%]/.test(l) && !/\.\w{2,4}\s*$/.test(l))
+      .slice(0, 15)
+      .find((l) => NAME_HINT.test(l))
+    if (candidate) {
+      fields.push({ path: 'propertyName', label: 'Property name (from heading)', value: candidate, snippet: candidate, provenance: 'seller' })
     }
   }
 

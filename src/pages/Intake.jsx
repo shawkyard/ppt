@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
-import { readFiles, parseText, applyExtraction } from '../lib/parse.js'
+import { parseText, applyExtraction } from '../lib/parse.js'
+import { readFiles } from '../lib/fileExtract.js'
 import { defaultInputs } from '../lib/schema.js'
 import { Chip } from '../components/ui.jsx'
 
@@ -12,22 +13,30 @@ export default function Intake() {
   const [text, setText] = useState('')
   const [fileNotes, setFileNotes] = useState([])
   const [dragOver, setDragOver] = useState(false)
+  const [busy, setBusy] = useState(false)
   const inputRef = useRef(null)
 
   async function ingestFiles(fileList) {
-    const results = await readFiles(fileList)
-    const notes = []
-    let combined = ''
-    for (const r of results) {
-      if (r.ok && r.text) {
-        combined += `\n\n===== ${r.name} =====\n${r.text}`
-        notes.push({ name: r.name, ok: true, chars: r.text.length })
-      } else {
-        notes.push({ name: r.name, ok: false, note: r.note })
+    setBusy(true)
+    try {
+      const results = await readFiles(fileList)
+      const notes = []
+      let combined = ''
+      for (const r of results) {
+        if (r.ok && r.text) {
+          combined += `\n\n===== ${r.name} =====\n${r.text}`
+          notes.push({ name: r.name, ok: true, chars: r.text.length })
+        } else {
+          notes.push({ name: r.name, ok: false, note: r.note })
+        }
       }
+      if (combined) setText((t) => (t ? t + combined : combined.trim()))
+      setFileNotes((n) => [...n, ...notes])
+    } catch (err) {
+      setFileNotes((n) => [...n, { name: 'error', ok: false, note: String(err?.message || err) }])
+    } finally {
+      setBusy(false)
     }
-    if (combined) setText((t) => (t ? t + combined : combined.trim()))
-    setFileNotes((n) => [...n, ...notes])
   }
 
   function onDrop(e) {
@@ -80,17 +89,22 @@ export default function Intake() {
         >
           <input ref={inputRef} type="file" multiple className="hidden"
             onChange={(e) => { ingestFiles(e.target.files); e.target.value = '' }} />
-          <div className="text-sm text-fog">Drop files here or <span className="text-gold">browse</span></div>
+          {busy ? (
+            <div className="text-sm text-gold">Reading files…</div>
+          ) : (
+            <div className="text-sm text-fog">Drop the OM & financials here or <span className="text-gold">browse</span></div>
+          )}
           <div className="text-[11px] text-mist mt-1">
-            Text, CSV, TSV, Markdown, JSON parse directly. For PDF / Excel / images, paste the text below.
+            PDF, Excel (.xlsx/.xls), CSV, text, Markdown & JSON parse directly in your browser.
+            Scanned/image PDFs have no text layer — paste those.
           </div>
         </div>
 
         {fileNotes.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {fileNotes.map((f, i) => (
-              <Chip key={i} tone={f.ok ? 'good' : 'warn'}>
-                {f.ok ? `✓ ${f.name} (${f.chars.toLocaleString()} chars)` : `⚠ ${f.name} — paste text`}
+              <Chip key={i} tone={f.ok ? 'good' : 'warn'} className="max-w-full">
+                {f.ok ? `✓ ${f.name} (${f.chars.toLocaleString()} chars)` : `⚠ ${f.name} — ${f.note || 'paste text'}`}
               </Chip>
             ))}
           </div>

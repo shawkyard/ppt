@@ -15,8 +15,10 @@ engineering or environmental report, lender commitment, or securities offering.
 
 ## What it does
 
-1. **Ingest anything.** Text, CSV, TSV, Markdown and JSON files parse directly. For
-   PDF / Excel / images, paste the extracted text. A heuristic parser scans for price,
+1. **Ingest anything.** Digital **PDFs** (OMs, rate sheets), **Excel** (.xlsx/.xls,
+   T-12s and rent rolls), CSV, text, Markdown and JSON all extract to text in the browser —
+   no upload, no backend (pdf.js + SheetJS, lazy-loaded on first use). Scanned/image-only
+   PDFs have no text layer, so paste those. A heuristic parser scans for price,
    sites, occupancy, rents, ADR, expenses, cap rate, acres and more — recording the exact
    snippet it matched as evidence. It **never invents figures**: anything it can't source
    stays at the illustrative model default and is flagged **Assumption**.
