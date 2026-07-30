@@ -1,19 +1,21 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext.jsx'
-import { parseText, applyExtraction } from '../lib/parse.js'
+import { parseText } from '../lib/parse.js'
 import { readFiles } from '../lib/fileExtract.js'
-import { defaultInputs } from '../lib/schema.js'
+import { buildEstimated, modesToMeta } from '../lib/estimate.js'
 import { Chip } from '../components/ui.jsx'
+import ConfirmInputs from '../components/ConfirmInputs.jsx'
 
 export default function Intake() {
-  const { addDeal, blankInputs } = useApp()
+  const { addDeal } = useApp()
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const [fileNotes, setFileNotes] = useState([])
   const [dragOver, setDragOver] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [pending, setPending] = useState(null)
   const inputRef = useRef(null)
 
   async function ingestFiles(fileList) {
@@ -45,19 +47,32 @@ export default function Intake() {
     if (e.dataTransfer?.files?.length) ingestFiles(e.dataTransfer.files)
   }
 
-  function underwrite() {
+  // Parse → estimate → open the confirmation step (don't compute yet).
+  function review() {
     const parsed = parseText(text)
-    const { inputs, meta, info } = applyExtraction(defaultInputs(), parsed)
-    if (name.trim()) inputs.propertyName = name.trim()
-    const id = addDeal({ name: name.trim() || inputs.propertyName, inputs, meta, info, rawText: text })
+    const est = buildEstimated(parsed, parsed.info)
+    if (name.trim()) { est.inputs.propertyName = name.trim(); est.modes.propertyName = 'manual' }
+    setPending({ est, parsed })
+  }
+
+  // User confirmed the inputs → build the deal and go to the package.
+  function confirmUnderwrite(vals, modes) {
+    const meta = modesToMeta(modes)
+    for (const f of pending.parsed.fields) {
+      if (meta[f.path]) meta[f.path].snippet = f.snippet
+    }
+    const id = addDeal({
+      name: name.trim() || vals.propertyName,
+      inputs: vals, meta, info: pending.parsed.info, rawText: text,
+    })
     navigate(`/deal/${id}`)
   }
 
   function startBlank() {
-    const inputs = blankInputs()
-    if (name.trim()) inputs.propertyName = name.trim()
-    const id = addDeal({ name: name.trim() || inputs.propertyName, inputs, meta: {}, info: [], rawText: '' })
-    navigate(`/deal/${id}`)
+    const parsed = { fields: [], info: [], notes: [] }
+    const est = buildEstimated(parsed, [])
+    if (name.trim()) { est.inputs.propertyName = name.trim(); est.modes.propertyName = 'manual' }
+    setPending({ est, parsed })
   }
 
   const preview = parseText(text)
@@ -138,14 +153,23 @@ export default function Intake() {
         )}
 
         <div className="flex items-center gap-3 pt-1">
-          <button className="btn-gold" onClick={underwrite}>Parse & Underwrite →</button>
+          <button className="btn-gold" onClick={review}>Parse & Review inputs →</button>
           <button className="btn-ghost" onClick={startBlank}>Start blank / manual</button>
         </div>
         <p className="text-[11px] text-mist/70">
-          The parser never invents figures. Anything it can't source stays at the illustrative model default and is flagged
-          <span className="text-gold"> Assumption</span> so you know exactly what to verify.
+          Next you'll confirm every input — keep what we read, estimate from other factors, or set it manually — so the model
+          is grounded in <span className="text-white">this</span> deal, not a template, before it computes.
         </p>
       </div>
+
+      {pending && (
+        <ConfirmInputs
+          propertyName={name.trim() || pending.est.inputs.propertyName}
+          initial={pending.est}
+          onConfirm={confirmUnderwrite}
+          onCancel={() => setPending(null)}
+        />
+      )}
     </div>
   )
 }

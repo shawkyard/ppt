@@ -64,6 +64,14 @@ export function fmtByType(type, v) {
   }
 }
 
+// Seed an editable text field from a numeric value given the format type.
+export function editValue(type, v) {
+  if (v == null) return ''
+  if (type === 'pct' || type === 'pct0') return String(+(v * 100).toFixed(3))
+  if (type === 'money' || type === 'moneyC' || type === 'int') return String(Math.round(v))
+  return String(v)
+}
+
 // Parse a user-typed value back into a number given the format type.
 export function parseByType(type, raw) {
   if (raw === '' || raw == null) return 0

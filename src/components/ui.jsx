@@ -5,6 +5,7 @@ const TONE = {
   info: 'border-sky-400/30 text-sky-300 bg-sky-400/10',
   warn: 'border-warn/40 text-warn bg-warn/10',
   assume: 'border-gold/40 text-gold bg-gold/10',
+  estimate: 'border-violet-400/40 text-violet-300 bg-violet-400/10',
   muted: 'border-slateline text-mist bg-graphite/60',
   bad: 'border-danger/50 text-danger bg-danger/10',
 }

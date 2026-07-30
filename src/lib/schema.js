@@ -15,9 +15,19 @@ export const PROVENANCE = {
   reported: { label: 'Reported / from docs', tone: 'info' },
   seller: { label: 'Seller / broker claim', tone: 'warn' },
   market: { label: 'Market-supported', tone: 'info' },
+  estimated: { label: 'Estimated', tone: 'estimate' },
   assumption: { label: 'Assumption (default)', tone: 'assume' },
   calculated: { label: 'Calculated', tone: 'muted' },
   missing: { label: 'Missing', tone: 'bad' },
+}
+
+// Confirmation-step modes and how they map to a stored provenance source.
+export const MODE_SOURCE = {
+  read: 'reported',      // extracted from docs, confident
+  unsure: 'seller',      // read but low confidence — verify
+  estimated: 'estimated', // derived from other factors
+  manual: 'verified',    // user typed / confirmed
+  default: 'assumption', // untouched illustrative default
 }
 
 function scen(current, proforma, target) {
@@ -202,6 +212,15 @@ export const KEY_FIELDS = [
     { path: 'op.y1OpEx', label: 'Year-1 non-management OpEx', type: 'money' },
     { path: 'op.opexGrowth', label: 'Annual OpEx growth', type: 'pct' },
     { path: 'op.mgmtFeePct', label: 'Management fee (% EGI)', type: 'pct' },
+  ]},
+  { group: 'Year-3 revenue drivers', scenario: true, fields: [
+    { path: 'rev.ltRate', label: 'Long-term monthly rate', type: 'money' },
+    { path: 'rev.ltOcc', label: 'Long-term occupancy', type: 'pct' },
+    { path: 'rev.stdADR', label: 'Transient ADR', type: 'money' },
+    { path: 'rev.stdOcc', label: 'Transient occupancy', type: 'pct' },
+    { path: 'rev.premADR', label: 'Premium / waterfront ADR', type: 'money' },
+    { path: 'rev.premOcc', label: 'Premium occupancy', type: 'pct' },
+    { path: 'rev.store', label: 'Store / propane / laundry / activities', type: 'money' },
   ]},
   { group: 'Full-build site mix', scenario: true, fields: [
     { path: 'mix.longTermPads', label: 'Long-term RV pads', type: 'int' },
