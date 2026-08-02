@@ -753,3 +753,28 @@ export const SOLUTIONS = {
 }
 
 export const SOLUTION_SLUGS = Object.keys(SOLUTIONS)
+
+export const AUDIENCE_PREFIX = {
+  'For loyalty vendors': '/for-vendors/',
+  'For brands': '/for-brands/',
+  'Solutions': '/solutions/',
+  'By channel': '/channels/',
+}
+
+// Path + short label for a slug (used for lateral "related" navigation).
+export function linkFor(slug) {
+  const d = SOLUTIONS[slug]
+  if (!d) return null
+  const label = d.breadcrumb[d.breadcrumb.length - 1].label
+  return { to: AUDIENCE_PREFIX[d.audience] + slug, label, blurb: d.sub }
+}
+
+// Sibling pages in the same audience group (for "keep exploring").
+export function relatedTo(slug, n = 3) {
+  const cur = SOLUTIONS[slug]
+  if (!cur) return []
+  return SOLUTION_SLUGS
+    .filter((s) => s !== slug && SOLUTIONS[s].audience === cur.audience)
+    .slice(0, n)
+    .map(linkFor)
+}

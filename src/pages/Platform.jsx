@@ -73,9 +73,9 @@ export default function Platform() {
       </Band>
 
       <CtaBand title="Choose your starting point." highlight="starting point"
-               sub="Whether you sell loyalty or run a program, the fastest way in is a five-minute estimate."
-               primary={{ label: 'Estimate Loyalty ROI', to: '/estimator' }}
-               secondary={{ label: 'For Vendors', to: '/for-vendors' }} />
+               sub="Pick the path that matches your role, or jump straight into a five-minute estimate."
+               primary={{ label: 'I’m a vendor', to: '/for-vendors' }}
+               secondary={{ label: 'I’m a brand', to: '/for-brands' }} />
     </>
   )
 }
