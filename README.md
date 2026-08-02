@@ -1,111 +1,72 @@
-# Stonebrook Deal Scout
+# Alma Loyalty — Website
 
-A cost-controlled MVP for **screening value-add multifamily apartment deals** before
-wasting hours on full underwriting.
+The public marketing site for **Alma Loyalty**, powered by **Alma AI OS™** —
+a new category: **Loyalty ROI Intelligence & Decisioning**.
 
-This is a **static demo MVP** — manual entry, demo data, scoring logic, and clean
-dashboards. It is intentionally **not** a live crawler, not a paid-API app, not a
-scraper, and has no backend, no auth, and no keys. All state lives in the browser
-(`localStorage`).
+The site answers one question in many ways: *can a loyalty program create
+incremental profit for this business, what must be true for that to happen, and
+which decisions will improve the outcome?* It is **vendor-first** (loyalty
+software and service companies) and **brand-second** (companies running or
+planning a program).
 
-## The thesis
+## Stack
 
-We do **not** use the old RE Mentor rule of requiring 12% cash-on-cash in Year 1.
-We evaluate whether a property can **become** a good deal after a realistic
-**18–24 month value-add stabilization plan**.
-
-Target profile: an underperforming **C property in a B area** in a strong or
-emerging market, with fixable upside — under-market rents, vacancy upside, dated
-units, poor management, weak other income, a stale listing, a negotiable price,
-and a realistic capex path. We avoid luxury/stabilized/fully-renovated product,
-bad locations, deals that only work off the broker pro forma, deals with no rent
-upside, and appreciation-only bets.
-
-## Features
-
-| Page | What it does |
-|------|--------------|
-| **Dashboard** | Pipeline overview, ranked deals, aggregate value created, market status |
-| **Market Gate** | Score a market 0–100 across 10 factors → Approved / Watchlist / Reject |
-| **Add Property** | Manual entry of listing-level data + value-add ratings |
-| **Scratch Screen** | Fast 0–100 read on every property, filterable by decision band |
-| **Deal Detail** | Full decision output: score, why, pain, upside, quick math, docs, risks |
-| **24-Month Plan** | Phased stabilization plan derived from the deal math |
-| **Offer / Price** | Preliminary *max supportable price* (never a final offer) + confidence |
-| **Risk Register** | Log and rank risks with mitigations |
-| **Broker Questions** | The questions/docs to request; one-click "copy as email" |
-| **Investor Summary** | One-page, print-friendly deal summary |
-
-### Scoring
-
-**Market Gate (0–100)** — job growth, population growth, wage/income support,
-employer anchors, rent growth, new-supply risk, affordability, crime/safety risk,
-infrastructure investment, and your RE Indicator score. Risk factors are inverted.
-- 80–100 Approved · 60–79 Watchlist · < 60 Reject
-
-**Property scratch score (0–100)** — market strength (20), submarket quality (15),
-condition/value-add fit (15), rent upside (15), vacancy/operations upside (10),
-capex feasibility (10), broker-optimism risk (5, inverted), debt/strike factor (10).
-- 85–100 Strong lead · 70–84 Request OM · 55–69 Watchlist · 40–54 Pass unless price drops · < 40 Pass
-
-Market strength, rent upside, and vacancy upside are auto-derived from the data;
-the rest are analyst ratings.
-
-### Deal math
-
-Price/unit, monthly & annual rent upside, current/stabilized gross rent, current
-& stabilized NOI, current & stabilized cap rate, stabilized value, total project
-cost, and value created — all in `src/lib/calculations.js`. On weak listing-only
-data the app deliberately shows a **preliminary max supportable price** plus the
-required documents, broker questions, and a confidence level — not a final offer.
-
-## Tech
-
-React + Vite + Tailwind. `react-router-dom` for routing. No other runtime deps.
-No backend, no Supabase, no APIs, no env vars, no secrets.
-
-## Getting started
+React 18 + Vite + Tailwind CSS + React Router. No backend; static SPA that
+builds to `dist/` (deployable to Cloudflare Pages, Netlify, Vercel, etc.).
+`public/_redirects` maps `/* → /index.html` so client-side routes resolve on
+deep-link and refresh.
 
 ```bash
 npm install
-npm run dev      # local dev server
-npm run build    # production build → dist/
-npm run preview  # preview the production build
+npm run dev       # local dev server
+npm run build     # production build → dist/
+npm run preview   # preview the production build
 ```
 
-Demo data (2 markets, 5 properties) seeds automatically on first run. Use
-**Reset demo data** in the sidebar to restore it at any time.
+## Design system
 
-## Deploy to Cloudflare Pages
+Derived from the approved reference: warm near-black + ivory alternating bands,
+a burnt-orange accent, a high-contrast **editorial serif** (Fraunces) for
+headlines with a single highlighted word, and **Inter** for body/UI. All tokens
+live in `tailwind.config.js`; swap the values there to re-theme. Fonts load from
+Google Fonts (see `index.html`).
 
-1. Push this repo to GitHub.
-2. In Cloudflare Pages, **Create a project** → connect the repo.
-3. Build settings:
-   - **Framework preset:** None (or Vite)
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-4. Deploy. `public/_redirects` (`/* /index.html 200`) is included so client-side
-   routes resolve correctly on refresh/deep-link.
-
-No environment variables are required.
-
-## Project structure
+## Structure
 
 ```
 src/
-  components/   Layout, DealTabs, DealHeader, shared UI primitives
-  context/      AppContext — state + localStorage persistence
-  data/         demoData.js — 2 markets, 5 seed properties
-  lib/          marketScore, dealScore, calculations, plan, screen, format, storage
-  pages/        the 10 screens
+  content/        site nav/footer, solution-page data, calculators, glossary, FAQs, role matrices
+  components/     Layout, Header (mega-menu), Footer, Estimator, SolutionPage template, shared UI + sections
+  pages/          Home, Platform, WhyROI, Methodology, DataConfidence, CalculatorLibrary,
+                  EstimatorPage, ForVendors, ForBrands, ProgramMatcher, Resources, Glossary,
+                  FaqPage, About, Contact, Security, Sitemap, Legal, NotFound
 ```
 
-## Version 2 ideas
+Most product / outcome / channel pages are rendered by a single data-driven
+template (`components/SolutionPage.jsx`) fed by `content/solutions.js`, so new
+pages are added as data, not duplicated markup.
 
-- Real data ingestion (crawler / paid listing APIs / OM PDF parsing) behind a backend
-- Supabase (or similar) for auth, multi-user pipelines, and shared deal history
-- Full underwriting model: financing, DSCR, IRR/equity multiple, sensitivity tables
-- Rent & sales comps integration to validate market rents independently
-- Document upload + checklist tracking per deal
-- Export to PDF/Excel and shareable investor links
-- Map view and submarket heat-mapping
+## Key routes
+
+- `/` home · `/estimator` Loyalty Opportunity Estimator (interactive) · `/calculators` model library
+- `/platform` · `/why-loyalty-roi` · `/methodology` · `/data-confidence`
+- `/for-vendors` (+ `/pre-scope`, `/account-prioritization`, `/sales-toolkit`, `/white-label`, `/roi-reports`, `/portfolio`, `/integrations`)
+- `/for-brands` (+ `/business-case`, `/active-membership`, `/purchase-frequency`, `/average-order-value`, `/retention`, `/audience-strategy`) · `/program-matcher`
+- `/solutions/*` (`roi-audit`, `loyalty-games`, `consulting`) · `/channels/*` (`ecommerce`, `retail`, `omnichannel`, `restaurant`, `subscription`, `b2b`)
+- `/resources` · `/glossary` · `/faq` · `/about` · `/contact` · `/security` · `/sitemap` · `/privacy` · `/terms` · `/accessibility`
+
+## Integrity notes (must stay true)
+
+Per the brand brief, the site deliberately does **not** publish, and these
+remain **approval-gated** until ownership confirms them:
+
+- Exact pricing, minimum orders, or two-vendor exclusivity terms
+- The "1,200 metrics" benchmark count and the "20,000 programs monitored" figure
+- Named customer logos, testimonials, case-study results, named integrations,
+  security certifications, or data-provider names
+- Loyalty-game prize amounts, and any specific "11 years" claim beyond the
+  general "more than a decade" wording on the About page
+
+All ROI figures are shown as **ranges with a confidence level**, never as a
+guarantee, and demonstration data is labeled as illustrative. Legal pages are
+placeholders for counsel review.

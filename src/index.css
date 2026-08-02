@@ -4,54 +4,94 @@
 
 @layer base {
   html {
-    color-scheme: dark;
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-ink text-fog font-sans antialiased;
+    @apply bg-ink text-ondark font-sans antialiased;
   }
   h1, h2, h3, h4 {
-    @apply text-white tracking-tight;
+    @apply font-serif tracking-tight;
+    line-height: 1.08;
   }
-  /* Numeric alignment for financial figures */
   .tnum {
     font-variant-numeric: tabular-nums;
+  }
+  :focus-visible {
+    outline: 2px solid #dd6a2b;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  .panel {
-    @apply bg-charcoal border border-slateline/70 rounded-lg shadow-panel;
+  .wrap {
+    @apply max-w-wrap mx-auto px-6;
   }
-  .panel-hd {
-    @apply px-5 py-4 border-b border-slateline/60;
-  }
-  .label {
-    @apply text-[11px] uppercase tracking-[0.14em] text-mist font-medium;
-  }
-  .input {
-    @apply w-full bg-ink border border-slateline rounded-md px-3 py-2 text-sm text-white
-           placeholder-mist/50 focus:outline-none focus:border-gold/70 focus:ring-1 focus:ring-gold/30;
+  .eyebrow {
+    @apply inline-block font-sans text-xs font-semibold uppercase text-orange;
+    letter-spacing: 0.2em;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium
-           transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] px-5 py-3 text-[15px] font-semibold font-sans
+           transition-all border border-transparent whitespace-nowrap;
   }
-  .btn-gold {
-    @apply btn bg-gold text-ink hover:bg-goldsoft;
+  .btn-primary {
+    @apply btn bg-orange text-[#241206] hover:bg-orangebright hover:-translate-y-0.5;
   }
-  .btn-ghost {
-    @apply btn border border-slateline text-fog hover:border-gold/60 hover:text-white;
+  .btn-outline-dark {
+    @apply btn bg-transparent text-ondark border-brownline/60 hover:border-sand hover:bg-white/[0.03];
   }
-  .btn-danger {
-    @apply btn border border-danger/50 text-danger hover:bg-danger/10;
+  .btn-outline-light {
+    @apply btn bg-transparent text-onlight border-brownline/50 hover:bg-brownline/10;
   }
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium;
+  /* Range slider styling */
+  .rng {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 999px;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, #dd6a2b var(--p, 50%), rgba(120,92,64,0.28) var(--p, 50%));
+  }
+  .rng::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f7efe2;
+    border: 5px solid #dd6a2b;
+    box-shadow: 0 2px 8px rgba(40,22,8,0.4);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .rng::-webkit-slider-thumb:hover { transform: scale(1.12); }
+  .rng::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f7efe2;
+    border: 5px solid #dd6a2b;
+    cursor: pointer;
   }
 }
 
-/* Slim scrollbar for the shell */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #0b0d0f; }
-::-webkit-scrollbar-thumb { background: #2e343c; border-radius: 6px; }
-::-webkit-scrollbar-thumb:hover { background: #3a4048; }
+@layer utilities {
+  .fade-up {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fade-up.in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .fade-up { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}

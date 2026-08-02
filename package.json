@@ -1,9 +1,9 @@
 {
-  "name": "stonebrook-deal-scout",
+  "name": "alma-loyalty-site",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Cost-controlled MVP for screening value-add multifamily deals before full underwriting.",
+  "description": "Alma Loyalty — Loyalty ROI Intelligence & Decisioning marketing site (React + Vite + Tailwind).",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
