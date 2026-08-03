@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loyalty API Integration — Connect Your Loyalty Program to Every System | AlmaLoyalty</title>
+<meta name="description" content="Complete guide to loyalty API integration. Covers CRM, CDP, e-commerce, POS, email, SMS, and loyalty platform connections — with real-time vs. batch guidance for each." />
+<style>
+/* ============================================================
+   AlmaLoyalty — Loyalty API Integration Guide
+   "Signal & Schematic" visual identity
+   ============================================================ */
+
+:root{
+  --paper:#eef0f7;
+  --surface:#ffffff;
+  --surface-2:#f6f7fc;
+  --ink:#0d1430;
+  --ink-soft:#39416a;
+  --muted:#6a7299;
+  --line:#e3e6f1;
+  --line-strong:#d3d7e8;
+  --brand:#2f52ff;
+  --brand-2:#1a37d6;
+  --cyan:#0fb3c6;
+  --coral:#f4645a;
+  --coral-ink:#c53f36;
+  --green:#1fa876;
+  --green-ink:#137a54;
+  --navy:#0a1236;
+  --navy-2:#131e52;
+  --navy-line:rgba(140,164,255,.16);
+  --shadow:0 1px 2px rgba(13,20,48,.04), 0 12px 30px -14px rgba(13,20,48,.18);
+  --shadow-lg:0 30px 60px -28px rgba(13,20,48,.4);
+  --radius:16px;
+  --radius-sm:11px;
+  --maxw:1120px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#060a1a;
+    --surface:#0d1430;
+    --surface-2:#111a3c;
+    --ink:#eef1fb;
+    --ink-soft:#c2c9e6;
+    --muted:#8b93bb;
+    --line:#212a52;
+    --line-strong:#2b3563;
+    --brand:#6a84ff;
+    --brand-2:#4d68ff;
+    --cyan:#37cfe0;
+    --coral:#ff7d72;
+    --coral-ink:#ff9b92;
+    --green:#3ecb93;
+    --green-ink:#57d8a5;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 34px -18px rgba(0,0,0,.7);
+    --shadow-lg:0 40px 70px -30px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#060a1a;--surface:#0d1430;--surface-2:#111a3c;--ink:#eef1fb;--ink-soft:#c2c9e6;
+  --muted:#8b93bb;--line:#212a52;--line-strong:#2b3563;--brand:#6a84ff;--brand-2:#4d68ff;
+  --cyan:#37cfe0;--coral:#ff7d72;--coral-ink:#ff9b92;--green:#3ecb93;--green-ink:#57d8a5;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 34px -18px rgba(0,0,0,.7);
+  --shadow-lg:0 40px 70px -30px rgba(0,0,0,.75);
+}
+:root[data-theme="light"]{
+  --paper:#eef0f7;--surface:#ffffff;--surface-2:#f6f7fc;--ink:#0d1430;--ink-soft:#39416a;
+  --muted:#6a7299;--line:#e3e6f1;--line-strong:#d3d7e8;--brand:#2f52ff;--brand-2:#1a37d6;
+  --cyan:#0fb3c6;--coral:#f4645a;--coral-ink:#c53f36;--green:#1fa876;--green-ink:#137a54;
+  --shadow:0 1px 2px rgba(13,20,48,.04), 0 12px 30px -14px rgba(13,20,48,.18);
+  --shadow-lg:0 30px 60px -28px rgba(13,20,48,.4);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.02em;font-weight:800}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--brand);display:inline-flex;align-items:center;gap:8px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.6}
+.section{padding:88px 0}
+.section-head{max-width:660px;margin-bottom:40px}
+.section-head h2{font-size:clamp(28px,4vw,40px);margin:16px 0 14px}
+.section-head p{color:var(--muted);font-size:18px}
+
+/* ---------- top nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--surface) 82%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;gap:26px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em;flex:none}
+.brand .logo{width:30px;height:30px;flex:none}
+.brand b{color:var(--brand)}
+.nav-links{display:flex;align-items:center;gap:22px;margin-left:6px}
+.nav-links a{font-size:14.5px;color:var(--ink-soft);font-weight:500;display:inline-flex;align-items:center;gap:5px}
+.nav-links a:hover{color:var(--brand)}
+.nav-links .caret{width:9px;height:9px;opacity:.5}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.pill-nav{
+  display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;
+  padding:8px 13px;border-radius:9px;background:var(--brand);color:#fff;
+}
+.pill-nav.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line-strong)}
+.nav-right .txt{font-size:14.5px;color:var(--ink-soft);font-weight:500}
+.btn-signup{
+  font-size:14.5px;font-weight:700;padding:9px 16px;border-radius:10px;
+  background:var(--ink);color:var(--surface);
+}
+:root[data-theme="dark"] .btn-signup{background:var(--brand);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-signup{background:var(--brand);color:#fff}}
+.nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--line-strong);
+  border-radius:9px;width:42px;height:38px;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+@media(max-width:960px){
+  .nav-links,.nav-right .txt,.pill-nav{display:none}
+  .nav-toggle{display:flex}
+  .nav-right{gap:10px}
+}
+@media(max-width:400px){
+  .brand{font-size:16px}.brand .logo{width:26px;height:26px}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow:hidden;color:#eaefff;
+  background:
+    radial-gradient(120% 90% at 85% 10%, rgba(47,82,255,.34), transparent 55%),
+    radial-gradient(90% 80% at 5% 90%, rgba(15,179,198,.22), transparent 55%),
+    linear-gradient(160deg,var(--navy),#0a1440 55%,#0b1650);
+}
+.hero-grid-bg{position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(var(--navy-line) 1px,transparent 1px),linear-gradient(90deg,var(--navy-line) 1px,transparent 1px);
+  background-size:46px 46px;mask-image:radial-gradient(120% 100% at 60% 0%,#000 30%,transparent 78%)}
+.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+  padding:26px 0 84px}
+.breadcrumb{font-family:var(--mono);font-size:12.5px;color:#9fb0e8;letter-spacing:.04em;padding:26px 0 30px;display:flex;gap:9px;flex-wrap:wrap}
+.breadcrumb a:hover{color:#fff}
+.breadcrumb .sep{opacity:.5}
+.tag-tech{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:#ffd9a1;border:1px solid rgba(255,197,122,.35);
+  background:rgba(255,180,90,.08);padding:6px 12px;border-radius:99px;margin-bottom:22px}
+.tag-tech .dot{width:7px;height:7px;border-radius:50%;background:#ffc078;box-shadow:0 0 10px #ffc078}
+.hero h1{font-size:clamp(34px,4.9vw,54px);line-height:1.03;color:#fff}
+.hero h1 .hl{color:transparent;background:linear-gradient(100deg,#7d97ff,#37cfe0);-webkit-background-clip:text;background-clip:text}
+.hero-sub{margin:22px 0 26px;font-size:18.5px;line-height:1.62;color:#c3cdf2;max-width:560px}
+.chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{display:inline-flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.4;color:#c6d0f4;
+  background:rgba(120,146,255,.1);border:1px solid var(--navy-line);border-radius:10px;padding:9px 13px;max-width:420px}
+.chip b{color:#9fb0e8;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;flex:none;padding-top:1px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15.5px;
+  padding:14px 22px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:transform .15s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(180deg,#3a63ff,#274cf5);color:#fff;box-shadow:0 14px 30px -12px rgba(47,82,255,.7)}
+.btn-ghost{background:rgba(255,255,255,.06);color:#eaefff;border-color:rgba(150,170,255,.28)}
+.btn svg{width:17px;height:17px}
+
+/* hero hub illustration */
+.hub-wrap{position:relative}
+.hub{width:100%;height:auto;overflow:visible}
+.hub .ring{fill:none;stroke:var(--navy-line);stroke-width:1}
+.hub .wire{fill:none;stroke:rgba(140,164,255,.3);stroke-width:1.4}
+.hub .flow{fill:none;stroke:url(#flowgrad);stroke-width:2.4;stroke-linecap:round;
+  stroke-dasharray:5 210;animation:flow 3.4s linear infinite}
+.hub .node-box{fill:rgba(13,22,60,.9);stroke:rgba(150,172,255,.4);stroke-width:1}
+.hub .node-box:hover{stroke:var(--cyan)}
+.hub text{font-family:var(--mono);fill:#c9d4ff;font-size:11px;font-weight:600;letter-spacing:.04em}
+.hub .core-ring{fill:none;stroke:rgba(120,151,255,.5);stroke-width:1.2}
+.hub .core-glow{fill:url(#coreglow)}
+.hub .core-box{fill:url(#coregrad);stroke:rgba(160,182,255,.55);stroke-width:1.2}
+.hub .core-label{fill:#fff;font-size:13px;font-weight:700;letter-spacing:.1em}
+.hub .core-sub{fill:#9fb0e8;font-size:8.5px;letter-spacing:.18em}
+.hub .pulse{transform-box:fill-box;transform-origin:center;animation:corePulse 3.4s ease-in-out infinite}
+@keyframes flow{to{stroke-dashoffset:-215}}
+@keyframes corePulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
+.hub-badges{position:absolute;left:0;right:0;bottom:-14px;display:flex;justify-content:center;gap:8px}
+.hub-badge{font-family:var(--mono);font-size:10.5px;color:#aeb9e6;background:rgba(10,18,54,.75);
+  border:1px solid var(--navy-line);border-radius:8px;padding:5px 10px;display:flex;align-items:center;gap:6px}
+.hub-badge i{width:7px;height:7px;border-radius:2px;display:inline-block}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:20px;padding-bottom:70px}
+  .hub-wrap{max-width:440px;margin:6px auto 0}
+}
+
+/* ---------- problem / solution ---------- */
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ps-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.ps-card .badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:8px;margin-bottom:18px}
+.ps-card.problem .badge{color:var(--coral-ink);background:color-mix(in srgb,var(--coral) 14%,transparent)}
+.ps-card.solution .badge{color:var(--green-ink);background:color-mix(in srgb,var(--green) 15%,transparent)}
+.ps-card h3{font-size:22px;margin-bottom:12px}
+.ps-card p{color:var(--muted);font-size:16px}
+.ps-illo{margin-top:22px;width:100%;height:118px}
+.ps-card.problem{border-top:3px solid var(--coral)}
+.ps-card.solution{border-top:3px solid var(--green)}
+@media(max-width:760px){.ps-grid{grid-template-columns:1fr}}
+
+/* ---------- architecture diagram ---------- */
+.arch{background:var(--navy);color:#e7ecff;position:relative;overflow:hidden}
+.arch .hero-grid-bg{opacity:.35}
+.arch .eyebrow{color:#7d97ff}
+.arch .section-head h2{color:#fff}
+.arch .section-head p{color:#b7c2ec}
+.arch-diagram{position:relative;background:rgba(9,16,48,.6);border:1px solid var(--navy-line);
+  border-radius:var(--radius);padding:14px;box-shadow:var(--shadow-lg);overflow-x:auto}
+.arch-svg{min-width:640px;width:100%;height:auto}
+.arch-svg .lane{fill:rgba(120,146,255,.05);stroke:var(--navy-line);stroke-width:1;rx:12}
+.arch-svg .lane-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;fill:#8ea0dc;text-transform:uppercase}
+.arch-svg .box{fill:rgba(17,28,74,.95);stroke:rgba(150,172,255,.34);stroke-width:1}
+.arch-svg .box.core{fill:url(#archcore);stroke:rgba(170,190,255,.6)}
+.arch-svg .box.api{fill:rgba(15,179,198,.14);stroke:rgba(55,207,224,.5)}
+.arch-svg .bt{font-family:var(--sans);font-size:12.5px;font-weight:600;fill:#dbe3ff}
+.arch-svg .bs{font-family:var(--mono);font-size:9.5px;fill:#9fb0e8;letter-spacing:.03em}
+.arch-svg .link{fill:none;stroke:rgba(140,164,255,.4);stroke-width:1.3}
+.arch-svg .link-flow{fill:none;stroke:var(--cyan);stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:4 120;animation:flow2 3s linear infinite}
+@keyframes flow2{to{stroke-dashoffset:-124}}
+
+/* ---------- integrations grid ---------- */
+.int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.int-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);position:relative;transition:transform .18s ease,box-shadow .2s ease,border-color .2s ease}
+.int-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.int-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.int-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand);flex:none}
+.int-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sync-badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:99px;display:inline-flex;align-items:center;gap:5px}
+.sync-badge i{width:6px;height:6px;border-radius:50%}
+.sync-rt{color:var(--brand-2);background:color-mix(in srgb,var(--brand) 13%,transparent)}
+.sync-rt i{background:var(--brand);box-shadow:0 0 7px var(--brand)}
+.sync-batch{color:var(--muted);background:color-mix(in srgb,var(--muted) 15%,transparent)}
+.sync-batch i{background:var(--muted)}
+.int-card h3{font-size:17px;margin-bottom:4px}
+.int-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em}
+.int-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.int-tools span{font-family:var(--mono);font-size:11px;color:var(--ink-soft);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+@media(max-width:900px){.int-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.int-grid{grid-template-columns:1fr}}
+
+/* ---------- realtime vs batch ---------- */
+.rtb{background:var(--surface-2)}
+.rtb-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:20px}
+.rtb-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.rtb-card h3{display:flex;align-items:center;gap:11px;font-size:20px;margin-bottom:6px}
+.rtb-card .tagline{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em;margin-bottom:18px}
+.rtb-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.rtb-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rtb-card.rt .rtb-ic{background:color-mix(in srgb,var(--brand) 14%,transparent);color:var(--brand)}
+.rtb-card.batch .rtb-ic{background:color-mix(in srgb,var(--cyan) 16%,transparent);color:var(--cyan)}
+.rtb-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+.rtb-list li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft)}
+.rtb-list li svg{width:18px;height:18px;flex:none;margin-top:2px;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rtb-card.rt .rtb-list li svg{stroke:var(--brand)}
+.rtb-card.batch .rtb-list li svg{stroke:var(--cyan)}
+.rtb-timeline{margin-top:20px;width:100%;height:66px}
+.callout{display:flex;gap:14px;align-items:center;background:color-mix(in srgb,var(--coral) 9%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--coral) 32%,var(--line));border-left:4px solid var(--coral);
+  border-radius:12px;padding:18px 22px}
+.callout svg{width:26px;height:26px;flex:none;stroke:var(--coral);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.callout p{font-size:16px;font-weight:600;color:var(--ink)}
+@media(max-width:760px){.rtb-grid{grid-template-columns:1fr}}
+
+/* ---------- KPIs ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+  box-shadow:var(--shadow);text-align:center}
+.gauge{width:112px;height:112px;margin:0 auto 8px;position:relative}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .track{fill:none;stroke:var(--line-strong);stroke-width:9}
+.gauge .val{fill:none;stroke-width:9;stroke-linecap:round}
+.gauge .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .center b{font-family:var(--mono);font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.gauge .center small{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em}
+.kpi h4{font-size:15.5px;margin:6px 0 4px}
+.kpi p{font-size:13px;color:var(--muted)}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.kpi-grid{grid-template-columns:1fr}}
+
+/* ---------- timeline ---------- */
+.tl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:14px}
+.tl-step{padding:0 18px;position:relative}
+.tl-step:not(:last-child)::after{content:"";position:absolute;top:19px;left:calc(50% + 22px);right:calc(-50% + 22px);
+  height:2px;background:linear-gradient(90deg,var(--brand),color-mix(in srgb,var(--brand) 30%,var(--line)))}
+.tl-dot{width:40px;height:40px;border-radius:12px;background:var(--surface);border:2px solid var(--brand);
+  color:var(--brand);font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;position:relative;z-index:2;box-shadow:var(--shadow)}
+.tl-step h4{font-size:16px;text-align:center;margin-bottom:6px}
+.tl-step .dur{display:block;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--brand);margin-bottom:8px;letter-spacing:.05em}
+.tl-step p{font-size:13.5px;color:var(--muted);text-align:center}
+@media(max-width:820px){
+  .tl-grid{grid-template-columns:1fr;gap:24px}
+  .tl-step{display:grid;grid-template-columns:40px 1fr;gap:16px;text-align:left;padding:0}
+  .tl-step .tl-dot{margin:0}
+  .tl-step h4,.tl-step .dur,.tl-step p{text-align:left}
+  .tl-step:not(:last-child)::after{display:none}
+}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+  box-shadow:var(--shadow);overflow:hidden}
+.faq-q{width:100%;background:none;border:0;text-align:left;cursor:pointer;font-family:inherit;
+  font-size:16.5px;font-weight:700;color:var(--ink);padding:20px 22px;display:flex;align-items:center;gap:14px}
+.faq-q .qmark{font-family:var(--mono);font-size:12px;color:var(--brand);flex:none}
+.faq-q .plus{margin-left:auto;width:20px;height:20px;flex:none;position:relative;transition:transform .25s ease}
+.faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--brand);border-radius:2px}
+.faq-q .plus::before{top:9px;left:2px;right:2px;height:2px}
+.faq-q .plus::after{left:9px;top:2px;bottom:2px;width:2px;transition:opacity .2s ease}
+.faq-item[open] .plus::after{opacity:0}
+.faq-a{padding:0 22px 22px 48px;color:var(--muted);font-size:15.5px}
+.faq-item[open] .plus{transform:rotate(180deg)}
+details.faq-item summary{list-style:none}
+details.faq-item summary::-webkit-details-marker{display:none}
+
+/* ---------- related ---------- */
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:18px 20px;box-shadow:var(--shadow);transition:transform .16s ease,border-color .2s ease}
+.rel-card:hover{transform:translateX(3px);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.rel-ic{width:40px;height:40px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand)}
+.rel-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.rel-card .rt{flex:1}
+.rel-card .rt b{display:block;font-size:15.5px;color:var(--ink)}
+.rel-card .rt small{font-size:12.5px;color:var(--muted)}
+.rel-card .arrow{color:var(--muted);transition:transform .16s ease}
+.rel-card:hover .arrow{transform:translateX(3px);color:var(--brand)}
+@media(max-width:820px){.rel-grid{grid-template-columns:1fr}}
+
+/* ---------- CTA ---------- */
+.cta{position:relative;overflow:hidden;color:#eaefff;text-align:center;
+  background:radial-gradient(120% 130% at 50% -20%, rgba(47,82,255,.4), transparent 60%),linear-gradient(160deg,var(--navy-2),var(--navy))}
+.cta .hero-grid-bg{opacity:.4}
+.cta-inner{position:relative;max-width:660px;margin:0 auto;padding:14px 0}
+.cta h2{font-size:clamp(28px,4vw,40px);color:#fff;margin-bottom:14px}
+.cta p{color:#c3cdf2;font-size:18px;margin-bottom:28px}
+
+/* ---------- footer ---------- */
+.footer{background:var(--navy);color:#c3cdf2;padding:60px 0 30px}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:30px}
+.foot-brand .brand{color:#fff;margin-bottom:14px}
+.foot-brand p{font-size:14px;color:#93a1d4;max-width:260px;margin-bottom:18px}
+.foot-social{display:flex;gap:10px}
+.foot-social a{width:34px;height:34px;border-radius:8px;background:rgba(120,146,255,.12);
+  display:flex;align-items:center;justify-content:center;color:#aeb9e6}
+.foot-social a:hover{background:var(--brand);color:#fff}
+.foot-social svg{width:16px;height:16px}
+.foot-col h5{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7d8ecb;margin-bottom:14px;font-weight:700}
+.foot-col a{display:block;font-size:13.5px;color:#aeb9e6;padding:5px 0}
+.foot-col a:hover{color:#fff}
+.foot-bottom{margin-top:44px;padding-top:22px;border-top:1px solid var(--navy-line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:#7d8ecb;font-family:var(--mono)}
+.foot-bottom a:hover{color:#fff}
+.foot-legal{display:flex;gap:20px;flex-wrap:wrap}
+@media(max-width:820px){.foot-top{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
+@media(max-width:480px){.foot-top{grid-template-columns:1fr}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="AlmaLoyalty home">
+      <svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="#2f52ff"/>
+        <path d="M16 8l6 10.4H10L16 8z" fill="#fff" opacity=".95"/>
+        <circle cx="16" cy="21.5" r="2.6" fill="#37cfe0"/>
+      </svg>
+      Alma<b>Loyalty</b>.com
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#">Products <svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a href="#">Solutions <svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a href="#">Resources <svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4"/></svg></a>
+      <a href="#">Company <svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    </nav>
+    <div class="nav-right">
+      <a class="pill-nav" href="#">⚡ Omnichannel</a>
+      <a class="txt" href="#">Pricing</a>
+      <a class="pill-nav ghost" href="#">◈ ROI Configurator</a>
+      <a class="txt" href="#">Login</a>
+      <a class="btn-signup" href="#">Sign Up</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-grid-bg"></div>
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="#top">Home</a><span class="sep">/</span><a href="#">Guides</a><span class="sep">/</span><span>Loyalty API Integration Guide</span>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="tag-tech"><span class="dot"></span>Technical / Educational</span>
+        <h1>Loyalty API Integration — <span class="hl">Connect Your Loyalty Program to Every System</span></h1>
+        <p class="hero-sub">A complete guide to loyalty API integration. We cover CRM, CDP, e-commerce, POS, email, SMS, and loyalty platform connections — with the technical and business considerations behind each.</p>
+        <div class="chip-row">
+          <span class="chip"><b>Audience</b>IT &amp; engineering teams implementing loyalty; loyalty software vendors selling to technical buyers</span>
+          <span class="chip"><b>Keyword</b>loyalty API integration</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#integrations">Explore the 12 integrations
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost" href="#architecture">See the architecture</a>
+        </div>
+      </div>
+
+      <!-- hub-and-spoke illustration -->
+      <div class="hub-wrap">
+        <svg class="hub" viewBox="0 0 520 540" role="img" aria-label="Diagram: a central loyalty core wired to eight business systems with live data flowing along each connection">
+          <defs>
+            <linearGradient id="flowgrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#37cfe0" stop-opacity="0"/>
+              <stop offset="0.5" stop-color="#37cfe0"/>
+              <stop offset="1" stop-color="#7d97ff" stop-opacity="0"/>
+            </linearGradient>
+            <radialGradient id="coreglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#3a63ff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#3a63ff" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="coregrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2b4bff"/><stop offset="1" stop-color="#122a9e"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring" cx="260" cy="260" r="196"/>
+          <circle class="ring" cx="260" cy="260" r="120" opacity=".6"/>
+          <!-- wires + flows to 8 nodes -->
+          <g id="wires"></g>
+          <!-- core -->
+          <circle class="core-glow pulse" cx="260" cy="260" r="92"/>
+          <circle class="core-ring" cx="260" cy="260" r="66"/>
+          <rect class="core-box" x="196" y="234" width="128" height="52" rx="13"/>
+          <text class="core-label" x="260" y="257" text-anchor="middle">LOYALTY</text>
+          <text class="core-sub" x="260" y="273" text-anchor="middle">CORE · API LAYER</text>
+          <!-- nodes injected by JS for maintainability -->
+          <g id="nodes"></g>
+        </svg>
+        <div class="hub-badges">
+          <span class="hub-badge"><i style="background:#37cfe0"></i>Live sync</span>
+          <span class="hub-badge"><i style="background:#7d97ff"></i>8 connected systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEM / SOLUTION ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why integration matters</span>
+      <h2>Disconnected loyalty breaks member trust</h2>
+      <p>The gap between a member's real balance and what a channel shows is where loyalty programs quietly fail.</p>
+    </div>
+    <div class="ps-grid">
+      <div class="ps-card problem reveal">
+        <span class="badge">✕ The Problem</span>
+        <h3>Data gaps and stale balances</h3>
+        <p>Poorly integrated loyalty systems create data gaps, delayed point updates, inconsistent member balances, and channel friction — all of which undermine program trust and member experience.</p>
+        <svg class="ps-illo" viewBox="0 0 360 118" fill="none" aria-hidden="true">
+          <g stroke="var(--coral)" stroke-width="1.6" stroke-dasharray="4 5" opacity=".7">
+            <path d="M70 30 L170 59"/><path d="M70 88 L170 59"/><path d="M290 22 L200 59"/><path d="M290 96 L200 59"/>
+          </g>
+          <g fill="var(--surface-2)" stroke="var(--line-strong)">
+            <rect x="30" y="16" width="60" height="28" rx="7"/><rect x="30" y="74" width="60" height="28" rx="7"/>
+            <rect x="270" y="8" width="66" height="28" rx="7"/><rect x="270" y="82" width="66" height="28" rx="7"/>
+          </g>
+          <circle cx="185" cy="59" r="24" fill="color-mix(in srgb,var(--coral) 16%,var(--surface))" stroke="var(--coral)"/>
+          <path d="M178 52l14 14M192 52l-14 14" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <g font-family="var(--mono)" font-size="8" fill="var(--muted)" text-anchor="middle">
+            <text x="60" y="33">CRM</text><text x="60" y="91">POS</text><text x="303" y="25">APP</text><text x="303" y="99">EMAIL</text>
+          </g>
+        </svg>
+      </div>
+      <div class="ps-card solution reveal">
+        <span class="badge">✓ The Solution</span>
+        <h3>One real-time source of truth</h3>
+        <p>A well-architected integration layer connects the loyalty platform to every transactional system via real-time APIs — enabling consistent data, instant balance updates, and personalized experiences across all channels.</p>
+        <svg class="ps-illo" viewBox="0 0 360 118" fill="none" aria-hidden="true">
+          <g stroke="var(--green)" stroke-width="1.8" opacity=".85">
+            <path d="M70 30 L162 59"/><path d="M70 88 L162 59"/><path d="M290 22 L208 59"/><path d="M290 96 L208 59"/>
+          </g>
+          <g fill="var(--surface-2)" stroke="var(--green)">
+            <rect x="30" y="16" width="60" height="28" rx="7"/><rect x="30" y="74" width="60" height="28" rx="7"/>
+            <rect x="270" y="8" width="66" height="28" rx="7"/><rect x="270" y="82" width="66" height="28" rx="7"/>
+          </g>
+          <circle cx="185" cy="59" r="24" fill="color-mix(in srgb,var(--green) 18%,var(--surface))" stroke="var(--green)"/>
+          <path d="M176 59l6 6 11-12" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <g font-family="var(--mono)" font-size="8" fill="var(--muted)" text-anchor="middle">
+            <text x="60" y="33">CRM</text><text x="60" y="91">POS</text><text x="303" y="25">APP</text><text x="303" y="99">EMAIL</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ARCHITECTURE ===================== -->
+<section class="section arch" id="architecture">
+  <div class="hero-grid-bg"></div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Reference architecture</span>
+      <h2>The loyalty integration layer</h2>
+      <p>An abstraction layer sits between your systems of engagement and the loyalty core, normalizing events and serving a single balance to every channel.</p>
+    </div>
+    <div class="arch-diagram reveal">
+      <svg class="arch-svg" viewBox="0 0 900 360" role="img" aria-label="Layered architecture: source systems feed an event and API layer, which connects to the loyalty core and a data warehouse.">
+        <defs>
+          <linearGradient id="archcore" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b4bff"/><stop offset="1" stop-color="#122a9e"/></linearGradient>
+        </defs>
+        <!-- lane 1: systems -->
+        <rect class="lane" x="20" y="20" width="860" height="86" rx="12"/>
+        <text class="lane-label" x="38" y="44">Systems of engagement</text>
+        <g id="archSys">
+          <rect class="box" x="31"  y="54" width="150" height="40" rx="9"/><text class="bt" x="106" y="79" text-anchor="middle">E-commerce</text>
+          <rect class="box" x="203" y="54" width="150" height="40" rx="9"/><text class="bt" x="278" y="79" text-anchor="middle">POS</text>
+          <rect class="box" x="375" y="54" width="150" height="40" rx="9"/><text class="bt" x="450" y="79" text-anchor="middle">Mobile App</text>
+          <rect class="box" x="547" y="54" width="150" height="40" rx="9"/><text class="bt" x="622" y="79" text-anchor="middle">CRM · CDP</text>
+          <rect class="box" x="719" y="54" width="150" height="40" rx="9"/><text class="bt" x="794" y="79" text-anchor="middle">ESP · SMS</text>
+        </g>
+        <!-- links down -->
+        <g class="link"><path d="M106 106 V150"/><path d="M278 106 V150"/><path d="M450 106 V150"/><path d="M622 106 V150"/><path d="M794 106 V150"/></g>
+        <path class="link-flow" d="M278 106 V150"/><path class="link-flow" d="M450 106 V150" style="animation-delay:1s"/>
+        <!-- lane 2: api/event layer -->
+        <rect class="lane" x="20" y="150" width="860" height="74" rx="12"/>
+        <text class="lane-label" x="38" y="174">Integration layer · REST · Webhooks · Event bus</text>
+        <rect class="box api" x="60" y="184" width="150" height="30" rx="8"/><text class="bt" x="135" y="203" text-anchor="middle">API Gateway</text>
+        <rect class="box api" x="240" y="184" width="150" height="30" rx="8"/><text class="bt" x="315" y="203" text-anchor="middle">Event Router</text>
+        <rect class="box api" x="420" y="184" width="150" height="30" rx="8"/><text class="bt" x="495" y="203" text-anchor="middle">Identity Resolver</text>
+        <rect class="box api" x="600" y="184" width="150" height="30" rx="8"/><text class="bt" x="675" y="203" text-anchor="middle">Transform / Map</text>
+        <!-- links down -->
+        <g class="link"><path d="M300 224 V276"/><path d="M600 224 V276"/></g>
+        <path class="link-flow" d="M300 224 V276" style="animation-delay:.4s"/>
+        <!-- lane 3: core + warehouse -->
+        <rect class="box core" x="180" y="276" width="240" height="66" rx="12"/>
+        <text class="bt" x="300" y="305" text-anchor="middle" style="font-size:14px">Loyalty Core</text>
+        <text class="bs" x="300" y="323" text-anchor="middle">points · tiers · rules · redemption</text>
+        <rect class="box" x="480" y="276" width="240" height="66" rx="12"/>
+        <text class="bt" x="600" y="305" text-anchor="middle" style="font-size:14px">Data Warehouse</text>
+        <text class="bs" x="600" y="323" text-anchor="middle">Snowflake · BigQuery (batch)</text>
+        <path class="link" d="M420 309 H480"/>
+        <path class="link-flow" d="M420 309 H480" style="animation-delay:.8s"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12 INTEGRATIONS ===================== -->
+<section class="section" id="integrations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The connection map</span>
+      <h2>12 critical loyalty integrations</h2>
+      <p>Every touchpoint where a member earns, burns, or is recognized. Each carries a recommended sync mode — real-time where trust is on the line, batch where latency is harmless.</p>
+    </div>
+    <div class="int-grid" id="intGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== REALTIME VS BATCH ===================== -->
+<section class="section rtb">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Sync strategy</span>
+      <h2>Real-time vs. batch integration</h2>
+      <p>Not every connection needs to be instant — but the ones a member can see always do.</p>
+    </div>
+    <div class="rtb-grid">
+      <div class="rtb-card rt reveal">
+        <h3><span class="rtb-ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Real-time is required for</h3>
+        <p class="tagline">latency budget &lt; 500 ms · member-visible</p>
+        <ul class="rtb-list">
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Point balance display at POS</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Redemption validation</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Tier status updates</li>
+        </ul>
+        <svg class="rtb-timeline" viewBox="0 0 320 66" fill="none" aria-hidden="true">
+          <line x1="12" y1="33" x2="308" y2="33" stroke="var(--line-strong)" stroke-width="2"/>
+          <circle cx="40" cy="33" r="7" fill="var(--brand)"/><circle cx="160" cy="33" r="7" fill="var(--brand)"/><circle cx="280" cy="33" r="7" fill="var(--brand)"/>
+          <path d="M40 33 H280" stroke="var(--brand)" stroke-width="2.4" stroke-dasharray="4 100" stroke-linecap="round" style="animation:flow2 2.4s linear infinite"/>
+          <g font-family="var(--mono)" font-size="9" fill="var(--muted)" text-anchor="middle">
+            <text x="40" y="56">event</text><text x="160" y="56">sync</text><text x="280" y="56">shown</text>
+          </g>
+        </svg>
+      </div>
+      <div class="rtb-card batch reveal">
+        <h3><span class="rtb-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg></span>Batch is acceptable for</h3>
+        <p class="tagline">hourly / nightly · back-office</p>
+        <ul class="rtb-list">
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Reporting and analytics</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Marketing segmentation</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M5 12l5 5L20 7"/></svg>Data warehouse sync</li>
+        </ul>
+        <svg class="rtb-timeline" viewBox="0 0 320 66" fill="none" aria-hidden="true">
+          <line x1="12" y1="33" x2="308" y2="33" stroke="var(--line-strong)" stroke-width="2"/>
+          <g fill="var(--cyan)"><circle cx="40" cy="33" r="5"/><circle cx="90" cy="33" r="5"/><circle cx="140" cy="33" r="5"/></g>
+          <rect x="176" y="24" width="120" height="18" rx="4" fill="color-mix(in srgb,var(--cyan) 24%,transparent)" stroke="var(--cyan)"/>
+          <g font-family="var(--mono)" font-size="9" fill="var(--muted)" text-anchor="middle">
+            <text x="90" y="56">queued events</text><text x="236" y="37" fill="var(--cyan)">nightly job</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="callout reveal">
+      <svg viewBox="0 0 24 24"><path d="M12 2l10 18H2L12 2z"/><path d="M12 9v5M12 17.5v.5"/></svg>
+      <p>Serving stale data at the point of purchase destroys member trust — no analytics dashboard is worth that trade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KPIs ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Measure what matters</span>
+      <h2>Key performance indicators</h2>
+      <p>The four numbers that tell you an integration is healthy — the targets a well-built loyalty layer should hold.</p>
+    </div>
+    <div class="kpi-grid" id="kpiGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== TIMELINE ===================== -->
+<section class="section rtb">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What to expect</span>
+      <h2>A typical integration timeline</h2>
+      <p>A basic e-commerce integration takes 2–4 weeks. A full multi-channel rollout — POS, mobile app, and CRM — typically runs 3–6 months.</p>
+    </div>
+    <div class="tl-grid reveal">
+      <div class="tl-step">
+        <div class="tl-dot">1</div><h4>Discovery &amp; mapping</h4>
+        <span class="dur">Week 1</span>
+        <p>Audit systems, define events, agree on the identity key that resolves a member everywhere.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">2</div><h4>First connection</h4>
+        <span class="dur">Weeks 2–4</span>
+        <p>Wire e-commerce earn/burn in real time. Validate balances end to end in a sandbox.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">3</div><h4>Channel rollout</h4>
+        <span class="dur">Months 2–4</span>
+        <p>Add POS, mobile SDK, CRM and ESP. Hardening, retries, and reconciliation jobs.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">4</div><h4>Scale &amp; observe</h4>
+        <span class="dur">Months 4–6</span>
+        <p>Warehouse sync, partner networks, monitoring dashboards, and SLA-backed uptime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 40px;text-align:center">
+      <span class="eyebrow" style="justify-content:center">Frequently asked questions</span>
+      <h2>Answers for technical buyers</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item reveal" open>
+        <summary class="faq-q"><span class="qmark">Q</span>How long does loyalty platform integration typically take?<span class="plus"></span></summary>
+        <div class="faq-a">A basic e-commerce integration takes 2–4 weeks. A full multi-channel integration including POS, mobile app, and CRM typically takes 3–6 months, depending on the number of systems and the maturity of their APIs.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="qmark">Q</span>Which integrations truly need to be real-time?<span class="plus"></span></summary>
+        <div class="faq-a">Anything a member can see at the moment of a transaction: point balances at POS, redemption validation, and tier status. Back-office flows like reporting, segmentation, and warehouse sync can run in batch without harming trust.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="qmark">Q</span>How do you keep a member's identity consistent across systems?<span class="plus"></span></summary>
+        <div class="faq-a">An identity resolver in the integration layer maps every system's customer key to a single loyalty member ID — using email, phone, loyalty number, or a CDP identity graph — so an event from any channel lands on the right balance.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="qmark">Q</span>What happens when a downstream system is offline?<span class="plus"></span></summary>
+        <div class="faq-a">Events are queued and retried with idempotency keys, so no earn or burn is lost or double-counted. Nightly reconciliation jobs compare balances against source-of-truth and flag any drift for review.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RELATED ===================== -->
+<section class="section rtb">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Keep reading</span><h2>Related resources</h2></div>
+    <div class="rel-grid">
+      <a class="rel-card reveal" href="#">
+        <span class="rel-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg></span>
+        <span class="rt"><b>Omnichannel Loyalty</b><small>One balance across every channel</small></span>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h9M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="rel-card reveal" href="#">
+        <span class="rel-ic"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+        <span class="rt"><b>Gated Member Pages</b><small>Personalized, authenticated content</small></span>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h9M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="rel-card reveal" href="#">
+        <span class="rel-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
+        <span class="rt"><b>Loyalty Sales OS</b><small>Win more brands, faster</small></span>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h9M9 4l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta section">
+  <div class="hero-grid-bg"></div>
+  <div class="wrap cta-inner reveal">
+    <h2>Ready to put this into practice?</h2>
+    <p>Alma Loyalty gives vendors and brands the tools to act on everything covered in this guide — from real-time APIs to full omnichannel rollout.</p>
+    <a class="btn btn-primary" href="#">See API capabilities
+      <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="#2f52ff"/><path d="M16 8l6 10.4H10L16 8z" fill="#fff" opacity=".95"/><circle cx="16" cy="21.5" r="2.6" fill="#37cfe0"/></svg>
+          Alma<b style="color:#7d97ff">Loyalty</b>.com
+        </a>
+        <p>The operating system for loyalty software vendors. Win more brands, sell more programs, deliver better results.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 002.48 2.5A2.5 2.5 0 007.5 6 2.5 2.5 0 004.98 3.5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4 0 4.74 2.6 4.74 6V21H18v-5.3c0-1.26-.02-2.9-1.77-2.9s-2.04 1.38-2.04 2.8V21H10z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 3h3l-7 8 8 10h-6l-5-6-5 6H3l7.5-9L3 3h6l4.5 5.5L18 3z"/></svg></a>
+          <a href="#" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Products</h5>
+        <a href="#">ROI Calculator</a><a href="#">Program Auditing</a><a href="#">Competitive Intelligence</a>
+        <a href="#">AI Decisioning</a><a href="#">Public Pages</a><a href="#">Gated Pages</a><a href="#">Engagement Games</a>
+      </div>
+      <div class="foot-col"><h5>Solutions</h5>
+        <a href="#">For Loyalty Vendors</a><a href="#">For Brands</a><a href="#">For Retailers</a>
+      </div>
+      <div class="foot-col"><h5>Resources</h5>
+        <a href="#">Blog</a><a href="#">Case Studies</a><a href="#">Documentation</a><a href="#">API Docs</a><a href="#">Guides</a><a href="#">ROI Methodology</a>
+      </div>
+      <div class="foot-col"><h5>Company</h5>
+        <a href="#">About</a><a href="#">Team</a><a href="#">Careers</a><a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Alma Loyalty Division. All rights reserved.</span>
+      <span class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var C = 260, R = 196; // hub center & radius
+  var nodes = [
+    {label:"CRM",   a:-90},
+    {label:"CDP",   a:-45},
+    {label:"E-COM", a:0},
+    {label:"POS",   a:45},
+    {label:"SMS",   a:90},
+    {label:"EMAIL", a:135},
+    {label:"APP",   a:180},
+    {label:"DWH",   a:225}
+  ];
+  var wg = document.getElementById("wires");
+  var ng = document.getElementById("nodes");
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(n,attrs){var e=document.createElementNS(SVGNS,n);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+  nodes.forEach(function(nd,i){
+    var rad = nd.a*Math.PI/180;
+    var x = C + R*Math.cos(rad), y = C + R*Math.sin(rad);
+    // node position slightly inside the ring for the box
+    var bx = C + (R-6)*Math.cos(rad), by = C + (R-6)*Math.sin(rad);
+    // wire from core edge to node
+    var cx = C + 70*Math.cos(rad), cy = C + 70*Math.sin(rad);
+    var nx = C + (R-34)*Math.cos(rad), nyy = C + (R-34)*Math.sin(rad);
+    wg.appendChild(el("line",{x1:cx,y1:cy,x2:nx,y2:nyy,class:"wire"}));
+    var f = el("line",{x1:cx,y1:cy,x2:nx,y2:nyy,class:"flow"});
+    f.style.animationDelay = (i*0.42)+"s";
+    wg.appendChild(f);
+    // node box
+    var w=58,h=30;
+    ng.appendChild(el("rect",{x:bx-w/2,y:by-h/2,width:w,height:h,rx:9,class:"node-box"}));
+    var t=el("text",{x:bx,y:by+4,"text-anchor":"middle"});t.textContent=nd.label;ng.appendChild(t);
+  });
+
+  // ---- 12 integrations ----
+  var integ = [
+    {n:"CRM", sub:"Customer profiles & lifecycle", rt:1, tools:["Salesforce","HubSpot","MS Dynamics"], icon:'<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0111 0"/><path d="M16 6.5a3 3 0 010 5.6M17.5 19a5.5 5.5 0 00-3-4.9"/>'},
+    {n:"CDP", sub:"Unified customer data", rt:1, tools:["Segment","mParticle","Tealium"], icon:'<ellipse cx="12" cy="5.5" rx="7" ry="2.8"/><path d="M5 5.5v13c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-13M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8"/>'},
+    {n:"E-commerce", sub:"Online earn & burn", rt:1, tools:["Shopify","Magento","BigCommerce","custom"], icon:'<path d="M4 4h2l2 12h9l2-8H7"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/>'},
+    {n:"POS", sub:"In-store transactions", rt:1, tools:["NCR","Oracle MICROS","Square","Lightspeed"], icon:'<rect x="4" y="4" width="16" height="12" rx="2"/><path d="M4 9h16M8 20h8"/><path d="M12 16v4"/>'},
+    {n:"Email ESP", sub:"Lifecycle messaging", rt:0, tools:["Klaviyo","Braze","Iterable"], icon:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/>'},
+    {n:"SMS", sub:"Triggered texts", rt:1, tools:["Attentive","Postscript"], icon:'<path d="M4 5h16v11H9l-4 4V5z"/><path d="M8 10h8M8 13h5"/>'},
+    {n:"Mobile App", sub:"Native member experience", rt:1, tools:["iOS SDK","Android SDK"], icon:'<rect x="7" y="3" width="10" height="18" rx="2.4"/><path d="M11 18h2"/>'},
+    {n:"Partner Networks", sub:"Coalition earn", rt:0, tools:["APIs","co-brand"], icon:'<circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><path d="M10 12h4"/>'},
+    {n:"Delivery Platforms", sub:"Third-party orders", rt:1, tools:["DoorDash","Instacart"], icon:'<path d="M3 13l2-6h9l3 4h4v5h-3"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>'},
+    {n:"Subscription Billing", sub:"Recurring revenue events", rt:1, tools:["Stripe","Recurly"], icon:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/>'},
+    {n:"Call Center", sub:"Agent-assisted service", rt:1, tools:["SF Service Cloud","Zendesk"], icon:'<path d="M4 11a8 8 0 0116 0"/><rect x="3" y="11" width="4" height="7" rx="1.5"/><rect x="17" y="11" width="4" height="7" rx="1.5"/><path d="M20 18a4 4 0 01-4 3h-3"/>'},
+    {n:"Data Warehouse", sub:"Analytics & modeling", rt:0, tools:["Snowflake","BigQuery"], icon:'<path d="M4 6c0-1.6 3.6-3 8-3s8 1.4 8 3-3.6 3-8 3-8-1.4-8-3z"/><path d="M4 6v12c0 1.6 3.6 3 8 3s8-1.4 8-3V6"/><path d="M4 12c0 1.6 3.6 3 8 3s8-1.4 8-3"/>'}
+  ];
+  var grid = document.getElementById("intGrid");
+  integ.forEach(function(it,i){
+    var num = (i+1<10?"0":"")+(i+1);
+    var badge = it.rt
+      ? '<span class="sync-badge sync-rt"><i></i>Real-time</span>'
+      : '<span class="sync-badge sync-batch"><i></i>Batch</span>';
+    var tools = it.tools.map(function(t){return "<span>"+t+"</span>";}).join("");
+    var card = document.createElement("div");
+    card.className="int-card reveal";
+    card.innerHTML =
+      '<div class="int-top"><span class="int-icon"><svg viewBox="0 0 24 24">'+it.icon+'</svg></span>'+badge+'</div>'+
+      '<div class="int-num">'+num+'</div>'+
+      '<h3>'+it.n+'</h3>'+
+      '<p style="color:var(--muted);font-size:13.5px">'+it.sub+'</p>'+
+      '<div class="int-tools">'+tools+'</div>';
+    grid.appendChild(card);
+  });
+
+  // ---- KPIs (gauges) ----
+  var kpis = [
+    {label:"Integration Coverage", val:"12/12", sub:"systems", pct:100, color:"var(--brand)", desc:"Every transactional touchpoint wired to the loyalty core."},
+    {label:"Data Latency", val:"<500", sub:"ms", pct:88, color:"var(--cyan)", desc:"Member-visible balance sync, end to end."},
+    {label:"System Uptime", val:"99.95", sub:"%", pct:99.95, color:"var(--green)", desc:"SLA-backed availability of the integration layer."},
+    {label:"Balance Accuracy", val:"100", sub:"%", pct:100, color:"var(--brand-2)", desc:"Reconciled against source of truth, nightly."}
+  ];
+  var kg = document.getElementById("kpiGrid");
+  var CIRC = 2*Math.PI*45;
+  kpis.forEach(function(k){
+    var off = CIRC*(1 - k.pct/100);
+    var d=document.createElement("div");
+    d.className="kpi reveal";
+    d.innerHTML=
+      '<div class="gauge"><svg width="112" height="112" viewBox="0 0 112 112">'+
+        '<circle class="track" cx="56" cy="56" r="45"/>'+
+        '<circle class="val" cx="56" cy="56" r="45" stroke="'+k.color+'" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/>'+
+      '</svg><div class="center"><b>'+k.val+'</b><small>'+k.sub+'</small></div></div>'+
+      '<h4>'+k.label+'</h4><p>'+k.desc+'</p>';
+    kg.appendChild(d);
+  });
+
+  // ---- reveal on scroll ----
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+  // ---- mobile nav ----
+  var links = document.querySelector(".nav-links");
+  document.getElementById("navToggle").addEventListener("click",function(){
+    var open = links.style.display==="flex";
+    links.style.display = open?"":"flex";
+    links.style.cssText = open?"":"display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;background:var(--surface);padding:16px 24px;gap:14px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)";
+  });
+})();
+</script>
+</body>
+</html>
