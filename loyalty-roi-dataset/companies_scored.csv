@@ -1,0 +1,126 @@
+company,sector,value_segment,sales_channel,region,approx_annual_rev_musd,est_aov_usd,est_purchase_freq_yr,est_gross_margin,scope_status,scope_reason,illustrative_net_profit_musd,illustrative_roi_pct
+Sephora,Beauty & Personal Care,luxury,Omnichannel,US,15000,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,567.0,99.1
+Estée Lauder,Beauty & Personal Care,luxury,Omnichannel,US,15600,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,589.68,99.1
+La Mer,Beauty & Personal Care,luxury,DTC Ecommerce,US,2000,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,75.6,99.1
+Jo Malone London,Beauty & Personal Care,luxury,Omnichannel,EU,600,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,22.68,99.1
+Diptyque,Beauty & Personal Care,luxury,DTC Ecommerce,EU,350,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,13.23,99.1
+Aesop,Beauty & Personal Care,luxury,Omnichannel,AU,550,195.0,2.88,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,20.79,99.1
+Ralph Lauren,Apparel & Accessories,luxury,Omnichannel,US,6600,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,249.48,99.1
+Burberry,Apparel & Accessories,luxury,Omnichannel,EU,3500,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,132.3,99.1
+Coach,Apparel & Accessories,luxury,Omnichannel,US,5100,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,192.78,99.1
+Michael Kors,Apparel & Accessories,luxury,Omnichannel,US,4000,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,151.2,99.1
+Tory Burch,Apparel & Accessories,luxury,Omnichannel,US,2000,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,75.6,99.1
+Kate Spade,Apparel & Accessories,luxury,Omnichannel,US,1400,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,52.92,99.1
+Theory,Apparel & Accessories,luxury,DTC Ecommerce,US,600,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,22.68,99.1
+Lululemon,Apparel & Accessories,luxury,Omnichannel,CA,10000,270.0,2.8,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,378.0,99.1
+Nordstrom,Apparel & Accessories,luxury,Department Store,US,15000,297.0,2.52,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,567.0,99.1
+Saks Fifth Avenue,Apparel & Accessories,luxury,Department Store,US,3000,297.0,2.52,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,113.4,99.1
+Neiman Marcus,Apparel & Accessories,luxury,Department Store,US,4000,297.0,2.52,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,151.2,99.1
+Patagonia,Sports & Outdoor,luxury,Omnichannel,US,1500,360.0,2.32,0.62,GOLDEN TARGET,high margin + moderate frequency — every extra order is high-margin lift,56.7,99.1
+Starbucks,QSR / Coffee,standard,Mobile App / QSR,US,36000,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,831.6,60.6
+McDonald's,QSR / Coffee,standard,Mobile App / QSR,US,25000,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,577.5,60.6
+Chipotle,QSR / Coffee,standard,Mobile App / QSR,US,10000,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,231.0,60.6
+Panera Bread,QSR / Coffee,standard,Mobile App / QSR,US,6000,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,138.6,60.6
+Domino's Pizza,QSR / Coffee,standard,Mobile App / QSR,US,4500,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,103.95,60.6
+Sweetgreen,QSR / Coffee,standard,Mobile App / QSR,US,600,8.8,75.6,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,13.86,60.6
+Ritual,Health & Supplements,standard,Subscription,US,100,54.0,10.4,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,2.31,60.6
+HelloFresh,Grocery,standard,Subscription,EU,8000,63.0,30.0,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,184.8,60.6
+Blue Apron,Grocery,standard,Subscription,US,400,63.0,30.0,0.5,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,9.24,60.6
+Target,General Merchandise,discount,Big Box,US,107000,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,505.57,12.4
+Walmart,General Merchandise,discount,Big Box,US,648000,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,3061.8,12.4
+Costco,General Merchandise,discount,Big Box,US,250000,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,1181.25,12.4
+Kohl's,General Merchandise,discount,Department Store,US,17000,56.1,17.28,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,80.33,12.4
+Kroger,Grocery,discount,Big Box,US,150000,42.0,18.0,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,708.75,12.4
+Aldi,Grocery,discount,Big Box,EU,120000,42.0,18.0,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,567.0,12.4
+Trader Joe's,Grocery,discount,Big Box,US,16000,42.0,18.0,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,75.6,12.4
+Amazon,General Merchandise,discount,Marketplace,US,575000,45.9,21.12,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,2716.88,12.4
+eBay,General Merchandise,discount,Marketplace,US,10000,45.9,21.12,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,47.25,12.4
+Etsy,General Merchandise,discount,Marketplace,US,2700,45.9,21.12,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,12.76,12.4
+Dollar General,General Merchandise,discount,Big Box,US,38000,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,179.55,12.4
+Five Below,General Merchandise,discount,Big Box,US,3500,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,16.54,12.4
+Big Lots,General Merchandise,discount,Big Box,US,4700,51.0,19.2,0.35,GOLDEN TARGET,solid margin + ultra-high frequency — subscription/point loop locks in habit,22.21,12.4
+Hermès,Apparel & Accessories,extreme_luxury,Boutique,EU,15000,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",750.75,131.2
+Louis Vuitton,Apparel & Accessories,extreme_luxury,Boutique,EU,25000,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",1251.25,131.2
+Chanel,Apparel & Accessories,extreme_luxury,Boutique,EU,19700,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",985.99,131.2
+Gucci,Apparel & Accessories,extreme_luxury,Boutique,EU,10500,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",525.52,131.2
+Dior,Apparel & Accessories,extreme_luxury,Boutique,EU,9500,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",475.48,131.2
+Prada,Apparel & Accessories,extreme_luxury,Boutique,EU,5400,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",270.27,131.2
+Balenciaga,Apparel & Accessories,extreme_luxury,Boutique,EU,2000,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",100.1,131.2
+Bottega Veneta,Apparel & Accessories,extreme_luxury,Boutique,EU,1800,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",90.09,131.2
+Brunello Cucinelli,Apparel & Accessories,extreme_luxury,Boutique,EU,1200,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",60.06,131.2
+Loro Piana,Apparel & Accessories,extreme_luxury,Boutique,EU,2500,1296.0,1.26,0.72,PROCEED,"viable, but model the specifics before committing",125.13,131.2
+Rolex,Jewelry & Watches,extreme_luxury,Boutique,EU,10000,5040.0,0.47,0.72,PROCEED,"viable, but model the specifics before committing",500.5,131.2
+Patek Philippe,Jewelry & Watches,extreme_luxury,Boutique,EU,2000,5040.0,0.47,0.72,PROCEED,"viable, but model the specifics before committing",100.1,131.2
+Cartier,Jewelry & Watches,extreme_luxury,Boutique,EU,7000,5040.0,0.47,0.72,PROCEED,"viable, but model the specifics before committing",350.35,131.2
+Van Cleef & Arpels,Jewelry & Watches,extreme_luxury,Boutique,EU,3000,5040.0,0.47,0.72,PROCEED,"viable, but model the specifics before committing",150.15,131.2
+Tiffany & Co.,Jewelry & Watches,extreme_luxury,Omnichannel,US,5000,4200.0,0.59,0.72,PROCEED,"viable, but model the specifics before committing",250.25,131.2
+Bulgari,Jewelry & Watches,extreme_luxury,Boutique,EU,2800,5040.0,0.47,0.72,PROCEED,"viable, but model the specifics before committing",140.14,131.2
+Nike,Footwear,standard,Omnichannel,US,51000,110.0,2.6,0.5,PROCEED,"viable, but model the specifics before committing",1178.1,60.6
+Adidas,Footwear,standard,Omnichannel,EU,24000,110.0,2.6,0.5,PROCEED,"viable, but model the specifics before committing",554.4,60.6
+Under Armour,Apparel & Accessories,standard,Omnichannel,US,5700,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",131.67,60.6
+New Balance,Footwear,standard,Omnichannel,US,6500,110.0,2.6,0.5,PROCEED,"viable, but model the specifics before committing",150.15,60.6
+Levi's,Apparel & Accessories,standard,Omnichannel,US,6200,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",143.22,60.6
+Gap,Apparel & Accessories,standard,Omnichannel,US,15000,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",346.5,60.6
+Uniqlo,Apparel & Accessories,standard,Omnichannel,APAC,20000,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",462.0,60.6
+Zara,Apparel & Accessories,standard,Omnichannel,EU,30000,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",693.0,60.6
+Macy's,Apparel & Accessories,standard,Department Store,US,23000,99.0,3.15,0.5,PROCEED,"viable, but model the specifics before committing",531.3,60.6
+Ulta Beauty,Beauty & Personal Care,standard,Omnichannel,US,11200,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",258.72,60.6
+Bath & Body Works,Beauty & Personal Care,standard,Omnichannel,US,7400,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",170.94,60.6
+The Body Shop,Beauty & Personal Care,standard,Omnichannel,EU,1000,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",23.1,60.6
+Glossier,Beauty & Personal Care,standard,DTC Ecommerce,US,275,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",6.35,60.6
+Fenty Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,600,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",13.86,60.6
+Rare Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,350,65.0,3.6,0.5,PROCEED,"viable, but model the specifics before committing",8.09,60.6
+Warby Parker,Eyewear,standard,Omnichannel,US,700,140.0,1.6,0.5,PROCEED,"viable, but model the specifics before committing",16.17,60.6
+Apple,Consumer Electronics,standard,Omnichannel,US,390000,140.0,3.0,0.5,PROCEED,"viable, but model the specifics before committing",9009.0,60.6
+Best Buy,Consumer Electronics,standard,Big Box,US,46000,140.0,3.0,0.5,PROCEED,"viable, but model the specifics before committing",1062.6,60.6
+Samsung Electronics,Consumer Electronics,standard,Omnichannel,APAC,200000,140.0,3.0,0.5,PROCEED,"viable, but model the specifics before committing",4620.0,60.6
+Sony,Consumer Electronics,standard,Omnichannel,APAC,80000,140.0,3.0,0.5,PROCEED,"viable, but model the specifics before committing",1848.0,60.6
+Dell,Consumer Electronics,standard,DTC Ecommerce,US,88000,140.0,3.0,0.5,PROCEED,"viable, but model the specifics before committing",2032.8,60.6
+IKEA,Home & Garden,standard,Omnichannel,EU,45000,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",1039.5,60.6
+Williams-Sonoma,Home & Garden,standard,Omnichannel,US,7800,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",180.18,60.6
+Pottery Barn,Home & Garden,standard,Omnichannel,US,3000,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",69.3,60.6
+Crate & Barrel,Home & Garden,standard,Omnichannel,US,2500,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",57.75,60.6
+Wayfair,Home & Garden,standard,Marketplace,US,12000,108.0,3.19,0.5,PROCEED,"viable, but model the specifics before committing",277.2,60.6
+Brooklinen,Home & Garden,standard,DTC Ecommerce,US,200,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",4.62,60.6
+REI,Sports & Outdoor,standard,Omnichannel,US,3700,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",85.47,60.6
+Dick's Sporting Goods,Sports & Outdoor,standard,Omnichannel,US,13000,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",300.3,60.6
+Columbia Sportswear,Sports & Outdoor,standard,Omnichannel,US,3400,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",78.54,60.6
+The North Face,Sports & Outdoor,standard,Omnichannel,US,3000,120.0,2.9,0.5,PROCEED,"viable, but model the specifics before committing",69.3,60.6
+Chewy,Pet Care,standard,DTC Ecommerce,US,11000,65.0,6.2,0.5,PROCEED,"viable, but model the specifics before committing",254.1,60.6
+Petco,Pet Care,standard,Omnichannel,US,6100,65.0,6.2,0.5,PROCEED,"viable, but model the specifics before committing",140.91,60.6
+PetSmart,Pet Care,standard,Omnichannel,US,9000,65.0,6.2,0.5,PROCEED,"viable, but model the specifics before committing",207.9,60.6
+GNC,Health & Supplements,standard,Omnichannel,US,2000,60.0,5.2,0.5,PROCEED,"viable, but model the specifics before committing",46.2,60.6
+Vitamin Shoppe,Health & Supplements,standard,Omnichannel,US,1100,60.0,5.2,0.5,PROCEED,"viable, but model the specifics before committing",25.41,60.6
+iHerb,Health & Supplements,standard,DTC Ecommerce,US,2000,60.0,5.2,0.5,PROCEED,"viable, but model the specifics before committing",46.2,60.6
+Peloton,Sports & Outdoor,standard,Subscription,US,2700,108.0,5.8,0.5,PROCEED,"viable, but model the specifics before committing",62.37,60.6
+Allbirds,Footwear,standard,DTC Ecommerce,US,250,110.0,2.6,0.5,PROCEED,"viable, but model the specifics before committing",5.78,60.6
+Bombas,Apparel & Accessories,standard,DTC Ecommerce,US,300,90.0,3.5,0.5,PROCEED,"viable, but model the specifics before committing",6.93,60.6
+H&M,Apparel & Accessories,discount,Omnichannel,EU,22000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",103.95,12.4
+Old Navy,Apparel & Accessories,discount,Omnichannel,US,8000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",37.8,12.4
+Forever 21,Apparel & Accessories,discount,Omnichannel,US,2000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",9.45,12.4
+Primark,Apparel & Accessories,discount,Big Box,EU,10000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",47.25,12.4
+ASOS,Apparel & Accessories,discount,Marketplace,EU,4000,48.6,4.62,0.35,PROCEED,"viable, but model the specifics before committing",18.9,12.4
+Boohoo,Apparel & Accessories,discount,Marketplace,EU,1900,48.6,4.62,0.35,PROCEED,"viable, but model the specifics before committing",8.98,12.4
+Uniqlo GU,Apparel & Accessories,discount,Omnichannel,APAC,2500,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",11.81,12.4
+TJ Maxx,Apparel & Accessories,discount,Big Box,US,50000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",236.25,12.4
+Ross Stores,Apparel & Accessories,discount,Big Box,US,20000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",94.5,12.4
+Marshalls,Apparel & Accessories,discount,Big Box,US,12000,54.0,4.2,0.35,PROCEED,"viable, but model the specifics before committing",56.7,12.4
+Sally Beauty,Beauty & Personal Care,discount,Omnichannel,US,3700,39.0,4.32,0.35,PROCEED,"viable, but model the specifics before committing",17.48,12.4
+e.l.f. Beauty,Beauty & Personal Care,discount,Omnichannel,US,1000,39.0,4.32,0.35,PROCEED,"viable, but model the specifics before committing",4.72,12.4
+NYX,Beauty & Personal Care,discount,Omnichannel,US,600,39.0,4.32,0.35,PROCEED,"viable, but model the specifics before committing",2.83,12.4
+Maybelline,Beauty & Personal Care,discount,Omnichannel,US,2000,39.0,4.32,0.35,PROCEED,"viable, but model the specifics before committing",9.45,12.4
+Skechers,Footwear,discount,Omnichannel,US,8000,66.0,3.12,0.35,PROCEED,"viable, but model the specifics before committing",37.8,12.4
+Payless,Footwear,discount,Omnichannel,US,2000,66.0,3.12,0.35,PROCEED,"viable, but model the specifics before committing",9.45,12.4
+Montblanc,Jewelry & Watches,luxury,Boutique,EU,1000,1260.0,0.83,0.62,REJECT,frequency < 1.5x/yr — customers forget points before rebuying,37.8,99.1
+Casper,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.5,REJECT,frequency < 1.5x/yr — customers forget points before rebuying,11.55,60.6
+Purple,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.5,REJECT,frequency < 1.5x/yr — customers forget points before rebuying,11.55,60.6
+Away,Luggage & Travel,standard,DTC Ecommerce,US,300,260.0,1.2,0.5,REJECT,frequency < 1.5x/yr — customers forget points before rebuying,6.93,60.6
+Temu,General Merchandise,extreme_discount,Marketplace,APAC,50000,30.6,25.52,0.24,REJECT,gross margin < 35% — rewards eat the margin,-437.5,-22.9
+Shein,Apparel & Accessories,extreme_discount,Marketplace,APAC,30000,32.4,5.58,0.24,REJECT,gross margin < 35% — rewards eat the margin,-262.5,-22.9
+AliExpress,General Merchandise,extreme_discount,Marketplace,APAC,30000,30.6,25.52,0.24,REJECT,gross margin < 35% — rewards eat the margin,-262.5,-22.9
+Wish,General Merchandise,extreme_discount,Marketplace,US,500,30.6,25.52,0.24,REJECT,gross margin < 35% — rewards eat the margin,-4.37,-22.9
+Miniso,General Merchandise,extreme_discount,Big Box,APAC,1500,34.0,23.2,0.24,REJECT,gross margin < 35% — rewards eat the margin,-13.12,-22.9
+Dollar Tree,General Merchandise,extreme_discount,Big Box,US,30000,34.0,23.2,0.24,REJECT,gross margin < 35% — rewards eat the margin,-262.5,-22.9
+Dollarama,General Merchandise,extreme_discount,Big Box,CA,4000,34.0,23.2,0.24,REJECT,gross margin < 35% — rewards eat the margin,-35.0,-22.9
+Ollie's Bargain Outlet,General Merchandise,extreme_discount,Big Box,US,2100,34.0,23.2,0.24,REJECT,gross margin < 35% — rewards eat the margin,-18.37,-22.9
+Poundland,General Merchandise,extreme_discount,Big Box,EU,2000,34.0,23.2,0.24,REJECT,gross margin < 35% — rewards eat the margin,-17.5,-22.9

@@ -1,0 +1,126 @@
+company,sector,value_segment,sales_channel,approx_annual_rev_musd,region
+Hermès,Apparel & Accessories,extreme_luxury,Boutique,15000,EU
+Louis Vuitton,Apparel & Accessories,extreme_luxury,Boutique,25000,EU
+Chanel,Apparel & Accessories,extreme_luxury,Boutique,19700,EU
+Gucci,Apparel & Accessories,extreme_luxury,Boutique,10500,EU
+Dior,Apparel & Accessories,extreme_luxury,Boutique,9500,EU
+Prada,Apparel & Accessories,extreme_luxury,Boutique,5400,EU
+Balenciaga,Apparel & Accessories,extreme_luxury,Boutique,2000,EU
+Bottega Veneta,Apparel & Accessories,extreme_luxury,Boutique,1800,EU
+Brunello Cucinelli,Apparel & Accessories,extreme_luxury,Boutique,1200,EU
+Loro Piana,Apparel & Accessories,extreme_luxury,Boutique,2500,EU
+Rolex,Jewelry & Watches,extreme_luxury,Boutique,10000,EU
+Patek Philippe,Jewelry & Watches,extreme_luxury,Boutique,2000,EU
+Cartier,Jewelry & Watches,extreme_luxury,Boutique,7000,EU
+Van Cleef & Arpels,Jewelry & Watches,extreme_luxury,Boutique,3000,EU
+Tiffany & Co.,Jewelry & Watches,extreme_luxury,Omnichannel,5000,US
+Bulgari,Jewelry & Watches,extreme_luxury,Boutique,2800,EU
+Sephora,Beauty & Personal Care,luxury,Omnichannel,15000,US
+Estée Lauder,Beauty & Personal Care,luxury,Omnichannel,15600,US
+La Mer,Beauty & Personal Care,luxury,DTC Ecommerce,2000,US
+Jo Malone London,Beauty & Personal Care,luxury,Omnichannel,600,EU
+Diptyque,Beauty & Personal Care,luxury,DTC Ecommerce,350,EU
+Aesop,Beauty & Personal Care,luxury,Omnichannel,550,AU
+Ralph Lauren,Apparel & Accessories,luxury,Omnichannel,6600,US
+Burberry,Apparel & Accessories,luxury,Omnichannel,3500,EU
+Coach,Apparel & Accessories,luxury,Omnichannel,5100,US
+Michael Kors,Apparel & Accessories,luxury,Omnichannel,4000,US
+Tory Burch,Apparel & Accessories,luxury,Omnichannel,2000,US
+Kate Spade,Apparel & Accessories,luxury,Omnichannel,1400,US
+Theory,Apparel & Accessories,luxury,DTC Ecommerce,600,US
+Montblanc,Jewelry & Watches,luxury,Boutique,1000,EU
+Lululemon,Apparel & Accessories,luxury,Omnichannel,10000,CA
+Nordstrom,Apparel & Accessories,luxury,Department Store,15000,US
+Saks Fifth Avenue,Apparel & Accessories,luxury,Department Store,3000,US
+Neiman Marcus,Apparel & Accessories,luxury,Department Store,4000,US
+Patagonia,Sports & Outdoor,luxury,Omnichannel,1500,US
+Nike,Footwear,standard,Omnichannel,51000,US
+Adidas,Footwear,standard,Omnichannel,24000,EU
+Under Armour,Apparel & Accessories,standard,Omnichannel,5700,US
+New Balance,Footwear,standard,Omnichannel,6500,US
+Levi's,Apparel & Accessories,standard,Omnichannel,6200,US
+Gap,Apparel & Accessories,standard,Omnichannel,15000,US
+Uniqlo,Apparel & Accessories,standard,Omnichannel,20000,APAC
+Zara,Apparel & Accessories,standard,Omnichannel,30000,EU
+Macy's,Apparel & Accessories,standard,Department Store,23000,US
+Ulta Beauty,Beauty & Personal Care,standard,Omnichannel,11200,US
+Bath & Body Works,Beauty & Personal Care,standard,Omnichannel,7400,US
+The Body Shop,Beauty & Personal Care,standard,Omnichannel,1000,EU
+Glossier,Beauty & Personal Care,standard,DTC Ecommerce,275,US
+Fenty Beauty,Beauty & Personal Care,standard,DTC Ecommerce,600,US
+Rare Beauty,Beauty & Personal Care,standard,DTC Ecommerce,350,US
+Warby Parker,Eyewear,standard,Omnichannel,700,US
+Apple,Consumer Electronics,standard,Omnichannel,390000,US
+Best Buy,Consumer Electronics,standard,Big Box,46000,US
+Samsung Electronics,Consumer Electronics,standard,Omnichannel,200000,APAC
+Sony,Consumer Electronics,standard,Omnichannel,80000,APAC
+Dell,Consumer Electronics,standard,DTC Ecommerce,88000,US
+IKEA,Home & Garden,standard,Omnichannel,45000,EU
+Williams-Sonoma,Home & Garden,standard,Omnichannel,7800,US
+Pottery Barn,Home & Garden,standard,Omnichannel,3000,US
+Crate & Barrel,Home & Garden,standard,Omnichannel,2500,US
+Wayfair,Home & Garden,standard,Marketplace,12000,US
+Brooklinen,Home & Garden,standard,DTC Ecommerce,200,US
+REI,Sports & Outdoor,standard,Omnichannel,3700,US
+Dick's Sporting Goods,Sports & Outdoor,standard,Omnichannel,13000,US
+Columbia Sportswear,Sports & Outdoor,standard,Omnichannel,3400,US
+The North Face,Sports & Outdoor,standard,Omnichannel,3000,US
+Chewy,Pet Care,standard,DTC Ecommerce,11000,US
+Petco,Pet Care,standard,Omnichannel,6100,US
+PetSmart,Pet Care,standard,Omnichannel,9000,US
+Starbucks,QSR / Coffee,standard,Mobile App / QSR,36000,US
+McDonald's,QSR / Coffee,standard,Mobile App / QSR,25000,US
+Chipotle,QSR / Coffee,standard,Mobile App / QSR,10000,US
+Panera Bread,QSR / Coffee,standard,Mobile App / QSR,6000,US
+Domino's Pizza,QSR / Coffee,standard,Mobile App / QSR,4500,US
+Sweetgreen,QSR / Coffee,standard,Mobile App / QSR,600,US
+GNC,Health & Supplements,standard,Omnichannel,2000,US
+Vitamin Shoppe,Health & Supplements,standard,Omnichannel,1100,US
+iHerb,Health & Supplements,standard,DTC Ecommerce,2000,US
+Ritual,Health & Supplements,standard,Subscription,100,US
+HelloFresh,Grocery,standard,Subscription,8000,EU
+Blue Apron,Grocery,standard,Subscription,400,US
+Peloton,Sports & Outdoor,standard,Subscription,2700,US
+Allbirds,Footwear,standard,DTC Ecommerce,250,US
+Bombas,Apparel & Accessories,standard,DTC Ecommerce,300,US
+Casper,Home / Mattress,standard,DTC Ecommerce,500,US
+Purple,Home / Mattress,standard,DTC Ecommerce,500,US
+Away,Luggage & Travel,standard,DTC Ecommerce,300,US
+H&M,Apparel & Accessories,discount,Omnichannel,22000,EU
+Old Navy,Apparel & Accessories,discount,Omnichannel,8000,US
+Forever 21,Apparel & Accessories,discount,Omnichannel,2000,US
+Primark,Apparel & Accessories,discount,Big Box,10000,EU
+ASOS,Apparel & Accessories,discount,Marketplace,4000,EU
+Boohoo,Apparel & Accessories,discount,Marketplace,1900,EU
+Uniqlo GU,Apparel & Accessories,discount,Omnichannel,2500,APAC
+Target,General Merchandise,discount,Big Box,107000,US
+Walmart,General Merchandise,discount,Big Box,648000,US
+Costco,General Merchandise,discount,Big Box,250000,US
+Kohl's,General Merchandise,discount,Department Store,17000,US
+TJ Maxx,Apparel & Accessories,discount,Big Box,50000,US
+Ross Stores,Apparel & Accessories,discount,Big Box,20000,US
+Marshalls,Apparel & Accessories,discount,Big Box,12000,US
+Kroger,Grocery,discount,Big Box,150000,US
+Aldi,Grocery,discount,Big Box,120000,EU
+Trader Joe's,Grocery,discount,Big Box,16000,US
+Amazon,General Merchandise,discount,Marketplace,575000,US
+eBay,General Merchandise,discount,Marketplace,10000,US
+Etsy,General Merchandise,discount,Marketplace,2700,US
+Sally Beauty,Beauty & Personal Care,discount,Omnichannel,3700,US
+e.l.f. Beauty,Beauty & Personal Care,discount,Omnichannel,1000,US
+NYX,Beauty & Personal Care,discount,Omnichannel,600,US
+Maybelline,Beauty & Personal Care,discount,Omnichannel,2000,US
+Dollar General,General Merchandise,discount,Big Box,38000,US
+Five Below,General Merchandise,discount,Big Box,3500,US
+Big Lots,General Merchandise,discount,Big Box,4700,US
+Skechers,Footwear,discount,Omnichannel,8000,US
+Payless,Footwear,discount,Omnichannel,2000,US
+Temu,General Merchandise,extreme_discount,Marketplace,50000,APAC
+Shein,Apparel & Accessories,extreme_discount,Marketplace,30000,APAC
+AliExpress,General Merchandise,extreme_discount,Marketplace,30000,APAC
+Wish,General Merchandise,extreme_discount,Marketplace,500,US
+Miniso,General Merchandise,extreme_discount,Big Box,1500,APAC
+Dollar Tree,General Merchandise,extreme_discount,Big Box,30000,US
+Dollarama,General Merchandise,extreme_discount,Big Box,4000,CA
+Ollie's Bargain Outlet,General Merchandise,extreme_discount,Big Box,2100,US
+Poundland,General Merchandise,extreme_discount,Big Box,2000,EU
