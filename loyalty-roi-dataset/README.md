@@ -1,79 +1,86 @@
-# B2C Loyalty ROI — Company Dataset & Account Rescoping
+# B2C Loyalty-Fit Scoring — Company Benchmarks & CRM Triage
 
-A machine-readable dataset of real B2C brands classified by **sector**, **value
-segment** (extreme luxury → extreme discount), and **primary sales channel**,
-with modeled **AOV**, **purchase frequency**, and **gross margin** — plus a
-filter that flags which accounts have a **high probability of making money with
-a loyalty program** vs. losing it.
+A transparent, sourced benchmark model that estimates **AOV**, **purchase
+frequency**, and **gross margin** for B2C companies from three public attributes
+— **sector**, **value segment** (extreme luxury → extreme discount), and **sales
+channel** — and turns them into a **0–100 loyalty-fit score** so you can triage a
+large CRM into likely-GREEN vs. likely-RED for a loyalty program and pull the top
+20–30%.
 
-Built to feed a loyalty-program ROI calculator across many companies at once.
+Built for **directional triage at scale**, not per-dollar precision. The goal is
+"green vs. red, top slice of the list," which is exactly what you can defend with
+category benchmarks and cannot fake with fake per-company numbers.
 
-## ⚠️ Read this first — what's real and what's modeled
+## ⚠️ What's real vs. modeled
 
-| Field | Status |
-|---|---|
-| company, sector, value_segment, sales_channel, region | **Real** — public classification |
-| approx_annual_rev_musd | **Real, but order-of-magnitude** (approx, most-recent widely reported FY; private brands are rough public estimates) |
-| est_aov_usd, est_purchase_freq_yr, est_gross_margin | **Modeled estimates** — see below |
+Per-company AOV and purchase frequency **are not public** — for a CRM of
+thousands of mid-market names there is nothing to look up. So those are
+**estimated** from published *category* benchmarks. What's solid: the sector
+classification and the **gross margin**, anchored to NYU Stern / Damodaran. Full
+provenance and confidence levels are in **`SOURCES.md`** — read it before quoting
+anything to a prospect.
 
-**Per-company AOV and purchase frequency are not public.** No major brand
-discloses "member AOV = $89." Any source handing you brand-specific AOV/PF to two
-decimals is almost certainly making it up. So this dataset does **not** claim
-per-brand facts for those. Instead, `benchmarks.py` estimates them from the
-brand's sector × segment × channel using published *category* benchmark ranges.
-Treat `est_*` columns as **defensible modeling inputs** — assumptions you'd
-present in a deck — not measured truth about a specific company.
+## The loyalty-fit score
+
+`loyalty_fit_score` (0–100, higher = more likely GREEN) blends the three things
+that actually decide whether a program clears its own reward + labor + platform
+cost:
+
+- **Margin (50%)** — room to fund rewards (0 at 20% GM → 1 at 60%+).
+- **Frequency (35%)** — enough repeat to form a habit (0 at 1.2x/yr → 1 at 4x+).
+- **AOV support (15%)** — ticket big enough to matter (0 at $15 → 1 at $60+).
+
+…then **hard "structural red" caps** knock down the cases that lose money even
+with a free program: sub-25% margin, too-infrequent to change behavior, or tiny
+ticket + low frequency. Output tiers: **A/B = GREEN, C = MARGINAL, D = RED**.
+
+`fit_percentile` ranks each company *within your file* (100 = best) so you can
+cut, e.g., everyone above the 75th percentile regardless of the absolute number.
+
+## Two ways to use it
+
+### 1. Score the curated sample (Python)
+```bash
+python3 seed_companies.py    # build companies.csv (125 real brands)
+python3 score.py             # -> companies_scored.csv, ranked, with fit score
+```
+
+### 2. Score YOUR CRM at scale (Excel)
+```bash
+python3 build_lookup.py      # -> benchmark_lookup.csv (full 640-combo grid)
+```
+Then, for each CRM row, classify the three public fields you can infer from
+firmographics / website / industry code, build a key
+`sector|value_segment|sales_channel`, and `XLOOKUP` it against the table:
+```
+=XLOOKUP($A2, lookup!$A:$A, lookup!$H:$H)   ' -> loyalty_fit_score
+```
+Sort by score, take your top 20–30%. No per-company AOV/PF needed — the grid
+supplies it.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `seed_companies.py` | The curated list of real brands. Run it to (re)build `companies.csv`. |
-| `companies.csv` | Editable input: one row per brand, 6 public fields. **Add rows here to scale.** |
-| `benchmarks.py` | The estimation model — every AOV/PF/margin assumption, commented and tunable. |
-| `score.py` | Fills estimates, applies the rescoping filter, computes an illustrative ROI → `companies_scored.csv`. |
-| `companies_scored.csv` | Generated output, ranked golden-targets-first. |
+| `benchmarks.py` | The model: sector/segment/channel tables + `estimate()` and `loyalty_fit()`. Every constant commented and tunable. |
+| `seed_companies.py` → `companies.csv` | 125 curated real brands (public fields only). Add rows to extend. |
+| `score.py` → `companies_scored.csv` | Enriched + fit-scored + percentile-ranked. |
+| `build_lookup.py` → `benchmark_lookup.csv` | Full sector×segment×channel grid — the Excel VLOOKUP/XLOOKUP table for CRM triage. |
+| `SOURCES.md` | Benchmark provenance and honesty notes. **Read before quoting.** |
 
-## Usage
+## Valid classification values
 
-```bash
-python3 seed_companies.py     # build companies.csv from the curated list
-python3 score.py              # -> companies_scored.csv
-```
-
-To grow toward "hundreds of companies": append rows to `companies.csv` in the
-same shape (`company, sector, value_segment, sales_channel,
-approx_annual_rev_musd, region`) and re-run `score.py`. The engine fills the rest
-automatically — no per-brand AOV/PF needed. Valid values for `sector`,
-`value_segment`, and `sales_channel` are the keys defined in `benchmarks.py`.
-
-## The rescoping filter (`scope_status`)
-
-Over half of loyalty programs lose money — almost always because margins are too
-thin to absorb reward cost, or organic frequency is too low to ever trigger a
-second purchase. The filter encodes that:
-
-- **REJECT** — `margin < 35%`; **or** `frequency < 1.5x/yr` and not a luxury-margin
-  exception; **or** low AOV *and* low frequency with no subscription/app cadence.
-- **GOLDEN TARGET** — high margin (≥55%) + moderate frequency (2–6x/yr) *[every
-  extra order is high-margin lift]*, **or** solid margin (≥35%) + ultra-high
-  frequency (≥10x/yr) *[subscription/point loop locks in habit]*.
-- **PROCEED** — viable, but model the specifics before committing.
-
-Each row carries a `scope_reason` explaining the verdict.
-
-## The illustrative ROI columns
-
-`illustrative_net_profit_musd` and `illustrative_roi_pct` rank rows by
-opportunity using **uniform, conservative** lift assumptions (members +8% AOV,
-+25% frequency; reward COGS ≈ 30% of incremental revenue; member base and program
-cost proxied from revenue). They are for *comparison and sorting only* — plug the
-`est_*` columns into your own calculator with your own member counts and program
-costs for real numbers.
+- **sector**: keys in `SECTOR_BASE` (Apparel & Accessories, Footwear, Beauty &
+  Personal Care, Consumer Electronics, Home & Garden, Home / Mattress, Grocery,
+  QSR / Coffee, Health & Supplements, Pet Care, Sports & Outdoor, Toys &
+  Hobbies, Jewelry & Watches, Eyewear, General Merchandise, Luggage & Travel)
+- **value_segment**: extreme_luxury, luxury, standard, discount, extreme_discount
+- **sales_channel**: Omnichannel, DTC Ecommerce, Marketplace, Mobile App / QSR,
+  Big Box, Department Store, Subscription, Boutique
 
 ## Tuning
 
-Everything judgmental lives in `benchmarks.py`: sector baselines, segment
-multipliers, channel multipliers, and segment margins. Adjust for your book of
-business and re-run. The lift and cost assumptions for the illustrative ROI live
-at the top of `score.py`.
+All judgment lives in `benchmarks.py`: sector baselines (margin anchored to
+Damodaran), segment/channel multipliers, and the fit-score weights + caps.
+Adjust for your book of business and re-run. Illustrative-ROI lift assumptions
+are at the top of `score.py`.

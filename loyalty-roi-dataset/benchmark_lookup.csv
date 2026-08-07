@@ -1,0 +1,641 @@
+lookup_key,sector,value_segment,sales_channel,est_aov_usd,est_purchase_freq_yr,est_gross_margin,loyalty_fit_score,fit_tier,expected_outcome
+Apparel & Accessories|discount|Big Box,Apparel & Accessories,discount,Big Box,54.0,4.2,0.49,84.2,A,GREEN
+Apparel & Accessories|discount|Boutique,Apparel & Accessories,discount,Boutique,64.8,3.36,0.49,78.2,A,GREEN
+Apparel & Accessories|discount|DTC Ecommerce,Apparel & Accessories,discount,DTC Ecommerce,54.0,4.2,0.49,84.2,A,GREEN
+Apparel & Accessories|discount|Department Store,Apparel & Accessories,discount,Department Store,59.4,3.78,0.49,83.3,A,GREEN
+Apparel & Accessories|discount|Marketplace,Apparel & Accessories,discount,Marketplace,48.6,4.62,0.49,82.4,A,GREEN
+Apparel & Accessories|discount|Mobile App / QSR,Apparel & Accessories,discount,Mobile App / QSR,43.2,7.56,0.49,80.6,A,GREEN
+Apparel & Accessories|discount|Omnichannel,Apparel & Accessories,discount,Omnichannel,54.0,4.2,0.49,84.2,A,GREEN
+Apparel & Accessories|discount|Subscription,Apparel & Accessories,discount,Subscription,48.6,8.4,0.49,82.4,A,GREEN
+Apparel & Accessories|extreme_discount|Big Box,Apparel & Accessories,extreme_discount,Big Box,36.0,5.08,0.44,72.0,A,GREEN
+Apparel & Accessories|extreme_discount|Boutique,Apparel & Accessories,extreme_discount,Boutique,43.2,4.06,0.44,74.4,A,GREEN
+Apparel & Accessories|extreme_discount|DTC Ecommerce,Apparel & Accessories,extreme_discount,DTC Ecommerce,36.0,5.08,0.44,72.0,A,GREEN
+Apparel & Accessories|extreme_discount|Department Store,Apparel & Accessories,extreme_discount,Department Store,39.6,4.57,0.44,73.2,A,GREEN
+Apparel & Accessories|extreme_discount|Marketplace,Apparel & Accessories,extreme_discount,Marketplace,32.4,5.58,0.44,70.8,A,GREEN
+Apparel & Accessories|extreme_discount|Mobile App / QSR,Apparel & Accessories,extreme_discount,Mobile App / QSR,28.8,9.13,0.44,69.6,A,GREEN
+Apparel & Accessories|extreme_discount|Omnichannel,Apparel & Accessories,extreme_discount,Omnichannel,36.0,5.08,0.44,72.0,A,GREEN
+Apparel & Accessories|extreme_discount|Subscription,Apparel & Accessories,extreme_discount,Subscription,32.4,10.15,0.44,70.8,A,GREEN
+Apparel & Accessories|extreme_luxury|Big Box,Apparel & Accessories,extreme_luxury,Big Box,1080.0,1.57,0.64,69.6,A,GREEN
+Apparel & Accessories|extreme_luxury|Boutique,Apparel & Accessories,extreme_luxury,Boutique,1296.0,1.26,0.64,22,D,RED
+Apparel & Accessories|extreme_luxury|DTC Ecommerce,Apparel & Accessories,extreme_luxury,DTC Ecommerce,1080.0,1.57,0.64,69.6,A,GREEN
+Apparel & Accessories|extreme_luxury|Department Store,Apparel & Accessories,extreme_luxury,Department Store,1188.0,1.42,0.64,67.8,A,GREEN
+Apparel & Accessories|extreme_luxury|Marketplace,Apparel & Accessories,extreme_luxury,Marketplace,972.0,1.73,0.64,71.6,A,GREEN
+Apparel & Accessories|extreme_luxury|Mobile App / QSR,Apparel & Accessories,extreme_luxury,Mobile App / QSR,864.0,2.83,0.64,85.4,A,GREEN
+Apparel & Accessories|extreme_luxury|Omnichannel,Apparel & Accessories,extreme_luxury,Omnichannel,1080.0,1.57,0.64,69.6,A,GREEN
+Apparel & Accessories|extreme_luxury|Subscription,Apparel & Accessories,extreme_luxury,Subscription,972.0,3.15,0.64,89.4,A,GREEN
+Apparel & Accessories|luxury|Big Box,Apparel & Accessories,luxury,Big Box,270.0,2.8,0.6,85.0,A,GREEN
+Apparel & Accessories|luxury|Boutique,Apparel & Accessories,luxury,Boutique,324.0,2.24,0.6,78.0,A,GREEN
+Apparel & Accessories|luxury|DTC Ecommerce,Apparel & Accessories,luxury,DTC Ecommerce,270.0,2.8,0.6,85.0,A,GREEN
+Apparel & Accessories|luxury|Department Store,Apparel & Accessories,luxury,Department Store,297.0,2.52,0.6,81.5,A,GREEN
+Apparel & Accessories|luxury|Marketplace,Apparel & Accessories,luxury,Marketplace,243.0,3.08,0.6,88.5,A,GREEN
+Apparel & Accessories|luxury|Mobile App / QSR,Apparel & Accessories,luxury,Mobile App / QSR,216.0,5.04,0.6,100.0,A,GREEN
+Apparel & Accessories|luxury|Omnichannel,Apparel & Accessories,luxury,Omnichannel,270.0,2.8,0.6,85.0,A,GREEN
+Apparel & Accessories|luxury|Subscription,Apparel & Accessories,luxury,Subscription,243.0,5.6,0.6,100.0,A,GREEN
+Apparel & Accessories|standard|Big Box,Apparel & Accessories,standard,Big Box,90.0,3.5,0.54,86.2,A,GREEN
+Apparel & Accessories|standard|Boutique,Apparel & Accessories,standard,Boutique,108.0,2.8,0.54,77.5,A,GREEN
+Apparel & Accessories|standard|DTC Ecommerce,Apparel & Accessories,standard,DTC Ecommerce,90.0,3.5,0.54,86.2,A,GREEN
+Apparel & Accessories|standard|Department Store,Apparel & Accessories,standard,Department Store,99.0,3.15,0.54,81.9,A,GREEN
+Apparel & Accessories|standard|Marketplace,Apparel & Accessories,standard,Marketplace,81.0,3.85,0.54,90.6,A,GREEN
+Apparel & Accessories|standard|Mobile App / QSR,Apparel & Accessories,standard,Mobile App / QSR,72.0,6.3,0.54,92.5,A,GREEN
+Apparel & Accessories|standard|Omnichannel,Apparel & Accessories,standard,Omnichannel,90.0,3.5,0.54,86.2,A,GREEN
+Apparel & Accessories|standard|Subscription,Apparel & Accessories,standard,Subscription,81.0,7.0,0.54,92.5,A,GREEN
+Beauty & Personal Care|discount|Big Box,Beauty & Personal Care,discount,Big Box,39.0,4.32,0.57,89.2,A,GREEN
+Beauty & Personal Care|discount|Boutique,Beauty & Personal Care,discount,Boutique,46.8,3.46,0.57,85.1,A,GREEN
+Beauty & Personal Care|discount|DTC Ecommerce,Beauty & Personal Care,discount,DTC Ecommerce,39.0,4.32,0.57,89.2,A,GREEN
+Beauty & Personal Care|discount|Department Store,Beauty & Personal Care,discount,Department Store,42.9,3.89,0.57,89.2,A,GREEN
+Beauty & Personal Care|discount|Marketplace,Beauty & Personal Care,discount,Marketplace,35.1,4.75,0.57,87.9,A,GREEN
+Beauty & Personal Care|discount|Mobile App / QSR,Beauty & Personal Care,discount,Mobile App / QSR,31.2,7.78,0.57,86.6,A,GREEN
+Beauty & Personal Care|discount|Omnichannel,Beauty & Personal Care,discount,Omnichannel,39.0,4.32,0.57,89.2,A,GREEN
+Beauty & Personal Care|discount|Subscription,Beauty & Personal Care,discount,Subscription,35.1,8.64,0.57,87.9,A,GREEN
+Beauty & Personal Care|extreme_discount|Big Box,Beauty & Personal Care,extreme_discount,Big Box,26.0,5.22,0.52,78.7,A,GREEN
+Beauty & Personal Care|extreme_discount|Boutique,Beauty & Personal Care,extreme_discount,Boutique,31.2,4.18,0.52,80.4,A,GREEN
+Beauty & Personal Care|extreme_discount|DTC Ecommerce,Beauty & Personal Care,extreme_discount,DTC Ecommerce,26.0,5.22,0.52,78.7,A,GREEN
+Beauty & Personal Care|extreme_discount|Department Store,Beauty & Personal Care,extreme_discount,Department Store,28.6,4.7,0.52,79.5,A,GREEN
+Beauty & Personal Care|extreme_discount|Marketplace,Beauty & Personal Care,extreme_discount,Marketplace,23.4,5.74,0.52,77.8,A,GREEN
+Beauty & Personal Care|extreme_discount|Mobile App / QSR,Beauty & Personal Care,extreme_discount,Mobile App / QSR,20.8,9.4,0.52,76.9,A,GREEN
+Beauty & Personal Care|extreme_discount|Omnichannel,Beauty & Personal Care,extreme_discount,Omnichannel,26.0,5.22,0.52,78.7,A,GREEN
+Beauty & Personal Care|extreme_discount|Subscription,Beauty & Personal Care,extreme_discount,Subscription,23.4,10.44,0.52,77.8,A,GREEN
+Beauty & Personal Care|extreme_luxury|Big Box,Beauty & Personal Care,extreme_luxury,Big Box,780.0,1.62,0.72,70.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|Boutique,Beauty & Personal Care,extreme_luxury,Boutique,936.0,1.3,0.72,66.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|DTC Ecommerce,Beauty & Personal Care,extreme_luxury,DTC Ecommerce,780.0,1.62,0.72,70.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|Department Store,Beauty & Personal Care,extreme_luxury,Department Store,858.0,1.46,0.72,68.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|Marketplace,Beauty & Personal Care,extreme_luxury,Marketplace,702.0,1.78,0.72,72.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|Mobile App / QSR,Beauty & Personal Care,extreme_luxury,Mobile App / QSR,624.0,2.92,0.72,86.5,A,GREEN
+Beauty & Personal Care|extreme_luxury|Omnichannel,Beauty & Personal Care,extreme_luxury,Omnichannel,780.0,1.62,0.72,70.2,A,GREEN
+Beauty & Personal Care|extreme_luxury|Subscription,Beauty & Personal Care,extreme_luxury,Subscription,702.0,3.24,0.72,90.5,A,GREEN
+Beauty & Personal Care|luxury|Big Box,Beauty & Personal Care,luxury,Big Box,195.0,2.88,0.68,86.0,A,GREEN
+Beauty & Personal Care|luxury|Boutique,Beauty & Personal Care,luxury,Boutique,234.0,2.3,0.68,78.8,A,GREEN
+Beauty & Personal Care|luxury|DTC Ecommerce,Beauty & Personal Care,luxury,DTC Ecommerce,195.0,2.88,0.68,86.0,A,GREEN
+Beauty & Personal Care|luxury|Department Store,Beauty & Personal Care,luxury,Department Store,214.5,2.59,0.68,82.4,A,GREEN
+Beauty & Personal Care|luxury|Marketplace,Beauty & Personal Care,luxury,Marketplace,175.5,3.17,0.68,89.6,A,GREEN
+Beauty & Personal Care|luxury|Mobile App / QSR,Beauty & Personal Care,luxury,Mobile App / QSR,156.0,5.18,0.68,100.0,A,GREEN
+Beauty & Personal Care|luxury|Omnichannel,Beauty & Personal Care,luxury,Omnichannel,195.0,2.88,0.68,86.0,A,GREEN
+Beauty & Personal Care|luxury|Subscription,Beauty & Personal Care,luxury,Subscription,175.5,5.76,0.68,100.0,A,GREEN
+Beauty & Personal Care|standard|Big Box,Beauty & Personal Care,standard,Big Box,65.0,3.6,0.62,95.0,A,GREEN
+Beauty & Personal Care|standard|Boutique,Beauty & Personal Care,standard,Boutique,78.0,2.88,0.62,86.0,A,GREEN
+Beauty & Personal Care|standard|DTC Ecommerce,Beauty & Personal Care,standard,DTC Ecommerce,65.0,3.6,0.62,95.0,A,GREEN
+Beauty & Personal Care|standard|Department Store,Beauty & Personal Care,standard,Department Store,71.5,3.24,0.62,90.5,A,GREEN
+Beauty & Personal Care|standard|Marketplace,Beauty & Personal Care,standard,Marketplace,58.5,3.96,0.62,99.0,A,GREEN
+Beauty & Personal Care|standard|Mobile App / QSR,Beauty & Personal Care,standard,Mobile App / QSR,52.0,6.48,0.62,97.3,A,GREEN
+Beauty & Personal Care|standard|Omnichannel,Beauty & Personal Care,standard,Omnichannel,65.0,3.6,0.62,95.0,A,GREEN
+Beauty & Personal Care|standard|Subscription,Beauty & Personal Care,standard,Subscription,58.5,7.2,0.62,99.5,A,GREEN
+Consumer Electronics|discount|Big Box,Consumer Electronics,discount,Big Box,84.0,3.6,0.23,28,D,RED
+Consumer Electronics|discount|Boutique,Consumer Electronics,discount,Boutique,100.8,2.88,0.23,28,D,RED
+Consumer Electronics|discount|DTC Ecommerce,Consumer Electronics,discount,DTC Ecommerce,84.0,3.6,0.23,28,D,RED
+Consumer Electronics|discount|Department Store,Consumer Electronics,discount,Department Store,92.4,3.24,0.23,28,D,RED
+Consumer Electronics|discount|Marketplace,Consumer Electronics,discount,Marketplace,75.6,3.96,0.23,28,D,RED
+Consumer Electronics|discount|Mobile App / QSR,Consumer Electronics,discount,Mobile App / QSR,67.2,6.48,0.23,28,D,RED
+Consumer Electronics|discount|Omnichannel,Consumer Electronics,discount,Omnichannel,84.0,3.6,0.23,28,D,RED
+Consumer Electronics|discount|Subscription,Consumer Electronics,discount,Subscription,75.6,7.2,0.23,28,D,RED
+Consumer Electronics|extreme_discount|Big Box,Consumer Electronics,extreme_discount,Big Box,56.0,4.35,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Boutique,Consumer Electronics,extreme_discount,Boutique,67.2,3.48,0.18,28,D,RED
+Consumer Electronics|extreme_discount|DTC Ecommerce,Consumer Electronics,extreme_discount,DTC Ecommerce,56.0,4.35,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Department Store,Consumer Electronics,extreme_discount,Department Store,61.6,3.91,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Marketplace,Consumer Electronics,extreme_discount,Marketplace,50.4,4.79,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Mobile App / QSR,Consumer Electronics,extreme_discount,Mobile App / QSR,44.8,7.83,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Omnichannel,Consumer Electronics,extreme_discount,Omnichannel,56.0,4.35,0.18,28,D,RED
+Consumer Electronics|extreme_discount|Subscription,Consumer Electronics,extreme_discount,Subscription,50.4,8.7,0.18,28,D,RED
+Consumer Electronics|extreme_luxury|Big Box,Consumer Electronics,extreme_luxury,Big Box,1680.0,1.35,0.38,39.4,C,MARGINAL
+Consumer Electronics|extreme_luxury|Boutique,Consumer Electronics,extreme_luxury,Boutique,2016.0,1.08,0.38,22,D,RED
+Consumer Electronics|extreme_luxury|DTC Ecommerce,Consumer Electronics,extreme_luxury,DTC Ecommerce,1680.0,1.35,0.38,39.4,C,MARGINAL
+Consumer Electronics|extreme_luxury|Department Store,Consumer Electronics,extreme_luxury,Department Store,1848.0,1.22,0.38,22,D,RED
+Consumer Electronics|extreme_luxury|Marketplace,Consumer Electronics,extreme_luxury,Marketplace,1512.0,1.49,0.38,41.1,C,MARGINAL
+Consumer Electronics|extreme_luxury|Mobile App / QSR,Consumer Electronics,extreme_luxury,Mobile App / QSR,1344.0,2.43,0.38,52.9,B,GREEN
+Consumer Electronics|extreme_luxury|Omnichannel,Consumer Electronics,extreme_luxury,Omnichannel,1680.0,1.35,0.38,39.4,C,MARGINAL
+Consumer Electronics|extreme_luxury|Subscription,Consumer Electronics,extreme_luxury,Subscription,1512.0,2.7,0.38,56.2,B,GREEN
+Consumer Electronics|luxury|Big Box,Consumer Electronics,luxury,Big Box,420.0,2.4,0.34,47.5,C,MARGINAL
+Consumer Electronics|luxury|Boutique,Consumer Electronics,luxury,Boutique,504.0,1.92,0.34,41.5,C,MARGINAL
+Consumer Electronics|luxury|DTC Ecommerce,Consumer Electronics,luxury,DTC Ecommerce,420.0,2.4,0.34,47.5,C,MARGINAL
+Consumer Electronics|luxury|Department Store,Consumer Electronics,luxury,Department Store,462.0,2.16,0.34,44.5,C,MARGINAL
+Consumer Electronics|luxury|Marketplace,Consumer Electronics,luxury,Marketplace,378.0,2.64,0.34,50.5,B,GREEN
+Consumer Electronics|luxury|Mobile App / QSR,Consumer Electronics,luxury,Mobile App / QSR,336.0,4.32,0.34,67.5,A,GREEN
+Consumer Electronics|luxury|Omnichannel,Consumer Electronics,luxury,Omnichannel,420.0,2.4,0.34,47.5,C,MARGINAL
+Consumer Electronics|luxury|Subscription,Consumer Electronics,luxury,Subscription,378.0,4.8,0.34,67.5,A,GREEN
+Consumer Electronics|standard|Big Box,Consumer Electronics,standard,Big Box,140.0,3.0,0.28,47.5,C,MARGINAL
+Consumer Electronics|standard|Boutique,Consumer Electronics,standard,Boutique,168.0,2.4,0.28,40.0,C,MARGINAL
+Consumer Electronics|standard|DTC Ecommerce,Consumer Electronics,standard,DTC Ecommerce,140.0,3.0,0.28,47.5,C,MARGINAL
+Consumer Electronics|standard|Department Store,Consumer Electronics,standard,Department Store,154.0,2.7,0.28,43.8,C,MARGINAL
+Consumer Electronics|standard|Marketplace,Consumer Electronics,standard,Marketplace,126.0,3.3,0.28,51.2,B,GREEN
+Consumer Electronics|standard|Mobile App / QSR,Consumer Electronics,standard,Mobile App / QSR,112.0,5.4,0.28,60.0,B,GREEN
+Consumer Electronics|standard|Omnichannel,Consumer Electronics,standard,Omnichannel,140.0,3.0,0.28,47.5,C,MARGINAL
+Consumer Electronics|standard|Subscription,Consumer Electronics,standard,Subscription,126.0,6.0,0.28,60.0,B,GREEN
+Eyewear|discount|Big Box,Eyewear,discount,Big Box,84.0,1.92,0.55,67.8,A,GREEN
+Eyewear|discount|Boutique,Eyewear,discount,Boutique,100.8,1.54,0.55,63.0,B,GREEN
+Eyewear|discount|DTC Ecommerce,Eyewear,discount,DTC Ecommerce,84.0,1.92,0.55,67.8,A,GREEN
+Eyewear|discount|Department Store,Eyewear,discount,Department Store,92.4,1.73,0.55,65.4,A,GREEN
+Eyewear|discount|Marketplace,Eyewear,discount,Marketplace,75.6,2.11,0.55,70.1,A,GREEN
+Eyewear|discount|Mobile App / QSR,Eyewear,discount,Mobile App / QSR,67.2,3.46,0.55,87.0,A,GREEN
+Eyewear|discount|Omnichannel,Eyewear,discount,Omnichannel,84.0,1.92,0.55,67.8,A,GREEN
+Eyewear|discount|Subscription,Eyewear,discount,Subscription,75.6,3.84,0.55,91.8,A,GREEN
+Eyewear|extreme_discount|Big Box,Eyewear,extreme_discount,Big Box,56.0,2.32,0.5,65.2,A,GREEN
+Eyewear|extreme_discount|Boutique,Eyewear,extreme_discount,Boutique,67.2,1.86,0.5,60.7,B,GREEN
+Eyewear|extreme_discount|DTC Ecommerce,Eyewear,extreme_discount,DTC Ecommerce,56.0,2.32,0.5,65.2,A,GREEN
+Eyewear|extreme_discount|Department Store,Eyewear,extreme_discount,Department Store,61.6,2.09,0.5,63.6,B,GREEN
+Eyewear|extreme_discount|Marketplace,Eyewear,extreme_discount,Marketplace,50.4,2.55,0.5,66.2,A,GREEN
+Eyewear|extreme_discount|Mobile App / QSR,Eyewear,extreme_discount,Mobile App / QSR,44.8,4.18,0.5,82.4,A,GREEN
+Eyewear|extreme_discount|Omnichannel,Eyewear,extreme_discount,Omnichannel,56.0,2.32,0.5,65.2,A,GREEN
+Eyewear|extreme_discount|Subscription,Eyewear,extreme_discount,Subscription,50.4,4.64,0.5,84.3,A,GREEN
+Eyewear|extreme_luxury|Big Box,Eyewear,extreme_luxury,Big Box,1680.0,0.72,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|Boutique,Eyewear,extreme_luxury,Boutique,2016.0,0.58,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|DTC Ecommerce,Eyewear,extreme_luxury,DTC Ecommerce,1680.0,0.72,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|Department Store,Eyewear,extreme_luxury,Department Store,1848.0,0.65,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|Marketplace,Eyewear,extreme_luxury,Marketplace,1512.0,0.79,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|Mobile App / QSR,Eyewear,extreme_luxury,Mobile App / QSR,1344.0,1.3,0.7,66.2,A,GREEN
+Eyewear|extreme_luxury|Omnichannel,Eyewear,extreme_luxury,Omnichannel,1680.0,0.72,0.7,65.0,A,GREEN
+Eyewear|extreme_luxury|Subscription,Eyewear,extreme_luxury,Subscription,1512.0,1.44,0.7,68.0,A,GREEN
+Eyewear|luxury|Big Box,Eyewear,luxury,Big Box,420.0,1.28,0.66,66.0,A,GREEN
+Eyewear|luxury|Boutique,Eyewear,luxury,Boutique,504.0,1.02,0.66,65.0,A,GREEN
+Eyewear|luxury|DTC Ecommerce,Eyewear,luxury,DTC Ecommerce,420.0,1.28,0.66,66.0,A,GREEN
+Eyewear|luxury|Department Store,Eyewear,luxury,Department Store,462.0,1.15,0.66,65.0,A,GREEN
+Eyewear|luxury|Marketplace,Eyewear,luxury,Marketplace,378.0,1.41,0.66,67.6,A,GREEN
+Eyewear|luxury|Mobile App / QSR,Eyewear,luxury,Mobile App / QSR,336.0,2.3,0.66,78.8,A,GREEN
+Eyewear|luxury|Omnichannel,Eyewear,luxury,Omnichannel,420.0,1.28,0.66,66.0,A,GREEN
+Eyewear|luxury|Subscription,Eyewear,luxury,Subscription,378.0,2.56,0.66,82.0,A,GREEN
+Eyewear|standard|Big Box,Eyewear,standard,Big Box,140.0,1.6,0.6,70.0,A,GREEN
+Eyewear|standard|Boutique,Eyewear,standard,Boutique,168.0,1.28,0.6,22,D,RED
+Eyewear|standard|DTC Ecommerce,Eyewear,standard,DTC Ecommerce,140.0,1.6,0.6,70.0,A,GREEN
+Eyewear|standard|Department Store,Eyewear,standard,Department Store,154.0,1.44,0.6,68.0,A,GREEN
+Eyewear|standard|Marketplace,Eyewear,standard,Marketplace,126.0,1.76,0.6,72.0,A,GREEN
+Eyewear|standard|Mobile App / QSR,Eyewear,standard,Mobile App / QSR,112.0,2.88,0.6,86.0,A,GREEN
+Eyewear|standard|Omnichannel,Eyewear,standard,Omnichannel,140.0,1.6,0.6,70.0,A,GREEN
+Eyewear|standard|Subscription,Eyewear,standard,Subscription,126.0,3.2,0.6,90.0,A,GREEN
+Footwear|discount|Big Box,Footwear,discount,Big Box,66.0,3.12,0.4,64.0,B,GREEN
+Footwear|discount|Boutique,Footwear,discount,Boutique,79.2,2.5,0.4,56.2,B,GREEN
+Footwear|discount|DTC Ecommerce,Footwear,discount,DTC Ecommerce,66.0,3.12,0.4,64.0,B,GREEN
+Footwear|discount|Department Store,Footwear,discount,Department Store,72.6,2.81,0.4,60.1,B,GREEN
+Footwear|discount|Marketplace,Footwear,discount,Marketplace,59.4,3.43,0.4,67.7,A,GREEN
+Footwear|discount|Mobile App / QSR,Footwear,discount,Mobile App / QSR,52.8,5.62,0.4,72.6,A,GREEN
+Footwear|discount|Omnichannel,Footwear,discount,Omnichannel,66.0,3.12,0.4,64.0,B,GREEN
+Footwear|discount|Subscription,Footwear,discount,Subscription,59.4,6.24,0.4,74.8,A,GREEN
+Footwear|extreme_discount|Big Box,Footwear,extreme_discount,Big Box,44.0,3.77,0.35,60.5,B,GREEN
+Footwear|extreme_discount|Boutique,Footwear,extreme_discount,Boutique,52.8,3.02,0.35,54.1,B,GREEN
+Footwear|extreme_discount|DTC Ecommerce,Footwear,extreme_discount,DTC Ecommerce,44.0,3.77,0.35,60.5,B,GREEN
+Footwear|extreme_discount|Department Store,Footwear,extreme_discount,Department Store,48.4,3.39,0.35,57.3,B,GREEN
+Footwear|extreme_discount|Marketplace,Footwear,extreme_discount,Marketplace,39.6,4.15,0.35,61.9,B,GREEN
+Footwear|extreme_discount|Mobile App / QSR,Footwear,extreme_discount,Mobile App / QSR,35.2,6.79,0.35,60.5,B,GREEN
+Footwear|extreme_discount|Omnichannel,Footwear,extreme_discount,Omnichannel,44.0,3.77,0.35,60.5,B,GREEN
+Footwear|extreme_discount|Subscription,Footwear,extreme_discount,Subscription,39.6,7.54,0.35,61.9,B,GREEN
+Footwear|extreme_luxury|Big Box,Footwear,extreme_luxury,Big Box,1320.0,1.17,0.55,22,D,RED
+Footwear|extreme_luxury|Boutique,Footwear,extreme_luxury,Boutique,1584.0,0.94,0.55,22,D,RED
+Footwear|extreme_luxury|DTC Ecommerce,Footwear,extreme_luxury,DTC Ecommerce,1320.0,1.17,0.55,22,D,RED
+Footwear|extreme_luxury|Department Store,Footwear,extreme_luxury,Department Store,1452.0,1.05,0.55,22,D,RED
+Footwear|extreme_luxury|Marketplace,Footwear,extreme_luxury,Marketplace,1188.0,1.29,0.55,22,D,RED
+Footwear|extreme_luxury|Mobile App / QSR,Footwear,extreme_luxury,Mobile App / QSR,1056.0,2.11,0.55,70.1,A,GREEN
+Footwear|extreme_luxury|Omnichannel,Footwear,extreme_luxury,Omnichannel,1320.0,1.17,0.55,22,D,RED
+Footwear|extreme_luxury|Subscription,Footwear,extreme_luxury,Subscription,1188.0,2.34,0.55,73.0,A,GREEN
+Footwear|luxury|Big Box,Footwear,luxury,Big Box,330.0,2.08,0.51,64.8,B,GREEN
+Footwear|luxury|Boutique,Footwear,luxury,Boutique,396.0,1.66,0.51,59.5,B,GREEN
+Footwear|luxury|DTC Ecommerce,Footwear,luxury,DTC Ecommerce,330.0,2.08,0.51,64.8,B,GREEN
+Footwear|luxury|Department Store,Footwear,luxury,Department Store,363.0,1.87,0.51,62.1,B,GREEN
+Footwear|luxury|Marketplace,Footwear,luxury,Marketplace,297.0,2.29,0.51,67.4,A,GREEN
+Footwear|luxury|Mobile App / QSR,Footwear,luxury,Mobile App / QSR,264.0,3.74,0.51,85.5,A,GREEN
+Footwear|luxury|Omnichannel,Footwear,luxury,Omnichannel,330.0,2.08,0.51,64.8,B,GREEN
+Footwear|luxury|Subscription,Footwear,luxury,Subscription,297.0,4.16,0.51,88.8,A,GREEN
+Footwear|standard|Big Box,Footwear,standard,Big Box,110.0,2.6,0.45,63.8,B,GREEN
+Footwear|standard|Boutique,Footwear,standard,Boutique,132.0,2.08,0.45,57.2,B,GREEN
+Footwear|standard|DTC Ecommerce,Footwear,standard,DTC Ecommerce,110.0,2.6,0.45,63.8,B,GREEN
+Footwear|standard|Department Store,Footwear,standard,Department Store,121.0,2.34,0.45,60.5,B,GREEN
+Footwear|standard|Marketplace,Footwear,standard,Marketplace,99.0,2.86,0.45,67.0,A,GREEN
+Footwear|standard|Mobile App / QSR,Footwear,standard,Mobile App / QSR,88.0,4.68,0.45,81.2,A,GREEN
+Footwear|standard|Omnichannel,Footwear,standard,Omnichannel,110.0,2.6,0.45,63.8,B,GREEN
+Footwear|standard|Subscription,Footwear,standard,Subscription,99.0,5.2,0.45,81.2,A,GREEN
+General Merchandise|discount|Big Box,General Merchandise,discount,Big Box,51.0,19.2,0.2,28,D,RED
+General Merchandise|discount|Boutique,General Merchandise,discount,Boutique,61.2,15.36,0.2,28,D,RED
+General Merchandise|discount|DTC Ecommerce,General Merchandise,discount,DTC Ecommerce,51.0,19.2,0.2,28,D,RED
+General Merchandise|discount|Department Store,General Merchandise,discount,Department Store,56.1,17.28,0.2,28,D,RED
+General Merchandise|discount|Marketplace,General Merchandise,discount,Marketplace,45.9,21.12,0.2,28,D,RED
+General Merchandise|discount|Mobile App / QSR,General Merchandise,discount,Mobile App / QSR,40.8,34.56,0.2,28,D,RED
+General Merchandise|discount|Omnichannel,General Merchandise,discount,Omnichannel,51.0,19.2,0.2,28,D,RED
+General Merchandise|discount|Subscription,General Merchandise,discount,Subscription,45.9,38.4,0.2,28,D,RED
+General Merchandise|extreme_discount|Big Box,General Merchandise,extreme_discount,Big Box,34.0,23.2,0.15,28,D,RED
+General Merchandise|extreme_discount|Boutique,General Merchandise,extreme_discount,Boutique,40.8,18.56,0.15,28,D,RED
+General Merchandise|extreme_discount|DTC Ecommerce,General Merchandise,extreme_discount,DTC Ecommerce,34.0,23.2,0.15,28,D,RED
+General Merchandise|extreme_discount|Department Store,General Merchandise,extreme_discount,Department Store,37.4,20.88,0.15,28,D,RED
+General Merchandise|extreme_discount|Marketplace,General Merchandise,extreme_discount,Marketplace,30.6,25.52,0.15,28,D,RED
+General Merchandise|extreme_discount|Mobile App / QSR,General Merchandise,extreme_discount,Mobile App / QSR,27.2,41.76,0.15,28,D,RED
+General Merchandise|extreme_discount|Omnichannel,General Merchandise,extreme_discount,Omnichannel,34.0,23.2,0.15,28,D,RED
+General Merchandise|extreme_discount|Subscription,General Merchandise,extreme_discount,Subscription,30.6,46.4,0.15,28,D,RED
+General Merchandise|extreme_luxury|Big Box,General Merchandise,extreme_luxury,Big Box,1020.0,7.2,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Boutique,General Merchandise,extreme_luxury,Boutique,1224.0,5.76,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|DTC Ecommerce,General Merchandise,extreme_luxury,DTC Ecommerce,1020.0,7.2,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Department Store,General Merchandise,extreme_luxury,Department Store,1122.0,6.48,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Marketplace,General Merchandise,extreme_luxury,Marketplace,918.0,7.92,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Mobile App / QSR,General Merchandise,extreme_luxury,Mobile App / QSR,816.0,12.96,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Omnichannel,General Merchandise,extreme_luxury,Omnichannel,1020.0,7.2,0.35,68.7,A,GREEN
+General Merchandise|extreme_luxury|Subscription,General Merchandise,extreme_luxury,Subscription,918.0,14.4,0.35,68.7,A,GREEN
+General Merchandise|luxury|Big Box,General Merchandise,luxury,Big Box,255.0,12.8,0.31,63.7,B,GREEN
+General Merchandise|luxury|Boutique,General Merchandise,luxury,Boutique,306.0,10.24,0.31,63.7,B,GREEN
+General Merchandise|luxury|DTC Ecommerce,General Merchandise,luxury,DTC Ecommerce,255.0,12.8,0.31,63.7,B,GREEN
+General Merchandise|luxury|Department Store,General Merchandise,luxury,Department Store,280.5,11.52,0.31,63.7,B,GREEN
+General Merchandise|luxury|Marketplace,General Merchandise,luxury,Marketplace,229.5,14.08,0.31,63.7,B,GREEN
+General Merchandise|luxury|Mobile App / QSR,General Merchandise,luxury,Mobile App / QSR,204.0,23.04,0.31,63.7,B,GREEN
+General Merchandise|luxury|Omnichannel,General Merchandise,luxury,Omnichannel,255.0,12.8,0.31,63.7,B,GREEN
+General Merchandise|luxury|Subscription,General Merchandise,luxury,Subscription,229.5,25.6,0.31,63.7,B,GREEN
+General Merchandise|standard|Big Box,General Merchandise,standard,Big Box,85.0,16.0,0.25,56.2,B,GREEN
+General Merchandise|standard|Boutique,General Merchandise,standard,Boutique,102.0,12.8,0.25,56.2,B,GREEN
+General Merchandise|standard|DTC Ecommerce,General Merchandise,standard,DTC Ecommerce,85.0,16.0,0.25,56.2,B,GREEN
+General Merchandise|standard|Department Store,General Merchandise,standard,Department Store,93.5,14.4,0.25,56.2,B,GREEN
+General Merchandise|standard|Marketplace,General Merchandise,standard,Marketplace,76.5,17.6,0.25,56.2,B,GREEN
+General Merchandise|standard|Mobile App / QSR,General Merchandise,standard,Mobile App / QSR,68.0,28.8,0.25,56.2,B,GREEN
+General Merchandise|standard|Omnichannel,General Merchandise,standard,Omnichannel,85.0,16.0,0.25,56.2,B,GREEN
+General Merchandise|standard|Subscription,General Merchandise,standard,Subscription,76.5,32.0,0.25,56.2,B,GREEN
+Grocery|discount|Big Box,Grocery,discount,Big Box,42.0,18.0,0.17,28,D,RED
+Grocery|discount|Boutique,Grocery,discount,Boutique,50.4,14.4,0.17,28,D,RED
+Grocery|discount|DTC Ecommerce,Grocery,discount,DTC Ecommerce,42.0,18.0,0.17,28,D,RED
+Grocery|discount|Department Store,Grocery,discount,Department Store,46.2,16.2,0.17,28,D,RED
+Grocery|discount|Marketplace,Grocery,discount,Marketplace,37.8,19.8,0.17,28,D,RED
+Grocery|discount|Mobile App / QSR,Grocery,discount,Mobile App / QSR,33.6,32.4,0.17,28,D,RED
+Grocery|discount|Omnichannel,Grocery,discount,Omnichannel,42.0,18.0,0.17,28,D,RED
+Grocery|discount|Subscription,Grocery,discount,Subscription,37.8,36.0,0.17,28,D,RED
+Grocery|extreme_discount|Big Box,Grocery,extreme_discount,Big Box,28.0,21.75,0.12,28,D,RED
+Grocery|extreme_discount|Boutique,Grocery,extreme_discount,Boutique,33.6,17.4,0.12,28,D,RED
+Grocery|extreme_discount|DTC Ecommerce,Grocery,extreme_discount,DTC Ecommerce,28.0,21.75,0.12,28,D,RED
+Grocery|extreme_discount|Department Store,Grocery,extreme_discount,Department Store,30.8,19.57,0.12,28,D,RED
+Grocery|extreme_discount|Marketplace,Grocery,extreme_discount,Marketplace,25.2,23.93,0.12,28,D,RED
+Grocery|extreme_discount|Mobile App / QSR,Grocery,extreme_discount,Mobile App / QSR,22.4,39.15,0.12,28,D,RED
+Grocery|extreme_discount|Omnichannel,Grocery,extreme_discount,Omnichannel,28.0,21.75,0.12,28,D,RED
+Grocery|extreme_discount|Subscription,Grocery,extreme_discount,Subscription,25.2,43.5,0.12,28,D,RED
+Grocery|extreme_luxury|Big Box,Grocery,extreme_luxury,Big Box,840.0,6.75,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Boutique,Grocery,extreme_luxury,Boutique,1008.0,5.4,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|DTC Ecommerce,Grocery,extreme_luxury,DTC Ecommerce,840.0,6.75,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Department Store,Grocery,extreme_luxury,Department Store,924.0,6.08,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Marketplace,Grocery,extreme_luxury,Marketplace,756.0,7.43,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Mobile App / QSR,Grocery,extreme_luxury,Mobile App / QSR,672.0,12.15,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Omnichannel,Grocery,extreme_luxury,Omnichannel,840.0,6.75,0.32,65.0,A,GREEN
+Grocery|extreme_luxury|Subscription,Grocery,extreme_luxury,Subscription,756.0,13.5,0.32,65.0,A,GREEN
+Grocery|luxury|Big Box,Grocery,luxury,Big Box,210.0,12.0,0.28,60.0,B,GREEN
+Grocery|luxury|Boutique,Grocery,luxury,Boutique,252.0,9.6,0.28,60.0,B,GREEN
+Grocery|luxury|DTC Ecommerce,Grocery,luxury,DTC Ecommerce,210.0,12.0,0.28,60.0,B,GREEN
+Grocery|luxury|Department Store,Grocery,luxury,Department Store,231.0,10.8,0.28,60.0,B,GREEN
+Grocery|luxury|Marketplace,Grocery,luxury,Marketplace,189.0,13.2,0.28,60.0,B,GREEN
+Grocery|luxury|Mobile App / QSR,Grocery,luxury,Mobile App / QSR,168.0,21.6,0.28,60.0,B,GREEN
+Grocery|luxury|Omnichannel,Grocery,luxury,Omnichannel,210.0,12.0,0.28,60.0,B,GREEN
+Grocery|luxury|Subscription,Grocery,luxury,Subscription,189.0,24.0,0.28,60.0,B,GREEN
+Grocery|standard|Big Box,Grocery,standard,Big Box,70.0,15.0,0.22,28,D,RED
+Grocery|standard|Boutique,Grocery,standard,Boutique,84.0,12.0,0.22,28,D,RED
+Grocery|standard|DTC Ecommerce,Grocery,standard,DTC Ecommerce,70.0,15.0,0.22,28,D,RED
+Grocery|standard|Department Store,Grocery,standard,Department Store,77.0,13.5,0.22,28,D,RED
+Grocery|standard|Marketplace,Grocery,standard,Marketplace,63.0,16.5,0.22,28,D,RED
+Grocery|standard|Mobile App / QSR,Grocery,standard,Mobile App / QSR,56.0,27.0,0.22,28,D,RED
+Grocery|standard|Omnichannel,Grocery,standard,Omnichannel,70.0,15.0,0.22,28,D,RED
+Grocery|standard|Subscription,Grocery,standard,Subscription,63.0,30.0,0.22,28,D,RED
+Health & Supplements|discount|Big Box,Health & Supplements,discount,Big Box,36.0,6.24,0.5,79.5,A,GREEN
+Health & Supplements|discount|Boutique,Health & Supplements,discount,Boutique,43.2,4.99,0.5,81.9,A,GREEN
+Health & Supplements|discount|DTC Ecommerce,Health & Supplements,discount,DTC Ecommerce,36.0,6.24,0.5,79.5,A,GREEN
+Health & Supplements|discount|Department Store,Health & Supplements,discount,Department Store,39.6,5.62,0.5,80.7,A,GREEN
+Health & Supplements|discount|Marketplace,Health & Supplements,discount,Marketplace,32.4,6.86,0.5,78.3,A,GREEN
+Health & Supplements|discount|Mobile App / QSR,Health & Supplements,discount,Mobile App / QSR,28.8,11.23,0.5,77.1,A,GREEN
+Health & Supplements|discount|Omnichannel,Health & Supplements,discount,Omnichannel,36.0,6.24,0.5,79.5,A,GREEN
+Health & Supplements|discount|Subscription,Health & Supplements,discount,Subscription,32.4,12.48,0.5,78.3,A,GREEN
+Health & Supplements|extreme_discount|Big Box,Health & Supplements,extreme_discount,Big Box,24.0,7.54,0.45,69.2,A,GREEN
+Health & Supplements|extreme_discount|Boutique,Health & Supplements,extreme_discount,Boutique,28.8,6.03,0.45,70.9,A,GREEN
+Health & Supplements|extreme_discount|DTC Ecommerce,Health & Supplements,extreme_discount,DTC Ecommerce,24.0,7.54,0.45,69.2,A,GREEN
+Health & Supplements|extreme_discount|Department Store,Health & Supplements,extreme_discount,Department Store,26.4,6.79,0.45,70.0,A,GREEN
+Health & Supplements|extreme_discount|Marketplace,Health & Supplements,extreme_discount,Marketplace,21.6,8.29,0.45,68.5,A,GREEN
+Health & Supplements|extreme_discount|Mobile App / QSR,Health & Supplements,extreme_discount,Mobile App / QSR,19.2,13.57,0.45,67.7,A,GREEN
+Health & Supplements|extreme_discount|Omnichannel,Health & Supplements,extreme_discount,Omnichannel,24.0,7.54,0.45,69.2,A,GREEN
+Health & Supplements|extreme_discount|Subscription,Health & Supplements,extreme_discount,Subscription,21.6,15.08,0.45,68.5,A,GREEN
+Health & Supplements|extreme_luxury|Big Box,Health & Supplements,extreme_luxury,Big Box,720.0,2.34,0.65,79.2,A,GREEN
+Health & Supplements|extreme_luxury|Boutique,Health & Supplements,extreme_luxury,Boutique,864.0,1.87,0.65,73.4,A,GREEN
+Health & Supplements|extreme_luxury|DTC Ecommerce,Health & Supplements,extreme_luxury,DTC Ecommerce,720.0,2.34,0.65,79.2,A,GREEN
+Health & Supplements|extreme_luxury|Department Store,Health & Supplements,extreme_luxury,Department Store,792.0,2.11,0.65,76.4,A,GREEN
+Health & Supplements|extreme_luxury|Marketplace,Health & Supplements,extreme_luxury,Marketplace,648.0,2.57,0.65,82.1,A,GREEN
+Health & Supplements|extreme_luxury|Mobile App / QSR,Health & Supplements,extreme_luxury,Mobile App / QSR,576.0,4.21,0.65,100.0,A,GREEN
+Health & Supplements|extreme_luxury|Omnichannel,Health & Supplements,extreme_luxury,Omnichannel,720.0,2.34,0.65,79.2,A,GREEN
+Health & Supplements|extreme_luxury|Subscription,Health & Supplements,extreme_luxury,Subscription,648.0,4.68,0.65,100.0,A,GREEN
+Health & Supplements|luxury|Big Box,Health & Supplements,luxury,Big Box,180.0,4.16,0.61,100.0,A,GREEN
+Health & Supplements|luxury|Boutique,Health & Supplements,luxury,Boutique,216.0,3.33,0.61,91.6,A,GREEN
+Health & Supplements|luxury|DTC Ecommerce,Health & Supplements,luxury,DTC Ecommerce,180.0,4.16,0.61,100.0,A,GREEN
+Health & Supplements|luxury|Department Store,Health & Supplements,luxury,Department Store,198.0,3.74,0.61,96.8,A,GREEN
+Health & Supplements|luxury|Marketplace,Health & Supplements,luxury,Marketplace,162.0,4.58,0.61,100.0,A,GREEN
+Health & Supplements|luxury|Mobile App / QSR,Health & Supplements,luxury,Mobile App / QSR,144.0,7.49,0.61,100.0,A,GREEN
+Health & Supplements|luxury|Omnichannel,Health & Supplements,luxury,Omnichannel,180.0,4.16,0.61,100.0,A,GREEN
+Health & Supplements|luxury|Subscription,Health & Supplements,luxury,Subscription,162.0,8.32,0.61,100.0,A,GREEN
+Health & Supplements|standard|Big Box,Health & Supplements,standard,Big Box,60.0,5.2,0.55,93.8,A,GREEN
+Health & Supplements|standard|Boutique,Health & Supplements,standard,Boutique,72.0,4.16,0.55,93.8,A,GREEN
+Health & Supplements|standard|DTC Ecommerce,Health & Supplements,standard,DTC Ecommerce,60.0,5.2,0.55,93.8,A,GREEN
+Health & Supplements|standard|Department Store,Health & Supplements,standard,Department Store,66.0,4.68,0.55,93.8,A,GREEN
+Health & Supplements|standard|Marketplace,Health & Supplements,standard,Marketplace,54.0,5.72,0.55,91.8,A,GREEN
+Health & Supplements|standard|Mobile App / QSR,Health & Supplements,standard,Mobile App / QSR,48.0,9.36,0.55,89.8,A,GREEN
+Health & Supplements|standard|Omnichannel,Health & Supplements,standard,Omnichannel,60.0,5.2,0.55,93.8,A,GREEN
+Health & Supplements|standard|Subscription,Health & Supplements,standard,Subscription,54.0,10.4,0.55,91.8,A,GREEN
+Home & Garden|discount|Big Box,Home & Garden,discount,Big Box,72.0,3.48,0.35,62.2,B,GREEN
+Home & Garden|discount|Boutique,Home & Garden,discount,Boutique,86.4,2.78,0.35,53.5,B,GREEN
+Home & Garden|discount|DTC Ecommerce,Home & Garden,discount,DTC Ecommerce,72.0,3.48,0.35,62.2,B,GREEN
+Home & Garden|discount|Department Store,Home & Garden,discount,Department Store,79.2,3.13,0.35,57.9,B,GREEN
+Home & Garden|discount|Marketplace,Home & Garden,discount,Marketplace,64.8,3.83,0.35,66.6,A,GREEN
+Home & Garden|discount|Mobile App / QSR,Home & Garden,discount,Mobile App / QSR,57.6,6.26,0.35,67.9,A,GREEN
+Home & Garden|discount|Omnichannel,Home & Garden,discount,Omnichannel,72.0,3.48,0.35,62.2,B,GREEN
+Home & Garden|discount|Subscription,Home & Garden,discount,Subscription,64.8,6.96,0.35,68.7,A,GREEN
+Home & Garden|extreme_discount|Big Box,Home & Garden,extreme_discount,Big Box,48.0,4.21,0.3,58.5,B,GREEN
+Home & Garden|extreme_discount|Boutique,Home & Garden,extreme_discount,Boutique,57.6,3.36,0.3,53.7,B,GREEN
+Home & Garden|extreme_discount|DTC Ecommerce,Home & Garden,extreme_discount,DTC Ecommerce,48.0,4.21,0.3,58.5,B,GREEN
+Home & Garden|extreme_discount|Department Store,Home & Garden,extreme_discount,Department Store,52.8,3.78,0.3,57.4,B,GREEN
+Home & Garden|extreme_discount|Marketplace,Home & Garden,extreme_discount,Marketplace,43.2,4.63,0.3,56.9,B,GREEN
+Home & Garden|extreme_discount|Mobile App / QSR,Home & Garden,extreme_discount,Mobile App / QSR,38.4,7.57,0.3,55.3,B,GREEN
+Home & Garden|extreme_discount|Omnichannel,Home & Garden,extreme_discount,Omnichannel,48.0,4.21,0.3,58.5,B,GREEN
+Home & Garden|extreme_discount|Subscription,Home & Garden,extreme_discount,Subscription,43.2,8.41,0.3,56.9,B,GREEN
+Home & Garden|extreme_luxury|Big Box,Home & Garden,extreme_luxury,Big Box,1440.0,1.3,0.5,53.8,B,GREEN
+Home & Garden|extreme_luxury|Boutique,Home & Garden,extreme_luxury,Boutique,1728.0,1.04,0.5,22,D,RED
+Home & Garden|extreme_luxury|DTC Ecommerce,Home & Garden,extreme_luxury,DTC Ecommerce,1440.0,1.3,0.5,53.8,B,GREEN
+Home & Garden|extreme_luxury|Department Store,Home & Garden,extreme_luxury,Department Store,1584.0,1.17,0.5,22,D,RED
+Home & Garden|extreme_luxury|Marketplace,Home & Garden,extreme_luxury,Marketplace,1296.0,1.44,0.5,55.5,B,GREEN
+Home & Garden|extreme_luxury|Mobile App / QSR,Home & Garden,extreme_luxury,Mobile App / QSR,1152.0,2.35,0.5,66.9,A,GREEN
+Home & Garden|extreme_luxury|Omnichannel,Home & Garden,extreme_luxury,Omnichannel,1440.0,1.3,0.5,53.8,B,GREEN
+Home & Garden|extreme_luxury|Subscription,Home & Garden,extreme_luxury,Subscription,1296.0,2.61,0.5,70.1,A,GREEN
+Home & Garden|luxury|Big Box,Home & Garden,luxury,Big Box,360.0,2.32,0.46,61.5,B,GREEN
+Home & Garden|luxury|Boutique,Home & Garden,luxury,Boutique,432.0,1.86,0.46,55.8,B,GREEN
+Home & Garden|luxury|DTC Ecommerce,Home & Garden,luxury,DTC Ecommerce,360.0,2.32,0.46,61.5,B,GREEN
+Home & Garden|luxury|Department Store,Home & Garden,luxury,Department Store,396.0,2.09,0.46,58.6,B,GREEN
+Home & Garden|luxury|Marketplace,Home & Garden,luxury,Marketplace,324.0,2.55,0.46,64.4,B,GREEN
+Home & Garden|luxury|Mobile App / QSR,Home & Garden,luxury,Mobile App / QSR,288.0,4.18,0.46,82.5,A,GREEN
+Home & Garden|luxury|Omnichannel,Home & Garden,luxury,Omnichannel,360.0,2.32,0.46,61.5,B,GREEN
+Home & Garden|luxury|Subscription,Home & Garden,luxury,Subscription,324.0,4.64,0.46,82.5,A,GREEN
+Home & Garden|standard|Big Box,Home & Garden,standard,Big Box,120.0,2.9,0.4,61.3,B,GREEN
+Home & Garden|standard|Boutique,Home & Garden,standard,Boutique,144.0,2.32,0.4,54.0,B,GREEN
+Home & Garden|standard|DTC Ecommerce,Home & Garden,standard,DTC Ecommerce,120.0,2.9,0.4,61.3,B,GREEN
+Home & Garden|standard|Department Store,Home & Garden,standard,Department Store,132.0,2.61,0.4,57.6,B,GREEN
+Home & Garden|standard|Marketplace,Home & Garden,standard,Marketplace,108.0,3.19,0.4,64.9,B,GREEN
+Home & Garden|standard|Mobile App / QSR,Home & Garden,standard,Mobile App / QSR,96.0,5.22,0.4,75.0,A,GREEN
+Home & Garden|standard|Omnichannel,Home & Garden,standard,Omnichannel,120.0,2.9,0.4,61.3,B,GREEN
+Home & Garden|standard|Subscription,Home & Garden,standard,Subscription,108.0,5.8,0.4,75.0,A,GREEN
+Home / Mattress|discount|Big Box,Home / Mattress,discount,Big Box,420.0,1.44,0.5,55.5,B,GREEN
+Home / Mattress|discount|Boutique,Home / Mattress,discount,Boutique,504.0,1.15,0.5,22,D,RED
+Home / Mattress|discount|DTC Ecommerce,Home / Mattress,discount,DTC Ecommerce,420.0,1.44,0.5,55.5,B,GREEN
+Home / Mattress|discount|Department Store,Home / Mattress,discount,Department Store,462.0,1.3,0.5,53.8,B,GREEN
+Home / Mattress|discount|Marketplace,Home / Mattress,discount,Marketplace,378.0,1.58,0.5,57.2,B,GREEN
+Home / Mattress|discount|Mobile App / QSR,Home / Mattress,discount,Mobile App / QSR,336.0,2.59,0.5,69.9,A,GREEN
+Home / Mattress|discount|Omnichannel,Home / Mattress,discount,Omnichannel,420.0,1.44,0.5,55.5,B,GREEN
+Home / Mattress|discount|Subscription,Home / Mattress,discount,Subscription,378.0,2.88,0.5,73.5,A,GREEN
+Home / Mattress|extreme_discount|Big Box,Home / Mattress,extreme_discount,Big Box,280.0,1.74,0.45,53.0,B,GREEN
+Home / Mattress|extreme_discount|Boutique,Home / Mattress,extreme_discount,Boutique,336.0,1.39,0.45,48.6,C,MARGINAL
+Home / Mattress|extreme_discount|DTC Ecommerce,Home / Mattress,extreme_discount,DTC Ecommerce,280.0,1.74,0.45,53.0,B,GREEN
+Home / Mattress|extreme_discount|Department Store,Home / Mattress,extreme_discount,Department Store,308.0,1.57,0.45,50.9,B,GREEN
+Home / Mattress|extreme_discount|Marketplace,Home / Mattress,extreme_discount,Marketplace,252.0,1.91,0.45,55.1,B,GREEN
+Home / Mattress|extreme_discount|Mobile App / QSR,Home / Mattress,extreme_discount,Mobile App / QSR,224.0,3.13,0.45,70.4,A,GREEN
+Home / Mattress|extreme_discount|Omnichannel,Home / Mattress,extreme_discount,Omnichannel,280.0,1.74,0.45,53.0,B,GREEN
+Home / Mattress|extreme_discount|Subscription,Home / Mattress,extreme_discount,Subscription,252.0,3.48,0.45,74.8,A,GREEN
+Home / Mattress|extreme_luxury|Big Box,Home / Mattress,extreme_luxury,Big Box,8400.0,0.54,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Boutique,Home / Mattress,extreme_luxury,Boutique,10080.0,0.43,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|DTC Ecommerce,Home / Mattress,extreme_luxury,DTC Ecommerce,8400.0,0.54,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Department Store,Home / Mattress,extreme_luxury,Department Store,9240.0,0.49,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Marketplace,Home / Mattress,extreme_luxury,Marketplace,7560.0,0.59,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Mobile App / QSR,Home / Mattress,extreme_luxury,Mobile App / QSR,6720.0,0.97,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Omnichannel,Home / Mattress,extreme_luxury,Omnichannel,8400.0,0.54,0.65,65.0,A,GREEN
+Home / Mattress|extreme_luxury|Subscription,Home / Mattress,extreme_luxury,Subscription,7560.0,1.08,0.65,65.0,A,GREEN
+Home / Mattress|luxury|Big Box,Home / Mattress,luxury,Big Box,2100.0,0.96,0.61,22,D,RED
+Home / Mattress|luxury|Boutique,Home / Mattress,luxury,Boutique,2520.0,0.77,0.61,22,D,RED
+Home / Mattress|luxury|DTC Ecommerce,Home / Mattress,luxury,DTC Ecommerce,2100.0,0.96,0.61,22,D,RED
+Home / Mattress|luxury|Department Store,Home / Mattress,luxury,Department Store,2310.0,0.86,0.61,22,D,RED
+Home / Mattress|luxury|Marketplace,Home / Mattress,luxury,Marketplace,1890.0,1.06,0.61,22,D,RED
+Home / Mattress|luxury|Mobile App / QSR,Home / Mattress,luxury,Mobile App / QSR,1680.0,1.73,0.61,71.6,A,GREEN
+Home / Mattress|luxury|Omnichannel,Home / Mattress,luxury,Omnichannel,2100.0,0.96,0.61,22,D,RED
+Home / Mattress|luxury|Subscription,Home / Mattress,luxury,Subscription,1890.0,1.92,0.61,74.0,A,GREEN
+Home / Mattress|standard|Big Box,Home / Mattress,standard,Big Box,700.0,1.2,0.55,22,D,RED
+Home / Mattress|standard|Boutique,Home / Mattress,standard,Boutique,840.0,0.96,0.55,22,D,RED
+Home / Mattress|standard|DTC Ecommerce,Home / Mattress,standard,DTC Ecommerce,700.0,1.2,0.55,22,D,RED
+Home / Mattress|standard|Department Store,Home / Mattress,standard,Department Store,770.0,1.08,0.55,22,D,RED
+Home / Mattress|standard|Marketplace,Home / Mattress,standard,Marketplace,630.0,1.32,0.55,60.2,B,GREEN
+Home / Mattress|standard|Mobile App / QSR,Home / Mattress,standard,Mobile App / QSR,560.0,2.16,0.55,70.8,A,GREEN
+Home / Mattress|standard|Omnichannel,Home / Mattress,standard,Omnichannel,700.0,1.2,0.55,22,D,RED
+Home / Mattress|standard|Subscription,Home / Mattress,standard,Subscription,630.0,2.4,0.55,73.8,A,GREEN
+Jewelry & Watches|discount|Big Box,Jewelry & Watches,discount,Big Box,210.0,1.56,0.45,50.8,B,GREEN
+Jewelry & Watches|discount|Boutique,Jewelry & Watches,discount,Boutique,252.0,1.25,0.45,22,D,RED
+Jewelry & Watches|discount|DTC Ecommerce,Jewelry & Watches,discount,DTC Ecommerce,210.0,1.56,0.45,50.8,B,GREEN
+Jewelry & Watches|discount|Department Store,Jewelry & Watches,discount,Department Store,231.0,1.4,0.45,48.7,C,MARGINAL
+Jewelry & Watches|discount|Marketplace,Jewelry & Watches,discount,Marketplace,189.0,1.72,0.45,52.8,B,GREEN
+Jewelry & Watches|discount|Mobile App / QSR,Jewelry & Watches,discount,Mobile App / QSR,168.0,2.81,0.45,66.4,A,GREEN
+Jewelry & Watches|discount|Omnichannel,Jewelry & Watches,discount,Omnichannel,210.0,1.56,0.45,50.8,B,GREEN
+Jewelry & Watches|discount|Subscription,Jewelry & Watches,discount,Subscription,189.0,3.12,0.45,70.2,A,GREEN
+Jewelry & Watches|extreme_discount|Big Box,Jewelry & Watches,extreme_discount,Big Box,140.0,1.89,0.4,48.6,C,MARGINAL
+Jewelry & Watches|extreme_discount|Boutique,Jewelry & Watches,extreme_discount,Boutique,168.0,1.51,0.4,43.9,C,MARGINAL
+Jewelry & Watches|extreme_discount|DTC Ecommerce,Jewelry & Watches,extreme_discount,DTC Ecommerce,140.0,1.89,0.4,48.6,C,MARGINAL
+Jewelry & Watches|extreme_discount|Department Store,Jewelry & Watches,extreme_discount,Department Store,154.0,1.7,0.4,46.2,C,MARGINAL
+Jewelry & Watches|extreme_discount|Marketplace,Jewelry & Watches,extreme_discount,Marketplace,126.0,2.07,0.4,50.9,B,GREEN
+Jewelry & Watches|extreme_discount|Mobile App / QSR,Jewelry & Watches,extreme_discount,Mobile App / QSR,112.0,3.39,0.4,67.4,A,GREEN
+Jewelry & Watches|extreme_discount|Omnichannel,Jewelry & Watches,extreme_discount,Omnichannel,140.0,1.89,0.4,48.6,C,MARGINAL
+Jewelry & Watches|extreme_discount|Subscription,Jewelry & Watches,extreme_discount,Subscription,126.0,3.77,0.4,72.1,A,GREEN
+Jewelry & Watches|extreme_luxury|Big Box,Jewelry & Watches,extreme_luxury,Big Box,4200.0,0.59,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Boutique,Jewelry & Watches,extreme_luxury,Boutique,5040.0,0.47,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|DTC Ecommerce,Jewelry & Watches,extreme_luxury,DTC Ecommerce,4200.0,0.59,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Department Store,Jewelry & Watches,extreme_luxury,Department Store,4620.0,0.53,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Marketplace,Jewelry & Watches,extreme_luxury,Marketplace,3780.0,0.64,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Mobile App / QSR,Jewelry & Watches,extreme_luxury,Mobile App / QSR,3360.0,1.05,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Omnichannel,Jewelry & Watches,extreme_luxury,Omnichannel,4200.0,0.59,0.6,22,D,RED
+Jewelry & Watches|extreme_luxury|Subscription,Jewelry & Watches,extreme_luxury,Subscription,3780.0,1.17,0.6,22,D,RED
+Jewelry & Watches|luxury|Big Box,Jewelry & Watches,luxury,Big Box,1050.0,1.04,0.56,22,D,RED
+Jewelry & Watches|luxury|Boutique,Jewelry & Watches,luxury,Boutique,1260.0,0.83,0.56,22,D,RED
+Jewelry & Watches|luxury|DTC Ecommerce,Jewelry & Watches,luxury,DTC Ecommerce,1050.0,1.04,0.56,22,D,RED
+Jewelry & Watches|luxury|Department Store,Jewelry & Watches,luxury,Department Store,1155.0,0.94,0.56,22,D,RED
+Jewelry & Watches|luxury|Marketplace,Jewelry & Watches,luxury,Marketplace,945.0,1.14,0.56,22,D,RED
+Jewelry & Watches|luxury|Mobile App / QSR,Jewelry & Watches,luxury,Mobile App / QSR,840.0,1.87,0.56,68.4,A,GREEN
+Jewelry & Watches|luxury|Omnichannel,Jewelry & Watches,luxury,Omnichannel,1050.0,1.04,0.56,22,D,RED
+Jewelry & Watches|luxury|Subscription,Jewelry & Watches,luxury,Subscription,945.0,2.08,0.56,71.0,A,GREEN
+Jewelry & Watches|standard|Big Box,Jewelry & Watches,standard,Big Box,350.0,1.3,0.5,53.8,B,GREEN
+Jewelry & Watches|standard|Boutique,Jewelry & Watches,standard,Boutique,420.0,1.04,0.5,22,D,RED
+Jewelry & Watches|standard|DTC Ecommerce,Jewelry & Watches,standard,DTC Ecommerce,350.0,1.3,0.5,53.8,B,GREEN
+Jewelry & Watches|standard|Department Store,Jewelry & Watches,standard,Department Store,385.0,1.17,0.5,22,D,RED
+Jewelry & Watches|standard|Marketplace,Jewelry & Watches,standard,Marketplace,315.0,1.43,0.5,55.4,B,GREEN
+Jewelry & Watches|standard|Mobile App / QSR,Jewelry & Watches,standard,Mobile App / QSR,280.0,2.34,0.5,66.8,A,GREEN
+Jewelry & Watches|standard|Omnichannel,Jewelry & Watches,standard,Omnichannel,350.0,1.3,0.5,53.8,B,GREEN
+Jewelry & Watches|standard|Subscription,Jewelry & Watches,standard,Subscription,315.0,2.6,0.5,70.0,A,GREEN
+Luggage & Travel|discount|Big Box,Luggage & Travel,discount,Big Box,156.0,1.44,0.45,49.3,C,MARGINAL
+Luggage & Travel|discount|Boutique,Luggage & Travel,discount,Boutique,187.2,1.15,0.45,22,D,RED
+Luggage & Travel|discount|DTC Ecommerce,Luggage & Travel,discount,DTC Ecommerce,156.0,1.44,0.45,49.3,C,MARGINAL
+Luggage & Travel|discount|Department Store,Luggage & Travel,discount,Department Store,171.6,1.3,0.45,47.5,C,MARGINAL
+Luggage & Travel|discount|Marketplace,Luggage & Travel,discount,Marketplace,140.4,1.58,0.45,51.0,B,GREEN
+Luggage & Travel|discount|Mobile App / QSR,Luggage & Travel,discount,Mobile App / QSR,124.8,2.59,0.45,63.6,B,GREEN
+Luggage & Travel|discount|Omnichannel,Luggage & Travel,discount,Omnichannel,156.0,1.44,0.45,49.3,C,MARGINAL
+Luggage & Travel|discount|Subscription,Luggage & Travel,discount,Subscription,140.4,2.88,0.45,67.2,A,GREEN
+Luggage & Travel|extreme_discount|Big Box,Luggage & Travel,extreme_discount,Big Box,104.0,1.74,0.4,46.8,C,MARGINAL
+Luggage & Travel|extreme_discount|Boutique,Luggage & Travel,extreme_discount,Boutique,124.8,1.39,0.4,42.4,C,MARGINAL
+Luggage & Travel|extreme_discount|DTC Ecommerce,Luggage & Travel,extreme_discount,DTC Ecommerce,104.0,1.74,0.4,46.8,C,MARGINAL
+Luggage & Travel|extreme_discount|Department Store,Luggage & Travel,extreme_discount,Department Store,114.4,1.57,0.4,44.6,C,MARGINAL
+Luggage & Travel|extreme_discount|Marketplace,Luggage & Travel,extreme_discount,Marketplace,93.6,1.91,0.4,48.9,C,MARGINAL
+Luggage & Travel|extreme_discount|Mobile App / QSR,Luggage & Travel,extreme_discount,Mobile App / QSR,83.2,3.13,0.4,64.1,B,GREEN
+Luggage & Travel|extreme_discount|Omnichannel,Luggage & Travel,extreme_discount,Omnichannel,104.0,1.74,0.4,46.8,C,MARGINAL
+Luggage & Travel|extreme_discount|Subscription,Luggage & Travel,extreme_discount,Subscription,93.6,3.48,0.4,68.5,A,GREEN
+Luggage & Travel|extreme_luxury|Big Box,Luggage & Travel,extreme_luxury,Big Box,3120.0,0.54,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Boutique,Luggage & Travel,extreme_luxury,Boutique,3744.0,0.43,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|DTC Ecommerce,Luggage & Travel,extreme_luxury,DTC Ecommerce,3120.0,0.54,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Department Store,Luggage & Travel,extreme_luxury,Department Store,3432.0,0.49,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Marketplace,Luggage & Travel,extreme_luxury,Marketplace,2808.0,0.59,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Mobile App / QSR,Luggage & Travel,extreme_luxury,Mobile App / QSR,2496.0,0.97,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Omnichannel,Luggage & Travel,extreme_luxury,Omnichannel,3120.0,0.54,0.6,22,D,RED
+Luggage & Travel|extreme_luxury|Subscription,Luggage & Travel,extreme_luxury,Subscription,2808.0,1.08,0.6,22,D,RED
+Luggage & Travel|luxury|Big Box,Luggage & Travel,luxury,Big Box,780.0,0.96,0.56,22,D,RED
+Luggage & Travel|luxury|Boutique,Luggage & Travel,luxury,Boutique,936.0,0.77,0.56,22,D,RED
+Luggage & Travel|luxury|DTC Ecommerce,Luggage & Travel,luxury,DTC Ecommerce,780.0,0.96,0.56,22,D,RED
+Luggage & Travel|luxury|Department Store,Luggage & Travel,luxury,Department Store,858.0,0.86,0.56,22,D,RED
+Luggage & Travel|luxury|Marketplace,Luggage & Travel,luxury,Marketplace,702.0,1.06,0.56,22,D,RED
+Luggage & Travel|luxury|Mobile App / QSR,Luggage & Travel,luxury,Mobile App / QSR,624.0,1.73,0.56,66.6,A,GREEN
+Luggage & Travel|luxury|Omnichannel,Luggage & Travel,luxury,Omnichannel,780.0,0.96,0.56,22,D,RED
+Luggage & Travel|luxury|Subscription,Luggage & Travel,luxury,Subscription,702.0,1.92,0.56,69.0,A,GREEN
+Luggage & Travel|standard|Big Box,Luggage & Travel,standard,Big Box,260.0,1.2,0.5,22,D,RED
+Luggage & Travel|standard|Boutique,Luggage & Travel,standard,Boutique,312.0,0.96,0.5,22,D,RED
+Luggage & Travel|standard|DTC Ecommerce,Luggage & Travel,standard,DTC Ecommerce,260.0,1.2,0.5,22,D,RED
+Luggage & Travel|standard|Department Store,Luggage & Travel,standard,Department Store,286.0,1.08,0.5,22,D,RED
+Luggage & Travel|standard|Marketplace,Luggage & Travel,standard,Marketplace,234.0,1.32,0.5,54.0,B,GREEN
+Luggage & Travel|standard|Mobile App / QSR,Luggage & Travel,standard,Mobile App / QSR,208.0,2.16,0.5,64.5,B,GREEN
+Luggage & Travel|standard|Omnichannel,Luggage & Travel,standard,Omnichannel,260.0,1.2,0.5,22,D,RED
+Luggage & Travel|standard|Subscription,Luggage & Travel,standard,Subscription,234.0,2.4,0.5,67.5,A,GREEN
+Pet Care|discount|Big Box,Pet Care,discount,Big Box,39.0,7.44,0.35,61.7,B,GREEN
+Pet Care|discount|Boutique,Pet Care,discount,Boutique,46.8,5.95,0.35,64.3,B,GREEN
+Pet Care|discount|DTC Ecommerce,Pet Care,discount,DTC Ecommerce,39.0,7.44,0.35,61.7,B,GREEN
+Pet Care|discount|Department Store,Pet Care,discount,Department Store,42.9,6.7,0.35,63.0,B,GREEN
+Pet Care|discount|Marketplace,Pet Care,discount,Marketplace,35.1,8.18,0.35,60.4,B,GREEN
+Pet Care|discount|Mobile App / QSR,Pet Care,discount,Mobile App / QSR,31.2,13.39,0.35,59.1,B,GREEN
+Pet Care|discount|Omnichannel,Pet Care,discount,Omnichannel,39.0,7.44,0.35,61.7,B,GREEN
+Pet Care|discount|Subscription,Pet Care,discount,Subscription,35.1,14.88,0.35,60.4,B,GREEN
+Pet Care|extreme_discount|Big Box,Pet Care,extreme_discount,Big Box,26.0,8.99,0.3,51.2,B,GREEN
+Pet Care|extreme_discount|Boutique,Pet Care,extreme_discount,Boutique,31.2,7.19,0.3,52.9,B,GREEN
+Pet Care|extreme_discount|DTC Ecommerce,Pet Care,extreme_discount,DTC Ecommerce,26.0,8.99,0.3,51.2,B,GREEN
+Pet Care|extreme_discount|Department Store,Pet Care,extreme_discount,Department Store,28.6,8.09,0.3,52.0,B,GREEN
+Pet Care|extreme_discount|Marketplace,Pet Care,extreme_discount,Marketplace,23.4,9.89,0.3,50.3,B,GREEN
+Pet Care|extreme_discount|Mobile App / QSR,Pet Care,extreme_discount,Mobile App / QSR,20.8,16.18,0.3,49.4,C,MARGINAL
+Pet Care|extreme_discount|Omnichannel,Pet Care,extreme_discount,Omnichannel,26.0,8.99,0.3,51.2,B,GREEN
+Pet Care|extreme_discount|Subscription,Pet Care,extreme_discount,Subscription,23.4,17.98,0.3,50.3,B,GREEN
+Pet Care|extreme_luxury|Big Box,Pet Care,extreme_luxury,Big Box,780.0,2.79,0.5,72.4,A,GREEN
+Pet Care|extreme_luxury|Boutique,Pet Care,extreme_luxury,Boutique,936.0,2.23,0.5,65.4,A,GREEN
+Pet Care|extreme_luxury|DTC Ecommerce,Pet Care,extreme_luxury,DTC Ecommerce,780.0,2.79,0.5,72.4,A,GREEN
+Pet Care|extreme_luxury|Department Store,Pet Care,extreme_luxury,Department Store,858.0,2.51,0.5,68.9,A,GREEN
+Pet Care|extreme_luxury|Marketplace,Pet Care,extreme_luxury,Marketplace,702.0,3.07,0.5,75.9,A,GREEN
+Pet Care|extreme_luxury|Mobile App / QSR,Pet Care,extreme_luxury,Mobile App / QSR,624.0,5.02,0.5,87.5,A,GREEN
+Pet Care|extreme_luxury|Omnichannel,Pet Care,extreme_luxury,Omnichannel,780.0,2.79,0.5,72.4,A,GREEN
+Pet Care|extreme_luxury|Subscription,Pet Care,extreme_luxury,Subscription,702.0,5.58,0.5,87.5,A,GREEN
+Pet Care|luxury|Big Box,Pet Care,luxury,Big Box,195.0,4.96,0.46,82.5,A,GREEN
+Pet Care|luxury|Boutique,Pet Care,luxury,Boutique,234.0,3.97,0.46,82.1,A,GREEN
+Pet Care|luxury|DTC Ecommerce,Pet Care,luxury,DTC Ecommerce,195.0,4.96,0.46,82.5,A,GREEN
+Pet Care|luxury|Department Store,Pet Care,luxury,Department Store,214.5,4.46,0.46,82.5,A,GREEN
+Pet Care|luxury|Marketplace,Pet Care,luxury,Marketplace,175.5,5.46,0.46,82.5,A,GREEN
+Pet Care|luxury|Mobile App / QSR,Pet Care,luxury,Mobile App / QSR,156.0,8.93,0.46,82.5,A,GREEN
+Pet Care|luxury|Omnichannel,Pet Care,luxury,Omnichannel,195.0,4.96,0.46,82.5,A,GREEN
+Pet Care|luxury|Subscription,Pet Care,luxury,Subscription,175.5,9.92,0.46,82.5,A,GREEN
+Pet Care|standard|Big Box,Pet Care,standard,Big Box,65.0,6.2,0.4,75.0,A,GREEN
+Pet Care|standard|Boutique,Pet Care,standard,Boutique,78.0,4.96,0.4,75.0,A,GREEN
+Pet Care|standard|DTC Ecommerce,Pet Care,standard,DTC Ecommerce,65.0,6.2,0.4,75.0,A,GREEN
+Pet Care|standard|Department Store,Pet Care,standard,Department Store,71.5,5.58,0.4,75.0,A,GREEN
+Pet Care|standard|Marketplace,Pet Care,standard,Marketplace,58.5,6.82,0.4,74.5,A,GREEN
+Pet Care|standard|Mobile App / QSR,Pet Care,standard,Mobile App / QSR,52.0,11.16,0.4,72.3,A,GREEN
+Pet Care|standard|Omnichannel,Pet Care,standard,Omnichannel,65.0,6.2,0.4,75.0,A,GREEN
+Pet Care|standard|Subscription,Pet Care,standard,Subscription,58.5,12.4,0.4,74.5,A,GREEN
+QSR / Coffee|discount|Big Box,QSR / Coffee,discount,Big Box,6.6,50.4,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Boutique,QSR / Coffee,discount,Boutique,7.92,40.32,0.61,85.0,A,GREEN
+QSR / Coffee|discount|DTC Ecommerce,QSR / Coffee,discount,DTC Ecommerce,6.6,50.4,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Department Store,QSR / Coffee,discount,Department Store,7.26,45.36,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Marketplace,QSR / Coffee,discount,Marketplace,5.94,55.44,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Mobile App / QSR,QSR / Coffee,discount,Mobile App / QSR,5.28,90.72,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Omnichannel,QSR / Coffee,discount,Omnichannel,6.6,50.4,0.61,85.0,A,GREEN
+QSR / Coffee|discount|Subscription,QSR / Coffee,discount,Subscription,5.94,100.8,0.61,85.0,A,GREEN
+QSR / Coffee|extreme_discount|Big Box,QSR / Coffee,extreme_discount,Big Box,4.4,60.9,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Boutique,QSR / Coffee,extreme_discount,Boutique,5.28,48.72,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|DTC Ecommerce,QSR / Coffee,extreme_discount,DTC Ecommerce,4.4,60.9,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Department Store,QSR / Coffee,extreme_discount,Department Store,4.84,54.81,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Marketplace,QSR / Coffee,extreme_discount,Marketplace,3.96,66.99,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Mobile App / QSR,QSR / Coffee,extreme_discount,Mobile App / QSR,3.52,109.62,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Omnichannel,QSR / Coffee,extreme_discount,Omnichannel,4.4,60.9,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_discount|Subscription,QSR / Coffee,extreme_discount,Subscription,3.96,121.8,0.56,80.0,A,GREEN
+QSR / Coffee|extreme_luxury|Big Box,QSR / Coffee,extreme_luxury,Big Box,132.0,18.9,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Boutique,QSR / Coffee,extreme_luxury,Boutique,158.4,15.12,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|DTC Ecommerce,QSR / Coffee,extreme_luxury,DTC Ecommerce,132.0,18.9,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Department Store,QSR / Coffee,extreme_luxury,Department Store,145.2,17.01,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Marketplace,QSR / Coffee,extreme_luxury,Marketplace,118.8,20.79,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Mobile App / QSR,QSR / Coffee,extreme_luxury,Mobile App / QSR,105.6,34.02,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Omnichannel,QSR / Coffee,extreme_luxury,Omnichannel,132.0,18.9,0.76,100.0,A,GREEN
+QSR / Coffee|extreme_luxury|Subscription,QSR / Coffee,extreme_luxury,Subscription,118.8,37.8,0.76,100.0,A,GREEN
+QSR / Coffee|luxury|Big Box,QSR / Coffee,luxury,Big Box,33.0,33.6,0.72,91.0,A,GREEN
+QSR / Coffee|luxury|Boutique,QSR / Coffee,luxury,Boutique,39.6,26.88,0.72,93.2,A,GREEN
+QSR / Coffee|luxury|DTC Ecommerce,QSR / Coffee,luxury,DTC Ecommerce,33.0,33.6,0.72,91.0,A,GREEN
+QSR / Coffee|luxury|Department Store,QSR / Coffee,luxury,Department Store,36.3,30.24,0.72,92.1,A,GREEN
+QSR / Coffee|luxury|Marketplace,QSR / Coffee,luxury,Marketplace,29.7,36.96,0.72,89.9,A,GREEN
+QSR / Coffee|luxury|Mobile App / QSR,QSR / Coffee,luxury,Mobile App / QSR,26.4,60.48,0.72,88.8,A,GREEN
+QSR / Coffee|luxury|Omnichannel,QSR / Coffee,luxury,Omnichannel,33.0,33.6,0.72,91.0,A,GREEN
+QSR / Coffee|luxury|Subscription,QSR / Coffee,luxury,Subscription,29.7,67.2,0.72,89.9,A,GREEN
+QSR / Coffee|standard|Big Box,QSR / Coffee,standard,Big Box,11.0,42.0,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Boutique,QSR / Coffee,standard,Boutique,13.2,33.6,0.66,85.0,A,GREEN
+QSR / Coffee|standard|DTC Ecommerce,QSR / Coffee,standard,DTC Ecommerce,11.0,42.0,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Department Store,QSR / Coffee,standard,Department Store,12.1,37.8,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Marketplace,QSR / Coffee,standard,Marketplace,9.9,46.2,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Mobile App / QSR,QSR / Coffee,standard,Mobile App / QSR,8.8,75.6,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Omnichannel,QSR / Coffee,standard,Omnichannel,11.0,42.0,0.66,85.0,A,GREEN
+QSR / Coffee|standard|Subscription,QSR / Coffee,standard,Subscription,9.9,84.0,0.66,85.0,A,GREEN
+Sports & Outdoor|discount|Big Box,Sports & Outdoor,discount,Big Box,72.0,3.48,0.4,68.5,A,GREEN
+Sports & Outdoor|discount|Boutique,Sports & Outdoor,discount,Boutique,86.4,2.78,0.4,59.8,B,GREEN
+Sports & Outdoor|discount|DTC Ecommerce,Sports & Outdoor,discount,DTC Ecommerce,72.0,3.48,0.4,68.5,A,GREEN
+Sports & Outdoor|discount|Department Store,Sports & Outdoor,discount,Department Store,79.2,3.13,0.4,64.1,B,GREEN
+Sports & Outdoor|discount|Marketplace,Sports & Outdoor,discount,Marketplace,64.8,3.83,0.4,72.9,A,GREEN
+Sports & Outdoor|discount|Mobile App / QSR,Sports & Outdoor,discount,Mobile App / QSR,57.6,6.26,0.4,74.2,A,GREEN
+Sports & Outdoor|discount|Omnichannel,Sports & Outdoor,discount,Omnichannel,72.0,3.48,0.4,68.5,A,GREEN
+Sports & Outdoor|discount|Subscription,Sports & Outdoor,discount,Subscription,64.8,6.96,0.4,75.0,A,GREEN
+Sports & Outdoor|extreme_discount|Big Box,Sports & Outdoor,extreme_discount,Big Box,48.0,4.21,0.35,64.7,B,GREEN
+Sports & Outdoor|extreme_discount|Boutique,Sports & Outdoor,extreme_discount,Boutique,57.6,3.36,0.35,59.9,B,GREEN
+Sports & Outdoor|extreme_discount|DTC Ecommerce,Sports & Outdoor,extreme_discount,DTC Ecommerce,48.0,4.21,0.35,64.7,B,GREEN
+Sports & Outdoor|extreme_discount|Department Store,Sports & Outdoor,extreme_discount,Department Store,52.8,3.78,0.35,63.6,B,GREEN
+Sports & Outdoor|extreme_discount|Marketplace,Sports & Outdoor,extreme_discount,Marketplace,43.2,4.63,0.35,63.1,B,GREEN
+Sports & Outdoor|extreme_discount|Mobile App / QSR,Sports & Outdoor,extreme_discount,Mobile App / QSR,38.4,7.57,0.35,61.5,B,GREEN
+Sports & Outdoor|extreme_discount|Omnichannel,Sports & Outdoor,extreme_discount,Omnichannel,48.0,4.21,0.35,64.7,B,GREEN
+Sports & Outdoor|extreme_discount|Subscription,Sports & Outdoor,extreme_discount,Subscription,43.2,8.41,0.35,63.1,B,GREEN
+Sports & Outdoor|extreme_luxury|Big Box,Sports & Outdoor,extreme_luxury,Big Box,1440.0,1.3,0.55,60.0,B,GREEN
+Sports & Outdoor|extreme_luxury|Boutique,Sports & Outdoor,extreme_luxury,Boutique,1728.0,1.04,0.55,22,D,RED
+Sports & Outdoor|extreme_luxury|DTC Ecommerce,Sports & Outdoor,extreme_luxury,DTC Ecommerce,1440.0,1.3,0.55,60.0,B,GREEN
+Sports & Outdoor|extreme_luxury|Department Store,Sports & Outdoor,extreme_luxury,Department Store,1584.0,1.17,0.55,22,D,RED
+Sports & Outdoor|extreme_luxury|Marketplace,Sports & Outdoor,extreme_luxury,Marketplace,1296.0,1.44,0.55,61.8,B,GREEN
+Sports & Outdoor|extreme_luxury|Mobile App / QSR,Sports & Outdoor,extreme_luxury,Mobile App / QSR,1152.0,2.35,0.55,73.1,A,GREEN
+Sports & Outdoor|extreme_luxury|Omnichannel,Sports & Outdoor,extreme_luxury,Omnichannel,1440.0,1.3,0.55,60.0,B,GREEN
+Sports & Outdoor|extreme_luxury|Subscription,Sports & Outdoor,extreme_luxury,Subscription,1296.0,2.61,0.55,76.4,A,GREEN
+Sports & Outdoor|luxury|Big Box,Sports & Outdoor,luxury,Big Box,360.0,2.32,0.51,67.8,A,GREEN
+Sports & Outdoor|luxury|Boutique,Sports & Outdoor,luxury,Boutique,432.0,1.86,0.51,62.0,B,GREEN
+Sports & Outdoor|luxury|DTC Ecommerce,Sports & Outdoor,luxury,DTC Ecommerce,360.0,2.32,0.51,67.8,A,GREEN
+Sports & Outdoor|luxury|Department Store,Sports & Outdoor,luxury,Department Store,396.0,2.09,0.51,64.9,B,GREEN
+Sports & Outdoor|luxury|Marketplace,Sports & Outdoor,luxury,Marketplace,324.0,2.55,0.51,70.6,A,GREEN
+Sports & Outdoor|luxury|Mobile App / QSR,Sports & Outdoor,luxury,Mobile App / QSR,288.0,4.18,0.51,88.8,A,GREEN
+Sports & Outdoor|luxury|Omnichannel,Sports & Outdoor,luxury,Omnichannel,360.0,2.32,0.51,67.8,A,GREEN
+Sports & Outdoor|luxury|Subscription,Sports & Outdoor,luxury,Subscription,324.0,4.64,0.51,88.8,A,GREEN
+Sports & Outdoor|standard|Big Box,Sports & Outdoor,standard,Big Box,120.0,2.9,0.45,67.5,A,GREEN
+Sports & Outdoor|standard|Boutique,Sports & Outdoor,standard,Boutique,144.0,2.32,0.45,60.2,B,GREEN
+Sports & Outdoor|standard|DTC Ecommerce,Sports & Outdoor,standard,DTC Ecommerce,120.0,2.9,0.45,67.5,A,GREEN
+Sports & Outdoor|standard|Department Store,Sports & Outdoor,standard,Department Store,132.0,2.61,0.45,63.9,B,GREEN
+Sports & Outdoor|standard|Marketplace,Sports & Outdoor,standard,Marketplace,108.0,3.19,0.45,71.1,A,GREEN
+Sports & Outdoor|standard|Mobile App / QSR,Sports & Outdoor,standard,Mobile App / QSR,96.0,5.22,0.45,81.2,A,GREEN
+Sports & Outdoor|standard|Omnichannel,Sports & Outdoor,standard,Omnichannel,120.0,2.9,0.45,67.5,A,GREEN
+Sports & Outdoor|standard|Subscription,Sports & Outdoor,standard,Subscription,108.0,5.8,0.45,81.2,A,GREEN
+Toys & Hobbies|discount|Big Box,Toys & Hobbies,discount,Big Box,33.0,4.08,0.37,62.3,B,GREEN
+Toys & Hobbies|discount|Boutique,Toys & Hobbies,discount,Boutique,39.6,3.26,0.37,55.2,B,GREEN
+Toys & Hobbies|discount|DTC Ecommerce,Toys & Hobbies,discount,DTC Ecommerce,33.0,4.08,0.37,62.3,B,GREEN
+Toys & Hobbies|discount|Department Store,Toys & Hobbies,discount,Department Store,36.3,3.67,0.37,59.2,B,GREEN
+Toys & Hobbies|discount|Marketplace,Toys & Hobbies,discount,Marketplace,29.7,4.49,0.37,61.2,B,GREEN
+Toys & Hobbies|discount|Mobile App / QSR,Toys & Hobbies,discount,Mobile App / QSR,26.4,7.34,0.37,60.1,B,GREEN
+Toys & Hobbies|discount|Omnichannel,Toys & Hobbies,discount,Omnichannel,33.0,4.08,0.37,62.3,B,GREEN
+Toys & Hobbies|discount|Subscription,Toys & Hobbies,discount,Subscription,29.7,8.16,0.37,61.2,B,GREEN
+Toys & Hobbies|extreme_discount|Big Box,Toys & Hobbies,extreme_discount,Big Box,22.0,4.93,0.32,52.3,B,GREEN
+Toys & Hobbies|extreme_discount|Boutique,Toys & Hobbies,extreme_discount,Boutique,26.4,3.94,0.32,53.1,B,GREEN
+Toys & Hobbies|extreme_discount|DTC Ecommerce,Toys & Hobbies,extreme_discount,DTC Ecommerce,22.0,4.93,0.32,52.3,B,GREEN
+Toys & Hobbies|extreme_discount|Department Store,Toys & Hobbies,extreme_discount,Department Store,24.2,4.44,0.32,53.1,B,GREEN
+Toys & Hobbies|extreme_discount|Marketplace,Toys & Hobbies,extreme_discount,Marketplace,19.8,5.42,0.32,28,D,RED
+Toys & Hobbies|extreme_discount|Mobile App / QSR,Toys & Hobbies,extreme_discount,Mobile App / QSR,17.6,8.87,0.32,50.9,B,GREEN
+Toys & Hobbies|extreme_discount|Omnichannel,Toys & Hobbies,extreme_discount,Omnichannel,22.0,4.93,0.32,52.3,B,GREEN
+Toys & Hobbies|extreme_discount|Subscription,Toys & Hobbies,extreme_discount,Subscription,19.8,9.86,0.32,51.6,B,GREEN
+Toys & Hobbies|extreme_luxury|Big Box,Toys & Hobbies,extreme_luxury,Big Box,660.0,1.53,0.52,59.1,B,GREEN
+Toys & Hobbies|extreme_luxury|Boutique,Toys & Hobbies,extreme_luxury,Boutique,792.0,1.22,0.52,22,D,RED
+Toys & Hobbies|extreme_luxury|DTC Ecommerce,Toys & Hobbies,extreme_luxury,DTC Ecommerce,660.0,1.53,0.52,59.1,B,GREEN
+Toys & Hobbies|extreme_luxury|Department Store,Toys & Hobbies,extreme_luxury,Department Store,726.0,1.38,0.52,57.2,B,GREEN
+Toys & Hobbies|extreme_luxury|Marketplace,Toys & Hobbies,extreme_luxury,Marketplace,594.0,1.68,0.52,61.0,B,GREEN
+Toys & Hobbies|extreme_luxury|Mobile App / QSR,Toys & Hobbies,extreme_luxury,Mobile App / QSR,528.0,2.75,0.52,74.4,A,GREEN
+Toys & Hobbies|extreme_luxury|Omnichannel,Toys & Hobbies,extreme_luxury,Omnichannel,660.0,1.53,0.52,59.1,B,GREEN
+Toys & Hobbies|extreme_luxury|Subscription,Toys & Hobbies,extreme_luxury,Subscription,594.0,3.06,0.52,78.2,A,GREEN
+Toys & Hobbies|luxury|Big Box,Toys & Hobbies,luxury,Big Box,165.0,2.72,0.48,69.0,A,GREEN
+Toys & Hobbies|luxury|Boutique,Toys & Hobbies,luxury,Boutique,198.0,2.18,0.48,62.2,B,GREEN
+Toys & Hobbies|luxury|DTC Ecommerce,Toys & Hobbies,luxury,DTC Ecommerce,165.0,2.72,0.48,69.0,A,GREEN
+Toys & Hobbies|luxury|Department Store,Toys & Hobbies,luxury,Department Store,181.5,2.45,0.48,65.6,A,GREEN
+Toys & Hobbies|luxury|Marketplace,Toys & Hobbies,luxury,Marketplace,148.5,2.99,0.48,72.4,A,GREEN
+Toys & Hobbies|luxury|Mobile App / QSR,Toys & Hobbies,luxury,Mobile App / QSR,132.0,4.9,0.48,85.0,A,GREEN
+Toys & Hobbies|luxury|Omnichannel,Toys & Hobbies,luxury,Omnichannel,165.0,2.72,0.48,69.0,A,GREEN
+Toys & Hobbies|luxury|Subscription,Toys & Hobbies,luxury,Subscription,148.5,5.44,0.48,85.0,A,GREEN
+Toys & Hobbies|standard|Big Box,Toys & Hobbies,standard,Big Box,55.0,3.4,0.42,68.3,A,GREEN
+Toys & Hobbies|standard|Boutique,Toys & Hobbies,standard,Boutique,66.0,2.72,0.42,61.5,B,GREEN
+Toys & Hobbies|standard|DTC Ecommerce,Toys & Hobbies,standard,DTC Ecommerce,55.0,3.4,0.42,68.3,A,GREEN
+Toys & Hobbies|standard|Department Store,Toys & Hobbies,standard,Department Store,60.5,3.06,0.42,65.8,A,GREEN
+Toys & Hobbies|standard|Marketplace,Toys & Hobbies,standard,Marketplace,49.5,3.74,0.42,70.8,A,GREEN
+Toys & Hobbies|standard|Mobile App / QSR,Toys & Hobbies,standard,Mobile App / QSR,44.0,6.12,0.42,72.2,A,GREEN
+Toys & Hobbies|standard|Omnichannel,Toys & Hobbies,standard,Omnichannel,55.0,3.4,0.42,68.3,A,GREEN
+Toys & Hobbies|standard|Subscription,Toys & Hobbies,standard,Subscription,49.5,6.8,0.42,74.0,A,GREEN
