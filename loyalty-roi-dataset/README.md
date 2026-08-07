@@ -41,13 +41,13 @@ cut, e.g., everyone above the 75th percentile regardless of the absolute number.
 
 ### 1. Score the curated sample (Python)
 ```bash
-python3 seed_companies.py    # build companies.csv (125 real brands)
+python3 seed_companies.py    # build companies.csv (211 real brands)
 python3 score.py             # -> companies_scored.csv, ranked, with fit score
 ```
 
 ### 2. Score YOUR CRM at scale (Excel)
 ```bash
-python3 build_lookup.py      # -> benchmark_lookup.csv (full 640-combo grid)
+python3 build_lookup.py      # -> benchmark_lookup.csv (full 1,400-combo grid)
 ```
 Then, for each CRM row, classify the three public fields you can infer from
 firmographics / website / industry code, build a key
@@ -63,17 +63,38 @@ supplies it.
 | File | What it is |
 |---|---|
 | `benchmarks.py` | The model: sector/segment/channel tables + `estimate()` and `loyalty_fit()`. Every constant commented and tunable. |
-| `seed_companies.py` → `companies.csv` | 125 curated real brands (public fields only). Add rows to extend. |
+| `seed_companies.py` → `companies.csv` | 211 curated real brands (public fields only). Add rows to extend. |
 | `score.py` → `companies_scored.csv` | Enriched + fit-scored + percentile-ranked. |
 | `build_lookup.py` → `benchmark_lookup.csv` | Full sector×segment×channel grid — the Excel VLOOKUP/XLOOKUP table for CRM triage. |
+| `classify.py` | Best-effort industry-text → sector guesser, to self-map a raw CRM export. |
 | `SOURCES.md` | Benchmark provenance and honesty notes. **Read before quoting.** |
 
-## Valid classification values
+## Auto-classifying a raw CRM
 
-- **sector**: keys in `SECTOR_BASE` (Apparel & Accessories, Footwear, Beauty &
-  Personal Care, Consumer Electronics, Home & Garden, Home / Mattress, Grocery,
-  QSR / Coffee, Health & Supplements, Pet Care, Sports & Outdoor, Toys &
-  Hobbies, Jewelry & Watches, Eyewear, General Merchandise, Luggage & Travel)
+`classify.py` maps a free-text industry label / SIC-NAICS description to a sector
+so you don't hand-tag thousands of rows:
+
+```bash
+python3 classify.py my_crm.csv industry > my_crm_mapped.csv   # adds guessed_sector
+```
+It matches at word starts and returns blank for anything it can't place (route
+those to manual review). It only guesses **sector** — the field a raw industry
+code maps to reliably; **value_segment** and **sales_channel** still need your eye
+(a $40 tee and a $4,000 gown are both "Apparel", and that's the whole point of
+the segment split).
+
+## Valid classification values (36 sectors)
+
+- **sector**: Apparel & Accessories, Footwear, Beauty & Personal Care, Consumer
+  Electronics, Home & Garden, Home / Mattress, Grocery, QSR / Coffee, Health &
+  Supplements, Pet Care, Sports & Outdoor, Toys & Hobbies, Jewelry & Watches,
+  Eyewear, General Merchandise, Luggage & Travel, Auto Parts & Accessories,
+  Automotive Service & Tires, Appliances, Furniture & Home Furnishings, Home
+  Improvement & Hardware, Office Supplies, Books & Media, Music & Instruments,
+  Craft & Hobby, Drug & Pharmacy, Convenience & Gas, Wine Beer & Spirits, Baby &
+  Kids, Florist & Gifts, Casual Dining, Fitness & Gym, Digital Subscription /
+  Streaming, Hotel / Lodging, Airline / Travel _(margin-funded fit; see
+  SOURCES.md notes 5–6 for airline & subscription caveats)_
 - **value_segment**: extreme_luxury, luxury, standard, discount, extreme_discount
 - **sales_channel**: Omnichannel, DTC Ecommerce, Marketplace, Mobile App / QSR,
   Big Box, Department Store, Subscription, Boutique

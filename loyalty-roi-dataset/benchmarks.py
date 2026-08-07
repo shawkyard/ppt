@@ -61,6 +61,27 @@ SECTOR_BASE = {
     "Eyewear":                SectorBase(140, 1.6, 0.60),
     "General Merchandise":    SectorBase(85,  16.0, 0.25),
     "Luggage & Travel":       SectorBase(260, 1.2, 0.50),
+    # --- widened coverage: the thin-margin / high-frequency verticals that
+    #     dominate a real B2C CRM. Margins still Damodaran-anchored (US). ---
+    "Auto Parts & Accessories":     SectorBase(70,  2.6, 0.45),
+    "Automotive Service & Tires":   SectorBase(180, 2.2, 0.45),
+    "Appliances":                   SectorBase(600, 0.8, 0.25),  # big-ticket, rare
+    "Furniture & Home Furnishings": SectorBase(500, 1.4, 0.42),
+    "Home Improvement & Hardware":  SectorBase(70,  5.0, 0.34),
+    "Office Supplies":              SectorBase(85,  4.5, 0.30),
+    "Books & Media":                SectorBase(35,  4.5, 0.40),
+    "Music & Instruments":          SectorBase(120, 2.0, 0.35),
+    "Craft & Hobby":                SectorBase(45,  4.0, 0.42),
+    "Drug & Pharmacy":              SectorBase(35,  14.0, 0.22), # thin + high freq
+    "Convenience & Gas":            SectorBase(12,  30.0, 0.30),
+    "Wine, Beer & Spirits":         SectorBase(55,  8.0, 0.30),
+    "Baby & Kids":                  SectorBase(60,  6.0, 0.45),
+    "Florist & Gifts":              SectorBase(60,  2.6, 0.50),
+    "Casual Dining":                SectorBase(42,  10.0, 0.63),
+    "Fitness & Gym":                SectorBase(6,   6.0, 0.70),  # base x subscription
+    "Digital Subscription / Streaming": SectorBase(6, 6.0, 0.65),
+    "Hotel / Lodging":              SectorBase(250, 3.0, 0.68),
+    "Airline / Travel":             SectorBase(380, 2.6, 0.16),  # margin-thin; see note
 }
 
 

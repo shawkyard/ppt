@@ -1,126 +1,212 @@
 company,sector,value_segment,sales_channel,region,approx_annual_rev_musd,est_aov_usd,est_purchase_freq_yr,est_gross_margin,loyalty_fit_score,fit_percentile,fit_tier,expected_outcome,illustrative_net_profit_musd,illustrative_roi_pct
-Ulta Beauty,Beauty & Personal Care,standard,Omnichannel,US,11200,65.0,3.6,0.62,95.0,96.0,A,GREEN,423.36,99.1
-Bath & Body Works,Beauty & Personal Care,standard,Omnichannel,US,7400,65.0,3.6,0.62,95.0,96.8,A,GREEN,279.72,99.1
-The Body Shop,Beauty & Personal Care,standard,Omnichannel,EU,1000,65.0,3.6,0.62,95.0,97.6,A,GREEN,37.8,99.1
-Glossier,Beauty & Personal Care,standard,DTC Ecommerce,US,275,65.0,3.6,0.62,95.0,98.4,A,GREEN,10.4,99.1
-Fenty Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,600,65.0,3.6,0.62,95.0,99.2,A,GREEN,22.68,99.1
-Rare Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,350,65.0,3.6,0.62,95.0,100.0,A,GREEN,13.23,99.1
-GNC,Health & Supplements,standard,Omnichannel,US,2000,60.0,5.2,0.55,93.8,93.6,A,GREEN,58.45,76.6
-Vitamin Shoppe,Health & Supplements,standard,Omnichannel,US,1100,60.0,5.2,0.55,93.8,94.4,A,GREEN,32.15,76.6
-iHerb,Health & Supplements,standard,DTC Ecommerce,US,2000,60.0,5.2,0.55,93.8,95.2,A,GREEN,58.45,76.6
-Ritual,Health & Supplements,standard,Subscription,US,100,54.0,10.4,0.55,91.8,92.8,A,GREEN,2.92,76.6
-Sally Beauty,Beauty & Personal Care,discount,Omnichannel,US,3700,39.0,4.32,0.57,89.2,89.6,A,GREEN,117.2,83.0
-e.l.f. Beauty,Beauty & Personal Care,discount,Omnichannel,US,1000,39.0,4.32,0.57,89.2,90.4,A,GREEN,31.68,83.0
-NYX,Beauty & Personal Care,discount,Omnichannel,US,600,39.0,4.32,0.57,89.2,91.2,A,GREEN,19.01,83.0
-Maybelline,Beauty & Personal Care,discount,Omnichannel,US,2000,39.0,4.32,0.57,89.2,92.0,A,GREEN,63.35,83.0
-Under Armour,Apparel & Accessories,standard,Omnichannel,US,5700,90.0,3.5,0.54,86.2,84.8,A,GREEN,159.6,73.4
-Levi's,Apparel & Accessories,standard,Omnichannel,US,6200,90.0,3.5,0.54,86.2,85.6,A,GREEN,173.6,73.4
-Gap,Apparel & Accessories,standard,Omnichannel,US,15000,90.0,3.5,0.54,86.2,86.4,A,GREEN,420.0,73.4
-Uniqlo,Apparel & Accessories,standard,Omnichannel,APAC,20000,90.0,3.5,0.54,86.2,87.2,A,GREEN,560.0,73.4
-Zara,Apparel & Accessories,standard,Omnichannel,EU,30000,90.0,3.5,0.54,86.2,88.0,A,GREEN,840.0,73.4
-Bombas,Apparel & Accessories,standard,DTC Ecommerce,US,300,90.0,3.5,0.54,86.2,88.8,A,GREEN,8.4,73.4
-Sephora,Beauty & Personal Care,luxury,Omnichannel,US,15000,195.0,2.88,0.68,86.0,80.0,A,GREEN,677.25,118.3
-Estée Lauder,Beauty & Personal Care,luxury,Omnichannel,US,15600,195.0,2.88,0.68,86.0,80.8,A,GREEN,704.34,118.3
-La Mer,Beauty & Personal Care,luxury,DTC Ecommerce,US,2000,195.0,2.88,0.68,86.0,81.6,A,GREEN,90.3,118.3
-Jo Malone London,Beauty & Personal Care,luxury,Omnichannel,EU,600,195.0,2.88,0.68,86.0,82.4,A,GREEN,27.09,118.3
-Diptyque,Beauty & Personal Care,luxury,DTC Ecommerce,EU,350,195.0,2.88,0.68,86.0,83.2,A,GREEN,15.8,118.3
-Aesop,Beauty & Personal Care,luxury,Omnichannel,AU,550,195.0,2.88,0.68,86.0,84.0,A,GREEN,24.83,118.3
-Ralph Lauren,Apparel & Accessories,luxury,Omnichannel,US,6600,270.0,2.8,0.6,85.0,68.8,A,GREEN,233.31,92.7
-Burberry,Apparel & Accessories,luxury,Omnichannel,EU,3500,270.0,2.8,0.6,85.0,69.6,A,GREEN,123.73,92.7
-Coach,Apparel & Accessories,luxury,Omnichannel,US,5100,270.0,2.8,0.6,85.0,70.4,A,GREEN,180.29,92.7
-Michael Kors,Apparel & Accessories,luxury,Omnichannel,US,4000,270.0,2.8,0.6,85.0,71.2,A,GREEN,141.4,92.7
-Tory Burch,Apparel & Accessories,luxury,Omnichannel,US,2000,270.0,2.8,0.6,85.0,72.0,A,GREEN,70.7,92.7
-Kate Spade,Apparel & Accessories,luxury,Omnichannel,US,1400,270.0,2.8,0.6,85.0,72.8,A,GREEN,49.49,92.7
-Theory,Apparel & Accessories,luxury,DTC Ecommerce,US,600,270.0,2.8,0.6,85.0,73.6,A,GREEN,21.21,92.7
-Lululemon,Apparel & Accessories,luxury,Omnichannel,CA,10000,270.0,2.8,0.6,85.0,74.4,A,GREEN,353.5,92.7
-Starbucks,QSR / Coffee,standard,Mobile App / QSR,US,36000,8.8,75.6,0.66,85.0,75.2,A,GREEN,1537.2,111.9
-McDonald's,QSR / Coffee,standard,Mobile App / QSR,US,25000,8.8,75.6,0.66,85.0,76.0,A,GREEN,1067.5,111.9
-Chipotle,QSR / Coffee,standard,Mobile App / QSR,US,10000,8.8,75.6,0.66,85.0,76.8,A,GREEN,427.0,111.9
-Panera Bread,QSR / Coffee,standard,Mobile App / QSR,US,6000,8.8,75.6,0.66,85.0,77.6,A,GREEN,256.2,111.9
-Domino's Pizza,QSR / Coffee,standard,Mobile App / QSR,US,4500,8.8,75.6,0.66,85.0,78.4,A,GREEN,192.15,111.9
-Sweetgreen,QSR / Coffee,standard,Mobile App / QSR,US,600,8.8,75.6,0.66,85.0,79.2,A,GREEN,25.62,111.9
-H&M,Apparel & Accessories,discount,Omnichannel,EU,22000,54.0,4.2,0.49,84.2,62.4,A,GREEN,481.25,57.3
-Old Navy,Apparel & Accessories,discount,Omnichannel,US,8000,54.0,4.2,0.49,84.2,63.2,A,GREEN,175.0,57.3
-Forever 21,Apparel & Accessories,discount,Omnichannel,US,2000,54.0,4.2,0.49,84.2,64.0,A,GREEN,43.75,57.3
-Primark,Apparel & Accessories,discount,Big Box,EU,10000,54.0,4.2,0.49,84.2,64.8,A,GREEN,218.75,57.3
-Uniqlo GU,Apparel & Accessories,discount,Omnichannel,APAC,2500,54.0,4.2,0.49,84.2,65.6,A,GREEN,54.69,57.3
-TJ Maxx,Apparel & Accessories,discount,Big Box,US,50000,54.0,4.2,0.49,84.2,66.4,A,GREEN,1093.75,57.3
-Ross Stores,Apparel & Accessories,discount,Big Box,US,20000,54.0,4.2,0.49,84.2,67.2,A,GREEN,437.5,57.3
-Marshalls,Apparel & Accessories,discount,Big Box,US,12000,54.0,4.2,0.49,84.2,68.0,A,GREEN,262.5,57.3
-ASOS,Apparel & Accessories,discount,Marketplace,EU,4000,48.6,4.62,0.49,82.4,60.8,A,GREEN,87.5,57.3
-Boohoo,Apparel & Accessories,discount,Marketplace,EU,1900,48.6,4.62,0.49,82.4,61.6,A,GREEN,41.56,57.3
-Macy's,Apparel & Accessories,standard,Department Store,US,23000,99.0,3.15,0.54,81.9,60.0,A,GREEN,644.0,73.4
-Nordstrom,Apparel & Accessories,luxury,Department Store,US,15000,297.0,2.52,0.6,81.5,57.6,A,GREEN,530.25,92.7
-Saks Fifth Avenue,Apparel & Accessories,luxury,Department Store,US,3000,297.0,2.52,0.6,81.5,58.4,A,GREEN,106.05,92.7
-Neiman Marcus,Apparel & Accessories,luxury,Department Store,US,4000,297.0,2.52,0.6,81.5,59.2,A,GREEN,141.4,92.7
-Peloton,Sports & Outdoor,standard,Subscription,US,2700,108.0,5.8,0.45,81.2,56.8,A,GREEN,45.83,44.5
-Chewy,Pet Care,standard,DTC Ecommerce,US,11000,65.0,6.2,0.4,75.0,54.4,A,GREEN,119.35,28.4
-Petco,Pet Care,standard,Omnichannel,US,6100,65.0,6.2,0.4,75.0,55.2,A,GREEN,66.19,28.4
-PetSmart,Pet Care,standard,Omnichannel,US,9000,65.0,6.2,0.4,75.0,56.0,A,GREEN,97.65,28.4
-Shein,Apparel & Accessories,extreme_discount,Marketplace,APAC,30000,32.4,5.58,0.44,70.8,53.6,A,GREEN,472.5,41.3
-Warby Parker,Eyewear,standard,Omnichannel,US,700,140.0,1.6,0.6,70.0,52.8,A,GREEN,24.75,92.7
-Patagonia,Sports & Outdoor,luxury,Omnichannel,US,1500,360.0,2.32,0.51,67.8,52.0,A,GREEN,36.49,63.8
-REI,Sports & Outdoor,standard,Omnichannel,US,3700,120.0,2.9,0.45,67.5,48.8,A,GREEN,62.81,44.5
-Dick's Sporting Goods,Sports & Outdoor,standard,Omnichannel,US,13000,120.0,2.9,0.45,67.5,49.6,A,GREEN,220.68,44.5
-Columbia Sportswear,Sports & Outdoor,standard,Omnichannel,US,3400,120.0,2.9,0.45,67.5,50.4,A,GREEN,57.72,44.5
-The North Face,Sports & Outdoor,standard,Omnichannel,US,3000,120.0,2.9,0.45,67.5,51.2,A,GREEN,50.93,44.5
-Wayfair,Home & Garden,standard,Marketplace,US,12000,108.0,3.19,0.4,64.9,48.0,B,GREEN,130.2,28.4
-Skechers,Footwear,discount,Omnichannel,US,8000,66.0,3.12,0.4,64.0,46.4,B,GREEN,86.8,28.4
-Payless,Footwear,discount,Omnichannel,US,2000,66.0,3.12,0.4,64.0,47.2,B,GREEN,21.7,28.4
-Nike,Footwear,standard,Omnichannel,US,51000,110.0,2.6,0.45,63.8,43.2,B,GREEN,865.73,44.5
-Adidas,Footwear,standard,Omnichannel,EU,24000,110.0,2.6,0.45,63.8,44.0,B,GREEN,407.4,44.5
-New Balance,Footwear,standard,Omnichannel,US,6500,110.0,2.6,0.45,63.8,44.8,B,GREEN,110.34,44.5
-Allbirds,Footwear,standard,DTC Ecommerce,US,250,110.0,2.6,0.45,63.8,45.6,B,GREEN,4.24,44.5
-IKEA,Home & Garden,standard,Omnichannel,EU,45000,120.0,2.9,0.4,61.3,39.2,B,GREEN,488.25,28.4
-Williams-Sonoma,Home & Garden,standard,Omnichannel,US,7800,120.0,2.9,0.4,61.3,40.0,B,GREEN,84.63,28.4
-Pottery Barn,Home & Garden,standard,Omnichannel,US,3000,120.0,2.9,0.4,61.3,40.8,B,GREEN,32.55,28.4
-Crate & Barrel,Home & Garden,standard,Omnichannel,US,2500,120.0,2.9,0.4,61.3,41.6,B,GREEN,27.13,28.4
-Brooklinen,Home & Garden,standard,DTC Ecommerce,US,200,120.0,2.9,0.4,61.3,42.4,B,GREEN,2.17,28.4
-Apple,Consumer Electronics,standard,Omnichannel,US,390000,140.0,3.0,0.28,47.5,35.2,C,MARGINAL,-1501.5,-10.1
-Best Buy,Consumer Electronics,standard,Big Box,US,46000,140.0,3.0,0.28,47.5,36.0,C,MARGINAL,-177.1,-10.1
-Samsung Electronics,Consumer Electronics,standard,Omnichannel,APAC,200000,140.0,3.0,0.28,47.5,36.8,C,MARGINAL,-770.0,-10.1
-Sony,Consumer Electronics,standard,Omnichannel,APAC,80000,140.0,3.0,0.28,47.5,37.6,C,MARGINAL,-308.0,-10.1
-Dell,Consumer Electronics,standard,DTC Ecommerce,US,88000,140.0,3.0,0.28,47.5,38.4,C,MARGINAL,-338.8,-10.1
-HelloFresh,Grocery,standard,Subscription,EU,8000,63.0,30.0,0.22,28,16.8,D,RED,-89.6,-29.4
-Blue Apron,Grocery,standard,Subscription,US,400,63.0,30.0,0.22,28,17.6,D,RED,-4.48,-29.4
-Target,General Merchandise,discount,Big Box,US,107000,51.0,19.2,0.2,28,18.4,D,RED,-1460.55,-35.8
-Walmart,General Merchandise,discount,Big Box,US,648000,51.0,19.2,0.2,28,19.2,D,RED,-8845.2,-35.8
-Costco,General Merchandise,discount,Big Box,US,250000,51.0,19.2,0.2,28,20.0,D,RED,-3412.5,-35.8
-Kohl's,General Merchandise,discount,Department Store,US,17000,56.1,17.28,0.2,28,20.8,D,RED,-232.05,-35.8
-Kroger,Grocery,discount,Big Box,US,150000,42.0,18.0,0.17,28,21.6,D,RED,-2598.75,-45.4
-Aldi,Grocery,discount,Big Box,EU,120000,42.0,18.0,0.17,28,22.4,D,RED,-2079.0,-45.4
-Trader Joe's,Grocery,discount,Big Box,US,16000,42.0,18.0,0.17,28,23.2,D,RED,-277.2,-45.4
-Amazon,General Merchandise,discount,Marketplace,US,575000,45.9,21.12,0.2,28,24.0,D,RED,-7848.75,-35.8
-eBay,General Merchandise,discount,Marketplace,US,10000,45.9,21.12,0.2,28,24.8,D,RED,-136.5,-35.8
-Etsy,General Merchandise,discount,Marketplace,US,2700,45.9,21.12,0.2,28,25.6,D,RED,-36.85,-35.8
-Dollar General,General Merchandise,discount,Big Box,US,38000,51.0,19.2,0.2,28,26.4,D,RED,-518.7,-35.8
-Five Below,General Merchandise,discount,Big Box,US,3500,51.0,19.2,0.2,28,27.2,D,RED,-47.77,-35.8
-Big Lots,General Merchandise,discount,Big Box,US,4700,51.0,19.2,0.2,28,28.0,D,RED,-64.16,-35.8
-Temu,General Merchandise,extreme_discount,Marketplace,APAC,50000,30.6,25.52,0.15,28,28.8,D,RED,-988.75,-51.8
-AliExpress,General Merchandise,extreme_discount,Marketplace,APAC,30000,30.6,25.52,0.15,28,29.6,D,RED,-593.25,-51.8
-Wish,General Merchandise,extreme_discount,Marketplace,US,500,30.6,25.52,0.15,28,30.4,D,RED,-9.89,-51.8
-Miniso,General Merchandise,extreme_discount,Big Box,APAC,1500,34.0,23.2,0.15,28,31.2,D,RED,-29.66,-51.8
-Dollar Tree,General Merchandise,extreme_discount,Big Box,US,30000,34.0,23.2,0.15,28,32.0,D,RED,-593.25,-51.8
-Dollarama,General Merchandise,extreme_discount,Big Box,CA,4000,34.0,23.2,0.15,28,32.8,D,RED,-79.1,-51.8
-Ollie's Bargain Outlet,General Merchandise,extreme_discount,Big Box,US,2100,34.0,23.2,0.15,28,33.6,D,RED,-41.53,-51.8
-Poundland,General Merchandise,extreme_discount,Big Box,EU,2000,34.0,23.2,0.15,28,34.4,D,RED,-39.55,-51.8
-Hermès,Apparel & Accessories,extreme_luxury,Boutique,EU,15000,1296.0,1.26,0.64,22,0.8,D,RED,603.75,105.5
-Louis Vuitton,Apparel & Accessories,extreme_luxury,Boutique,EU,25000,1296.0,1.26,0.64,22,1.6,D,RED,1006.25,105.5
-Chanel,Apparel & Accessories,extreme_luxury,Boutique,EU,19700,1296.0,1.26,0.64,22,2.4,D,RED,792.92,105.5
-Gucci,Apparel & Accessories,extreme_luxury,Boutique,EU,10500,1296.0,1.26,0.64,22,3.2,D,RED,422.62,105.5
-Dior,Apparel & Accessories,extreme_luxury,Boutique,EU,9500,1296.0,1.26,0.64,22,4.0,D,RED,382.38,105.5
-Prada,Apparel & Accessories,extreme_luxury,Boutique,EU,5400,1296.0,1.26,0.64,22,4.8,D,RED,217.35,105.5
-Balenciaga,Apparel & Accessories,extreme_luxury,Boutique,EU,2000,1296.0,1.26,0.64,22,5.6,D,RED,80.5,105.5
-Bottega Veneta,Apparel & Accessories,extreme_luxury,Boutique,EU,1800,1296.0,1.26,0.64,22,6.4,D,RED,72.45,105.5
-Brunello Cucinelli,Apparel & Accessories,extreme_luxury,Boutique,EU,1200,1296.0,1.26,0.64,22,7.2,D,RED,48.3,105.5
-Loro Piana,Apparel & Accessories,extreme_luxury,Boutique,EU,2500,1296.0,1.26,0.64,22,8.0,D,RED,100.63,105.5
-Rolex,Jewelry & Watches,extreme_luxury,Boutique,EU,10000,5040.0,0.47,0.6,22,8.8,D,RED,353.5,92.7
-Patek Philippe,Jewelry & Watches,extreme_luxury,Boutique,EU,2000,5040.0,0.47,0.6,22,9.6,D,RED,70.7,92.7
-Cartier,Jewelry & Watches,extreme_luxury,Boutique,EU,7000,5040.0,0.47,0.6,22,10.4,D,RED,247.45,92.7
-Van Cleef & Arpels,Jewelry & Watches,extreme_luxury,Boutique,EU,3000,5040.0,0.47,0.6,22,11.2,D,RED,106.05,92.7
-Tiffany & Co.,Jewelry & Watches,extreme_luxury,Omnichannel,US,5000,4200.0,0.59,0.6,22,12.0,D,RED,176.75,92.7
-Bulgari,Jewelry & Watches,extreme_luxury,Boutique,EU,2800,5040.0,0.47,0.6,22,12.8,D,RED,98.98,92.7
-Montblanc,Jewelry & Watches,luxury,Boutique,EU,1000,1260.0,0.83,0.56,22,13.6,D,RED,30.45,79.8
-Casper,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.55,22,14.4,D,RED,14.61,76.6
-Purple,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.55,22,15.2,D,RED,14.61,76.6
-Away,Luggage & Travel,standard,DTC Ecommerce,US,300,260.0,1.2,0.5,22,16.0,D,RED,6.93,60.6
+Ulta Beauty,Beauty & Personal Care,standard,Omnichannel,US,11200,65.0,3.6,0.62,95.0,97.2,A,GREEN,423.36,99.1
+Bath & Body Works,Beauty & Personal Care,standard,Omnichannel,US,7400,65.0,3.6,0.62,95.0,97.6,A,GREEN,279.72,99.1
+The Body Shop,Beauty & Personal Care,standard,Omnichannel,EU,1000,65.0,3.6,0.62,95.0,98.1,A,GREEN,37.8,99.1
+Glossier,Beauty & Personal Care,standard,DTC Ecommerce,US,275,65.0,3.6,0.62,95.0,98.6,A,GREEN,10.4,99.1
+Fenty Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,600,65.0,3.6,0.62,95.0,99.1,A,GREEN,22.68,99.1
+Rare Beauty,Beauty & Personal Care,standard,DTC Ecommerce,US,350,65.0,3.6,0.62,95.0,99.5,A,GREEN,13.23,99.1
+Motel 6,Hotel / Lodging,discount,Omnichannel,US,1000,150.0,3.6,0.63,95.0,100.0,A,GREEN,39.03,102.3
+GNC,Health & Supplements,standard,Omnichannel,US,2000,60.0,5.2,0.55,93.8,95.7,A,GREEN,58.45,76.6
+Vitamin Shoppe,Health & Supplements,standard,Omnichannel,US,1100,60.0,5.2,0.55,93.8,96.2,A,GREEN,32.15,76.6
+iHerb,Health & Supplements,standard,DTC Ecommerce,US,2000,60.0,5.2,0.55,93.8,96.7,A,GREEN,58.45,76.6
+Ritual,Health & Supplements,standard,Subscription,US,100,54.0,10.4,0.55,91.8,95.3,A,GREEN,2.92,76.6
+Olive Garden,Casual Dining,standard,Mobile App / QSR,US,4800,33.6,18.0,0.63,91.2,92.4,A,GREEN,187.32,102.3
+Chili's,Casual Dining,standard,Mobile App / QSR,US,4000,33.6,18.0,0.63,91.2,92.9,A,GREEN,156.1,102.3
+Applebee's,Casual Dining,standard,Mobile App / QSR,US,4400,33.6,18.0,0.63,91.2,93.4,A,GREEN,171.71,102.3
+Cheesecake Factory,Casual Dining,standard,Mobile App / QSR,US,3400,33.6,18.0,0.63,91.2,93.8,A,GREEN,132.69,102.3
+Texas Roadhouse,Casual Dining,standard,Mobile App / QSR,US,4600,33.6,18.0,0.63,91.2,94.3,A,GREEN,179.52,102.3
+Airbnb,Hotel / Lodging,standard,Marketplace,US,10000,225.0,3.3,0.68,91.2,94.8,A,GREEN,451.5,118.3
+Sally Beauty,Beauty & Personal Care,discount,Omnichannel,US,3700,39.0,4.32,0.57,89.2,90.5,A,GREEN,117.2,83.0
+e.l.f. Beauty,Beauty & Personal Care,discount,Omnichannel,US,1000,39.0,4.32,0.57,89.2,91.0,A,GREEN,31.68,83.0
+NYX,Beauty & Personal Care,discount,Omnichannel,US,600,39.0,4.32,0.57,89.2,91.5,A,GREEN,19.01,83.0
+Maybelline,Beauty & Personal Care,discount,Omnichannel,US,2000,39.0,4.32,0.57,89.2,91.9,A,GREEN,63.35,83.0
+Pottery Barn Kids,Baby & Kids,luxury,Omnichannel,US,1000,180.0,4.8,0.51,88.8,90.0,A,GREEN,24.33,63.8
+Marriott,Hotel / Lodging,standard,Omnichannel,US,25000,250.0,3.0,0.68,87.5,89.1,A,GREEN,1128.75,118.3
+Hilton,Hotel / Lodging,standard,Omnichannel,US,10000,250.0,3.0,0.68,87.5,89.6,A,GREEN,451.5,118.3
+Under Armour,Apparel & Accessories,standard,Omnichannel,US,5700,90.0,3.5,0.54,86.2,86.3,A,GREEN,159.6,73.4
+Levi's,Apparel & Accessories,standard,Omnichannel,US,6200,90.0,3.5,0.54,86.2,86.7,A,GREEN,173.6,73.4
+Gap,Apparel & Accessories,standard,Omnichannel,US,15000,90.0,3.5,0.54,86.2,87.2,A,GREEN,420.0,73.4
+Uniqlo,Apparel & Accessories,standard,Omnichannel,APAC,20000,90.0,3.5,0.54,86.2,87.7,A,GREEN,560.0,73.4
+Zara,Apparel & Accessories,standard,Omnichannel,EU,30000,90.0,3.5,0.54,86.2,88.2,A,GREEN,840.0,73.4
+Bombas,Apparel & Accessories,standard,DTC Ecommerce,US,300,90.0,3.5,0.54,86.2,88.6,A,GREEN,8.4,73.4
+Sephora,Beauty & Personal Care,luxury,Omnichannel,US,15000,195.0,2.88,0.68,86.0,83.4,A,GREEN,677.25,118.3
+Estée Lauder,Beauty & Personal Care,luxury,Omnichannel,US,15600,195.0,2.88,0.68,86.0,83.9,A,GREEN,704.34,118.3
+La Mer,Beauty & Personal Care,luxury,DTC Ecommerce,US,2000,195.0,2.88,0.68,86.0,84.4,A,GREEN,90.3,118.3
+Jo Malone London,Beauty & Personal Care,luxury,Omnichannel,EU,600,195.0,2.88,0.68,86.0,84.8,A,GREEN,27.09,118.3
+Diptyque,Beauty & Personal Care,luxury,DTC Ecommerce,EU,350,195.0,2.88,0.68,86.0,85.3,A,GREEN,15.8,118.3
+Aesop,Beauty & Personal Care,luxury,Omnichannel,AU,550,195.0,2.88,0.68,86.0,85.8,A,GREEN,24.83,118.3
+The Bouqs,Florist & Gifts,standard,Subscription,US,120,54.0,5.2,0.5,85.5,82.9,A,GREEN,2.77,60.6
+Equinox,Fitness & Gym,luxury,Subscription,US,1000,16.2,9.6,0.76,85.4,82.5,A,GREEN,54.95,144.0
+Ralph Lauren,Apparel & Accessories,luxury,Omnichannel,US,6600,270.0,2.8,0.6,85.0,71.6,A,GREEN,233.31,92.7
+Burberry,Apparel & Accessories,luxury,Omnichannel,EU,3500,270.0,2.8,0.6,85.0,72.0,A,GREEN,123.73,92.7
+Coach,Apparel & Accessories,luxury,Omnichannel,US,5100,270.0,2.8,0.6,85.0,72.5,A,GREEN,180.29,92.7
+Michael Kors,Apparel & Accessories,luxury,Omnichannel,US,4000,270.0,2.8,0.6,85.0,73.0,A,GREEN,141.4,92.7
+Tory Burch,Apparel & Accessories,luxury,Omnichannel,US,2000,270.0,2.8,0.6,85.0,73.5,A,GREEN,70.7,92.7
+Kate Spade,Apparel & Accessories,luxury,Omnichannel,US,1400,270.0,2.8,0.6,85.0,73.9,A,GREEN,49.49,92.7
+Theory,Apparel & Accessories,luxury,DTC Ecommerce,US,600,270.0,2.8,0.6,85.0,74.4,A,GREEN,21.21,92.7
+Lululemon,Apparel & Accessories,luxury,Omnichannel,CA,10000,270.0,2.8,0.6,85.0,74.9,A,GREEN,353.5,92.7
+Starbucks,QSR / Coffee,standard,Mobile App / QSR,US,36000,8.8,75.6,0.66,85.0,75.4,A,GREEN,1537.2,111.9
+McDonald's,QSR / Coffee,standard,Mobile App / QSR,US,25000,8.8,75.6,0.66,85.0,75.8,A,GREEN,1067.5,111.9
+Chipotle,QSR / Coffee,standard,Mobile App / QSR,US,10000,8.8,75.6,0.66,85.0,76.3,A,GREEN,427.0,111.9
+Panera Bread,QSR / Coffee,standard,Mobile App / QSR,US,6000,8.8,75.6,0.66,85.0,76.8,A,GREEN,256.2,111.9
+Domino's Pizza,QSR / Coffee,standard,Mobile App / QSR,US,4500,8.8,75.6,0.66,85.0,77.3,A,GREEN,192.15,111.9
+Sweetgreen,QSR / Coffee,standard,Mobile App / QSR,US,600,8.8,75.6,0.66,85.0,77.7,A,GREEN,25.62,111.9
+Planet Fitness,Fitness & Gym,discount,Subscription,US,1100,3.24,14.4,0.65,85.0,78.2,A,GREEN,45.62,108.7
+LA Fitness,Fitness & Gym,standard,Subscription,US,2000,5.4,12.0,0.7,85.0,78.7,A,GREEN,95.2,124.8
+Orangetheory Fitness,Fitness & Gym,standard,Subscription,US,1500,5.4,12.0,0.7,85.0,79.1,A,GREEN,71.4,124.8
+ClassPass,Fitness & Gym,standard,Subscription,US,400,5.4,12.0,0.7,85.0,79.6,A,GREEN,19.04,124.8
+Netflix,Digital Subscription / Streaming,standard,Subscription,US,39000,5.4,12.0,0.65,85.0,80.1,A,GREEN,1617.53,108.7
+Spotify,Digital Subscription / Streaming,standard,Subscription,EU,14000,5.4,12.0,0.65,85.0,80.6,A,GREEN,580.65,108.7
+Disney+,Digital Subscription / Streaming,standard,Subscription,US,8000,5.4,12.0,0.65,85.0,81.0,A,GREEN,331.8,108.7
+Hulu,Digital Subscription / Streaming,standard,Subscription,US,11000,5.4,12.0,0.65,85.0,81.5,A,GREEN,456.23,108.7
+Audible,Digital Subscription / Streaming,standard,Subscription,US,3000,5.4,12.0,0.65,85.0,82.0,A,GREEN,124.42,108.7
+H&M,Apparel & Accessories,discount,Omnichannel,EU,22000,54.0,4.2,0.49,84.2,67.8,A,GREEN,481.25,57.3
+Old Navy,Apparel & Accessories,discount,Omnichannel,US,8000,54.0,4.2,0.49,84.2,68.2,A,GREEN,175.0,57.3
+Forever 21,Apparel & Accessories,discount,Omnichannel,US,2000,54.0,4.2,0.49,84.2,68.7,A,GREEN,43.75,57.3
+Primark,Apparel & Accessories,discount,Big Box,EU,10000,54.0,4.2,0.49,84.2,69.2,A,GREEN,218.75,57.3
+Uniqlo GU,Apparel & Accessories,discount,Omnichannel,APAC,2500,54.0,4.2,0.49,84.2,69.7,A,GREEN,54.69,57.3
+TJ Maxx,Apparel & Accessories,discount,Big Box,US,50000,54.0,4.2,0.49,84.2,70.1,A,GREEN,1093.75,57.3
+Ross Stores,Apparel & Accessories,discount,Big Box,US,20000,54.0,4.2,0.49,84.2,70.6,A,GREEN,437.5,57.3
+Marshalls,Apparel & Accessories,discount,Big Box,US,12000,54.0,4.2,0.49,84.2,71.1,A,GREEN,262.5,57.3
+ASOS,Apparel & Accessories,discount,Marketplace,EU,4000,48.6,4.62,0.49,82.4,66.8,A,GREEN,87.5,57.3
+Boohoo,Apparel & Accessories,discount,Marketplace,EU,1900,48.6,4.62,0.49,82.4,67.3,A,GREEN,41.56,57.3
+Macy's,Apparel & Accessories,standard,Department Store,US,23000,99.0,3.15,0.54,81.9,66.4,A,GREEN,644.0,73.4
+Nordstrom,Apparel & Accessories,luxury,Department Store,US,15000,297.0,2.52,0.6,81.5,64.9,A,GREEN,530.25,92.7
+Saks Fifth Avenue,Apparel & Accessories,luxury,Department Store,US,3000,297.0,2.52,0.6,81.5,65.4,A,GREEN,106.05,92.7
+Neiman Marcus,Apparel & Accessories,luxury,Department Store,US,4000,297.0,2.52,0.6,81.5,65.9,A,GREEN,141.4,92.7
+Peloton,Sports & Outdoor,standard,Subscription,US,2700,108.0,5.8,0.45,81.2,63.5,A,GREEN,45.83,44.5
+Carter's,Baby & Kids,standard,Omnichannel,US,3000,60.0,6.0,0.45,81.2,64.0,A,GREEN,50.93,44.5
+Buy Buy Baby,Baby & Kids,standard,Omnichannel,US,1400,60.0,6.0,0.45,81.2,64.5,A,GREEN,23.77,44.5
+Hyatt,Hotel / Lodging,luxury,Omnichannel,US,6500,750.0,2.4,0.74,80.0,63.0,A,GREEN,341.25,137.6
+Chewy,Pet Care,standard,DTC Ecommerce,US,11000,65.0,6.2,0.4,75.0,61.6,A,GREEN,119.35,28.4
+Petco,Pet Care,standard,Omnichannel,US,6100,65.0,6.2,0.4,75.0,62.1,A,GREEN,66.19,28.4
+PetSmart,Pet Care,standard,Omnichannel,US,9000,65.0,6.2,0.4,75.0,62.6,A,GREEN,97.65,28.4
+Michaels,Craft & Hobby,standard,Omnichannel,US,5400,45.0,4.0,0.42,72.5,60.2,A,GREEN,71.82,34.9
+Hobby Lobby,Craft & Hobby,standard,Big Box,US,8000,45.0,4.0,0.42,72.5,60.7,A,GREEN,106.4,34.9
+Blick Art Materials,Craft & Hobby,standard,Omnichannel,US,400,45.0,4.0,0.42,72.5,61.1,A,GREEN,5.32,34.9
+Shein,Apparel & Accessories,extreme_discount,Marketplace,APAC,30000,32.4,5.58,0.44,70.8,59.7,A,GREEN,472.5,41.3
+Warby Parker,Eyewear,standard,Omnichannel,US,700,140.0,1.6,0.6,70.0,57.8,A,GREEN,24.75,92.7
+1-800-Flowers,Florist & Gifts,standard,DTC Ecommerce,US,2000,60.0,2.6,0.5,70.0,58.3,A,GREEN,46.2,60.6
+FTD,Florist & Gifts,standard,DTC Ecommerce,US,600,60.0,2.6,0.5,70.0,58.8,A,GREEN,13.86,60.6
+Edible Arrangements,Florist & Gifts,standard,Omnichannel,US,500,60.0,2.6,0.5,70.0,59.2,A,GREEN,11.55,60.6
+Patagonia,Sports & Outdoor,luxury,Omnichannel,US,1500,360.0,2.32,0.51,67.8,57.3,A,GREEN,36.49,63.8
+REI,Sports & Outdoor,standard,Omnichannel,US,3700,120.0,2.9,0.45,67.5,53.6,A,GREEN,62.81,44.5
+Dick's Sporting Goods,Sports & Outdoor,standard,Omnichannel,US,13000,120.0,2.9,0.45,67.5,54.0,A,GREEN,220.68,44.5
+Columbia Sportswear,Sports & Outdoor,standard,Omnichannel,US,3400,120.0,2.9,0.45,67.5,54.5,A,GREEN,57.72,44.5
+The North Face,Sports & Outdoor,standard,Omnichannel,US,3000,120.0,2.9,0.45,67.5,55.0,A,GREEN,50.93,44.5
+Home Depot,Home Improvement & Hardware,standard,Big Box,US,152000,70.0,5.0,0.34,67.5,55.5,A,GREEN,532.0,9.2
+Lowe's,Home Improvement & Hardware,standard,Big Box,US,86000,70.0,5.0,0.34,67.5,55.9,A,GREEN,301.0,9.2
+Ace Hardware,Home Improvement & Hardware,standard,Omnichannel,US,9000,70.0,5.0,0.34,67.5,56.4,A,GREEN,31.5,9.2
+Menards,Home Improvement & Hardware,standard,Big Box,US,13000,70.0,5.0,0.34,67.5,56.9,A,GREEN,45.5,9.2
+The Children's Place,Baby & Kids,discount,Omnichannel,US,1600,36.0,7.2,0.4,67.0,53.1,A,GREEN,17.36,28.4
+Barnes & Noble,Books & Media,standard,Omnichannel,US,3000,35.0,4.5,0.4,66.7,52.1,A,GREEN,32.55,28.4
+Books-A-Million,Books & Media,standard,Omnichannel,US,500,35.0,4.5,0.4,66.7,52.6,A,GREEN,5.43,28.4
+Wayfair,Home & Garden,standard,Marketplace,US,12000,108.0,3.19,0.4,64.9,51.7,B,GREEN,130.2,28.4
+Skechers,Footwear,discount,Omnichannel,US,8000,66.0,3.12,0.4,64.0,50.7,B,GREEN,86.8,28.4
+Payless,Footwear,discount,Omnichannel,US,2000,66.0,3.12,0.4,64.0,51.2,B,GREEN,21.7,28.4
+Nike,Footwear,standard,Omnichannel,US,51000,110.0,2.6,0.45,63.8,46.4,B,GREEN,865.73,44.5
+Adidas,Footwear,standard,Omnichannel,EU,24000,110.0,2.6,0.45,63.8,46.9,B,GREEN,407.4,44.5
+New Balance,Footwear,standard,Omnichannel,US,6500,110.0,2.6,0.45,63.8,47.4,B,GREEN,110.34,44.5
+Allbirds,Footwear,standard,DTC Ecommerce,US,250,110.0,2.6,0.45,63.8,47.9,B,GREEN,4.24,44.5
+AutoZone,Auto Parts & Accessories,standard,Big Box,US,18000,70.0,2.6,0.45,63.8,48.3,B,GREEN,305.55,44.5
+O'Reilly Auto Parts,Auto Parts & Accessories,standard,Big Box,US,16000,70.0,2.6,0.45,63.8,48.8,B,GREEN,271.6,44.5
+Advance Auto Parts,Auto Parts & Accessories,standard,Big Box,US,11000,70.0,2.6,0.45,63.8,49.3,B,GREEN,186.73,44.5
+NAPA Auto Parts,Auto Parts & Accessories,standard,Omnichannel,US,12000,70.0,2.6,0.45,63.8,49.8,B,GREEN,203.7,44.5
+Tire Rack,Auto Parts & Accessories,standard,DTC Ecommerce,US,1200,70.0,2.6,0.45,63.8,50.2,B,GREEN,20.37,44.5
+Staples,Office Supplies,standard,Omnichannel,US,10000,85.0,4.5,0.3,62.5,45.0,B,GREEN,-14.0,-3.7
+Office Depot,Office Supplies,standard,Omnichannel,US,8000,85.0,4.5,0.3,62.5,45.5,B,GREEN,-11.2,-3.7
+Quill,Office Supplies,standard,DTC Ecommerce,US,1200,85.0,4.5,0.3,62.5,46.0,B,GREEN,-1.68,-3.7
+IKEA,Home & Garden,standard,Omnichannel,EU,45000,120.0,2.9,0.4,61.3,42.7,B,GREEN,488.25,28.4
+Williams-Sonoma,Home & Garden,standard,Omnichannel,US,7800,120.0,2.9,0.4,61.3,43.1,B,GREEN,84.63,28.4
+Pottery Barn,Home & Garden,standard,Omnichannel,US,3000,120.0,2.9,0.4,61.3,43.6,B,GREEN,32.55,28.4
+Crate & Barrel,Home & Garden,standard,Omnichannel,US,2500,120.0,2.9,0.4,61.3,44.1,B,GREEN,27.13,28.4
+Brooklinen,Home & Garden,standard,DTC Ecommerce,US,200,120.0,2.9,0.4,61.3,44.5,B,GREEN,2.17,28.4
+Total Wine & More,"Wine, Beer & Spirits",standard,Omnichannel,US,5000,55.0,8.0,0.3,60.8,41.2,B,GREEN,-7.0,-3.7
+BevMo,"Wine, Beer & Spirits",standard,Omnichannel,US,1000,55.0,8.0,0.3,60.8,41.7,B,GREEN,-1.4,-3.7
+Wine.com,"Wine, Beer & Spirits",standard,DTC Ecommerce,US,250,55.0,8.0,0.3,60.8,42.2,B,GREEN,-0.35,-3.7
+Joann,Craft & Hobby,discount,Omnichannel,US,2200,27.0,4.8,0.37,60.2,40.8,B,GREEN,15.79,18.8
+Drizly,"Wine, Beer & Spirits",standard,Marketplace,US,300,49.5,8.8,0.3,59.0,39.8,B,GREEN,-0.42,-3.7
+Winc,"Wine, Beer & Spirits",standard,Subscription,US,80,49.5,16.0,0.3,59.0,40.3,B,GREEN,-0.11,-3.7
+Discount Tire,Automotive Service & Tires,standard,Omnichannel,US,8000,180.0,2.2,0.45,58.8,37.9,B,GREEN,135.8,44.5
+Firestone,Automotive Service & Tires,standard,Omnichannel,US,3000,180.0,2.2,0.45,58.8,38.4,B,GREEN,50.92,44.5
+Jiffy Lube,Automotive Service & Tires,standard,Omnichannel,US,2000,180.0,2.2,0.45,58.8,38.9,B,GREEN,33.95,44.5
+Valvoline,Automotive Service & Tires,standard,Omnichannel,US,1600,180.0,2.2,0.45,58.8,39.3,B,GREEN,27.16,44.5
+RockAuto,Auto Parts & Accessories,discount,DTC Ecommerce,US,800,42.0,3.12,0.4,58.0,37.4,B,GREEN,8.68,28.4
+Half Price Books,Books & Media,discount,Omnichannel,US,280,21.0,5.4,0.35,55.7,37.0,B,GREEN,1.32,12.4
+Harbor Freight Tools,Home Improvement & Hardware,discount,Big Box,US,8000,42.0,6.0,0.29,55.2,36.5,B,GREEN,-21.0,-6.9
+Apple,Consumer Electronics,standard,Omnichannel,US,390000,140.0,3.0,0.28,47.5,32.7,C,MARGINAL,-1501.5,-10.1
+Best Buy,Consumer Electronics,standard,Big Box,US,46000,140.0,3.0,0.28,47.5,33.2,C,MARGINAL,-177.1,-10.1
+Samsung Electronics,Consumer Electronics,standard,Omnichannel,APAC,200000,140.0,3.0,0.28,47.5,33.6,C,MARGINAL,-770.0,-10.1
+Sony,Consumer Electronics,standard,Omnichannel,APAC,80000,140.0,3.0,0.28,47.5,34.1,C,MARGINAL,-308.0,-10.1
+Dell,Consumer Electronics,standard,DTC Ecommerce,US,88000,140.0,3.0,0.28,47.5,34.6,C,MARGINAL,-338.8,-10.1
+Wawa,Convenience & Gas,standard,Big Box,US,14000,12.0,30.0,0.3,47.5,35.1,C,MARGINAL,-19.6,-3.7
+Sheetz,Convenience & Gas,standard,Big Box,US,9000,12.0,30.0,0.3,47.5,35.5,C,MARGINAL,-12.6,-3.7
+QuikTrip,Convenience & Gas,standard,Big Box,US,11000,12.0,30.0,0.3,47.5,36.0,C,MARGINAL,-15.4,-3.7
+Ashley Furniture,Furniture & Home Furnishings,standard,Omnichannel,US,8000,500.0,1.4,0.42,45.0,30.8,C,MARGINAL,106.4,34.9
+La-Z-Boy,Furniture & Home Furnishings,standard,Omnichannel,US,2000,500.0,1.4,0.42,45.0,31.3,C,MARGINAL,26.6,34.9
+West Elm,Furniture & Home Furnishings,standard,Omnichannel,US,2000,500.0,1.4,0.42,45.0,31.8,C,MARGINAL,26.6,34.9
+Article,Furniture & Home Furnishings,standard,DTC Ecommerce,CA,400,500.0,1.4,0.42,45.0,32.2,C,MARGINAL,5.32,34.9
+Guitar Center,Music & Instruments,standard,Omnichannel,US,2200,120.0,2.0,0.35,43.8,29.4,C,MARGINAL,10.4,12.4
+Sweetwater,Music & Instruments,standard,DTC Ecommerce,US,1600,120.0,2.0,0.35,43.8,29.9,C,MARGINAL,7.56,12.4
+Sam Ash,Music & Instruments,standard,Omnichannel,US,400,120.0,2.0,0.35,43.8,30.3,C,MARGINAL,1.89,12.4
+7-Eleven,Convenience & Gas,discount,Big Box,US,18000,7.2,36.0,0.25,41.2,28.4,C,MARGINAL,-135.45,-19.7
+Circle K,Convenience & Gas,discount,Big Box,US,16000,7.2,36.0,0.25,41.2,28.9,C,MARGINAL,-120.4,-19.7
+HelloFresh,Grocery,standard,Subscription,EU,8000,63.0,30.0,0.22,28,12.8,D,RED,-89.6,-29.4
+Blue Apron,Grocery,standard,Subscription,US,400,63.0,30.0,0.22,28,13.3,D,RED,-4.48,-29.4
+Target,General Merchandise,discount,Big Box,US,107000,51.0,19.2,0.2,28,13.7,D,RED,-1460.55,-35.8
+Walmart,General Merchandise,discount,Big Box,US,648000,51.0,19.2,0.2,28,14.2,D,RED,-8845.2,-35.8
+Costco,General Merchandise,discount,Big Box,US,250000,51.0,19.2,0.2,28,14.7,D,RED,-3412.5,-35.8
+Kohl's,General Merchandise,discount,Department Store,US,17000,56.1,17.28,0.2,28,15.2,D,RED,-232.05,-35.8
+Kroger,Grocery,discount,Big Box,US,150000,42.0,18.0,0.17,28,15.6,D,RED,-2598.75,-45.4
+Aldi,Grocery,discount,Big Box,EU,120000,42.0,18.0,0.17,28,16.1,D,RED,-2079.0,-45.4
+Trader Joe's,Grocery,discount,Big Box,US,16000,42.0,18.0,0.17,28,16.6,D,RED,-277.2,-45.4
+Amazon,General Merchandise,discount,Marketplace,US,575000,45.9,21.12,0.2,28,17.1,D,RED,-7848.75,-35.8
+eBay,General Merchandise,discount,Marketplace,US,10000,45.9,21.12,0.2,28,17.5,D,RED,-136.5,-35.8
+Etsy,General Merchandise,discount,Marketplace,US,2700,45.9,21.12,0.2,28,18.0,D,RED,-36.85,-35.8
+Dollar General,General Merchandise,discount,Big Box,US,38000,51.0,19.2,0.2,28,18.5,D,RED,-518.7,-35.8
+Five Below,General Merchandise,discount,Big Box,US,3500,51.0,19.2,0.2,28,19.0,D,RED,-47.77,-35.8
+Big Lots,General Merchandise,discount,Big Box,US,4700,51.0,19.2,0.2,28,19.4,D,RED,-64.16,-35.8
+Temu,General Merchandise,extreme_discount,Marketplace,APAC,50000,30.6,25.52,0.15,28,19.9,D,RED,-988.75,-51.8
+AliExpress,General Merchandise,extreme_discount,Marketplace,APAC,30000,30.6,25.52,0.15,28,20.4,D,RED,-593.25,-51.8
+Wish,General Merchandise,extreme_discount,Marketplace,US,500,30.6,25.52,0.15,28,20.9,D,RED,-9.89,-51.8
+Miniso,General Merchandise,extreme_discount,Big Box,APAC,1500,34.0,23.2,0.15,28,21.3,D,RED,-29.66,-51.8
+Dollar Tree,General Merchandise,extreme_discount,Big Box,US,30000,34.0,23.2,0.15,28,21.8,D,RED,-593.25,-51.8
+Dollarama,General Merchandise,extreme_discount,Big Box,CA,4000,34.0,23.2,0.15,28,22.3,D,RED,-79.1,-51.8
+Ollie's Bargain Outlet,General Merchandise,extreme_discount,Big Box,US,2100,34.0,23.2,0.15,28,22.7,D,RED,-41.53,-51.8
+Poundland,General Merchandise,extreme_discount,Big Box,EU,2000,34.0,23.2,0.15,28,23.2,D,RED,-39.55,-51.8
+ThriftBooks,Books & Media,discount,Marketplace,US,300,18.9,5.94,0.35,28,23.7,D,RED,1.42,12.4
+CVS Pharmacy,Drug & Pharmacy,standard,Omnichannel,US,90000,35.0,14.0,0.22,28,24.2,D,RED,-1008.0,-29.4
+Walgreens,Drug & Pharmacy,standard,Omnichannel,US,110000,35.0,14.0,0.22,28,24.6,D,RED,-1232.0,-29.4
+Rite Aid,Drug & Pharmacy,discount,Omnichannel,US,17000,21.0,16.8,0.17,28,25.1,D,RED,-294.52,-45.4
+Boots,Drug & Pharmacy,standard,Omnichannel,EU,10000,35.0,14.0,0.22,28,25.6,D,RED,-112.0,-29.4
+Delta Air Lines,Airline / Travel,standard,Omnichannel,US,58000,380.0,2.6,0.16,28,26.1,D,RED,-1075.9,-48.6
+Southwest Airlines,Airline / Travel,standard,Omnichannel,US,27000,380.0,2.6,0.16,28,26.5,D,RED,-500.85,-48.6
+United Airlines,Airline / Travel,standard,Omnichannel,US,54000,380.0,2.6,0.16,28,27.0,D,RED,-1001.7,-48.6
+Expedia,Airline / Travel,standard,Marketplace,US,13000,342.0,2.86,0.16,28,27.5,D,RED,-241.15,-48.6
+Booking.com,Airline / Travel,standard,Marketplace,EU,21000,342.0,2.86,0.16,28,28.0,D,RED,-389.55,-48.6
+Hermès,Apparel & Accessories,extreme_luxury,Boutique,EU,15000,1296.0,1.26,0.64,22,1.9,D,RED,603.75,105.5
+Louis Vuitton,Apparel & Accessories,extreme_luxury,Boutique,EU,25000,1296.0,1.26,0.64,22,2.4,D,RED,1006.25,105.5
+Chanel,Apparel & Accessories,extreme_luxury,Boutique,EU,19700,1296.0,1.26,0.64,22,2.8,D,RED,792.92,105.5
+Gucci,Apparel & Accessories,extreme_luxury,Boutique,EU,10500,1296.0,1.26,0.64,22,3.3,D,RED,422.62,105.5
+Dior,Apparel & Accessories,extreme_luxury,Boutique,EU,9500,1296.0,1.26,0.64,22,3.8,D,RED,382.38,105.5
+Prada,Apparel & Accessories,extreme_luxury,Boutique,EU,5400,1296.0,1.26,0.64,22,4.3,D,RED,217.35,105.5
+Balenciaga,Apparel & Accessories,extreme_luxury,Boutique,EU,2000,1296.0,1.26,0.64,22,4.7,D,RED,80.5,105.5
+Bottega Veneta,Apparel & Accessories,extreme_luxury,Boutique,EU,1800,1296.0,1.26,0.64,22,5.2,D,RED,72.45,105.5
+Brunello Cucinelli,Apparel & Accessories,extreme_luxury,Boutique,EU,1200,1296.0,1.26,0.64,22,5.7,D,RED,48.3,105.5
+Loro Piana,Apparel & Accessories,extreme_luxury,Boutique,EU,2500,1296.0,1.26,0.64,22,6.2,D,RED,100.63,105.5
+Rolex,Jewelry & Watches,extreme_luxury,Boutique,EU,10000,5040.0,0.47,0.6,22,6.6,D,RED,353.5,92.7
+Patek Philippe,Jewelry & Watches,extreme_luxury,Boutique,EU,2000,5040.0,0.47,0.6,22,7.1,D,RED,70.7,92.7
+Cartier,Jewelry & Watches,extreme_luxury,Boutique,EU,7000,5040.0,0.47,0.6,22,7.6,D,RED,247.45,92.7
+Van Cleef & Arpels,Jewelry & Watches,extreme_luxury,Boutique,EU,3000,5040.0,0.47,0.6,22,8.1,D,RED,106.05,92.7
+Tiffany & Co.,Jewelry & Watches,extreme_luxury,Omnichannel,US,5000,4200.0,0.59,0.6,22,8.5,D,RED,176.75,92.7
+Bulgari,Jewelry & Watches,extreme_luxury,Boutique,EU,2800,5040.0,0.47,0.6,22,9.0,D,RED,98.98,92.7
+Montblanc,Jewelry & Watches,luxury,Boutique,EU,1000,1260.0,0.83,0.56,22,9.5,D,RED,30.45,79.8
+Casper,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.55,22,10.0,D,RED,14.61,76.6
+Purple,Home / Mattress,standard,DTC Ecommerce,US,500,700.0,1.2,0.55,22,10.4,D,RED,14.61,76.6
+Away,Luggage & Travel,standard,DTC Ecommerce,US,300,260.0,1.2,0.5,22,10.9,D,RED,6.93,60.6
+Restoration Hardware,Furniture & Home Furnishings,luxury,Omnichannel,US,3000,1500.0,1.12,0.48,22,11.4,D,RED,61.95,54.1
+Ethan Allen,Furniture & Home Furnishings,luxury,Omnichannel,US,750,1500.0,1.12,0.48,22,11.8,D,RED,15.49,54.1
+Herman Miller,Furniture & Home Furnishings,luxury,Omnichannel,US,4000,1500.0,1.12,0.48,22,12.3,D,RED,82.6,54.1
+Whirlpool,Appliances,standard,Omnichannel,US,19000,600.0,0.8,0.25,21.2,0.5,D,RED,-142.97,-19.7
+GE Appliances,Appliances,standard,Omnichannel,US,10000,600.0,0.8,0.25,21.2,0.9,D,RED,-75.25,-19.7
+AJ Madison,Appliances,standard,DTC Ecommerce,US,400,600.0,0.8,0.25,21.2,1.4,D,RED,-3.01,-19.7

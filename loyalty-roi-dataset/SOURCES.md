@@ -37,6 +37,19 @@ per-company measured fact — those don't exist publicly for AOV/frequency.
    Their economics work through paid membership + volume, not earn-and-burn
    points a 15–20% margin can't fund. Different animal; don't confuse the two.
 
+5. **Airlines score RED on margin — that's the honest limit of a margin-funded
+   model.** Airline/hotel loyalty is enormously profitable in reality, but it's
+   funded by *selling miles/points to co-brand banks*, not from retail margin.
+   This model scores fitness for a **margin-funded rewards program**, so it flags
+   airlines RED. If your prospect monetizes points via a card partner, that's a
+   different (and often great) model this score doesn't capture — treat travel as
+   a manual-review exception.
+
+6. **For Subscription / Streaming / Fitness sectors the "AOV" is a per-charge
+   proxy, not a meaningful basket.** The fit score for these leans on margin +
+   frequency (both high), which is correct; ignore their `est_aov_usd` and
+   `illustrative_roi_*` columns and model the subscription economics directly.
+
 ## Source links
 
 - NYU Stern / Damodaran, Margins by Sector (US): https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/margin.html

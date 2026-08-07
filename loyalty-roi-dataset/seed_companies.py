@@ -153,6 +153,112 @@ COMPANIES = [
     ("Dollarama",           "General Merchandise",   "extreme_discount", "Big Box",         4000, "CA"),
     ("Ollie's Bargain Outlet","General Merchandise", "extreme_discount", "Big Box",         2100, "US"),
     ("Poundland",           "General Merchandise",   "extreme_discount", "Big Box",         2000, "EU"),
+
+    # ================= WIDENED COVERAGE (thin-margin / high-freq verticals) =========
+    # ---- Auto parts & service ----
+    ("AutoZone",            "Auto Parts & Accessories", "standard", "Big Box",             18000, "US"),
+    ("O'Reilly Auto Parts", "Auto Parts & Accessories", "standard", "Big Box",             16000, "US"),
+    ("Advance Auto Parts",  "Auto Parts & Accessories", "standard", "Big Box",             11000, "US"),
+    ("NAPA Auto Parts",     "Auto Parts & Accessories", "standard", "Omnichannel",         12000, "US"),
+    ("RockAuto",            "Auto Parts & Accessories", "discount", "DTC Ecommerce",          800, "US"),
+    ("Tire Rack",           "Auto Parts & Accessories", "standard", "DTC Ecommerce",         1200, "US"),
+    ("Discount Tire",       "Automotive Service & Tires","standard", "Omnichannel",          8000, "US"),
+    ("Firestone",           "Automotive Service & Tires","standard", "Omnichannel",          3000, "US"),
+    ("Jiffy Lube",          "Automotive Service & Tires","standard", "Omnichannel",          2000, "US"),
+    ("Valvoline",           "Automotive Service & Tires","standard", "Omnichannel",          1600, "US"),
+    # ---- Appliances (big-ticket, rare) ----
+    ("Whirlpool",           "Appliances",            "standard", "Omnichannel",            19000, "US"),
+    ("GE Appliances",       "Appliances",            "standard", "Omnichannel",            10000, "US"),
+    ("AJ Madison",          "Appliances",            "standard", "DTC Ecommerce",            400, "US"),
+    # ---- Furniture & home furnishings ----
+    ("Ashley Furniture",    "Furniture & Home Furnishings","standard", "Omnichannel",       8000, "US"),
+    ("La-Z-Boy",            "Furniture & Home Furnishings","standard", "Omnichannel",       2000, "US"),
+    ("Restoration Hardware","Furniture & Home Furnishings","luxury", "Omnichannel",         3000, "US"),
+    ("Ethan Allen",         "Furniture & Home Furnishings","luxury", "Omnichannel",          750, "US"),
+    ("West Elm",            "Furniture & Home Furnishings","standard", "Omnichannel",       2000, "US"),
+    ("Article",             "Furniture & Home Furnishings","standard", "DTC Ecommerce",      400, "CA"),
+    ("Herman Miller",       "Furniture & Home Furnishings","luxury", "Omnichannel",         4000, "US"),
+    # ---- Home improvement & hardware ----
+    ("Home Depot",          "Home Improvement & Hardware","standard", "Big Box",          152000, "US"),
+    ("Lowe's",              "Home Improvement & Hardware","standard", "Big Box",           86000, "US"),
+    ("Ace Hardware",        "Home Improvement & Hardware","standard", "Omnichannel",        9000, "US"),
+    ("Harbor Freight Tools","Home Improvement & Hardware","discount", "Big Box",            8000, "US"),
+    ("Menards",             "Home Improvement & Hardware","standard", "Big Box",           13000, "US"),
+    # ---- Office supplies ----
+    ("Staples",             "Office Supplies",       "standard", "Omnichannel",            10000, "US"),
+    ("Office Depot",        "Office Supplies",       "standard", "Omnichannel",             8000, "US"),
+    ("Quill",               "Office Supplies",       "standard", "DTC Ecommerce",           1200, "US"),
+    # ---- Books & media ----
+    ("Barnes & Noble",      "Books & Media",         "standard", "Omnichannel",             3000, "US"),
+    ("Books-A-Million",     "Books & Media",         "standard", "Omnichannel",              500, "US"),
+    ("ThriftBooks",         "Books & Media",         "discount", "Marketplace",              300, "US"),
+    ("Half Price Books",    "Books & Media",         "discount", "Omnichannel",              280, "US"),
+    # ---- Music & instruments ----
+    ("Guitar Center",       "Music & Instruments",   "standard", "Omnichannel",             2200, "US"),
+    ("Sweetwater",          "Music & Instruments",   "standard", "DTC Ecommerce",           1600, "US"),
+    ("Sam Ash",             "Music & Instruments",   "standard", "Omnichannel",              400, "US"),
+    # ---- Craft & hobby ----
+    ("Michaels",            "Craft & Hobby",         "standard", "Omnichannel",             5400, "US"),
+    ("Joann",               "Craft & Hobby",         "discount", "Omnichannel",             2200, "US"),
+    ("Hobby Lobby",         "Craft & Hobby",         "standard", "Big Box",                 8000, "US"),
+    ("Blick Art Materials", "Craft & Hobby",         "standard", "Omnichannel",              400, "US"),
+    # ---- Drug & pharmacy (thin margin, high freq) ----
+    ("CVS Pharmacy",        "Drug & Pharmacy",       "standard", "Omnichannel",            90000, "US"),
+    ("Walgreens",           "Drug & Pharmacy",       "standard", "Omnichannel",           110000, "US"),
+    ("Rite Aid",            "Drug & Pharmacy",       "discount", "Omnichannel",            17000, "US"),
+    ("Boots",               "Drug & Pharmacy",       "standard", "Omnichannel",            10000, "EU"),
+    # ---- Convenience & gas ----
+    ("7-Eleven",            "Convenience & Gas",     "discount", "Big Box",                18000, "US"),
+    ("Wawa",                "Convenience & Gas",     "standard", "Big Box",                14000, "US"),
+    ("Sheetz",              "Convenience & Gas",     "standard", "Big Box",                 9000, "US"),
+    ("Circle K",            "Convenience & Gas",     "discount", "Big Box",                16000, "US"),
+    ("QuikTrip",            "Convenience & Gas",     "standard", "Big Box",                11000, "US"),
+    # ---- Wine, beer & spirits ----
+    ("Total Wine & More",   "Wine, Beer & Spirits",  "standard", "Omnichannel",             5000, "US"),
+    ("BevMo",               "Wine, Beer & Spirits",  "standard", "Omnichannel",             1000, "US"),
+    ("Drizly",              "Wine, Beer & Spirits",  "standard", "Marketplace",              300, "US"),
+    ("Wine.com",            "Wine, Beer & Spirits",  "standard", "DTC Ecommerce",            250, "US"),
+    ("Winc",                "Wine, Beer & Spirits",  "standard", "Subscription",              80, "US"),
+    # ---- Baby & kids ----
+    ("Carter's",            "Baby & Kids",           "standard", "Omnichannel",             3000, "US"),
+    ("The Children's Place","Baby & Kids",           "discount", "Omnichannel",             1600, "US"),
+    ("Buy Buy Baby",        "Baby & Kids",           "standard", "Omnichannel",             1400, "US"),
+    ("Pottery Barn Kids",   "Baby & Kids",           "luxury",   "Omnichannel",             1000, "US"),
+    # ---- Florist & gifts ----
+    ("1-800-Flowers",       "Florist & Gifts",       "standard", "DTC Ecommerce",           2000, "US"),
+    ("FTD",                 "Florist & Gifts",       "standard", "DTC Ecommerce",            600, "US"),
+    ("Edible Arrangements", "Florist & Gifts",       "standard", "Omnichannel",              500, "US"),
+    ("The Bouqs",           "Florist & Gifts",       "standard", "Subscription",             120, "US"),
+    # ---- Casual dining ----
+    ("Olive Garden",        "Casual Dining",         "standard", "Mobile App / QSR",        4800, "US"),
+    ("Chili's",             "Casual Dining",         "standard", "Mobile App / QSR",        4000, "US"),
+    ("Applebee's",          "Casual Dining",         "standard", "Mobile App / QSR",        4400, "US"),
+    ("Cheesecake Factory",  "Casual Dining",         "standard", "Mobile App / QSR",        3400, "US"),
+    ("Texas Roadhouse",     "Casual Dining",         "standard", "Mobile App / QSR",        4600, "US"),
+    # ---- Fitness & gym (subscription) ----
+    ("Planet Fitness",      "Fitness & Gym",         "discount", "Subscription",            1100, "US"),
+    ("LA Fitness",          "Fitness & Gym",         "standard", "Subscription",            2000, "US"),
+    ("Equinox",             "Fitness & Gym",         "luxury",   "Subscription",            1000, "US"),
+    ("Orangetheory Fitness","Fitness & Gym",         "standard", "Subscription",            1500, "US"),
+    ("ClassPass",           "Fitness & Gym",         "standard", "Subscription",             400, "US"),
+    # ---- Digital subscription / streaming ----
+    ("Netflix",             "Digital Subscription / Streaming","standard", "Subscription", 39000, "US"),
+    ("Spotify",             "Digital Subscription / Streaming","standard", "Subscription", 14000, "EU"),
+    ("Disney+",             "Digital Subscription / Streaming","standard", "Subscription",  8000, "US"),
+    ("Hulu",                "Digital Subscription / Streaming","standard", "Subscription", 11000, "US"),
+    ("Audible",             "Digital Subscription / Streaming","standard", "Subscription",  3000, "US"),
+    # ---- Hotels & lodging ----
+    ("Marriott",            "Hotel / Lodging",       "standard", "Omnichannel",            25000, "US"),
+    ("Hilton",              "Hotel / Lodging",       "standard", "Omnichannel",            10000, "US"),
+    ("Hyatt",               "Hotel / Lodging",       "luxury",   "Omnichannel",             6500, "US"),
+    ("Motel 6",             "Hotel / Lodging",       "discount", "Omnichannel",             1000, "US"),
+    ("Airbnb",              "Hotel / Lodging",       "standard", "Marketplace",            10000, "US"),
+    # ---- Airlines & travel ----
+    ("Delta Air Lines",     "Airline / Travel",      "standard", "Omnichannel",            58000, "US"),
+    ("Southwest Airlines",  "Airline / Travel",      "standard", "Omnichannel",            27000, "US"),
+    ("United Airlines",     "Airline / Travel",      "standard", "Omnichannel",            54000, "US"),
+    ("Expedia",             "Airline / Travel",      "standard", "Marketplace",            13000, "US"),
+    ("Booking.com",         "Airline / Travel",      "standard", "Marketplace",            21000, "EU"),
 ]
 # fmt: on
 
