@@ -1,0 +1,1077 @@
+<style>
+/* ============ ALMA AI OS — LOYALTY™ · Product Blueprint ============ */
+*{box-sizing:border-box}
+:root{
+  /* ---- LIGHT (default / un-stamped system-light) ---- */
+  --ground:#F6F3EC; --surface:#FFFFFF; --surface-2:#F0ECE2; --surface-3:#E9E4D7;
+  --ink:#191B22; --ink-2:#4C505C; --ink-3:#7E8291; --line:#E2DCCE; --line-2:#CFC7B4;
+  --gold:#B07A16; --gold-bright:#D79A2E; --gold-soft:#F3E6C6;
+  --v-actual:#127A54; --v-actual-bg:#E1F1E9;
+  --v-est:#9A6410; --v-est-bg:#F5EAD6;
+  --v-hybrid:#3B49B8; --v-hybrid-bg:#E5E7F7;
+  --v-missing:#7E8291; --v-missing-bg:#ECE9E1;
+  --pos:#127A54; --neg:#B33B2B; --warn:#9A6410; --info:#3B49B8;
+  --shadow:0 1px 2px rgba(30,25,10,.05),0 8px 28px -12px rgba(30,25,10,.18);
+  --shadow-lg:0 2px 6px rgba(30,25,10,.06),0 24px 60px -22px rgba(30,25,10,.30);
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1120px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0B0D13; --surface:#12151F; --surface-2:#171B27; --surface-3:#1F2434;
+  --ink:#ECEAE2; --ink-2:#AAAEBC; --ink-3:#767B8C; --line:#262B3B; --line-2:#333A4E;
+  --gold:#E9B455; --gold-bright:#F1C168; --gold-soft:#3A2E12;
+  --v-actual:#37C08A; --v-actual-bg:#10241C;
+  --v-est:#E0A345; --v-est-bg:#2A2110;
+  --v-hybrid:#8B95F0; --v-hybrid-bg:#171A2E;
+  --v-missing:#767B8C; --v-missing-bg:#1B1F2B;
+  --pos:#37C08A; --neg:#F0785F; --warn:#E0A345; --info:#8B95F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  --shadow-lg:0 2px 8px rgba(0,0,0,.5),0 30px 70px -24px rgba(0,0,0,.8);
+}}
+:root[data-theme="dark"]{
+  --ground:#0B0D13; --surface:#12151F; --surface-2:#171B27; --surface-3:#1F2434;
+  --ink:#ECEAE2; --ink-2:#AAAEBC; --ink-3:#767B8C; --line:#262B3B; --line-2:#333A4E;
+  --gold:#E9B455; --gold-bright:#F1C168; --gold-soft:#3A2E12;
+  --v-actual:#37C08A; --v-actual-bg:#10241C;
+  --v-est:#E0A345; --v-est-bg:#2A2110;
+  --v-hybrid:#8B95F0; --v-hybrid-bg:#171A2E;
+  --v-missing:#767B8C; --v-missing-bg:#1B1F2B;
+  --pos:#37C08A; --neg:#F0785F; --warn:#E0A345; --info:#8B95F0;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  --shadow-lg:0 2px 8px rgba(0,0,0,.5),0 30px 70px -24px rgba(0,0,0,.8);
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.12;margin:0;font-weight:760;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.serif{font-family:var(--serif)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+/* ---- top bar ---- */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--ground) 86%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar .row{display:flex;align-items:center;gap:16px;height:58px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em}
+.logo .mark{width:26px;height:26px;border-radius:8px;position:relative;flex:none;
+  background:radial-gradient(circle at 32% 30%,var(--gold-bright),var(--gold) 70%);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent),0 4px 14px -4px var(--gold)}
+.logo .mark::after{content:"";position:absolute;inset:7px;border-radius:50%;
+  background:var(--ground);opacity:.28}
+.logo small{font-family:var(--mono);font-weight:600;font-size:10px;letter-spacing:.16em;
+  color:var(--ink-3);text-transform:uppercase;margin-left:2px}
+.spacer{flex:1}
+.pill-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px;border:1px solid var(--line-2);border-radius:100px;color:var(--ink-2)}
+.tbtn{font:inherit;font-size:13px;cursor:pointer;background:transparent;border:1px solid var(--line-2);
+  color:var(--ink-2);border-radius:9px;padding:7px 11px;display:inline-flex;gap:7px;align-items:center}
+.tbtn:hover{border-color:var(--gold);color:var(--ink)}
+.tbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---- hero ---- */
+.hero{position:relative;padding:78px 0 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:520px;z-index:0;
+  background:
+    radial-gradient(60% 80% at 18% 20%,color-mix(in srgb,var(--gold) 22%,transparent),transparent 60%),
+    radial-gradient(50% 70% at 84% 12%,color-mix(in srgb,var(--v-hybrid) 16%,transparent),transparent 62%);
+  filter:blur(8px);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.trademark{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:22px}
+.hero h1{font-size:clamp(38px,6.4vw,74px);letter-spacing:-.035em;font-weight:820;max-width:16ch}
+.hero h1 .amp{color:var(--gold)}
+.hero .lede{font-family:var(--serif);font-size:clamp(19px,2.5vw,25px);line-height:1.42;color:var(--ink-2);
+  max-width:34ch;margin-top:22px}
+.rights{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.rights span{font-family:var(--mono);font-size:12px;letter-spacing:.02em;padding:6px 12px;border-radius:8px;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+.rights b{color:var(--gold);font-weight:700}
+
+/* ---- brands<->alma<->vendors diagram ---- */
+.triad{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:10px;
+  margin:44px 0 6px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--surface);
+  box-shadow:var(--shadow)}
+.node{padding:16px 14px;border-radius:14px;text-align:center;border:1px solid var(--line)}
+.node.brand{background:linear-gradient(180deg,var(--surface-2),var(--surface))}
+.node.vendor{background:linear-gradient(180deg,var(--surface-2),var(--surface))}
+.node.alma{background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 14%,var(--surface)),var(--surface));
+  border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
+.node h4{font-size:16px;margin-bottom:5px}
+.node p{font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.node .cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:8px}
+.flow{font-family:var(--mono);color:var(--gold);font-size:22px;font-weight:700;text-align:center}
+.verbs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.verbs span{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-2);padding:7px 13px;border-radius:100px;border:1px solid var(--line-2);background:var(--surface)}
+.verbs span b{color:var(--gold)}
+
+/* ---- section scaffolding ---- */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.04em}
+.sec-head h2{font-size:clamp(25px,3.6vw,38px)}
+.sec-sub{color:var(--ink-2);font-size:17px;max-width:62ch;margin:14px 0 30px;line-height:1.55}
+.sec-sub.serif{font-family:var(--serif);font-size:19px}
+
+/* ---- generic cards / grid ---- */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.card h4{font-size:16px;margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:14px;color:var(--ink-2);line-height:1.5}
+.card .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;font-weight:600}
+.lead-gold{border-left:3px solid var(--gold)}
+
+/* provenance chips */
+.prov{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;
+  padding:2px 8px;border-radius:6px;letter-spacing:.02em;white-space:nowrap;vertical-align:middle}
+.prov.actual{color:var(--v-actual);background:var(--v-actual-bg);border:1px solid color-mix(in srgb,var(--v-actual) 40%,transparent)}
+.prov.est{color:var(--v-est);background:var(--v-est-bg);border:1px dashed color-mix(in srgb,var(--v-est) 60%,transparent)}
+.prov.hybrid{color:var(--v-hybrid);background:var(--v-hybrid-bg);border:1px solid color-mix(in srgb,var(--v-hybrid) 40%,transparent)}
+.prov.missing{color:var(--v-missing);background:var(--v-missing-bg);border:1px dotted color-mix(in srgb,var(--v-missing) 60%,transparent)}
+.prov .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.conf{display:inline-flex;gap:2px;vertical-align:middle}
+.conf i{width:5px;height:5px;border-radius:50%;background:var(--ink-3);opacity:.28}
+.conf i.on{opacity:1;background:var(--v-actual)}
+
+/* progressive disclosure */
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface-2);margin-top:10px;overflow:hidden}
+details>summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:650;font-size:14px;
+  display:flex;align-items:center;gap:10px}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"›";font-family:var(--mono);color:var(--gold);font-size:20px;line-height:0;
+  transition:transform .18s ease}
+details[open]>summary::before{transform:rotate(90deg)}
+details .body{padding:2px 16px 16px 34px;font-size:14px;color:var(--ink-2);line-height:1.55}
+details .body ul{margin:8px 0;padding-left:18px}
+details .body li{margin:4px 0}
+.disc-chain{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.disc-chain span{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding:3px 9px;border-radius:100px;border:1px solid var(--line-2)}
+.disc-chain span.hot{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 45%,var(--line-2))}
+
+/* ---- device / screen frame ---- */
+.screen{border:1px solid var(--line-2);border-radius:18px;background:var(--surface);box-shadow:var(--shadow-lg);
+  overflow:hidden;margin-top:8px}
+.screen .chrome{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:var(--surface-2)}
+.screen .chrome .dots{display:flex;gap:6px}
+.screen .chrome .dots i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.screen .chrome .addr{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:6px;
+  padding:3px 10px;border-radius:6px;background:var(--ground);border:1px solid var(--line)}
+.screen .chrome .live{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--v-actual);display:flex;align-items:center;gap:6px}
+.screen .chrome .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--v-actual);
+  box-shadow:0 0 0 0 color-mix(in srgb,var(--v-actual) 60%,transparent);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--v-actual) 55%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.screen .body{padding:20px}
+.screen-cap{font-size:13px;color:var(--ink-3);margin-top:12px;text-align:center;font-style:italic}
+
+/* dashboard bits */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{padding:14px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
+.stat .big{font-family:var(--mono);font-size:30px;font-weight:720;letter-spacing:-.03em;line-height:1}
+.stat .lbl{font-size:12px;color:var(--ink-3);margin-top:7px}
+.stat .delta{font-family:var(--mono);font-size:12px;font-weight:650}
+.up{color:var(--pos)} .down{color:var(--neg)}
+.feed{display:flex;flex-direction:column;gap:0}
+.feed .item{display:grid;grid-template-columns:auto 1fr auto;gap:13px;padding:14px 4px;border-bottom:1px solid var(--line);align-items:start}
+.feed .item:last-child{border-bottom:none}
+.feed .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-family:var(--mono);
+  font-size:14px;font-weight:700;flex:none}
+.ic.intent{background:var(--v-hybrid-bg);color:var(--v-hybrid)}
+.ic.tech{background:var(--v-est-bg);color:var(--v-est)}
+.ic.match{background:color-mix(in srgb,var(--gold) 18%,var(--surface));color:var(--gold)}
+.ic.fin{background:var(--v-actual-bg);color:var(--v-actual)}
+.feed .txt b{font-size:14.5px;font-weight:680}
+.feed .txt p{font-size:13px;color:var(--ink-2);margin-top:2px}
+.feed .txt .why{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+.feed .txt .why b{color:var(--gold);font-weight:600;font-size:12.5px}
+.feed .act{align-self:center}
+.mini-btn{font:inherit;font-size:12px;font-weight:600;padding:6px 11px;border-radius:8px;border:1px solid var(--line-2);
+  background:var(--surface);color:var(--ink);cursor:pointer;white-space:nowrap}
+.mini-btn.gold{background:var(--gold);border-color:var(--gold);color:#1a1400}
+:root[data-theme="dark"] .mini-btn.gold,@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .mini-btn.gold{color:#140f00}}
+.mini-btn:hover{border-color:var(--gold)}
+
+/* five scores */
+.scores{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.score{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface);position:relative}
+.score .n{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.score h4{font-size:14.5px;margin:6px 0 10px}
+.score .val{font-family:var(--mono);font-size:26px;font-weight:720}
+.score .bar{height:6px;border-radius:100px;background:var(--surface-3);margin-top:10px;overflow:hidden}
+.score .bar i{display:block;height:100%;border-radius:100px}
+.score p{font-size:12px;color:var(--ink-3);margin-top:9px;line-height:1.4}
+
+/* financial engine */
+.engine{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
+.flowchart{display:flex;flex-direction:column;gap:0}
+.frow{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.frow:last-child{border-bottom:none}
+.frow .op{font-family:var(--mono);color:var(--ink-3);font-size:12px}
+.frow .lab{font-size:13.5px}
+.frow .lab small{color:var(--ink-3);display:block;font-size:11.5px}
+.frow .v{font-family:var(--mono);font-size:14px;font-weight:650;text-align:right;white-space:nowrap}
+.frow.total{border-top:2px solid var(--ink);border-bottom:none;margin-top:6px;padding-top:12px}
+.frow.total .lab{font-weight:750}
+.frow.total .v{font-size:17px;color:var(--gold)}
+.scenario-tabs{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;margin-bottom:16px}
+.scenario-tabs button{font:inherit;font-size:12.5px;font-weight:650;padding:7px 14px;border-radius:7px;border:none;
+  background:transparent;color:var(--ink-2);cursor:pointer}
+.scenario-tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.scenario-tabs button[aria-selected="true"].c-cons{color:var(--v-actual)}
+.scenario-tabs button[aria-selected="true"].c-high{color:var(--gold)}
+.verdict{padding:16px;border-radius:12px;background:var(--v-actual-bg);border:1px solid color-mix(in srgb,var(--v-actual) 35%,transparent);margin-top:16px}
+.verdict .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--v-actual);font-weight:700}
+.verdict p{font-size:14.5px;color:var(--ink);margin-top:6px;line-height:1.5}
+.kpi-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.kpi-3 .k{padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);text-align:center}
+.kpi-3 .k .kv{font-family:var(--mono);font-size:22px;font-weight:720}
+.kpi-3 .k .kl{font-size:11px;color:var(--ink-3);margin-top:3px}
+.decomp{display:flex;gap:6px;margin-top:8px;height:38px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.decomp span{display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:650;color:#1a1400}
+.decomp .aov{background:color-mix(in srgb,var(--gold) 65%,#fff)}
+.decomp .pf{background:color-mix(in srgb,var(--v-hybrid) 55%,#fff);color:#0c1030}
+.decomp .inter{background:color-mix(in srgb,var(--v-actual) 55%,#fff);color:#04180f}
+
+/* matchmaker doors */
+.doors{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch}
+.door{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--surface);box-shadow:var(--shadow)}
+.door.brand{background:linear-gradient(180deg,color-mix(in srgb,var(--v-hybrid) 8%,var(--surface)),var(--surface))}
+.door.vendor{background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 9%,var(--surface)),var(--surface))}
+.door h4{font-size:19px;margin-bottom:4px}
+.door .who{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.door ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.door ul li{font-size:12px;font-family:var(--mono);padding:4px 9px;border-radius:100px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.door-mid{display:grid;place-items:center;text-align:center}
+.door-mid .mm{font-family:var(--serif);font-size:18px;color:var(--gold);font-weight:700;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.1em}
+
+/* ranking */
+.rank{display:flex;flex-direction:column;gap:10px}
+.rank .r{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.rank .r.you{border-color:var(--gold);background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 10%,var(--surface)),var(--surface))}
+.rank .pos{font-family:var(--mono);font-size:24px;font-weight:760;width:44px;text-align:center;color:var(--ink-3)}
+.rank .r.you .pos{color:var(--gold)}
+.rank .who b{font-size:15px}
+.rank .who .tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-left:8px}
+.rank .who p{font-size:13px;color:var(--ink-2);margin-top:3px}
+.rank .fit{font-family:var(--mono);text-align:right}
+.rank .fit .f{font-size:20px;font-weight:720}
+.rank .fit small{font-size:10.5px;color:var(--ink-3);display:block}
+.urg{margin-top:14px;padding:13px 16px;border-radius:12px;border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);
+  background:var(--v-est-bg);display:flex;gap:12px;align-items:center}
+.urg .tick{font-family:var(--mono);font-weight:700;color:var(--v-est);font-size:13px}
+.urg p{font-size:13.5px;color:var(--ink);line-height:1.45}
+
+/* intent timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line-2)}
+.tev{position:relative;padding:0 0 20px 0}
+.tev::before{content:"";position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--gold)}
+.tev.faint::before{border-color:var(--v-missing)}
+.tev .when{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.tev b{font-size:15px;display:block;margin:2px 0 4px}
+.tev .why{font-size:13px;color:var(--ink-2)}
+.tev .why em{color:var(--gold);font-style:normal;font-weight:600}
+.corr{margin-top:8px;padding:12px 14px;border-radius:10px;background:var(--v-hybrid-bg);
+  border:1px solid color-mix(in srgb,var(--v-hybrid) 30%,transparent);font-size:13px;color:var(--ink)}
+.corr b{color:var(--v-hybrid)}
+
+/* stack grid */
+.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tech{padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.tech .cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.tech b{font-size:14px;display:block;margin:4px 0 6px}
+.tech.migrate{border-color:color-mix(in srgb,var(--v-est) 45%,var(--line));border-style:dashed}
+.tech .prev{font-size:11px;color:var(--ink-3);text-decoration:line-through;margin-top:4px;font-family:var(--mono)}
+
+/* agents */
+.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.agent{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);position:relative;overflow:hidden}
+.agent .working{position:absolute;top:12px;right:12px;width:7px;height:7px;border-radius:50%;background:var(--v-actual);animation:pulse 2s infinite}
+.agent b{font-size:14px}
+.agent .task{font-family:var(--mono);font-size:12px;color:var(--gold);margin-top:8px}
+.agent p{font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.4}
+.ladder{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.ladder .lv{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.ladder .lv .ln{font-family:var(--mono);font-weight:700;color:var(--gold);font-size:13px}
+.ladder .lv .cost{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.ladder .lv p{font-size:13px;color:var(--ink-2)}
+
+/* lists / callouts */
+.callout{border-left:3px solid var(--gold);background:var(--surface-2);padding:16px 18px;border-radius:0 12px 12px 0;margin:8px 0}
+.callout.warn{border-left-color:var(--warn);background:var(--v-est-bg)}
+.callout.no{border-left-color:var(--neg);background:color-mix(in srgb,var(--neg) 8%,var(--surface))}
+.callout p{font-size:14.5px;color:var(--ink);line-height:1.55}
+.callout .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px;display:block}
+.callout .t.g{color:var(--gold)} .callout.warn .t{color:var(--warn)} .callout.no .t{color:var(--neg)}
+.checklist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.checklist li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;line-height:1.5}
+.checklist li::before{content:"";width:20px;height:20px;border-radius:6px;margin-top:2px;flex:none;
+  background:var(--v-actual-bg);border:1px solid color-mix(in srgb,var(--v-actual) 40%,transparent);
+  background-image:linear-gradient(45deg,transparent 45%,var(--v-actual) 45%,var(--v-actual) 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,var(--v-actual) 45%,var(--v-actual) 55%,transparent 55%);
+  background-size:9px 9px;background-position:center;background-repeat:no-repeat}
+.checklist.no li::before{background-image:linear-gradient(45deg,transparent 44%,var(--neg) 44%,var(--neg) 56%,transparent 56%),linear-gradient(-45deg,transparent 44%,var(--neg) 44%,var(--neg) 56%,transparent 56%);border-color:color-mix(in srgb,var(--neg) 40%,transparent);background-color:color-mix(in srgb,var(--neg) 8%,var(--surface))}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+
+/* pricing */
+.price{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.plan{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--surface)}
+.plan.feature{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),var(--shadow-lg)}
+.plan .side{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.plan h4{font-size:18px;margin:8px 0 4px}
+.plan .money{font-family:var(--mono);font-size:32px;font-weight:760;letter-spacing:-.03em;margin:8px 0}
+.plan .money small{font-size:13px;color:var(--ink-3);font-weight:500}
+.plan ul{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+.plan ul li{font-size:13px;color:var(--ink-2);padding-left:18px;position:relative}
+.plan ul li::before{content:"+";position:absolute;left:0;color:var(--gold);font-family:var(--mono);font-weight:700}
+.illus{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-style:italic}
+
+/* final / beat horizon */
+.beat{background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--line-2);
+  border-radius:20px;padding:32px;box-shadow:var(--shadow-lg)}
+.beat ol{counter-reset:b;list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:14px}
+.beat ol li{counter-increment:b;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.beat ol li::before{content:counter(b);font-family:var(--mono);font-weight:760;font-size:15px;color:#1a1400;
+  background:var(--gold);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}
+.beat ol li b{font-size:15.5px}
+.beat ol li p{font-size:14px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+
+/* appendix parts map */
+.parts{columns:2;column-gap:24px}
+.parts .p{break-inside:avoid;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.parts .p .pn{font-family:var(--mono);color:var(--gold);font-weight:700;font-size:12px}
+.parts .p a{color:var(--ink-2);text-decoration:none}
+.parts .p a:hover{color:var(--gold)}
+
+footer{padding:44px 0 60px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px}
+.big-close{font-family:var(--serif);font-size:clamp(24px,4vw,40px);letter-spacing:-.02em;color:var(--ink);
+  text-align:center;padding:20px 0}
+.big-close b{color:var(--gold)}
+
+/* responsive */
+@media(max-width:900px){
+  .g4,.g3,.stat-row,.scores,.stack,.agents,.price,.kpi-3{grid-template-columns:repeat(2,1fr)}
+  .engine,.two,.doors{grid-template-columns:1fr}
+  .doors .door-mid .mm{writing-mode:horizontal-tb;transform:none}
+  .triad{grid-template-columns:1fr;gap:8px}.triad .flow{transform:rotate(90deg)}
+  .parts{columns:1}
+}
+@media(max-width:560px){
+  .g2,.g4,.g3,.stat-row,.scores,.stack,.agents,.price,.kpi-3{grid-template-columns:1fr}
+  .rank .r{grid-template-columns:auto 1fr}.rank .fit{grid-column:2;text-align:left}
+  .wrap{padding:0 16px}
+}
+</style>
+
+<div class="topbar"><div class="wrap row">
+  <div class="logo"><span class="mark"></span>ALMA<small>AI OS · Loyalty™</small></div>
+  <div class="spacer"></div>
+  <span class="pill-tag">Product Blueprint</span>
+  <button class="tbtn" id="themeBtn" aria-label="Toggle theme">◐ Theme</button>
+</div></div>
+
+<!-- ============ HERO ============ -->
+<header class="hero"><div class="wrap">
+  <div class="trademark">Alma AI OS — Loyalty™</div>
+  <h1>Everyone wins <span class="amp">when</span> the fit is right.</h1>
+  <p class="lede">The financial, technology, fit and intent intelligence layer for the entire loyalty ecosystem — proving the match <em>before</em>, <em>during</em> and <em>after</em> the sale.</p>
+  <div class="rights">
+    <span><b>Right</b> brand</span><span><b>Right</b> vendor</span><span><b>Right</b> economics</span>
+    <span><b>Right</b> technology</span><span><b>Right</b> time</span>
+  </div>
+
+  <div class="triad">
+    <div class="node brand"><span class="cap">Demand side</span><h4>Brands</h4><p>Should we do loyalty? Which vendor? Is it working?</p></div>
+    <div class="flow">→</div>
+    <div class="node alma"><span class="cap">The operating system</span><h4>ALMA</h4><p>Understands both sides. Hunts · gathers · verifies · calculates · matches · activates.</p></div>
+    <div class="flow">←</div>
+    <div class="node vendor"><span class="cap">Supply side</span><h4>Vendors</h4><p>Who can afford us? Why? When? What do we say?</p></div>
+  </div>
+  <div class="verbs">
+    <span><b>Calculate</b></span><span><b>Match</b></span><span><b>Monitor</b></span>
+    <span><b>Research</b></span><span><b>Act</b></span><span><b>Prove</b></span>
+  </div>
+</div></header>
+
+<!-- ============ 30 SECONDS ============ -->
+<section id="thirty"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">01</span><h2>Understand Alma in 30 seconds</h2></div>
+  <p class="sec-sub serif">A brand does not know whether loyalty will make money. A vendor does not know which brands can afford it. Both guess, both waste money, and bad-fit deals churn. Alma runs the math for both sides and proves the fit with evidence — so the right brand meets the right vendor at the right time.</p>
+
+  <div class="grid g3">
+    <div class="card lead-gold"><span class="kicker">For a 10th grader · Part 1</span><p>Alma is like a matchmaker with a calculator. Loyalty programs (points, rewards, VIP) only make money for some companies. Alma figures out which companies those are, which software company should sell to them, and whether it will actually pay off — then it keeps watching everything so it always knows what changed today.</p></div>
+    <div class="card"><span class="kicker">What it decides</span>
+      <ul style="margin:0;padding-left:18px;font-size:14px;color:var(--ink-2);line-height:1.7">
+        <li>Which brands can <b>financially</b> support loyalty</li>
+        <li>Which <b>vendors fit</b> those brands</li>
+        <li>Which accounts show <b>buying signals</b> now</li>
+        <li>Which technology &amp; programs <b>changed</b></li>
+        <li>What the salesperson should <b>do today</b></li>
+        <li>How to make a live program <b>better</b></li>
+        <li>Carrying the model into <b>renewal</b></li>
+      </ul>
+    </div>
+    <div class="card"><span class="kicker">Part 3 · The brand promise</span>
+      <p style="color:var(--ink);font-weight:600">"Everyone wins when the fit is right" is the correct promise — <span style="color:var(--gold)">keep it.</span></p>
+      <p style="margin-top:8px">It is the rare positioning that is simultaneously the ethic (don't sell bad fits), the product (a fit engine), and the growth loop (both sides invite the other). The only risk: "everyone wins" can sound soft. Pair it always with the hard line below so it reads as <em>disciplined</em>, not utopian.</p>
+    </div>
+  </div>
+
+  <div class="two" style="margin-top:16px">
+    <div class="callout"><span class="t g">Say this to vendors</span><p>Stop burning six months chasing companies that were never going to make money with loyalty.</p></div>
+    <div class="callout"><span class="t g">Say this to brands</span><p>Know whether loyalty can make money <em>before</em> you spend millions building it.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ CPO CHALLENGE ============ -->
+<section id="challenge"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">02</span><h2>The honest product read</h2></div>
+  <p class="sec-sub">You asked me to act as CPO, CTO, Head of UX, VP Loyalty, VP Revenue and investor — and to <em>challenge</em> the concept, not applaud it. Here is where I'd push.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="kicker">What is genuinely strong</span>
+      <p><b>The wedge is real and specific.</b> "Salespeople fear the ROI math" is a founder insight you cannot get from a prompt. Deriving members <em>down</em> from Revenue ÷ AOV ÷ Frequency — instead of asking "how many members do you expect?" — is the whole product in one move. Protect it.</p>
+    </div>
+    <div class="card"><span class="kicker">What to combine</span>
+      <p>Collapse "Company Intelligence Record" and "Financial Model" into <b>one object with tabs</b> — the model is a lens on the company, not a separate screen. Collapse Quick / Detailed / Upload calculators into <b>one calculator with a depth slider</b>. Five scores stay five; do not merge them.</p>
+    </div>
+    <div class="card"><span class="kicker">What must stay separate</span>
+      <p>The <b>five scores</b> (never one mystery AI number). <b>Actual vs Estimated</b> provenance (never blended silently). <b>Paid placement vs independent ranking</b> (never let money move rank). These three separations <em>are</em> the trust product.</p>
+    </div>
+    <div class="card lead-gold"><span class="kicker">Part 22 · Do NOT build yet</span>
+      <p>Voice AI outreach, coalition modeling, 500k-company crawl, the adjacent-market calculators (CDP/ESP/POS ROI), vendor self-serve portal, and CRM two-way sync. All real — all <em>after</em> you've proven the core loop on ~150 vendors and a few thousand hand-curated brands. Breadth is the reward for depth, not a substitute.</p>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:16px"><span class="t">The one thing that will kill this if you get it wrong</span><p>False precision. The moment a salesperson forwards a report that says "$8,384,227" and the brand's CFO finds it's an AI guess, the trust product is dead. Every number must wear its provenance and its confidence. This is a design constraint, not a footnote — it drives the entire visual system below.</p></div>
+</div></section>
+
+<!-- ============ FIVE SCORES ============ -->
+<section id="scores"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">03</span><h2>The five scores stay five</h2><span class="pill-tag">Part 14</span></div>
+  <p class="sec-sub">One "AI fit score" is a black box nobody trusts and everybody argues with. Five separate, drillable scores answer five different questions — and let a rep see <em>exactly</em> why an account ranks where it does.</p>
+  <div class="scores">
+    <div class="score"><div class="n">01</div><h4>Financial Fit</h4><div class="val" style="color:var(--v-actual)">82</div><div class="bar"><i style="width:82%;background:var(--v-actual)"></i></div><p>Can the brand economically support the program?</p></div>
+    <div class="score"><div class="n">02</div><h4>Vendor Capability Fit</h4><div class="val" style="color:var(--v-hybrid)">74</div><div class="bar"><i style="width:74%;background:var(--v-hybrid)"></i></div><p>Does the vendor truly have the tech &amp; services?</p></div>
+    <div class="score"><div class="n">03</div><h4>Buyer Intent</h4><div class="val" style="color:var(--gold)">68</div><div class="bar"><i style="width:68%;background:var(--gold)"></i></div><p>Credible signals they're researching / changing?</p></div>
+    <div class="score"><div class="n">04</div><h4>Mutual Match</h4><div class="val" style="color:var(--v-actual)">79</div><div class="bar"><i style="width:79%;background:var(--v-actual)"></i></div><p>How well do brand needs &amp; vendor strengths align?</p></div>
+    <div class="score"><div class="n">05</div><h4>Commercial Priority</h4><div class="val" style="color:var(--gold)">A−</div><div class="bar"><i style="width:88%;background:var(--gold)"></i></div><p>Given all four — where to spend effort now.</p></div>
+  </div>
+  <details><summary>Why → show the components of Commercial Priority</summary>
+    <div class="body">Commercial Priority is <b>not</b> a sixth guess — it is a transparent weighting of the other four against deal economics and timing. Every score expands into its inputs, each input carries a source and confidence, and the rep can challenge any of them.
+      <div class="disc-chain"><span class="hot">Answer</span><span>Why</span><span>Evidence</span><span>Math</span><span>Source</span><span>History</span></div>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ FINANCIAL ENGINE ============ -->
+<section id="engine"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">04</span><h2>One protected financial engine</h2><span class="pill-tag">Parts 6 · 7 · 34</span></div>
+  <p class="sec-sub">There is exactly <em>one</em> engine. The public calculator, the embedded white-label widget, bulk Pre-Scope, proposals and renewal reviews all call the same registry of formulas. No spreadsheet forks. It derives members <b>down</b> from business reality, and it answers the only question that matters: <em>does this still make money under conservative assumptions?</em></p>
+
+  <div class="engine">
+    <div class="card">
+      <div class="scenario-tabs" role="tablist" id="scnTabs">
+        <button class="c-cons" role="tab" data-scn="cons" aria-selected="false">Conservative</button>
+        <button role="tab" data-scn="exp" aria-selected="true">Expected</button>
+        <button class="c-high" role="tab" data-scn="high" aria-selected="false">High</button>
+      </div>
+      <div class="flowchart" id="flow">
+        <div class="frow"><div class="lab">Annual Revenue <small>SEC 10-K, FY illustrative</small></div><div class="op"></div><div class="v">$5.13B</div></div>
+        <div class="frow"><div class="lab">÷ Average Order Value</div><div class="op">÷</div><div class="v">$98</div></div>
+        <div class="frow"><div class="lab">= Orders</div><div class="op">=</div><div class="v" data-k="orders">52.3M</div></div>
+        <div class="frow"><div class="lab">÷ Purchase Frequency</div><div class="op">÷</div><div class="v">2.4×</div></div>
+        <div class="frow"><div class="lab">= Estimated Customers</div><div class="op">=</div><div class="v" data-k="cust">21.8M</div></div>
+        <div class="frow"><div class="lab">× Identity Capture × Eligibility</div><div class="op">×</div><div class="v" data-k="idcap">62%</div></div>
+        <div class="frow"><div class="lab">× Enrollment Rate</div><div class="op">×</div><div class="v" data-k="enr">—</div></div>
+        <div class="frow"><div class="lab">× Active Rate → Active Members</div><div class="op">×</div><div class="v" data-k="active">—</div></div>
+        <div class="frow total"><div class="lab">Net Incremental Contribution</div><div class="op"></div><div class="v" data-k="net">—</div></div>
+      </div>
+      <p class="illus" style="margin-top:10px">Illustrative figures on a demo account. Live models carry field-level provenance (below).</p>
+    </div>
+
+    <div>
+      <div class="verdict" id="verdict">
+        <span class="lbl">The conclusion that matters</span>
+        <p id="verdictText">Even here, the economics hold. That is a far more useful answer than a fake exact number.</p>
+      </div>
+      <div class="kpi-3">
+        <div class="k"><div class="kv" data-k="bcr">—</div><div class="kl">Benefit-Cost Ratio</div></div>
+        <div class="k"><div class="kv" data-k="roi">—</div><div class="kl">Net ROI</div></div>
+        <div class="k"><div class="kv" data-k="pay">—</div><div class="kl">Payback</div></div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="eyebrow" style="margin-bottom:6px">Incremental revenue — decomposed correctly</div>
+        <div class="decomp">
+          <span class="aov" style="flex:2.2">AOV-only</span>
+          <span class="pf" style="flex:3">Frequency-only</span>
+          <span class="inter" style="flex:1">Interaction</span>
+        </div>
+        <p style="font-size:12.5px;color:var(--ink-3);margin-top:8px">The classic spreadsheet mistake is counting <em>only</em> the interaction term. Alma sums all three effects — and never calls the Benefit-Cost Ratio "ROI×".</p>
+      </div>
+    </div>
+  </div>
+
+  <details style="margin-top:16px"><summary>Show the math → how Conservative / Expected / High are built</summary>
+    <div class="body">Each driver (enrollment, active rate, AOV lift, PF lift, breakage, incrementality) has a range from the benchmark library, tightened by any actuals. Conservative pulls each driver toward its pessimistic bound; High toward optimistic. We show the <b>band</b>, not a point. The headline is almost always: "attractive even at the low end" or "only works if X — validate X first."
+      <ul><li><b>Gross incremental</b> = (AOV-only) + (PF-only) + (interaction), across active members.</li>
+      <li>× incrementality × gross margin = <b>economic benefit</b>.</li>
+      <li>− rewards, software, implementation, services, marketing, ops, tech, internal labor = <b>net contribution</b>.</li>
+      <li>Outputs: BCR, Net ROI, Payback, Break-even lift, 5-year outlook.</li></ul>
+    </div>
+  </details>
+</div></section>
+
+<!-- ============ PROVENANCE ============ -->
+<section id="prov"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">05</span><h2>Actual · Estimated · Hybrid — visible on every number</h2><span class="pill-tag">Parts 5 · 35 · 36</span></div>
+  <p class="sec-sub">The provenance system <em>is</em> the brand's personality. Verified data is a <b>solid emerald chip</b>. Estimated data is <b>dashed amber</b> — tentative by shape, not just color, so it survives a screenshot or a colorblind CFO. Hybrid is indigo. Missing is dotted grey. Estimated data is valuable — but it never masquerades as actual.</p>
+
+  <div class="grid g4">
+    <div class="card"><span class="prov actual"><span class="dot"></span>ACTUAL</span><p style="margin-top:10px">Customer/CRM/SEC/audited. <b>Overrides estimates.</b></p></div>
+    <div class="card"><span class="prov est"><span class="dot"></span>~ESTIMATED</span><p style="margin-top:10px">Benchmarks &amp; models. Great for ranking &amp; TAM — labeled always.</p></div>
+    <div class="card"><span class="prov hybrid"><span class="dot"></span>HYBRID</span><p style="margin-top:10px">Actuals where present, estimates only for gaps. The common mode.</p></div>
+    <div class="card"><span class="prov missing"><span class="dot"></span>MISSING</span><p style="margin-top:10px">"Not enough verifiable information." Better than invented certainty.</p></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <span class="kicker">Every important field carries a full record</span>
+    <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px">
+      <thead><tr style="text-align:left;color:var(--ink-3);font-family:var(--mono);font-size:11px;letter-spacing:.08em">
+        <th style="padding:8px 10px">Field</th><th>Value</th><th>Provenance</th><th>Source</th><th>Confidence</th><th>Updated</th></tr></thead>
+      <tbody style="font-family:var(--mono)">
+        <tr style="border-top:1px solid var(--line)"><td style="padding:9px 10px">Annual Revenue</td><td>$5.13B</td><td><span class="prov actual"><span class="dot"></span>ACTUAL</span></td><td style="color:var(--ink-2)">SEC 10-K</td><td><span class="conf"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td style="color:var(--ink-3)">12d ago</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:9px 10px">Avg Order Value</td><td>$98</td><td><span class="prov hybrid"><span class="dot"></span>HYBRID</span></td><td style="color:var(--ink-2)">Derived + benchmark</td><td><span class="conf"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td style="color:var(--ink-3)">3d ago</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:9px 10px">Enrollment Rate</td><td>~34%</td><td><span class="prov est"><span class="dot"></span>~ESTIMATED</span></td><td style="color:var(--ink-2)">Category prior</td><td><span class="conf"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></td><td style="color:var(--ink-3)">est.</td></tr>
+        <tr style="border-top:1px solid var(--line)"><td style="padding:9px 10px">Current Loyalty Vendor</td><td>—</td><td><span class="prov missing"><span class="dot"></span>MISSING</span></td><td style="color:var(--ink-2)">No evidence found</td><td><span class="conf"><i></i><i></i><i></i><i></i><i></i></span></td><td style="color:var(--ink-3)">—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="callout no" style="margin-top:16px"><span class="t">Non-negotiable · Part 34</span><p>Estimated data never renders in the "Actual" style. Web-traffic signal is labeled "Digital Demand," never converted into audited channel revenue. A suggested tech migration is shown as a <em>signal with confidence</em>, never a fact.</p></div>
+</div></section>
+
+<!-- ============ SCREEN: VENDOR DAILY ============ -->
+<section id="vendor-daily"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">06</span><h2>Screen — Vendor Daily Dashboard</h2><span class="pill-tag">Parts 12 · 23 · 38</span></div>
+  <p class="sec-sub">The retention engine for vendors. One question, answered every morning: <em>what changed since yesterday?</em> If a rep has no reason to log in daily, the subscription dies. This screen is that reason.</p>
+
+  <div class="screen">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div>
+      <span class="addr">alma.os / yotpo / today</span><span class="live">Agents working — 142 accounts</span></div>
+    <div class="body">
+      <div class="stat-row">
+        <div class="stat"><div class="big" style="color:var(--gold)">12</div><div class="lbl">New opportunities</div><div class="delta up">▲ overnight</div></div>
+        <div class="stat"><div class="big" style="color:var(--v-hybrid)">7</div><div class="lbl">Buyer-intent signals</div><div class="delta up">▲ 3 high-confidence</div></div>
+        <div class="stat"><div class="big" style="color:var(--v-actual)">3</div><div class="lbl">Entered your Top-3</div><div class="delta up">▲ act fast</div></div>
+        <div class="stat"><div class="big" style="color:var(--v-est)">4</div><div class="lbl">Tech migrations detected</div><div class="delta">~ signals</div></div>
+      </div>
+
+      <div class="feed" style="margin-top:18px">
+        <div class="item"><div class="ic match">#2</div>
+          <div class="txt"><b>ACME Beauty — you moved into the Top-3 match</b>
+            <p>Financial Fit 82 · Mutual Match 79 · now ranks you #2 of 5 fitting vendors.</p>
+            <div class="why"><b>Why it matters:</b> #1 currently leads on native POS. You lead on receipt-scanning + referrals — their new signal favors you.</div></div>
+          <div class="act"><button class="mini-btn gold">Open account</button></div></div>
+
+        <div class="item"><div class="ic intent">◆</div>
+          <div class="txt"><b>Northwind Coffee — hired VP of Loyalty</b>
+            <p>New executive, retention remit, started this week. <span class="prov hybrid"><span class="dot"></span>HYBRID</span></p>
+            <div class="why"><b>Do this:</b> reach the VP in their first 30 days with the economic case, not a demo.</div></div>
+          <div class="act"><button class="mini-btn">Draft outreach</button></div></div>
+
+        <div class="item"><div class="ic tech">⇄</div>
+          <div class="txt"><b>Vela Apparel — possible commerce migration</b>
+            <p>Magento detected + "Shopify Plus Architect" role posted. <span class="prov est"><span class="dot"></span>~SIGNAL</span></p>
+            <div class="why"><b>Not a fact yet:</b> two independent signals suggest a re-platform. Loyalty re-selection often follows.</div></div>
+          <div class="act"><button class="mini-btn">Watch</button></div></div>
+
+        <div class="item"><div class="ic fin">$</div>
+          <div class="txt"><b>Harbor Pet — financial model refreshed</b>
+            <p>Conservative case now +$4.2M net; still attractive at the low end.</p>
+            <div class="why"><b>Ready:</b> executive report generated overnight.</div></div>
+          <div class="act"><button class="mini-btn">View report</button></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="screen-cap">The daily loop (Part 23): arrive → see what changed → one click to act. Streaks, "overnight finds," and Top-3 movement are the addiction mechanics.</p>
+</div></section>
+
+<!-- ============ SCREEN: COMPANY INTELLIGENCE ============ -->
+<section id="company"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">07</span><h2>Screen — Company Intelligence Record</h2><span class="pill-tag">Parts 8 · 16 · 40</span></div>
+  <p class="sec-sub">The centerpiece object. Everything Alma knows about one brand, with the answer first and the evidence a click away. Demo account shown; illustrative fields are labeled and never styled as verified.</p>
+
+  <div class="screen">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div>
+      <span class="addr">alma.os / company / nike — illustrative demo</span><span class="live">6 agents on this account</span></div>
+    <div class="body">
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;justify-content:space-between">
+        <div>
+          <div class="eyebrow">Company summary</div>
+          <h3 style="font-size:26px;margin:6px 0 4px">Nike <span class="prov est" style="vertical-align:middle">DEMO / ILLUSTRATIVE</span></h3>
+          <p style="color:var(--ink-2);font-size:14px;max-width:52ch">Global athletic brand · DTC + wholesale + marketplace · high identity capture via app &amp; membership. Hybrid model: financials verified from filings, program specifics estimated.</p>
+        </div>
+        <div style="text-align:right">
+          <div class="eyebrow">Commercial priority</div>
+          <div class="num" style="font-size:40px;font-weight:760;color:var(--gold);line-height:1">A−</div>
+          <div style="font-size:12px;color:var(--ink-3)">Opportunity ~$180K ARR <span class="prov est">~EST</span></div>
+        </div>
+      </div>
+
+      <div class="scores" style="margin-top:20px">
+        <div class="score"><div class="n">Financial</div><div class="val" style="font-size:22px;color:var(--v-actual)">82</div><div class="bar"><i style="width:82%;background:var(--v-actual)"></i></div></div>
+        <div class="score"><div class="n">Capability</div><div class="val" style="font-size:22px;color:var(--v-hybrid)">74</div><div class="bar"><i style="width:74%;background:var(--v-hybrid)"></i></div></div>
+        <div class="score"><div class="n">Intent</div><div class="val" style="font-size:22px;color:var(--gold)">68</div><div class="bar"><i style="width:68%;background:var(--gold)"></i></div></div>
+        <div class="score"><div class="n">Mutual Match</div><div class="val" style="font-size:22px;color:var(--v-actual)">79</div><div class="bar"><i style="width:79%;background:var(--v-actual)"></i></div></div>
+        <div class="score"><div class="n">Priority</div><div class="val" style="font-size:22px;color:var(--gold)">A−</div><div class="bar"><i style="width:88%;background:var(--gold)"></i></div></div>
+      </div>
+
+      <div class="grid g2" style="margin-top:18px">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Recommended sales actions</div>
+          <ul class="checklist">
+            <li>Lead with the <b>economic case</b> — conservative +$4.2M — not a feature demo.</li>
+            <li>Reference their <b>app-based identity capture</b>; it's their unfair advantage.</li>
+            <li>Validate <b>current vendor &amp; contract timing</b> before proposing.</li>
+          </ul>
+          <div class="eyebrow" style="margin:16px 0 8px">Must be validated</div>
+          <ul class="checklist no">
+            <li>Incumbent loyalty vendor — <span class="prov missing"><span class="dot"></span>MISSING</span></li>
+            <li>Actual enrollment &amp; active rates — currently <span class="prov est"><span class="dot"></span>~EST</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Timeline — what happened / why it matters</div>
+          <div class="timeline">
+            <div class="tev"><div class="when">3 days ago</div><b>Rewards page terms changed</b><div class="why">Points expiry shortened — <em>possible devaluation → member dissatisfaction window.</em></div></div>
+            <div class="tev"><div class="when">2 weeks ago</div><b>Shopify Plus architect role posted</b><div class="why">Commerce investment — <em>loyalty integrations often re-scoped alongside.</em></div></div>
+            <div class="tev faint"><div class="when">6 weeks ago</div><b>CDP evaluation signal</b><div class="why">Low confidence — <em>watch for corroboration before acting.</em></div></div>
+          </div>
+        </div>
+      </div>
+
+      <details style="margin-top:16px"><summary>Show evidence → sources, agents working, change history</summary>
+        <div class="body">Financials: SEC EDGAR (10-K) <span class="prov actual">ACTUAL</span>. Program specifics: category benchmark + site crawl <span class="prov est">~EST</span>. Web reach: Digital Demand signal (not revenue). Agents currently running: Research · Financial · Intent · Stack · Match · Report. Every field links to its source, capture date, and prior values.</div>
+      </details>
+    </div>
+  </div>
+  <p class="screen-cap">Progressive disclosure in action: answer (A−, +$4.2M) → why → evidence → math → source → history. A rookie reads the top; a CTO drills to the bottom.</p>
+</div></section>
+
+<!-- ============ SCREEN: MATCHMAKER ============ -->
+<section id="matchmaker"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">08</span><h2>Screen — The two-sided Matchmaker</h2><span class="pill-tag">Parts 10 · 18</span></div>
+  <p class="sec-sub">Not a four-field form. Two doors, one truth: <b>brands qualify vendors, vendors qualify brands, Alma proves the match.</b></p>
+  <div class="doors">
+    <div class="door brand"><span class="who">I am a brand</span><h4>Find vendors that fit us</h4>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-top:8px">Match on the reality of our business — not a logo grid.</p>
+      <ul><li>economics</li><li>company size</li><li>channels</li><li>business model</li><li>geography</li><li>tech &amp; integrations</li><li>budget</li><li>program mechanics</li><li>services</li><li>timeline</li></ul>
+    </div>
+    <div class="door-mid"><span class="mm">The fit is mutual</span></div>
+    <div class="door vendor"><span class="who">I sell loyalty software</span><h4>Find brands that fit us</h4>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-top:8px">Only the accounts our ICP + economics can actually win.</p>
+      <ul><li>vendor ICP</li><li>financial viability</li><li>existing stack</li><li>capabilities</li><li>buyer intent</li><li>opportunity value</li><li>industry</li><li>business model</li><li>integrations</li><li>geography</li></ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:16px"><span class="t g">Design rule</span><p>The Matchmaker output is always a <em>ranked, evidenced</em> list with the five scores visible — never a single opaque "best match." And paid subscription never changes independent rank.</p></div>
+</div></section>
+
+<!-- ============ SCREEN: COMPETITIVE RANKING ============ -->
+<section id="ranking"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">09</span><h2>Screen — Competitive ranking &amp; urgency</h2><span class="pill-tag">Parts 13 · 42</span></div>
+  <p class="sec-sub">The most commercially potent mechanic — <em>if</em> it's honest. If our customer is #2, we tell them #2, and exactly why. Then we make the clock visible.</p>
+  <div class="screen"><div class="body">
+    <div class="eyebrow" style="margin-bottom:12px">ACME Beauty — best loyalty fit · evidence-backed</div>
+    <div class="rank">
+      <div class="r"><div class="pos">1</div><div class="who"><b>Vendor A</b><p>Leads on <b>native POS integration</b> — verified via 3 customer references &amp; public docs.</p></div><div class="fit"><div class="f" style="color:var(--v-actual)">86</div><small>mutual match</small></div></div>
+      <div class="r you"><div class="pos">2</div><div class="who"><b>Yotpo</b><span class="tag">you</span><p>Leads on <b>receipt-scanning + referrals</b>, which ACME's new signal favors. You trail only on POS depth.</p></div><div class="fit"><div class="f" style="color:var(--gold)">82</div><small>mutual match</small></div></div>
+      <div class="r"><div class="pos">3</div><div class="who"><b>Vendor C</b><p>Strong on paid membership; weaker channel coverage for ACME's retail mix.</p></div><div class="fit"><div class="f" style="color:var(--ink-2)">71</div><small>mutual match</small></div></div>
+    </div>
+    <div class="urg"><span class="tick">CLOCK</span><p><b>You rank #2 today.</b> Close the POS gap in the narrative, or move before #1 discovers this account. The other Top-3 vendors may be notified per their subscription — urgency is real, not manufactured.</p></div>
+  </div></div>
+  <p class="screen-cap">This single screen serves sales, competitive intel, product strategy and roadmap. It only works because the ranking is defensible — never fabricated.</p>
+</div></section>
+
+<!-- ============ SCREEN: BUYER INTENT ============ -->
+<section id="intent"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">10</span><h2>Screen — Buyer-intent event timeline</h2><span class="pill-tag">Parts 11 · 43</span></div>
+  <p class="sec-sub">Intent is <em>corroborated evidence</em>, not anonymous web traffic. Confidence rises when independent signals agree — and Alma says "possible," never "definitely."</p>
+  <div class="screen"><div class="body">
+    <div class="timeline">
+      <div class="tev"><div class="when">Today · high confidence</div><b>VP of Loyalty hired</b><div class="why">LinkedIn + company press. <em>Retention mandate, first-30-days window.</em></div></div>
+      <div class="tev"><div class="when">4 days ago · medium</div><b>Shopify Plus Architect role posted</b><div class="why">Public job board. <em>Commerce re-platform investment.</em></div></div>
+      <div class="tev"><div class="when">2 weeks ago · medium</div><b>Magento currently detected on storefront</b><div class="why">Tech fingerprint. <em>Incumbent platform being replaced?</em></div></div>
+      <div class="tev faint"><div class="when">3 weeks ago · low</div><b>Rewards page copy edited</b><div class="why">Crawl diff. <em>Weak on its own — needs corroboration.</em></div></div>
+    </div>
+    <div class="corr"><b>Corroboration:</b> Magento detected <span class="mono">+</span> Shopify Plus role <span class="mono">=</span> <b>possible commerce migration</b> (confidence rising). Alma does <em>not</em> claim "switched to Shopify." Loyalty re-selection frequently rides along with re-platforming — which is why this account's Intent score just moved.</div>
+  </div></div>
+</div></section>
+
+<!-- ============ MARTECH STACK ============ -->
+<section id="stack"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">11</span><h2>MarTech Stack Intelligence</h2><span class="pill-tag">Part 12</span></div>
+  <p class="sec-sub"><b>For rookies:</b> a MarTech stack is simply the collection of software a company uses to market to, sell to and manage customers. Alma tracks it with history — current, previous, first-detected, last-verified, and migration signals.</p>
+  <div class="stack">
+    <div class="tech"><span class="cat">Commerce</span><b>Magento</b><span class="prov est"><span class="dot"></span>~SIGNAL</span><span class="prev">→ Shopify Plus?</span></div>
+    <div class="tech"><span class="cat">Loyalty</span><b>None detected</b><span class="prov missing"><span class="dot"></span>MISSING</span></div>
+    <div class="tech"><span class="cat">CRM</span><b>Salesforce</b><span class="prov actual"><span class="dot"></span>VERIFIED</span></div>
+    <div class="tech"><span class="cat">CDP</span><b>Segment</b><span class="prov hybrid"><span class="dot"></span>HYBRID</span></div>
+    <div class="tech"><span class="cat">Email / SMS</span><b>Klaviyo</b><span class="prov actual"><span class="dot"></span>VERIFIED</span></div>
+    <div class="tech"><span class="cat">POS</span><b>Lightspeed</b><span class="prov est"><span class="dot"></span>~EST</span></div>
+    <div class="tech migrate"><span class="cat">Reviews</span><b>Yotpo</b><span class="prov actual"><span class="dot"></span>VERIFIED</span></div>
+    <div class="tech"><span class="cat">Analytics</span><b>GA4 + Looker</b><span class="prov hybrid"><span class="dot"></span>HYBRID</span></div>
+  </div>
+  <div class="callout" style="margin-top:16px"><span class="t g">Why this compounds</span><p>Yotpo already owns Reviews here. That's a warm-intro wedge into Loyalty — and it's exactly the adjacency logic that powers Alma's expansion strategy (Part 17).</p></div>
+</div></section>
+
+<!-- ============ RESEARCH AGENTS ============ -->
+<section id="agents"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">12</span><h2>Research agents &amp; the living system</h2><span class="pill-tag">Parts 24 · 25 · 37</span></div>
+  <p class="sec-sub">The customer must feel they hired an always-on revenue department. Agents show visible, honest activity — and a research <em>ladder</em> keeps it economical, because you cannot deep-crawl 500,000 companies every night.</p>
+  <div class="agents">
+    <div class="agent"><span class="working"></span><b>Research Agent</b><div class="task">Researching 142 accounts</div><p>Classifies &amp; refreshes company profiles.</p></div>
+    <div class="agent"><span class="working"></span><b>Financial Agent</b><div class="task">17 models refreshed</div><p>Re-runs the engine on new data.</p></div>
+    <div class="agent"><span class="working"></span><b>Intent Agent</b><div class="task">7 high-confidence signals</div><p>Correlates independent evidence.</p></div>
+    <div class="agent"><span class="working"></span><b>Stack Intelligence</b><div class="task">11 tech changes detected</div><p>Tracks migrations with confidence.</p></div>
+    <div class="agent"><span class="working"></span><b>Match Agent</b><div class="task">5 new Top-3 matches</div><p>Re-ranks brand↔vendor fit.</p></div>
+    <div class="agent"><span class="working"></span><b>Report Agent</b><div class="task">3 executive reports ready</div><p>Consulting-grade output.</p></div>
+  </div>
+
+  <div style="margin-top:22px">
+    <div class="eyebrow" style="margin-bottom:10px">The research ladder · Part 25 — spend deep only where it pays</div>
+    <div class="ladder">
+      <div class="lv"><span class="ln">L0</span><p>Existing database · taxonomy · benchmarks</p><span class="cost">$0</span></div>
+      <div class="lv"><span class="ln">L1</span><p>Public financial normalization</p><span class="cost">¢</span></div>
+      <div class="lv"><span class="ln">L2</span><p>Low-cost site / company classification</p><span class="cost">¢</span></div>
+      <div class="lv"><span class="ln">L3</span><p>Deeper crawl — only for promising / Amber / conflicting accounts</p><span class="cost">$</span></div>
+      <div class="lv"><span class="ln">L4</span><p>Digital-demand / web-traffic signal when useful</p><span class="cost">$$</span></div>
+      <div class="lv"><span class="ln">L5</span><p>Premium deep research — high-value or decision-sensitive only</p><span class="cost">$$$</span></div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-3);margin-top:10px">Caching, dedup, research timestamps, do-not-research-before dates, concurrency limits and per-account cost tracking. Never pay twice to rediscover unchanged information.</p>
+  </div>
+</div></section>
+
+<!-- ============ BRAND GROWTH ============ -->
+<section id="brand"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">13</span><h2>Brand Growth Intelligence — the weekly loop</h2><span class="pill-tag">Parts 15 · 20 · 24 · 39</span></div>
+  <p class="sec-sub">A brand won't shop for vendors every month — so after they choose one, Alma's job changes to <b>make the program better</b>. That's the recurring value, because the market never stops changing.</p>
+
+  <div class="screen"><div class="chrome"><div class="dots"><i></i><i></i><i></i></div>
+    <span class="addr">alma.os / brand / executive weekly brief</span><span class="live">6 brand agents</span></div>
+    <div class="body">
+      <div class="stat-row">
+        <div class="stat"><div class="big" style="color:var(--v-est)">4</div><div class="lbl">Competitor program changes</div></div>
+        <div class="stat"><div class="big" style="color:var(--v-hybrid)">2</div><div class="lbl">New tech capabilities</div></div>
+        <div class="stat"><div class="big" style="color:var(--gold)">3</div><div class="lbl">Recommended actions</div></div>
+        <div class="stat"><div class="big" style="color:var(--v-actual)">+3%</div><div class="lbl">Member recruitment</div><div class="delta up">ROI still positive</div></div>
+      </div>
+      <div class="feed" style="margin-top:16px">
+        <div class="item"><div class="ic tech">◎</div><div class="txt"><b>Competitor devalued points 15%</b><p>Competitor Loyalty Watch flagged a terms change.</p><div class="why"><b>Opportunity:</b> a "your points keep their value" campaign — dissatisfaction window is open.</div></div><div class="act"><button class="mini-btn gold">See play</button></div></div>
+        <div class="item"><div class="ic match">＋</div><div class="txt"><b>Member Growth: 3 untapped recruitment surfaces</b><p>Post-purchase, packaging QR, and warranty registration are not enrolling members.</p><div class="why"><b>Impact est:</b> +2–4% enrollment <span class="prov est">~EST</span> · low effort.</div></div><div class="act"><button class="mini-btn">Prioritize</button></div></div>
+        <div class="item"><div class="ic fin">$</div><div class="txt"><b>Offer Scout: don't copy the 20% discount</b><p>Competitor's discount would destroy your margin.</p><div class="why"><b>Better economics:</b> $10 reward after $150 spend — modeled to protect margin.</div></div><div class="act"><button class="mini-btn">Model it</button></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="screen-cap">Agents: Competitor Watch · Member Growth · Program Performance (expected vs actual) · Offer &amp; Reward Scout · Technology Opportunity · Program Optimization → prioritized by Impact / Effort / Confidence / Cost.</p>
+</div></section>
+
+<!-- ============ SALES -> CS ============ -->
+<section id="continuity"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">14</span><h2>Sales → Customer Success continuity</h2><span class="pill-tag">Part 16</span></div>
+  <p class="sec-sub">The model doesn't die at signature. The business case that <em>won</em> the deal becomes the plan CS is held to — and the value story renewal is closed on. Bad-fit deals that CS inherits are the most expensive mistake in the funnel; this is the fix.</p>
+  <div class="screen"><div class="body">
+    <div style="overflow-x:auto"><div style="display:grid;grid-template-columns:repeat(8,minmax(120px,1fr));gap:0;min-width:860px">
+      <!-- header row -->
+      <div style="grid-column:1/-1;display:grid;grid-template-columns:subgrid;gap:0">
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--gold);border-bottom:2px solid var(--gold)">PRE-SALE</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">DISCOVERY</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">PROPOSAL</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">CLOSE</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">IMPLEMENT</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">LIVE</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);border-bottom:2px solid var(--line)">VALUE REVIEW</div>
+        <div style="padding:12px 10px;font-family:var(--mono);font-size:11px;color:var(--gold);border-bottom:2px solid var(--gold)">RENEWAL</div>
+      </div>
+      <div style="grid-column:1/-1;display:grid;grid-template-columns:subgrid;gap:0;font-size:12.5px;color:var(--ink-2)">
+        <div style="padding:12px 10px">Estimate economics <span class="prov est">~EST</span></div>
+        <div style="padding:12px 10px">Replace estimates with <span class="prov actual">ACTUAL</span></div>
+        <div style="padding:12px 10px">Lock approved business case</div>
+        <div style="padding:12px 10px">Preserve assumptions</div>
+        <div style="padding:12px 10px">Transfer KPIs to CS</div>
+        <div style="padding:12px 10px">Actual vs plan</div>
+        <div style="padding:12px 10px">Show realized value</div>
+        <div style="padding:12px 10px">Prove value → renew</div>
+      </div>
+    </div></div>
+    <div class="callout" style="margin-top:16px"><span class="t g">The handoff package</span><p>Why targeted · original ROI · expected enrollment / active / lift / cost · integrations · risks · KPIs · sources · unresolved assumptions. CS finally inherits <em>context</em>, not just a logo.</p></div>
+  </div></div>
+</div></section>
+
+<!-- ============ EXPANSION + MOAT ============ -->
+<section id="moat"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">15</span><h2>Expansion, the data moat &amp; "why not just use ChatGPT?"</h2><span class="pill-tag">Parts 17 · 18 · 19 · 48 · 49</span></div>
+  <p class="sec-sub">Loyalty stays the center. But the <em>same brands</em> buy the technologies around loyalty — so one deep Brand Intelligence Record is reusable across CDP, ESP, POS, personalization fit and ROI. Build the brand once; monetize it many times.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="kicker">Part 17 · follow the integrations outward</span>
+      <p>Map who the major loyalty platforms (Yotpo, Antavo, Talon.One, Snipp, Capillary, LoyaltyLion, Salesforce Loyalty…) integrate with. Those adjacencies define the expansion order: <b>Commerce → CRM → CDP → ESP → POS → Personalization → Automation → Payments → Service → Analytics.</b> Same buyers, more surface.</p>
+    </div>
+    <div class="card lead-gold"><span class="kicker">Part 19 · the answer to "I'll just ask an LLM"</span>
+      <p>The model is not the product. Anyone can rent an LLM; nobody else has the <b>accumulated system</b>: proprietary formulas, field-level provenance, benchmark libraries, vendor capability taxonomy, tech-stack history, buyer-intent history, outcome data and the feedback loops. <em>Anyone can buy a hammer — that doesn't make them an architect.</em></p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px"><span class="kicker">Part 18 · 49 · the moat is the compound, not one formula</span>
+    <div class="grid g4" style="margin-top:6px">
+      <div><div class="num" style="font-size:24px;font-weight:720;color:var(--gold)">Formulas</div><p style="font-size:12.5px;color:var(--ink-3);margin-top:4px">protected registry</p></div>
+      <div><div class="num" style="font-size:24px;font-weight:720;color:var(--gold)">+ Data</div><p style="font-size:12.5px;color:var(--ink-3);margin-top:4px">500k tech profiles (goal)</p></div>
+      <div><div class="num" style="font-size:24px;font-weight:720;color:var(--gold)">+ History</div><p style="font-size:12.5px;color:var(--ink-3);margin-top:4px">financial · tech · intent · match</p></div>
+      <div><div class="num" style="font-size:24px;font-weight:720;color:var(--gold)">+ Outcomes</div><p style="font-size:12.5px;color:var(--ink-3);margin-top:4px">what actually closed &amp; renewed</p></div>
+    </div>
+    <p style="font-size:14px;color:var(--ink-2);margin-top:12px">Highest-value proprietary datasets to hoard first (Part 49): <b>outcome data</b> (screened vs unscreened win/churn), the <b>vendor capability &amp; integration graph</b>, <b>tech-migration histories</b>, and <b>calculator-derived first-party intent</b>. These take years to recreate and get more valuable with every deal.</p>
+  </div>
+
+  <div class="callout" style="margin-top:16px"><span class="t g">Part 48 · scaling 30k → 500k economically</span><p>Never uniform deep-crawl. The research ladder + caching means 95% of companies live cheaply at L0–L2; you spend L3–L5 only on accounts a paying customer is actually looking at. Cost scales with <em>attention</em>, not with database size.</p></div>
+</div></section>
+
+<!-- ============ BUILD PLAN ============ -->
+<section id="build"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">16</span><h2>What to build — and what not to</h2><span class="pill-tag">Parts 20 · 21 · 22 · 46 · 47</span></div>
+
+  <div class="grid g2">
+    <div class="card"><span class="kicker">Part 20 · first 10 screens to build</span>
+      <ol style="margin:0;padding-left:20px;font-size:14px;color:var(--ink-2);line-height:1.8">
+        <li>ROI Calculator (one engine, depth slider)</li>
+        <li>Company Intelligence Record</li>
+        <li>Vendor Daily Dashboard</li>
+        <li>Two-sided Matchmaker</li>
+        <li>Competitive Ranking</li>
+        <li>Buyer-Intent Timeline</li>
+        <li>MarTech Stack view</li>
+        <li>Vendor DNA / Hunting Mandate onboarding</li>
+        <li>Executive Report generator</li>
+        <li>Brand Weekly Brief</li>
+      </ol>
+    </div>
+    <div class="card lead-gold"><span class="kicker">Part 21 · 5 screens to perfect for the investor demo</span>
+      <ol style="margin:0;padding-left:20px;font-size:14px;color:var(--ink-2);line-height:1.8">
+        <li><b>Vendor Daily Dashboard</b> — "what changed overnight"</li>
+        <li><b>Company Intelligence Record</b> — depth + provenance</li>
+        <li><b>Financial Engine</b> — conservative case still wins</li>
+        <li><b>Competitive Ranking</b> — the urgency moment</li>
+        <li><b>Executive Report</b> — consulting-grade output</li>
+      </ol>
+      <p style="margin-top:10px;font-size:13px">These five tell the whole story and are the highest revenue-impact surfaces.</p>
+    </div>
+  </div>
+
+  <div class="callout no" style="margin-top:16px"><span class="t">Part 22 · do NOT build during MVP</span><p>Voice AI · CRM two-way sync · vendor self-serve portal · adjacent-market calculators · 500k crawl · coalition modeling · mobile apps · white-label theming engine. Fake what you can with curated data; earn the rest with traction.</p></div>
+
+  <div class="two" style="margin-top:20px">
+    <div>
+      <div class="eyebrow" style="margin-bottom:10px">Part 46 · 30-day plan</div>
+      <ul class="checklist">
+        <li><b>Engine v1</b>: the canonical formula registry + 3 scenarios, hard-tested against a spreadsheet you trust.</li>
+        <li><b>Provenance model</b>: value / source / date / confidence / status on every field.</li>
+        <li><b>Company Record + Calculator</b> on ~50 hand-curated demo brands (incl. Nike, labeled).</li>
+        <li><b>One vendor</b> (e.g. a Yotpo-style ICP) with a real Hunting Mandate + Daily Dashboard.</li>
+        <li>Investor-demo polish on the 5 screens above.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom:10px">Part 47 · 90-day plan</div>
+      <ul class="checklist">
+        <li><b>Research ladder L0–L3</b> live with caching + cost tracking.</li>
+        <li><b>Matchmaker + Competitive Ranking</b> across ~150 modeled vendors.</li>
+        <li><b>Intent engine</b>: 3–4 corroborated signal types (hiring, job-tech, crawl-diff, calculator).</li>
+        <li><b>Executive Report</b> generator + CRM push (one-way).</li>
+        <li><b>Brand Weekly Brief</b> + first paying vendor design partners.</li>
+        <li>Start logging <b>outcome data</b> from day one — it's the moat.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ PRICING + GTM ============ -->
+<section id="gtm"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">17</span><h2>Pricing &amp; go-to-market</h2><span class="pill-tag">Parts 25-onboarding · 26 · 27 · 28</span></div>
+  <p class="sec-sub illus">All figures below are proposed concepts, not finalized pricing or guarantees.</p>
+
+  <div class="price">
+    <div class="plan"><span class="side">Brand · low friction</span><h4>Free → Brand Intelligence</h4><div class="money">$99–199<small>/mo</small></div>
+      <ul><li>Calculator + basic match (free)</li><li>Competitor Loyalty Watch</li><li>Member growth ideas</li><li>Weekly brief</li></ul></div>
+    <div class="plan feature"><span class="side">Vendor · the core business</span><h4>Vendor Intelligence</h4><div class="money">$1,000<small>/mo · prepaid annual</small></div>
+      <ul><li>Buyer Intent included</li><li>Daily dashboard + Top-3 alerts</li><li>Research / match / report credits</li><li>Illustrative credits: $500/100 · $1k/500 · $1.5k/1,000</li></ul></div>
+    <div class="plan"><span class="side">Brand · pro</span><h4>Brand Intelligence Pro</h4><div class="money">$299–499<small>/mo</small></div>
+      <ul><li>All agents + program optimization</li><li>Actual vs expected ROI tracking</li><li>Technology opportunity scout</li><li>Embedded calculator (from ~$1k+)</li></ul></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card"><span class="kicker">Part 28 · initial GTM</span>
+      <p>Start narrow — that's the advantage. ~<b>150 loyalty vendors</b> already identified; thousands of contacts (CRO, VP Sales, Partnerships, CS, Product). Lead with the result, never the AI jargon. Land vendor design partners, prove one extra closed deal, expand outward to adjacent categories that sell to the same brands.</p>
+      <p style="font-size:13px;color:var(--ink-3);margin-top:10px">Why they pay (illustrative): 6 extra deals × $75k ARR = $450k ARR; a $12k/yr subscription is a rounding error if Alma finds even one real customer.</p>
+    </div>
+    <div class="card"><span class="kicker">Part 39 · operating budget direction</span>
+      <p class="illus" style="margin-bottom:8px">Illustrative — target ~$2,000/mo to start.</p>
+      <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.7">
+        <li>CRM + AI (GoHighLevel-class) ~$394</li>
+        <li>Apollo ~$150 · cold-email ~$100 · domains ~$200</li>
+        <li>Voice / SMS ~$400 · paid test ~$500 · contingency ~$250</li>
+      </ul>
+      <p style="font-size:13px;color:var(--ink-3);margin-top:10px">Scale to $3.5–5k/mo only where a channel measurably produces qualified meetings.</p>
+    </div>
+  </div>
+
+  <details style="margin-top:16px"><summary>Part 25 · onboarding — Vendor DNA &amp; Hunting Mandate (the question that matters)</summary>
+    <div class="body">Don't ask "what industries do you target?" Ask: <b>"Which 10 customers do you wish you had 100 more of?"</b> Then Alma analyzes those accounts to <em>discover</em> the vendor's real ICP — because most vendors don't actually know it. Capture min viable size, favorite &amp; poor-fit industries, geo, mechanics (points/tiers/referrals/paid/cashback/coalition), integrations (POS/ecom/CDP/ESP/DW), services, pricing, contract minimums, security &amp; data residency. Brand onboarding mirrors it from the demand side.</div>
+  </details>
+  <details><summary>Part 26 · notifications — earn the interrupt</summary>
+    <div class="body">Only notify on state <em>change</em> that implies an action: entered your Top-3, high-confidence intent, competitor devaluation, tech migration corroborated, report ready, renewal-risk on a live program. Digest by default; real-time only for Top-3 movement and high-confidence intent. Every notification links straight to the one action.</div>
+  </details>
+</div></section>
+
+<!-- ============ RISKS + TRUST ============ -->
+<section id="risks"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">18</span><h2>Risks, trust &amp; what needs a human</h2><span class="pill-tag">Parts 29-34</span></div>
+  <div class="grid g3">
+    <div class="card"><span class="kicker">Part 29 · product risk</span><p>The system feels magical but the data is thin at first. Mitigate with brutal honesty: show "Missing" proudly, curate the demo universe, and never let breadth outrun trust.</p></div>
+    <div class="card"><span class="kicker">Part 30 · data risk</span><p>Stale, mis-attributed, or over-confident data. Mitigate: timestamps, confidence, corroboration rules, and "do-not-research-before" freshness gates.</p></div>
+    <div class="card"><span class="kicker">Part 31 · AI risk</span><p>Hallucinated migrations, invented certainty, fabricated rankings. Hard rule: LLMs draft and correlate; they never mint an "Actual" or a rank without evidence.</p></div>
+    <div class="card"><span class="kicker">Part 32 · legal / trust</span><p>Rankings must be defensible; competitive notifications must respect permissions; scraped data must respect ToS &amp; privacy. Digital-demand labeled, never sold as audited revenue.</p></div>
+    <div class="card"><span class="kicker">Part 33 · needs human review</span><p>Any number that leaves the building in a proposal, any competitive ranking a rep will act on, any "Actual" promotion, and any renewal value claim.</p></div>
+    <div class="card lead-gold"><span class="kicker">Part 34 · avoiding false certainty</span><p>Show bands not points. Lead with the conservative case. Wear provenance and confidence on every figure. Say "not enough verifiable information" out loud when it's true.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ BEAT HORIZON ============ -->
+<section id="beat"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">19</span><h2>Part 50 — How we beat Hostinger Horizons</h2></div>
+  <p class="sec-sub serif">Horizon will ship a good-looking app. It cannot ship <em>judgment</em>. The bake-off isn't won on components rendered — it's won on whether a loyalty executive believes the thing is telling the truth. That's our entire game.</p>
+  <div class="beat">
+    <ol>
+      <li><div><b>Win on trust architecture, not screen count.</b><p>Provenance, confidence, and the conservative-case-still-wins framing are things a generic app-builder won't think to build. It's the hardest thing to fake and the easiest thing for a domain expert to spot missing.</p></div></li>
+      <li><div><b>Derive members <em>down</em> from business reality.</b><p>Revenue ÷ AOV ÷ Frequency → addressable → enrolled → active. Horizon will ask "how many members do you expect?" We answer the question the customer can't.</p></div></li>
+      <li><div><b>One protected engine, five separate scores.</b><p>No black-box "AI score." Every number drillable to its source. That reads as rigor; a single mystery number reads as a toy.</p></div></li>
+      <li><div><b>Make it feel alive.</b><p>"What changed overnight," visible agents, Top-3 movement, the research ladder. Daily addiction for vendors, weekly value for brands — designed retention, not a dashboard.</p></div></li>
+      <li><div><b>Show the compounding moat.</b><p>Formulas + data + history + vendor graph + outcomes. Explain, on screen, why "just use ChatGPT" misses the point. An investor needs to see the moat, not infer it.</p></div></li>
+      <li><div><b>Organize the complexity, don't amputate it.</b><p>Rookie understands it in 30 seconds; a CTO drills for three hours. Progressive disclosure is the differentiator — the ambition stays, the confusion goes.</p></div></li>
+    </ol>
+  </div>
+  <div class="big-close">Everyone wins <b>when the fit is right.</b></div>
+</div></section>
+
+<!-- ============ PARTS INDEX ============ -->
+<section id="index"><div class="wrap">
+  <div class="sec-head"><span class="sec-no">20</span><h2>All 50 parts — where each is answered</h2></div>
+  <p class="sec-sub">Nothing dropped. Every requested part maps to a section above; the deeper strategic answers live in the disclosure panels.</p>
+  <div class="parts">
+    <div class="p"><span class="pn">1</span><a href="#thirty">10th-grader explanation</a></div>
+    <div class="p"><span class="pn">2</span><a href="#gtm">Business model</a></div>
+    <div class="p"><span class="pn">3</span><a href="#thirty">Brand-promise verdict</a></div>
+    <div class="p"><span class="pn">4</span><a href="#challenge">Product architecture</a></div>
+    <div class="p"><span class="pn">5</span><a href="#index">Navigation</a></div>
+    <div class="p"><span class="pn">6</span><a href="#vendor-daily">Dashboard</a></div>
+    <div class="p"><span class="pn">7</span><a href="#engine">ROI calculator</a></div>
+    <div class="p"><span class="pn">8</span><a href="#company">Company Intelligence Record</a></div>
+    <div class="p"><span class="pn">9</span><a href="#gtm">Vendor DNA &amp; Hunting Mandate</a></div>
+    <div class="p"><span class="pn">10</span><a href="#matchmaker">Matchmaker</a></div>
+    <div class="p"><span class="pn">11</span><a href="#intent">Buyer Intent</a></div>
+    <div class="p"><span class="pn">12</span><a href="#stack">MarTech Stack</a></div>
+    <div class="p"><span class="pn">13</span><a href="#ranking">Competitive Ranking</a></div>
+    <div class="p"><span class="pn">14</span><a href="#agents">Research Agents</a></div>
+    <div class="p"><span class="pn">15</span><a href="#brand">Brand Growth Intelligence</a></div>
+    <div class="p"><span class="pn">16</span><a href="#continuity">Sales → CS continuity</a></div>
+    <div class="p"><span class="pn">17</span><a href="#moat">Adjacent-market expansion</a></div>
+    <div class="p"><span class="pn">18</span><a href="#moat">Data moat</a></div>
+    <div class="p"><span class="pn">19</span><a href="#moat">AI moat vs ChatGPT</a></div>
+    <div class="p"><span class="pn">20</span><a href="#build">First 10 screens</a></div>
+    <div class="p"><span class="pn">21</span><a href="#build">5 screens for investor demo</a></div>
+    <div class="p"><span class="pn">22</span><a href="#build">What NOT to build in MVP</a></div>
+    <div class="p"><span class="pn">23</span><a href="#vendor-daily">Vendor daily loop</a></div>
+    <div class="p"><span class="pn">24</span><a href="#brand">Brand weekly loop</a></div>
+    <div class="p"><span class="pn">25</span><a href="#gtm">Onboarding flows</a></div>
+    <div class="p"><span class="pn">26</span><a href="#gtm">Notifications</a></div>
+    <div class="p"><span class="pn">27</span><a href="#gtm">Pricing</a></div>
+    <div class="p"><span class="pn">28</span><a href="#gtm">Initial GTM</a></div>
+    <div class="p"><span class="pn">29</span><a href="#risks">Product risks</a></div>
+    <div class="p"><span class="pn">30</span><a href="#risks">Data risks</a></div>
+    <div class="p"><span class="pn">31</span><a href="#risks">AI risks</a></div>
+    <div class="p"><span class="pn">32</span><a href="#risks">Legal / trust</a></div>
+    <div class="p"><span class="pn">33</span><a href="#risks">What needs human review</a></div>
+    <div class="p"><span class="pn">34</span><a href="#engine">Avoiding false certainty</a></div>
+    <div class="p"><span class="pn">35</span><a href="#prov">Actual vs Estimated vs Hybrid</a></div>
+    <div class="p"><span class="pn">36</span><a href="#prov">Provenance &amp; confidence</a></div>
+    <div class="p"><span class="pn">37</span><a href="#agents">Feeling alive 24/7</a></div>
+    <div class="p"><span class="pn">38</span><a href="#vendor-daily">Sample vendor daily dashboard</a></div>
+    <div class="p"><span class="pn">39</span><a href="#brand">Sample brand weekly dashboard</a></div>
+    <div class="p"><span class="pn">40</span><a href="#company">Sample Company Record</a></div>
+    <div class="p"><span class="pn">41</span><a href="#matchmaker">Sample vendor match</a></div>
+    <div class="p"><span class="pn">42</span><a href="#ranking">Sample competitive ranking</a></div>
+    <div class="p"><span class="pn">43</span><a href="#intent">Sample intent timeline</a></div>
+    <div class="p"><span class="pn">44</span><a href="#beat">Investor demo narrative</a></div>
+    <div class="p"><span class="pn">45</span><a href="#continuity">Customer demo narrative</a></div>
+    <div class="p"><span class="pn">46</span><a href="#build">30-day build plan</a></div>
+    <div class="p"><span class="pn">47</span><a href="#build">90-day build plan</a></div>
+    <div class="p"><span class="pn">48</span><a href="#moat">Scaling to 500k economically</a></div>
+    <div class="p"><span class="pn">49</span><a href="#moat">Highest-value datasets</a></div>
+    <div class="p"><span class="pn">50</span><a href="#beat">Beating Horizon</a></div>
+  </div>
+
+  <details style="margin-top:20px"><summary>Parts 44 &amp; 45 · the two demo narratives, scripted</summary>
+    <div class="body"><b>Investor demo (Part 44):</b> "We're Yotpo. Here's our Hunting Mandate → Alma worked overnight → here are today's 10 highest-priority accounts → open ACME → financial viability (conservative still wins) → tech stack → buyer intent → why we rank #2 and how to win → generate the executive report → generate outreach → push to CRM → and here's what happens when they become a customer: CS inherits the model." One continuous story, no dead ends.
+      <br><br><b>Customer demo (Part 45):</b> flip to the brand. "Is loyalty even viable for us? → here are our best-fit vendors, evidenced → subscribe to Brand Growth Intelligence → a competitor just devalued points → here are three untapped recruitment surfaces → your Klaviyo can now do X → actual vs expected ROI, still positive." End on: <em>everyone wins when the fit is right.</em></div>
+  </details>
+</div></section>
+
+<footer><div class="wrap">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center">
+    <div class="logo"><span class="mark"></span>ALMA<small>AI OS · Loyalty™</small></div>
+    <p style="max-width:52ch">Product blueprint &amp; bake-off deliverable. All financials, company names (Nike, ACME, Yotpo et al.) and metrics shown are <b>illustrative demo material</b> — never presented as verified actuals. Estimated data is always labeled; paid placement never alters independent ranking.</p>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  // theme toggle (respects the three-state model)
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  btn&&btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var sysDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
+    var isDark = cur? cur==='dark' : sysDark;
+    root.setAttribute('data-theme', isDark?'light':'dark');
+  });
+
+  // financial engine scenarios
+  var D={
+    cons:{orders:'52.3M',cust:'21.8M',idcap:'58%',enr:'28%',active:'46%',net:'+$4.2M',bcr:'2.1×',roi:'112%',pay:'14 mo',
+      verdict:'Even under conservative assumptions the program still nets ~$4.2M. That — not a fake exact number — is the decision.'},
+    exp:{orders:'52.3M',cust:'21.8M',idcap:'62%',enr:'34%',active:'52%',net:'+$7.1M',bcr:'3.0×',roi:'204%',pay:'9 mo',
+      verdict:'Expected case nets ~$7.1M with a 9-month payback. Attractive, but the range below the line is what you sell on.'},
+    high:{orders:'52.3M',cust:'21.8M',idcap:'66%',enr:'41%',active:'58%',net:'+$12.0M',bcr:'4.4×',roi:'341%',pay:'6 mo',
+      verdict:'High case nets ~$12M — real upside, but never lead with it. Lead with the conservative floor; let this be the ceiling.'}
+  };
+  function set(k,v){document.querySelectorAll('[data-k="'+k+'"]').forEach(function(e){e.textContent=v;});}
+  function apply(s){var d=D[s];for(var k in d){if(k!=='verdict')set(k,d[k]);}
+    document.getElementById('verdictText').textContent=d.verdict;
+    var vb=document.getElementById('verdict');
+    vb.style.background = s==='high'?'color-mix(in srgb,var(--gold) 12%,var(--surface))':(s==='cons'?'var(--v-actual-bg)':'var(--v-hybrid-bg)');
+  }
+  var tabs=document.querySelectorAll('#scnTabs button');
+  tabs.forEach(function(b){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected','false');});
+    b.setAttribute('aria-selected','true');apply(b.dataset.scn);
+  });});
+  apply('exp');
+})();
+</script>
