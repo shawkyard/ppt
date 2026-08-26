@@ -1,0 +1,151 @@
+rank,company_name,domain,website,linkedin_company_url,hq_location,category,customer_size,b2c_b2b,service_model,domain_confidence
+1,Epsilon (PeopleCloud Loyalty),epsilon.com,https://epsilon.com,linkedin.com/company/epsilon,US,Enterprise loyalty + data cloud,Enterprise,Both,Full-service (managed),verified
+2,Capillary Technologies,capillarytech.com,https://capillarytech.com,linkedin.com/company/capillary-technologies,India / US,Enterprise loyalty + engagement AI,Enterprise,Both,Full-service + hybrid,verified
+3,Comarch Loyalty Management,comarch.com,https://comarch.com,linkedin.com/company/comarch,Poland,Enterprise loyalty suite,Enterprise,Both,Full-service + hybrid,verified
+4,Oracle CrowdTwist / Responsys,oracle.com,https://oracle.com,linkedin.com/company/oracle,US,Enterprise loyalty + marketing cloud,Enterprise,B2C,Hybrid (SI-led),verified
+5,Salesforce Loyalty Management,salesforce.com,https://salesforce.com,linkedin.com/company/salesforce,US,CRM-native loyalty,Enterprise,Both,Hybrid (SI-led),verified
+6,SAP Emarsys Loyalty,emarsys.com,https://emarsys.com,linkedin.com/company/emarsys,Austria / US,Omnichannel marketing + loyalty,Mid / Enterprise,B2C,Hybrid,verified
+7,Marigold Loyalty (Cheetah Digital),meetmarigold.com,https://meetmarigold.com,linkedin.com/company/meet-marigold,US,Enterprise loyalty + messaging,Enterprise,B2C,Full-service + hybrid,verified
+8,Kobie Marketing,kobie.com,https://kobie.com,linkedin.com/company/kobie-marketing,US,Enterprise loyalty (managed),Enterprise,Both,Full-service (managed),verified
+9,Antavo,antavo.com,https://antavo.com,linkedin.com/company/antavo,UK / Hungary,No-code enterprise loyalty,Mid / Enterprise,Both,Hybrid (no-code + API),verified
+10,Bond Brand Loyalty,bondbl.com,https://bondbl.com,linkedin.com/company/bond-brand-loyalty,Canada / US,Loyalty agency + platform,Enterprise,Both,Full-service (agency),verified
+11,Kognitiv (Aimia),kognitiv.com,https://kognitiv.com,linkedin.com/company/kognitiv-corporation,Canada,Enterprise loyalty + AI,Enterprise,Both,Full-service + hybrid,verified
+12,Merkle Loyalty,merkle.com,https://merkle.com,linkedin.com/company/merkle,US,Loyalty agency + tech,Enterprise,Both,Full-service (agency),verified
+13,Brierley,brierley.com,https://brierley.com,linkedin.com/company/brierley-and-partners,US,Enterprise loyalty (managed),Enterprise,B2C,Full-service (managed),verified
+14,Annex Cloud,annexcloud.com,https://annexcloud.com,linkedin.com/company/annex-cloud,US,Loyalty experience platform,Mid / Enterprise,Both,Hybrid,verified
+15,Mastercard SessionM,mastercard.com,https://mastercard.com,linkedin.com/company/mastercard,US,Enterprise loyalty + data,Enterprise,B2C,Full-service + hybrid,verified
+16,Loyalty Juggernaut (GRAVTY),lji.io,https://lji.io,linkedin.com/company/loyalty-juggernaut,US / India,Cloud-native enterprise loyalty,Enterprise,Both,Hybrid,verified
+17,Loyalty Prime,loyaltyprime.com,https://loyaltyprime.com,linkedin.com/company/loyalty-prime,Germany,Enterprise loyalty platform,Enterprise,Both,Hybrid,verified
+18,Zinrelo,zinrelo.com,https://zinrelo.com,linkedin.com/company/zinrelo,US / India,Mid-market loyalty SaaS,Mid,Both,Hybrid (managed onboarding),verified
+19,Ansira,ansira.com,https://ansira.com,linkedin.com/company/ansira,US,Distributed marketing + loyalty,Enterprise,Both,Full-service (agency),verified
+20,ICF Next,icf.com,https://icf.com,linkedin.com/company/icf,US,Loyalty consultancy + platform,Enterprise,Both,Full-service (agency),verified
+21,Maritz Motivation,maritzmotivation.com,https://maritzmotivation.com,linkedin.com/company/maritz,US,Loyalty & incentive solutions,Enterprise,Both,Full-service (managed),verified
+22,Collinson,collinsongroup.com,https://collinsongroup.com,linkedin.com/company/collinson,UK,Loyalty + travel benefits,Enterprise,Both,Full-service (managed),verified
+23,Splio,splio.com,https://splio.com,linkedin.com/company/splio,France,Individuation marketing + loyalty,Mid,B2C,Hybrid,verified
+24,Eagle Eye Solutions,eagleeye.com,https://eagleeye.com,linkedin.com/company/eagle-eye-solutions,UK,Real-time loyalty + promotions,Enterprise,B2C,Hybrid,verified
+25,Talon.One,talon.one,https://talon.one,linkedin.com/company/talon-one,Germany,API-first promotion + loyalty engine,Mid / Enterprise,Both,Self-serve + hybrid (developer),verified
+26,Voucherify,voucherify.io,https://voucherify.io,,Poland,API-first promotions + loyalty,Mid / Enterprise,Both,Self-serve + hybrid (developer),likely
+27,Open Loyalty,openloyalty.io,https://openloyalty.io,,Poland,Headless loyalty infrastructure,Mid / Enterprise,Both,Self-serve + hybrid (developer),likely
+28,White Label Loyalty,whitelabel-loyalty.com,https://whitelabel-loyalty.com,,UK,Event-based API loyalty,Mid / Enterprise,Both,Hybrid (API + managed),likely
+29,Punchh,punchh.com,https://punchh.com,,US,Restaurant loyalty + offers,Mid / Enterprise,B2C,Full-service + hybrid,likely
+30,Paytronix,paytronix.com,https://paytronix.com,,US,Restaurant + c-store loyalty/CRM,Mid / Enterprise,B2C,Full-service + hybrid,likely
+31,Thanx,thanx.com,https://thanx.com,,US,Card-linked restaurant loyalty,Mid,B2C,Hybrid,likely
+32,Como,como.com,https://como.com,,Israel / US,Restaurant + retail loyalty/CRM,SMB / Mid,B2C,Hybrid,likely
+33,Spendgo,spendgo.com,https://spendgo.com,,US,Omnichannel loyalty for retail/F&B,SMB / Mid,B2C,Hybrid,likely
+34,Incentivio,incentivio.com,https://incentivio.com,,US,Digital guest engagement + loyalty,Mid,B2C,Full-service + hybrid,likely
+35,Toast Loyalty,toasttab.com,https://toasttab.com,,US,POS-native restaurant loyalty,SMB / Mid,B2C,Self-serve (add-on),likely
+36,Square Loyalty,squareup.com,https://squareup.com,,US,POS-native SMB loyalty,SMB,B2C,Self-serve (add-on),likely
+37,Clover Rewards / Loyalty,clover.com,https://clover.com,,US,POS-native SMB loyalty,SMB,B2C,Self-serve (add-on),likely
+38,Lightspeed Loyalty,lightspeedhq.com,https://lightspeedhq.com,,Canada,POS-native retail/F&B loyalty,SMB / Mid,B2C,Self-serve (add-on),likely
+39,TouchBistro Loyalty,touchbistro.com,https://touchbistro.com,,Canada,Restaurant POS loyalty + marketing,SMB / Mid,B2C,Self-serve (add-on),likely
+40,Bikky,bikky.com,https://bikky.com,,US,Restaurant CDP + loyalty,Mid,B2C,Hybrid,likely
+41,LevelUp,thelevelup.com,https://thelevelup.com,,US,Mobile pay + loyalty for F&B,Mid,B2C,Hybrid,likely
+42,Snipp Interactive,snipp.com,https://snipp.com,,US / Canada,Receipt & rebate loyalty (CPG),Mid / Enterprise,Both,Full-service + hybrid,likely
+43,TADA,usetada.com,https://usetada.com,,Singapore,Loyalty + rewards ecosystem,Mid / Enterprise,Both,Hybrid,verified
+44,Jebbit,jebbit.com,https://jebbit.com,,US,Zero-party data + engagement,Mid / Enterprise,B2C,Self-serve + hybrid,likely
+45,SheerID,sheerid.com,https://sheerid.com,,US,Identity-based gated offers,Mid / Enterprise,B2C,Self-serve + hybrid,likely
+46,Fetch Rewards,fetch.com,https://fetch.com,,US,Consumer receipt-scan rewards app,Enterprise (brand-funded),B2C (brand-paid),Full-service (network),likely
+47,Ibotta,ibotta.com,https://ibotta.com,,US,Cash-back rewards network (CPG),Enterprise (brand-funded),B2C (brand-paid),Full-service (network),likely
+48,Shopkick,shopkick.com,https://shopkick.com,,US,Shopping rewards app,Enterprise (brand-funded),B2C (brand-paid),Full-service (network),likely
+49,Bubblehouse,bubblehouse.com,https://bubblehouse.com,,US,Loyalty + receipt scanning (DTC/CPG),SMB / Mid,B2C,Hybrid,verified
+50,360insights,360insights.com,https://360insights.com,,Canada,Channel incentives + rebates + loyalty,Enterprise,B2B,Full-service (managed),likely
+51,Extole,extole.com,https://extole.com,,US,Referral + advocacy loyalty,Mid / Enterprise,B2C,Hybrid,likely
+52,Mention Me,mention-me.com,https://mention-me.com,,UK,Referral + advocacy platform,Mid,B2C,Hybrid,likely
+53,Friendbuy,friendbuy.com,https://friendbuy.com,,US,Referral + loyalty rewards,SMB / Mid,B2C,Self-serve + hybrid,likely
+54,Ambassador,getambassador.com,https://getambassador.com,,US,Referral + partner marketing,Mid,Both,Self-serve + hybrid,likely
+55,Referral Rock,referralrock.com,https://referralrock.com,,US,Referral program software,SMB / Mid,Both,Self-serve,likely
+56,ReferralCandy,referralcandy.com,https://referralcandy.com,,Singapore,Referral app for ecommerce,SMB,B2C,Self-serve,likely
+57,Cardlytics,cardlytics.com,https://cardlytics.com,,US,Card-linked offers network,Enterprise,Both,Full-service (network),likely
+58,Figg,figg.com,https://figg.com,,US,White-label card-linked loyalty,Mid / Enterprise,Both,Hybrid,likely
+59,Kigo (Prizeout),kigo.io,https://kigo.io,,US,Card-linked rewards infrastructure,Mid / Enterprise,B2B2C,Hybrid,verified
+60,Dosh,dosh.com,https://dosh.com,,US,Consumer card-linked cash-back,Enterprise (network),B2C,Full-service (network),likely
+61,Upside,upside.com,https://upside.com,,US,Retail cash-back / fuel rewards,Enterprise (network),B2C,Full-service (network),likely
+62,Augeo,augeomarketing.com,https://augeomarketing.com,,US,"Loyalty, engagement & incentives",Enterprise,Both,Full-service (managed),verified
+63,Fidel API,fidelapi.com,https://fidelapi.com,,UK / US,Card-linking API infrastructure,Mid / Enterprise,B2B (dev),Self-serve (developer),likely
+64,Bink,bink.com,https://bink.com,,UK,Payment-linked loyalty,Enterprise,B2C,Full-service,likely
+65,Kard,getkard.com,https://getkard.com,,US,Card-linked rewards network,Mid / Enterprise,B2B2C,Self-serve + hybrid,likely
+66,Rewards Network,rewardsnetwork.com,https://rewardsnetwork.com,,US,Dining rewards network,Enterprise (network),B2C,Full-service (network),likely
+67,Smile.io,smile.io,https://smile.io,,Canada,Ecommerce loyalty app (SMB),SMB,B2C,Self-serve,likely
+68,LoyaltyLion,loyaltylion.com,https://loyaltylion.com,,UK,Ecommerce loyalty + analytics,SMB / Mid,B2C,Self-serve + hybrid,likely
+69,Yotpo Loyalty (Swell),yotpo.com,https://yotpo.com,,US / Israel,Ecommerce retention suite,SMB / Mid,B2C,Self-serve + hybrid,likely
+70,Stamped,stamped.io,https://stamped.io,,Canada,Reviews + loyalty for ecommerce,SMB,B2C,Self-serve,likely
+71,Growave,growave.io,https://growave.io,,Kyrgyzstan,All-in-one Shopify engagement,SMB,B2C,Self-serve,likely
+72,Rivo,rivo.io,https://rivo.io,,Canada,Loyalty + customer accounts (Shopify),SMB,B2C,Self-serve,likely
+73,Marsello,marsello.com,https://marsello.com,,New Zealand,Omnichannel loyalty + marketing,SMB / Mid,B2C,Self-serve + hybrid,likely
+74,Nector,nector.io,https://nector.io,,India,Loyalty + referral + reviews,SMB,B2C,Self-serve,likely
+75,Okendo,okendo.io,https://okendo.io,,Australia,Reviews + loyalty + surveys,SMB / Mid,B2C,Self-serve + hybrid,likely
+76,BON Loyalty,bonloyalty.com,https://bonloyalty.com,,Vietnam,Shopify loyalty & rewards app,SMB,B2C,Self-serve,likely
+77,Joy Loyalty,joy.so,https://joy.so,,Vietnam,Shopify loyalty & rewards app,SMB,B2C,Self-serve,verified
+78,Loloyal,loloyal.com,https://loloyal.com,,China / HK,Shopify loyalty & referral app,SMB,B2C,Self-serve,verified
+79,Froonze,froonze.com,https://froonze.com,,Cyprus,Loyalty + customer accounts (Shopify),SMB,B2C,Self-serve,likely
+80,Gameball,gameball.co,https://gameball.co,,Egypt / US,Gamified loyalty + engagement,SMB / Mid,B2C,Self-serve,likely
+81,AiTrillion,aitrillion.com,https://aitrillion.com,,US / India,All-in-one Shopify marketing + loyalty,SMB,B2C,Self-serve,likely
+82,Appstle Loyalty,appstle.com,https://appstle.com,,US / India,Subscriptions + loyalty (Shopify),SMB,B2C,Self-serve,likely
+83,Influence.io,influence.io,https://influence.io,,US,Loyalty & referrals (Shopify),SMB,B2C,Self-serve,likely
+84,Toki,buildwithtoki.com,https://buildwithtoki.com,,US,Loyalty + memberships (Shopify Plus),Mid,B2C,Self-serve + hybrid,likely
+85,Sway,swayloyalty.com,https://swayloyalty.com,,US,Loyalty for Shopify DTC,SMB / Mid,B2C,Self-serve,verified
+86,Loyoly,loyoly.io,https://loyoly.io,,France,Loyalty + UGC + referral,SMB / Mid,B2C,Self-serve + hybrid,likely
+87,Fivestars,fivestars.com,https://fivestars.com,,US,SMB local loyalty + payments,SMB,B2C,Full-service (managed),likely
+88,TapMango,tapmango.com,https://tapmango.com,,Canada,SMB loyalty + marketing (branded),SMB / Mid,B2C,Full-service (managed),likely
+89,Kangaroo Rewards,kangaroorewards.com,https://kangaroorewards.com,,Canada,Omnichannel SMB loyalty,SMB / Mid,B2C,Hybrid,likely
+90,Belly,mobivity.com,https://mobivity.com,,US,Tablet-based SMB loyalty,SMB,B2C,Self-serve + managed,verified
+91,Perkville,perkville.com,https://perkville.com,,US,Rewards + referral for SMB,SMB,B2C,Self-serve,likely
+92,Preferred Patron,preferredpatron.com,https://preferredpatron.com,,US,Loyalty + gift card for SMB,SMB / Mid,B2C,Self-serve + hybrid,likely
+93,Loyalzoo,loyalzoo.com,https://loyalzoo.com,,UK / US,Digital loyalty for SMB retail/F&B,SMB,B2C,Self-serve,likely
+94,S Loyalty,sloyalty.com,https://sloyalty.com,,Hong Kong,Ecommerce loyalty (SMB),SMB,B2C,Self-serve,likely
+95,Loopy Loyalty,loopyloyalty.com,https://loopyloyalty.com,,Hong Kong,Digital stamp cards (wallet),SMB,B2C,Self-serve,likely
+96,Loyverse,loyverse.com,https://loyverse.com,,UK,Free POS + loyalty for SMB,SMB,B2C,Self-serve (freemium),likely
+97,Guusto,guusto.com,https://guusto.com,,Canada,Rewards & recognition (gifting),SMB / Mid,B2B,Self-serve + hybrid,likely
+98,Boomerangme,boomerangme.co,https://boomerangme.co,,US,Digital loyalty cards for SMB/agencies,SMB,B2C,Self-serve,likely
+99,Stamp Me,stampme.com,https://stampme.com,,Australia,Digital loyalty punch cards,SMB,B2C,Self-serve,likely
+100,Reelo,reelo.io,https://reelo.io,,India,SMB loyalty + marketing (F&B/retail),SMB / Mid,B2C,Self-serve + hybrid,likely
+101,Novus Loyalty,novusloyalty.com,https://novusloyalty.com,,US / UAE,Configurable SMB-mid loyalty SaaS,SMB / Mid,Both,Hybrid,likely
+102,Loyalty Gator,loyaltygator.com,https://loyaltygator.com,,Canada,Standalone SMB loyalty/gift,SMB,Both,Self-serve,likely
+103,Piggy,piggy.eu,https://piggy.eu,,Netherlands,SMB/mid loyalty + marketing,SMB / Mid,B2C,Self-serve + hybrid,verified
+104,Loyax,loyax.com,https://loyax.com,,Bulgaria,White-label loyalty platform,Mid,B2C,Hybrid,verified
+105,Blackhawk Network,blackhawknetwork.com,https://blackhawknetwork.com,,US,Gift card + rewards + incentives,Enterprise,Both,Full-service (managed),likely
+106,Tango (Tango Card),tangocard.com,https://tangocard.com,,US,Rewards-as-a-service API,Mid / Enterprise,Both,Self-serve + hybrid,likely
+107,Tremendous,tremendous.com,https://tremendous.com,,US,Bulk payouts & rewards platform,SMB / Enterprise,Both,Self-serve,likely
+108,Giftbit,giftbit.com,https://giftbit.com,,Canada,Digital gift card rewards API,SMB / Mid,Both,Self-serve,likely
+109,BHN Rewards (Rybbon),bhnrewards.com,https://bhnrewards.com,,US,Digital rewards for marketing,SMB / Mid,Both,Self-serve + hybrid,likely
+110,Xoxoday Plum,xoxoday.com,https://xoxoday.com,,India / Singapore,Rewards & incentives infrastructure,Mid / Enterprise,Both,Self-serve + hybrid,likely
+111,Giift,giift.com,https://giift.com,,Singapore / UAE,Loyalty + rewards marketplace,Enterprise,Both,Full-service + hybrid,likely
+112,Empuls,empuls.io,https://empuls.io,,India,Employee engagement + rewards,Mid / Enterprise,B2B (B2E),Self-serve + hybrid,likely
+113,Awardco,award.co,https://award.co,,US,Recognition & rewards (Amazon-powered),Mid / Enterprise,B2B (B2E),Self-serve + hybrid,likely
+114,BI Worldwide,biworldwide.com,https://biworldwide.com,,US,Engagement + incentives + loyalty,Enterprise,Both,Full-service (managed),likely
+115,Bunchball (Nitro),bunchball.com,https://bunchball.com,,US,Gamification platform,Enterprise,Both,Hybrid,likely
+116,dunnhumby,dunnhumby.com,https://dunnhumby.com,,UK,Retail data science + loyalty,Enterprise,B2C,Full-service (managed),likely
+117,Ecrebo,ecrebo.com,https://ecrebo.com,,UK,POS-integrated retail marketing,Enterprise,B2C,Hybrid,likely
+118,Coniq,coniq.com,https://coniq.com,,UK,Loyalty for malls & retail destinations,Enterprise,B2C,Full-service + hybrid,likely
+119,Aislelabs,aislelabs.com,https://aislelabs.com,,Canada,WiFi marketing + loyalty analytics,Mid / Enterprise,B2C,Hybrid,likely
+120,BrandLoyalty,brandloyalty.com,https://brandloyalty.com,,Netherlands,Campaign-based retail loyalty,Enterprise,B2C,Full-service (managed),verified
+121,Currency Alliance,currencyalliance.com,https://currencyalliance.com,,UK / Spain,Coalition & points-exchange platform,Mid / Enterprise,Both,Hybrid,likely
+122,Points.com,points.com,https://points.com,,Canada,Loyalty commerce infrastructure,Enterprise,B2B2C,Full-service (managed),likely
+123,Plusgrade,plusgrade.com,https://plusgrade.com,,Canada,Ancillary revenue + loyalty,Enterprise,B2B2C,Full-service (managed),likely
+124,Switchfly,switchfly.com,https://switchfly.com,,US,Loyalty redemption + travel commerce,Enterprise,B2B2C,Full-service (managed),likely
+125,Sabre Loyalty,sabre.com,https://sabre.com,,US,Airline loyalty + retailing,Enterprise,B2C,Full-service (managed),likely
+126,Amadeus Loyalty,amadeus.com,https://amadeus.com,,Spain,Travel loyalty management,Enterprise,B2C,Full-service (managed),likely
+127,PAYBACK,payback.net,https://payback.net,,Germany / India,Coalition loyalty program + platform,Enterprise,B2C,Full-service (managed),likely
+128,PassKit,passkit.com,https://passkit.com,,Hong Kong,Mobile wallet + membership infra,SMB / Mid,Both,Self-serve (developer),likely
+129,Uniqodo,uniqodo.com,https://uniqodo.com,,UK,Promotions & incentive engine,Mid / Enterprise,B2C,Hybrid,likely
+130,Qixol (Promotions Engine),qixolpromo.com,https://qixolpromo.com,,UK,Promotions & loyalty engine,Mid,B2C,Hybrid,verified
+131,Talkable,talkable.com,https://talkable.com,,US,Referral marketing platform,SMB / Mid,B2C,Self-serve + hybrid,likely
+132,Buyapowa,buyapowa.com,https://buyapowa.com,,UK,Referral + advocacy + partnerships,Mid / Enterprise,B2C,Hybrid,likely
+133,SaaSquatch (ReferralSaaSquatch),saasquatch.com,https://saasquatch.com,,Canada,Referral + loyalty + rewards,Mid,Both,Self-serve + hybrid,likely
+134,Genius Referrals,geniusreferrals.com,https://geniusreferrals.com,,US,Referral automation platform,SMB / Mid,Both,Self-serve,likely
+135,InviteReferrals,invitereferrals.com,https://invitereferrals.com,,India,Referral marketing software,SMB / Mid,B2C,Self-serve,likely
+136,Duel,duel.tech,https://duel.tech,,UK,Brand advocacy + loyalty,Mid / Enterprise,B2C,Hybrid,verified
+137,Social Seeder,socialseeder.com,https://socialseeder.com,,Belgium,Employee & fan advocacy,Mid,B2B,Self-serve + hybrid,likely
+138,Vibes,vibes.com,https://vibes.com,,US,Mobile wallet + messaging loyalty,Enterprise,B2C,Hybrid,likely
+139,Vibenomics,vibenomics.com,https://vibenomics.com,,US,In-store engagement + offers,Enterprise,B2C,Hybrid,likely
+140,Antsomi (CDP 365),antsomi.com,https://antsomi.com,,Vietnam / SEA,CDP + loyalty (SEA),Mid / Enterprise,B2C,Hybrid,likely
+141,MoEngage,moengage.com,https://moengage.com,,India / US,Engagement + loyalty (insights-led),Mid / Enterprise,B2C,Self-serve + hybrid,likely
+142,CleverTap,clevertap.com,https://clevertap.com,,India / US,Retention + engagement platform,Mid / Enterprise,B2C,Self-serve + hybrid,likely
+143,WebEngage,webengage.com,https://webengage.com,,India,Retention + engagement + loyalty,Mid / Enterprise,B2C,Self-serve + hybrid,likely
+144,Optimove,optimove.com,https://optimove.com,,Israel / US,CRM marketing + loyalty orchestration,Mid / Enterprise,B2C,Self-serve + hybrid,likely
+145,Zeta Marketing Platform,zetaglobal.com,https://zetaglobal.com,,US,Marketing cloud + loyalty,Enterprise,B2C,Full-service + hybrid,likely
+146,PDI Technologies,pditechnologies.com,https://pditechnologies.com,,US,Fuel & convenience loyalty,Enterprise,B2C,Full-service + hybrid,likely
+147,SpotOn,spoton.com,https://spoton.com,,US,POS + loyalty for SMB/mid F&B & retail,SMB / Mid,B2C,Self-serve + hybrid,likely
+148,Apex Loyalty,apexloyalty.com,https://apexloyalty.com,,US / Turkey,B2B channel & dealer loyalty (Salesforce-native),Mid / Enterprise,B2B,Hybrid,likely
+149,Loyal Guru,loyal.guru,https://loyal.guru,,Spain,Real-time loyalty for grocery/retail,Enterprise,B2C,Hybrid,likely
+150,Reward360 (R360),reward360.ai,https://reward360.ai,,India / MENA,Enterprise loyalty + rewards platform,Enterprise,Both,Full-service + hybrid,verified

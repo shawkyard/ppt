@@ -1,0 +1,431 @@
+<title>Loyalty Vendor Contacts — Top 25</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#eceae4; --panel:#f7f6f2; --card:#ffffff; --ink:#1c1a17; --ink-2:#4a463f; --ink-3:#847d70;
+  --line:#ddd8cd; --line-2:#cfc9bb; --accent:#b25a2e; --accent-ink:#9a4a22; --accent-soft:#f3e3d7;
+  --ink-blue:#2f3d52; --ok:#3f7a4d;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(28,26,23,.05),0 10px 26px rgba(28,26,23,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#171512; --panel:#1f1c18; --card:#242019; --ink:#f3efe6; --ink-2:#c8c1b3; --ink-3:#928b7c;
+  --line:#332e26; --line-2:#413a30; --accent:#e08a54; --accent-ink:#f0a273; --accent-soft:#37281d;
+  --ink-blue:#a9bad2; --ok:#69b079;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.45);
+}}
+:root[data-theme="dark"]{
+  --bg:#171512; --panel:#1f1c18; --card:#242019; --ink:#f3efe6; --ink-2:#c8c1b3; --ink-3:#928b7c;
+  --line:#332e26; --line-2:#413a30; --accent:#e08a54; --accent-ink:#f0a273; --accent-soft:#37281d;
+  --ink-blue:#a9bad2; --ok:#69b079;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+header{padding:44px 0 20px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-ink);margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--accent)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,50px);line-height:1.03;
+  margin:0;letter-spacing:-.01em;text-wrap:balance;max-width:18ch}
+.lede{color:var(--ink-2);max-width:66ch;margin:16px 0 0;font-size:16px}
+.toolbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:16px 0;border-bottom:1px solid var(--line);margin-bottom:26px}
+.toolbar .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search{flex:1 1 260px;position:relative;min-width:220px}
+.search input{width:100%;padding:11px 12px 11px 38px;border:1px solid var(--line-2);background:var(--card);
+  color:var(--ink);border-radius:10px;font-size:15px;font-family:inherit}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+.cnt{font-family:var(--mono);font-size:13px;color:var(--ink-3);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;padding-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.top{display:grid;grid-template-columns:auto auto 1fr;gap:12px;align-items:center}
+.idx{color:var(--ink-3);font-size:13px}
+.mg{width:42px;height:42px;border-radius:10px;background:var(--accent-soft);color:var(--accent-ink);
+  font-weight:800;font-size:16px;display:grid;place-items:center;font-family:var(--serif);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.ttl h3{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.focus{margin:2px 0 0;font-size:12.5px;color:var(--ink-3)}
+dl{margin:0;display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--line);padding-top:13px}
+dl div{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:start}
+dt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700;padding-top:1px}
+dd{margin:0;font-size:13.5px;color:var(--ink)}
+.muted{color:var(--ink-3)}
+.ln{color:var(--ink-blue);text-decoration:none;font-family:var(--mono);font-size:13px}
+.ln:hover{text-decoration:underline}
+.acts{display:flex;gap:9px;margin-top:auto}
+.btn{flex:1;text-align:center;padding:9px 12px;border-radius:9px;border:1px solid var(--line-2);
+  background:transparent;color:var(--ink);text-decoration:none;font-weight:650;font-size:13.5px}
+.btn:hover{background:var(--panel)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-ink)}
+:root[data-theme="dark"] .btn.primary,:root:not([data-theme="light"]) .btn.primary{color:#1a1512}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.empty{grid-column:1/-1;text-align:center;color:var(--ink-3);padding:50px}
+footer{border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px;padding:22px 0 46px;margin-top:10px}
+footer p{margin:0 0 6px;max-width:80ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header><div class="wrap">
+  <p class="kicker">Outreach Directory · Top 25 · Aug 2026</p>
+  <h1>Loyalty Vendor Contacts</h1>
+  <p class="lede">The 25 top-ranked platforms with a verified path to a real conversation — official website,
+  headquarters, the right way in, public phone where listed, and the LinkedIn company page. Emails and
+  direct dials are deliberately left out rather than guessed.</p>
+</div></header>
+
+<div class="toolbar"><div class="wrap">
+  <div class="search">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search vendor, focus, or location…" autocomplete="off">
+  </div>
+  <span class="cnt" id="cnt">25 / 25</span>
+</div></div>
+
+<div class="wrap"><div class="grid" id="grid">
+<article class="card" data-s="epsilon enterprise loyalty + data cloud irving, tx, usa">
+  <div class="top"><span class="mono idx">01</span><span class="mg">E</span>
+    <div class="ttl"><h3>Epsilon</h3><p class="focus">Enterprise loyalty + data cloud</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Irving, TX, USA</dd></div>
+    <div><dt>How to reach</dt><dd>Contact form on site — ask for Loyalty/CRM (PeopleCloud) sales</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://epsilon.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/epsilon" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="capillary technologies enterprise loyalty + engagement ai bengaluru, in / santa clara, ca">
+  <div class="top"><span class="mono idx">02</span><span class="mg">CT</span>
+    <div class="ttl"><h3>Capillary Technologies</h3><p class="focus">Enterprise loyalty + engagement AI</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Bengaluru, IN / Santa Clara, CA</dd></div>
+    <div><dt>How to reach</dt><dd>&#x27;Contact us&#x27; / request demo — enterprise RFP</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://capillarytech.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/capillary-technologies" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="comarch enterprise loyalty suite kraków, poland">
+  <div class="top"><span class="mono idx">03</span><span class="mg">C</span>
+    <div class="ttl"><h3>Comarch</h3><p class="focus">Enterprise loyalty suite</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Kraków, Poland</dd></div>
+    <div><dt>How to reach</dt><dd>&#x27;Contact&#x27; — Loyalty &amp; Marketing business unit</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://comarch.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/comarch" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="oracle (crowdtwist) loyalty within oracle cx austin, tx, usa">
+  <div class="top"><span class="mono idx">04</span><span class="mg">OC</span>
+    <div class="ttl"><h3>Oracle (CrowdTwist)</h3><p class="focus">Loyalty within Oracle CX</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Austin, TX, USA</dd></div>
+    <div><dt>How to reach</dt><dd>Via Oracle CX / Advertising &amp; CX sales</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://oracle.com/cx/marketing/loyalty" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/oracle" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="salesforce loyalty mgmt crm-native loyalty san francisco, ca, usa">
+  <div class="top"><span class="mono idx">05</span><span class="mg">SL</span>
+    <div class="ttl"><h3>Salesforce Loyalty Mgmt</h3><p class="focus">CRM-native loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>San Francisco, CA, USA</dd></div>
+    <div><dt>How to reach</dt><dd>Via your Salesforce account exec / contact form</dd></div>
+    <div><dt>Phone</dt><dd><a class="ln" href="tel:1-800-664-9073">1-800-664-9073</a></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://salesforce.com/products/loyalty-management" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/salesforce" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="sap emarsys omnichannel marketing + loyalty vienna, at / london, uk">
+  <div class="top"><span class="mono idx">06</span><span class="mg">SE</span>
+    <div class="ttl"><h3>SAP Emarsys</h3><p class="focus">Omnichannel marketing + loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Vienna, AT / London, UK</dd></div>
+    <div><dt>How to reach</dt><dd>&#x27;Request a demo&#x27; form</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://emarsys.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/emarsys" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="marigold (cheetah) enterprise loyalty + messaging nashville / atlanta, usa">
+  <div class="top"><span class="mono idx">07</span><span class="mg">MC</span>
+    <div class="ttl"><h3>Marigold (Cheetah)</h3><p class="focus">Enterprise loyalty + messaging</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Nashville / Atlanta, USA</dd></div>
+    <div><dt>How to reach</dt><dd>meetmarigold.com/contact-sales</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://meetmarigold.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/meet-marigold" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="kobie marketing managed enterprise loyalty st. petersburg, fl, usa">
+  <div class="top"><span class="mono idx">08</span><span class="mg">KM</span>
+    <div class="ttl"><h3>Kobie Marketing</h3><p class="focus">Managed enterprise loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>St. Petersburg, FL, USA</dd></div>
+    <div><dt>How to reach</dt><dd>kobie.com/contact</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://kobie.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/kobie-marketing" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="antavo no-code enterprise loyalty london, uk / budapest, hu">
+  <div class="top"><span class="mono idx">09</span><span class="mg">A</span>
+    <div class="ttl"><h3>Antavo</h3><p class="focus">No-code enterprise loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>London, UK / Budapest, HU</dd></div>
+    <div><dt>How to reach</dt><dd>antavo.com/book-demo (or /contact)</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://antavo.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/antavo" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="bond brand loyalty loyalty agency + platform toronto, on, canada">
+  <div class="top"><span class="mono idx">10</span><span class="mg">BB</span>
+    <div class="ttl"><h3>Bond Brand Loyalty</h3><p class="focus">Loyalty agency + platform</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Toronto, ON, Canada</dd></div>
+    <div><dt>How to reach</dt><dd>&#x27;Contact&#x27; on bondbl.com — agency/strategy</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://bondbl.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/bond-brand-loyalty" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="kognitiv (aimia) enterprise loyalty + ai toronto, on, canada">
+  <div class="top"><span class="mono idx">11</span><span class="mg">KA</span>
+    <div class="ttl"><h3>Kognitiv (Aimia)</h3><p class="focus">Enterprise loyalty + AI</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Toronto, ON, Canada</dd></div>
+    <div><dt>How to reach</dt><dd>kognitiv.com — &#x27;Contact us&#x27;</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://kognitiv.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/kognitiv-corporation" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="merkle loyalty agency + tech columbia, md, usa">
+  <div class="top"><span class="mono idx">12</span><span class="mg">M</span>
+    <div class="ttl"><h3>Merkle</h3><p class="focus">Loyalty agency + tech</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Columbia, MD, USA</dd></div>
+    <div><dt>How to reach</dt><dd>merkle.com/contact-us — Dentsu agency</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://merkle.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/merkle" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="brierley managed enterprise loyalty frisco, tx, usa">
+  <div class="top"><span class="mono idx">13</span><span class="mg">B</span>
+    <div class="ttl"><h3>Brierley</h3><p class="focus">Managed enterprise loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Frisco, TX, USA</dd></div>
+    <div><dt>How to reach</dt><dd>brierley.com/contact</dd></div>
+    <div><dt>Phone</dt><dd><a class="ln" href="tel:+1214-743-5454">+1 214-743-5454</a></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://brierley.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/brierley-and-partners" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="annex cloud loyalty experience platform agoura hills, ca, usa">
+  <div class="top"><span class="mono idx">14</span><span class="mg">AC</span>
+    <div class="ttl"><h3>Annex Cloud</h3><p class="focus">Loyalty experience platform</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Agoura Hills, CA, USA</dd></div>
+    <div><dt>How to reach</dt><dd>annexcloud.com/contact-us</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://annexcloud.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/annex-cloud" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="mastercard (sessionm) enterprise loyalty + data purchase, ny, usa">
+  <div class="top"><span class="mono idx">15</span><span class="mg">MS</span>
+    <div class="ttl"><h3>Mastercard (SessionM)</h3><p class="focus">Enterprise loyalty + data</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Purchase, NY, USA</dd></div>
+    <div><dt>How to reach</dt><dd>Via Mastercard Services / Loyalty sales</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://mastercard.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/mastercard" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="loyalty juggernaut cloud-native enterprise loyalty milpitas, ca, usa">
+  <div class="top"><span class="mono idx">16</span><span class="mg">LJ</span>
+    <div class="ttl"><h3>Loyalty Juggernaut</h3><p class="focus">Cloud-native enterprise loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Milpitas, CA, USA</dd></div>
+    <div><dt>How to reach</dt><dd>lji.io — &#x27;Contact&#x27; / GRAVTY demo</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://lji.io" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/loyalty-juggernaut" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="loyalty prime enterprise loyalty platform munich, germany">
+  <div class="top"><span class="mono idx">17</span><span class="mg">LP</span>
+    <div class="ttl"><h3>Loyalty Prime</h3><p class="focus">Enterprise loyalty platform</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Munich, Germany</dd></div>
+    <div><dt>How to reach</dt><dd>loyaltyprime.com/en — &#x27;Contact&#x27; (verify current status)</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://loyaltyprime.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/loyalty-prime" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="zinrelo mid-market loyalty saas san jose, ca, usa">
+  <div class="top"><span class="mono idx">18</span><span class="mg">Z</span>
+    <div class="ttl"><h3>Zinrelo</h3><p class="focus">Mid-market loyalty SaaS</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>San Jose, CA, USA</dd></div>
+    <div><dt>How to reach</dt><dd>zinrelo.com — &#x27;Contact us&#x27; / demo</dd></div>
+    <div><dt>Phone</dt><dd><a class="ln" href="tel:+1650-701-7759">+1 650-701-7759</a></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://zinrelo.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/zinrelo" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="ansira distributed marketing + loyalty st. louis, mo, usa">
+  <div class="top"><span class="mono idx">19</span><span class="mg">A</span>
+    <div class="ttl"><h3>Ansira</h3><p class="focus">Distributed marketing + loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>St. Louis, MO, USA</dd></div>
+    <div><dt>How to reach</dt><dd>ansira.com/contact — distributed/channel</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://ansira.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/ansira" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="icf next loyalty consultancy + platform reston, va, usa">
+  <div class="top"><span class="mono idx">20</span><span class="mg">IN</span>
+    <div class="ttl"><h3>ICF Next</h3><p class="focus">Loyalty consultancy + platform</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Reston, VA, USA</dd></div>
+    <div><dt>How to reach</dt><dd>icf.com/contact-us</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://icf.com/next" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/icf" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="maritz motivation loyalty &amp; incentive solutions fenton, mo, usa">
+  <div class="top"><span class="mono idx">21</span><span class="mg">MM</span>
+    <div class="ttl"><h3>Maritz Motivation</h3><p class="focus">Loyalty &amp; incentive solutions</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Fenton, MO, USA</dd></div>
+    <div><dt>How to reach</dt><dd>maritzmotivation.com — &#x27;Contact us&#x27;</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://maritzmotivation.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/maritz" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="collinson loyalty + travel benefits london, uk">
+  <div class="top"><span class="mono idx">22</span><span class="mg">C</span>
+    <div class="ttl"><h3>Collinson</h3><p class="focus">Loyalty + travel benefits</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>London, UK</dd></div>
+    <div><dt>How to reach</dt><dd>collinsongroup.com — &#x27;Contact us&#x27;</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://collinsongroup.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/collinson" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="splio individuation marketing + loyalty paris, france">
+  <div class="top"><span class="mono idx">23</span><span class="mg">S</span>
+    <div class="ttl"><h3>Splio</h3><p class="focus">Individuation marketing + loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Paris, France</dd></div>
+    <div><dt>How to reach</dt><dd>splio.com — &#x27;Contact&#x27; (EU)</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://splio.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/splio" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="eagle eye solutions real-time loyalty + promotions guildford, uk">
+  <div class="top"><span class="mono idx">24</span><span class="mg">EE</span>
+    <div class="ttl"><h3>Eagle Eye Solutions</h3><p class="focus">Real-time loyalty + promotions</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Guildford, UK</dd></div>
+    <div><dt>How to reach</dt><dd>eagleeye.com/contact</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://eagleeye.com" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/eagle-eye-solutions" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<article class="card" data-s="talon.one api-first promotion + loyalty berlin, germany">
+  <div class="top"><span class="mono idx">25</span><span class="mg">T</span>
+    <div class="ttl"><h3>Talon.One</h3><p class="focus">API-first promotion + loyalty</p></div></div>
+  <dl>
+    <div><dt>HQ</dt><dd>Berlin, Germany</dd></div>
+    <div><dt>How to reach</dt><dd>talon.one/request-demo</dd></div>
+    <div><dt>Phone</dt><dd><span class="muted">—</span></dd></div>
+  </dl>
+  <div class="acts">
+    <a class="btn primary" href="https://talon.one" target="_blank" rel="noopener">Website ↗</a>
+    <a class="btn" href="https://linkedin.com/company/talon-one" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</article>
+<div class="empty" id="empty" style="display:none">No vendors match — try another term.</div>
+</div></div>
+
+<footer><div class="wrap">
+  <p><strong>How this list is scoped:</strong> the 25 top-ranked vendors from the full 150-vendor comparison. Company-level contact routes only.</p>
+  <p><strong>No fabricated data:</strong> personal emails and direct-dial numbers are omitted on purpose; phone appears only where a company publicly lists a main line. Verify before outreach.</p>
+  <p><strong>Want named people?</strong> Decision-makers (partnerships, sales, C-suite) with verified emails can be enriched from Apollo.io / Clay on request.</p>
+</div></footer>
+
+<script>
+const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],cnt=document.getElementById('cnt'),empty=document.getElementById('empty');
+q.addEventListener('input',()=>{
+  const t=q.value.trim().toLowerCase();let n=0;
+  cards.forEach(c=>{const m=!t||c.dataset.s.includes(t);c.style.display=m?'':'none';if(m)n++;});
+  cnt.textContent=n+' / '+cards.length;empty.style.display=n?'none':'';
+});
+</script>
