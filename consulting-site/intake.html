@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Intake | Five Hours Back</title>
+<meta name="description" content="Pre-call intake for AI Concierge clients. No form, no call — this is what lets us start with a game plan.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏱️</text></svg>">
+<style>
+  :root{
+    --ink:#1a2332;
+    --ink-soft:#4a5568;
+    --ink-faint:#8593a5;
+    --paper:#faf8f4;
+    --card:#ffffff;
+    --line:#e8e2d8;
+    --accent:#1f6f5c;
+    --accent-deep:#164f42;
+    --accent-soft:#e7f2ee;
+    --gold:#c8922a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    background:var(--paper);color:var(--ink);
+    line-height:1.6;font-size:16px;
+    padding:0 0 80px;
+  }
+  h1,h2,h3{font-family:'Bricolage Grotesque','Public Sans',system-ui,sans-serif;line-height:1.15;letter-spacing:-0.015em;text-wrap:balance}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  header{padding:64px 0 8px;text-align:center}
+  .logo{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:20px;color:var(--ink);text-decoration:none;display:inline-block;margin-bottom:28px}
+  .logo span{color:var(--accent)}
+  header h1{font-size:clamp(30px,5vw,42px);font-weight:800;margin-bottom:14px}
+  header p{color:var(--ink-soft);max-width:560px;margin:0 auto}
+  .rule-note{
+    background:var(--accent-soft);color:var(--accent-deep);
+    border-radius:10px;padding:12px 18px;
+    font-size:14.5px;font-weight:600;
+    display:inline-block;margin-top:18px;
+  }
+  form{margin-top:40px}
+  fieldset{
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:16px;
+    padding:30px 30px 22px;
+    margin-bottom:22px;
+  }
+  legend{
+    font-family:'Bricolage Grotesque',system-ui,sans-serif;
+    font-weight:700;font-size:19px;
+    padding:0 10px;margin-left:-10px;
+  }
+  .hint{font-size:13.5px;color:var(--ink-faint);margin:-2px 0 18px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  .field label .why{font-weight:400;color:var(--ink-faint)}
+  .field input[type=text],.field input[type=email],.field select,.field textarea{
+    width:100%;padding:11px 14px;
+    border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:15px;color:var(--ink);
+    background:#fdfcfa;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+  .field textarea{resize:vertical;min-height:80px}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.field-row{grid-template-columns:1fr}}
+  .radio-row{display:flex;gap:18px;flex-wrap:wrap}
+  .radio-row label{display:flex;align-items:center;gap:7px;font-size:14.5px;font-weight:500;color:var(--ink-soft);cursor:pointer}
+  .radio-row input{accent-color:var(--accent)}
+  .btn{
+    display:block;width:100%;
+    background:var(--accent);color:#fff;
+    font-weight:700;font-size:17px;
+    padding:16px;border-radius:999px;
+    border:none;cursor:pointer;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:var(--accent-deep)}
+  .form-note{font-size:13px;color:var(--ink-faint);text-align:center;margin-top:14px}
+  .star{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <a class="logo" href="/">Five Hours <span>Back</span></a>
+  <h1>Before our first call</h1>
+  <p>This takes 10–15 honest minutes, and it's what lets me show up to call one with a game plan instead of spending our first half hour figuring out where to start. Every field matters — the more specific you are, the more we get done.</p>
+  <span class="rule-note">House rule: no form, no call. Your call gets confirmed as soon as this lands.</span>
+</header>
+
+<div class="wrap">
+<!-- Netlify Forms: submissions appear under Forms → client-intake in your dashboard -->
+<form name="client-intake" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="client-intake">
+  <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+  <fieldset>
+    <legend>Business basics</legend>
+    <div class="field-row">
+      <div class="field">
+        <label for="name">Your name &amp; title</label>
+        <input type="text" id="name" name="name_title" required>
+      </div>
+      <div class="field">
+        <label for="biz">Business name</label>
+        <input type="text" id="biz" name="business" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="what">What does the business do, and for whom?</label>
+      <textarea id="what" name="business_description" required placeholder="Plain English — what you sell, who buys it, roughly how big the team is."></textarea>
+    </div>
+    <div class="field">
+      <label for="hours">In a normal week, how many hours do you spend working IN the business (doing the work) vs ON the business (improving it)?</label>
+      <input type="text" id="hours" name="in_vs_on" required placeholder="e.g. 45 in / 5 on">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Where the time goes</legend>
+    <p class="hint">This section is my most important early signal — be brutally honest.</p>
+    <div class="field">
+      <label for="sinks">Which tasks eat the most of your time each week?</label>
+      <textarea id="sinks" name="time_sinks" required placeholder="List them with rough hours if you can: quotes ~4h, invoicing ~2h, email ~5h…"></textarea>
+    </div>
+    <div class="field">
+      <label for="bottleneck">Where are YOU personally the bottleneck — what stops moving when you're busy?</label>
+      <textarea id="bottleneck" name="bottleneck" required></textarea>
+    </div>
+    <div class="field">
+      <label for="dropped">When things get swamped, which balls get dropped first?</label>
+      <textarea id="dropped" name="dropped_balls" required placeholder="Follow-ups that don't happen, reviews never asked for, quotes that go out late…"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Process inventory</legend>
+    <p class="hint">For each area, name one or two repeatable processes that happen every week or month — even tiny ones. "None" is a fine answer.</p>
+    <div class="field">
+      <label for="p-sales">Sales <span class="why">(leads, quotes, follow-up, closing)</span></label>
+      <textarea id="p-sales" name="process_sales" required></textarea>
+    </div>
+    <div class="field">
+      <label for="p-ops">Operations <span class="why">(scheduling, delivery, the actual work)</span></label>
+      <textarea id="p-ops" name="process_operations" required></textarea>
+    </div>
+    <div class="field">
+      <label for="p-fin">Finance <span class="why">(invoicing, chasing payment, bookkeeping)</span></label>
+      <textarea id="p-fin" name="process_finance" required></textarea>
+    </div>
+    <div class="field">
+      <label for="p-mkt">Marketing <span class="why">(posts, reviews, email, ads)</span></label>
+      <textarea id="p-mkt" name="process_marketing" required></textarea>
+    </div>
+    <div class="field">
+      <label for="p-int">Intelligence <span class="why">(reports, numbers you check, research)</span></label>
+      <textarea id="p-int" name="process_intelligence" required></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Your tool stack</legend>
+    <div class="field">
+      <label for="tools">Top software tools you run the business on (up to 10)</label>
+      <textarea id="tools" name="tools" required placeholder="QuickBooks, Gmail, Jobber, Square, Google Calendar…"></textarea>
+    </div>
+    <div class="field">
+      <label for="ai-tools">AI tools you already pay for or use, and what you use them for</label>
+      <textarea id="ai-tools" name="ai_tools" required placeholder='"ChatGPT free plan for emails" counts. "None" is fine too.'></textarea>
+    </div>
+    <div class="field">
+      <label for="team">Who's on the team, and who (if anyone) already uses AI?</label>
+      <textarea id="team" name="team" required></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Outcomes <span class="star">★</span></legend>
+    <p class="hint">The most important section by far. Everything we build points at your answers here.</p>
+    <div class="field">
+      <label for="ten-hours">If I handed you back 10 hours a week, what would you actually do with that time?</label>
+      <textarea id="ten-hours" name="ten_hours_answer" required></textarea>
+    </div>
+    <div class="field">
+      <label for="ninety">What does winning look like 90 days from now? Be specific.</label>
+      <textarea id="ninety" name="ninety_day_win" required placeholder="Revenue number, hours worked, a hire made, home for dinner by 6 — whatever winning means to you."></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Logistics</legend>
+    <div class="field">
+      <label for="email">Best email for recordings and recap links</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="field">
+      <label>Have you installed the voice-message app I sent you (for between-call questions)?</label>
+      <div class="radio-row">
+        <label><input type="radio" name="voxer_installed" value="yes" required> Yes</label>
+        <label><input type="radio" name="voxer_installed" value="not-yet"> Not yet — remind me</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="anything">Anything else I should know before call one?</label>
+      <textarea id="anything" name="anything_else" placeholder="Optional — but this is where the good stuff usually shows up."></textarea>
+    </div>
+  </fieldset>
+
+  <button class="btn" type="submit">Submit — and lock in call one</button>
+  <p class="form-note">Your answers stay between us. They become the working plan for your engagement.</p>
+</form>
+</div>
+
+</body>
+</html>
