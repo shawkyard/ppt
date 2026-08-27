@@ -196,7 +196,7 @@
 </nav>
 
 <main id="app"></main>
-<div class="foot" id="poweredBy">Engine v1.0-CANONICAL — ported from the ROI Master Control Center workbook, verified against Excel</div>
+<div class="foot" id="poweredBy">Engine v1.1-CANONICAL-MULTICHANNEL — ported from the ROI Master Control Center workbook, verified against Excel</div>
 
 <script src="formulas.js"></script>
 <script>
@@ -230,24 +230,40 @@
     preset: 'base',
     identity: true, // repeat identity observable? (gates PF lift)
     inputs: {
-      annualRevenue: 1000000000, aov: 235, purchaseFrequency: 3, grossMarginPct: 50,
-      enrollmentRatePct: 35, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15,
+      grossMarginPct: 50,
+      activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15,
       rewardRatePct: 2.5, platformCost: 150000, implementationCost: 25000,
       integrationCost: 50000, laborCost: 25000, marketingCost: 50000,
       servicesCost: 25000, otherCost: 0,
       rampY1Pct: 70, rampY2Pct: 90, rampY3Pct: 100,
       costInflationPct: 3, discountRatePct: 10
+    },
+    // Per-channel baselines: each channel has its own revenue / AOV / purchase
+    // frequency (→ its own customer count) and its own enrollment rate,
+    // capped by the channel's recruitment ceiling (CHANNEL_SPECS).
+    channelInputs: {
+      ecommerce: { revenue: 1000000000, aov: 235, pf: 3, enrollPct: 35, aovLiftPct: 15, pfLiftPct: 15 },
+      pos:       { revenue: 500000000,  aov: 45,  pf: 8, enrollPct: 25, aovLiftPct: 15, pfLiftPct: 15 },
+      email:     { revenue: 100000000,  aov: 60,  pf: 4, enrollPct: 40, aovLiftPct: 15, pfLiftPct: 15 },
+      cpg:       { revenue: 250000000,  aov: 12,  pf: 24, enrollPct: 3.5, aovLiftPct: 15, pfLiftPct: 15 }
     }
   };
   // Scenario presets from the workbook's 'Scenario Inputs' sheet.
+  // Enrollment applies to the e-commerce (direct-relationship) channel;
+  // other channels keep their own capped sliders.
   var PRESETS = {
     conservative: { label: 'Conservative', desc: '25% Enroll / 45% Active / 8% Lifts',
-      enrollmentRatePct: 25, activeRatePct: 45, aovLiftPct: 8, pfLiftPct: 8 },
+      ecomEnrollPct: 25, activeRatePct: 45, aovLiftPct: 8, pfLiftPct: 8 },
     base:         { label: 'Base',         desc: '35% Enroll / 60% Active / 15% Lifts',
-      enrollmentRatePct: 35, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
+      ecomEnrollPct: 35, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
     aggressive:   { label: 'Aggressive',   desc: '45% Enroll / 70% Active / 22% Lifts',
-      enrollmentRatePct: 45, activeRatePct: 70, aovLiftPct: 22, pfLiftPct: 22 }
+      ecomEnrollPct: 45, activeRatePct: 70, aovLiftPct: 22, pfLiftPct: 22 }
   };
+  var SPECS = window.LoyaltyRoiEngine.CHANNEL_SPECS;
+  function selectedChannels() {
+    var keys = Object.keys(state.channels).filter(function (k) { return state.channels[k]; });
+    return keys.length ? keys : ['ecommerce'];
+  }
 
   // ---- Format helpers ----
   function money(v, dp) {
@@ -268,13 +284,11 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
 
   // UI holds whole percents; the canonical engine takes fractions like Excel.
-  function engineInputs() {
+  function pc(v) { return (parseFloat(v) || 0) / 100; }
+  function model() {
     var s = state.inputs;
-    var pc = function (v) { return (parseFloat(v) || 0) / 100; };
-    return {
-      annualRevenue: s.annualRevenue, aov: s.aov, purchaseFrequency: s.purchaseFrequency,
-      grossMargin: pc(s.grossMarginPct),
-      enrollmentRate: pc(s.enrollmentRatePct), activeRate: pc(s.activeRatePct),
+    var shared = {
+      grossMargin: pc(s.grossMarginPct), activeRate: pc(s.activeRatePct),
       aovLift: pc(s.aovLiftPct), pfLift: pc(s.pfLiftPct),
       identityAvailable: state.identity,
       rewardRate: pc(s.rewardRatePct),
@@ -284,8 +298,16 @@
       rampByYear: [pc(s.rampY1Pct), pc(s.rampY2Pct), pc(s.rampY3Pct), 1, 1],
       costInflation: pc(s.costInflationPct), discountRate: pc(s.discountRatePct)
     };
+    var channels = selectedChannels().map(function (k) {
+      var c = state.channelInputs[k];
+      return {
+        key: k, annualRevenue: c.revenue, aov: c.aov, purchaseFrequency: c.pf,
+        enrollmentRate: pc(c.enrollPct),
+        aovLift: pc(c.aovLiftPct), pfLift: pc(c.pfLiftPct)
+      };
+    });
+    return window.LoyaltyRoiEngine.computeMultiChannel(shared, channels);
   }
-  function model() { return window.LoyaltyRoiEngine.computeFiveYear(engineInputs()); }
 
   // ---- Renderers ----
   var app = document.getElementById('app');
@@ -332,20 +354,34 @@
       '</div></div>';
   }
 
+  function chField(chKey, field, label, note) {
+    return '<div class="field"><label>' + label + '</label>' +
+      '<input type="number" min="0" step="any" data-ck="' + chKey + ':' + field + '" value="' + state.channelInputs[chKey][field] + '" />' +
+      (note ? '<div class="note">' + note + '</div>' : '') + '</div>';
+  }
+
   function renderStep1() {
     var m = model();
+    var sections = m.channels.map(function (ch) {
+      return '<div class="panel"><h2>' + ch.label + ' — Revenue Drivers</h2><div class="fields">' +
+        chField(ch.key, 'revenue', 'Annual Revenue ($)') +
+        chField(ch.key, 'aov', 'Average Order Value ($)') +
+        chField(ch.key, 'pf', 'Annual Purchase Frequency', 'Average orders per customer per year') +
+        '</div>' +
+        '<div class="funnel" style="margin-top:18px"><div class="fcell"><div class="l">' + ch.label + ' Customers</div>' +
+        '<div class="n">' + int(ch.customers) + '</div><div class="d">Revenue ÷ (AOV × Frequency)</div></div></div>' +
+        (ch.customers < 1 && state.channelInputs[ch.key].revenue > 0
+          ? '<div class="warnbox"><b>Check your inputs</b>These numbers imply less than one customer in this channel.</div>' : '') +
+        '</div>';
+    }).join('');
     app.innerHTML =
-      header(1, 'Baseline Metrics', 'Enter your core business inputs to establish the baseline.', 'Start', 'start') +
-      '<div class="panel"><h2>Revenue Drivers</h2><div class="fields">' +
-        numField('annualRevenue', 'Annual Revenue ($)') +
-        numField('aov', 'Average Order Value ($)') +
-        numField('purchaseFrequency', 'Annual Purchase Frequency', 'Average orders per customer per year') +
+      header(1, 'Baseline Metrics', 'Each channel carries its own revenue, AOV and purchase frequency — dividing them tells us how many customers each channel really has.', 'Start', 'start') +
+      sections +
+      '<div class="panel"><div class="fields">' +
         numField('grossMarginPct', 'Gross Margin (%)', 'Revenue is not profit — ROI is computed on gross profit') +
       '</div>' +
-      '<div class="funnel" style="margin-top:22px"><div class="fcell"><div class="l">Estimated Customers</div>' +
-        '<div class="n">' + int(m.customers) + '</div><div class="d">Revenue ÷ (AOV × Frequency)</div></div></div>' +
-      (m.customers < 1 && state.inputs.annualRevenue > 0
-        ? '<div class="warnbox"><b>Check your inputs</b>These numbers imply less than one customer. Annual Revenue should be your total yearly revenue; AOV is dollars per order; Frequency is orders per customer per year.</div>'
+      (m.channels.length > 1
+        ? '<div class="funnel" style="margin-top:18px"><div class="fcell hot"><div class="l">Total Customers (all channels)</div><div class="n">' + int(m.customers) + '</div><div class="d">Channels are separate customer pools — never double-counted</div></div></div>'
         : '') +
       '</div>' +
       navBtns('Next: Loyalty Assumptions', '2');
@@ -361,11 +397,30 @@
     app.innerHTML =
       header(2, 'Loyalty Assumptions', 'Fine-tune the engagement funnel. Set enrollment, activity, and lift metrics.', 'Baseline', '1') +
       '<div class="panel"><h2>Quick Presets</h2><div class="presets">' + presetBtns + '</div>' +
+      m.channels.map(function (ch) {
+        var ci = state.channelInputs[ch.key];
+        var capPct = Math.round(ch.spec.enrollMax * 100);
+        function chSlider(field, label, min, max, valSuffix) {
+          return '<div class="slider-row"><div class="slider-head"><label>' + label + '</label>' +
+            '<span class="val">' + ci[field] + (valSuffix || '%') + '</span></div>' +
+            '<input type="range" min="' + min + '" max="' + max + '" step="' + (max <= 5 ? 0.5 : 1) + '" data-ck="' + ch.key + ':' + field + '" value="' + ci[field] + '" />' +
+            '<div class="slider-scale"><span>' + min + '%</span><span>' + max + '%</span></div></div>';
+        }
+        return '<h2 style="margin-top:10px">' + ch.label + '</h2>' +
+          '<p class="methodology" style="margin-bottom:12px">' + ch.spec.note +
+          (ch.spec.confirm ? ' <b>(ceiling to confirm)</b>' : '') + '</p>' +
+          '<div class="sliders2">' +
+          chSlider('enrollPct', 'Enrollment Rate (max ' + capPct + '%)', 0, capPct) +
+          chSlider('aovLiftPct', 'AOV Lift', 0, 25) +
+          chSlider('pfLiftPct', 'Purchase Frequency Lift', 0, 25) +
+          '</div>' +
+          (ch.enrollmentCapped
+            ? '<div class="warnbox amber"><b>Recruitment ceiling applied</b>' + ch.label + ' can only recruit up to ' + capPct + '% of its customers; the model uses ' + capPct + '%.</div>'
+            : '');
+      }).join('') +
+      '<h2 style="margin-top:18px">Program-wide</h2>' +
       '<div class="sliders2">' +
-        slider('enrollmentRatePct', 'Enrollment Rate', 0, 100) +
-        slider('activeRatePct', 'Active Rate', 0, 100) +
-        slider('aovLiftPct', 'AOV Lift', 0, 50) +
-        slider('pfLiftPct', 'Purchase Frequency Lift', 0, 50) +
+        slider('activeRatePct', 'Active Rate (% of enrolled)', 0, 100) +
       '</div>' +
       '<label class="chk" style="max-width:520px"><input type="checkbox" data-toggle="identity"' + (state.identity ? ' checked' : '') + ' /> Repeat-customer identity is observable (required for frequency lift)</label>' +
       (!state.identity
@@ -373,12 +428,22 @@
         : '') +
       '<h2 style="margin-top:10px">Program Impact Funnel</h2>' +
       '<div class="funnel">' +
-        '<div class="fcell"><div class="l">Total Customers</div><div class="n">' + int(m.customers) + '</div><div class="d">Based on Revenue / AOV / Freq</div></div>' +
+        '<div class="fcell"><div class="l">Total Customers</div><div class="n">' + int(m.customers) + '</div><div class="d">All selected channels</div></div>' +
         '<div class="arrow">→</div>' +
-        '<div class="fcell"><div class="l">Enrolled Members</div><div class="n">' + int(m.enrolledMembers) + '</div><div class="d">' + state.inputs.enrollmentRatePct + '% of Customers</div></div>' +
+        '<div class="fcell"><div class="l">Enrolled Members</div><div class="n">' + int(m.enrolledMembers) + '</div><div class="d">Per-channel recruitment, capped by channel</div></div>' +
         '<div class="arrow">→</div>' +
         '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">' + state.inputs.activeRatePct + '% of Enrolled — lift applies here</div></div>' +
       '</div>' +
+      (function () {
+        var share = m.customers > 0 ? (m.activeMembers / m.customers) * 100 : 0;
+        var inBand = share >= 8 && share <= 12;
+        return '<div class="warnbox' + (inBand ? '' : ' amber') + '" style="border-color:' + (inBand ? '#14532d' : '') + ';background:' + (inBand ? '#052e22' : '') + '">' +
+          '<b style="color:' + (inBand ? 'var(--good)' : '') + '">Active members = ' + share.toFixed(1) + '% of all customers</b>' +
+          'Real-world programs typically land at 8–12% of company customers signed up AND truly active. ' +
+          (share > 12 ? 'Above that band — defensible for direct channels, but be ready to justify it to a CFO.'
+            : share < 8 ? 'Below the typical band — conservative.' : 'Within the typical band.') +
+          '</div>';
+      })() +
       '<div class="breakdown"><h3 class="small">Incremental Revenue Bridge (active members, annual)</h3>' +
         '<div class="row"><span>AOV-only revenue lift</span><span class="amt">' + money(m.aovOnlyLift, 0) + '</span></div>' +
         '<div class="row"><span>Frequency-only revenue lift</span><span class="amt">' + money(m.pfOnlyLift, 0) + '</span></div>' +
@@ -521,7 +586,7 @@
       var payload = {
         email: document.getElementById('leadEmail').value,
         mode: state.mode, channels: state.channels,
-        inputs: state.inputs, results: model(),
+        inputs: state.inputs, channelInputs: state.channelInputs, results: model(),
         brand: brandParam || 'BBP ROI Modeling',
         page: document.referrer || null, ts: new Date().toISOString()
       };
@@ -561,15 +626,27 @@
     if (preset) {
       var p = PRESETS[preset.getAttribute('data-preset')];
       state.preset = preset.getAttribute('data-preset');
-      state.inputs.enrollmentRatePct = p.enrollmentRatePct;
       state.inputs.activeRatePct = p.activeRatePct;
+      // Presets seed every selected channel's lifts; e-commerce (direct
+      // relationship) also takes the preset enrollment rate.
+      selectedChannels().forEach(function (k) {
+        state.channelInputs[k].aovLiftPct = p.aovLiftPct;
+        state.channelInputs[k].pfLiftPct = p.pfLiftPct;
+      });
+      if (state.channels.ecommerce) state.channelInputs.ecommerce.enrollPct = p.ecomEnrollPct;
       render(); return;
     }
   });
   app.addEventListener('input', function (e) {
     var key = e.target.getAttribute('data-key');
-    if (key) {
-      state.inputs[key] = parseFloat(e.target.value) || 0;
+    var ck = e.target.getAttribute('data-ck');
+    if (key || ck) {
+      var v = parseFloat(e.target.value) || 0;
+      if (key) state.inputs[key] = v;
+      else {
+        var parts = ck.split(':');
+        state.channelInputs[parts[0]][parts[1]] = v;
+      }
       // Re-render everything except the input being typed in (sliders re-render fully).
       if (e.target.type === 'range') { render(); }
       else { refreshDerived(); }
@@ -583,11 +660,15 @@
   // Lightweight refresh for typed number fields: re-render but restore focus.
   function refreshDerived() {
     var active = document.activeElement;
-    var key = active && active.getAttribute('data-key');
+    var sel = active && (active.getAttribute('data-key')
+      ? '[data-key="' + active.getAttribute('data-key') + '"]'
+      : active.getAttribute('data-ck')
+        ? '[data-ck="' + active.getAttribute('data-ck') + '"]'
+        : null);
     var pos = active && active.selectionStart;
     render();
-    if (key) {
-      var el = app.querySelector('[data-key="' + key + '"]');
+    if (sel) {
+      var el = app.querySelector(sel);
       if (el) {
         el.focus();
         try { el.selectionStart = el.selectionEnd = pos; } catch (err) {}

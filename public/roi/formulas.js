@@ -119,36 +119,140 @@ function computeCanonicalModel(i) {
   };
 }
 
-/**
- * Five-year projection — "5-Year Model" sheet.
- * Ramp applies to member value; recurring costs inflate; one-time costs hit
- * Year 1 only; net contributions discount to NPV. Organic growth is never
- * hidden inside loyalty value.
- *
- * @param {Object} i  Same fields as computeCanonicalModel, plus:
- * @param {number[]} [i.rampByYear]     5 fractions, default [0.7,0.9,1,1,1] (Base)
- * @param {number}   [i.costInflation]  Fraction / year, default 0.03
- * @param {number}   [i.discountRate]   Fraction / year, default 0.10
+/*
+ * Channel recruitment ceilings.
+ * Loyalty recruits CUSTOMERS, not orders — and each channel caps how many of
+ * its customers can realistically be recruited:
+ *  - E-commerce: direct relationship (accounts/checkout) → 20–100% recruitable.
+ *  - CPG: manufacturer sells through retailers, no direct relationship;
+ *    receipt processing recruits only ~3–4% of customers.
+ *  - POS and Email/Mobile ceilings are working assumptions pending the
+ *    owner's numbers (marked confirm:true).
  */
-function computeFiveYear(i) {
-  const m = computeCanonicalModel(i);
-  const ramp = Array.isArray(i.rampByYear) && i.rampByYear.length === 5
-    ? i.rampByYear.map(n) : [0.7, 0.9, 1, 1, 1];
-  const inflation = i.costInflation == null ? 0.03 : n(i.costInflation);
-  const discount = i.discountRate == null ? 0.10 : n(i.discountRate);
-  const margin = n(i.grossMargin);
-  const rewardRate = n(i.rewardRate);
+const CHANNEL_SPECS = {
+  ecommerce: { label: 'E-commerce', enrollMin: 0.20, enrollMax: 1.00, confirm: false,
+    note: 'Direct enrollment at checkout / account creation: 20–100% of customers recruitable.' },
+  pos: { label: 'In-Store POS', enrollMin: 0, enrollMax: 0.60, confirm: true,
+    note: 'Requires tender or named-customer identity at the register. Ceiling to be confirmed.' },
+  email: { label: 'Email / Mobile', enrollMin: 0, enrollMax: 0.80, confirm: true,
+    note: 'Known subscribers / opt-ins. Ceiling to be confirmed.' },
+  cpg: { label: 'CPG (receipt processing)', enrollMin: 0, enrollMax: 0.04, confirm: false,
+    note: 'No direct customer relationship (sold through retailers); receipt processing recruits ~3–4%.' },
+};
+
+/**
+ * Multi-channel model. Each channel carries its own revenue / AOV / purchase
+ * frequency (→ its own customer count) and its own enrollment rate, clamped
+ * to the channel's recruitment ceiling. Program-level costs stay in ONE
+ * denominator across all channels; channels are treated as disjoint customer
+ * pools (the omnichannel dedupe rule: never double-count customers or sales).
+ *
+ * @param {Object} shared    activeRate, aovLift, pfLift, grossMargin, rewardRate,
+ *                           identityAvailable, cost fields, rampByYear,
+ *                           costInflation, discountRate (fractions, like Excel)
+ * @param {Array}  channels  [{key, annualRevenue, aov, purchaseFrequency,
+ *                            enrollmentRate, uniqueCustomers?, identityAvailable?}]
+ */
+function computeMultiChannel(shared, channels) {
+  const perChannel = (channels || []).map((ch) => {
+    const spec = CHANNEL_SPECS[ch.key] || { label: ch.key, enrollMin: 0, enrollMax: 1, note: '' };
+    const enrollmentRate = Math.min(Math.max(n(ch.enrollmentRate), 0), spec.enrollMax);
+    const m = computeCanonicalModel({
+      annualRevenue: ch.annualRevenue, uniqueCustomers: ch.uniqueCustomers,
+      aov: ch.aov, purchaseFrequency: ch.purchaseFrequency,
+      grossMargin: shared.grossMargin,
+      enrollmentRate, activeRate: shared.activeRate,
+      // The CMO conversation happens per channel: lifts are channel-level
+      // assumptions (typically 3%–25%), falling back to program-level.
+      aovLift: ch.aovLift != null ? ch.aovLift : shared.aovLift,
+      pfLift: ch.pfLift != null ? ch.pfLift : shared.pfLift,
+      identityAvailable: ch.identityAvailable != null ? ch.identityAvailable : shared.identityAvailable,
+      // Costs are program-level, not channel-level: zero here, applied once below.
+      rewardRate: 0, platformCost: 0, laborCost: 0, marketingCost: 0,
+      servicesCost: 0, otherCost: 0, implementationCost: 0, integrationCost: 0,
+    });
+    return {
+      key: ch.key, label: spec.label, spec,
+      enrollmentRateApplied: enrollmentRate,
+      enrollmentCapped: n(ch.enrollmentRate) > spec.enrollMax,
+      customers: m.customers, enrolledMembers: m.enrolledMembers, activeMembers: m.activeMembers,
+      baselineActiveRevenue: m.baselineActiveRevenue,
+      aovOnlyLift: m.aovOnlyLift, pfOnlyLift: m.pfOnlyLift, synergyLift: m.synergyLift,
+      incrementalRevenue: m.incrementalRevenue, incrementalGrossProfit: m.incrementalGrossProfit,
+      bridgeCheck: m.bridgeCheck,
+    };
+  });
+
+  const sum = (f) => perChannel.reduce((t, ch) => t + f(ch), 0);
+  const blended = {
+    customers: sum((ch) => ch.customers),
+    enrolledMembers: sum((ch) => ch.enrolledMembers),
+    activeMembers: sum((ch) => ch.activeMembers),
+    baselineActiveRevenue: sum((ch) => ch.baselineActiveRevenue),
+    aovOnlyLift: sum((ch) => ch.aovOnlyLift),
+    pfOnlyLift: sum((ch) => ch.pfOnlyLift),
+    synergyLift: sum((ch) => ch.synergyLift),
+    incrementalRevenue: sum((ch) => ch.incrementalRevenue),
+    incrementalGrossProfit: sum((ch) => ch.incrementalGrossProfit),
+    bridgeCheck: sum((ch) => ch.bridgeCheck),
+    totalCompanyRevenue: (channels || []).reduce((t, ch) => t + n(ch.annualRevenue), 0),
+  };
+
+  // Program-level economics: one denominator across every channel.
+  const rewardsCost = blended.incrementalRevenue * n(shared.rewardRate);
+  const recurringFixedCosts =
+    n(shared.platformCost) + n(shared.laborCost) + n(shared.marketingCost) +
+    n(shared.servicesCost) + n(shared.otherCost);
+  const oneTimeCosts = n(shared.implementationCost) + n(shared.integrationCost);
+  const totalInvestment = rewardsCost + recurringFixedCosts + oneTimeCosts;
+  const netContribution = blended.incrementalGrossProfit - totalInvestment;
+  const netRoi = totalInvestment > 0 ? netContribution / totalInvestment : null;
+  const benefitCostMultiple = totalInvestment > 0 ? blended.incrementalGrossProfit / totalInvestment : null;
+  const paybackMonths = netContribution > 0 ? totalInvestment / (netContribution / 12) : Infinity;
+  const contributionPerActive = blended.activeMembers > 0
+    ? (blended.incrementalGrossProfit - rewardsCost) / blended.activeMembers : 0;
+
+  const projection = projectFiveYear({
+    activeMembers: blended.activeMembers,
+    incrementalRevenue: blended.incrementalRevenue,
+    grossMargin: n(shared.grossMargin), rewardRate: n(shared.rewardRate),
+    recurringFixedCosts, oneTimeCosts,
+    rampByYear: shared.rampByYear, costInflation: shared.costInflation,
+    discountRate: shared.discountRate,
+  });
+
+  return {
+    channels: perChannel,
+    ...blended,
+    rewardsCost, recurringFixedCosts, oneTimeCosts, totalInvestment,
+    netContribution, netRoi, benefitCostMultiple, paybackMonths,
+    contributionPerActive,
+    incRevenueShareOfCompany: div(blended.incrementalRevenue, blended.totalCompanyRevenue),
+    breakEvenActiveMembers: contributionPerActive > 0
+      ? (recurringFixedCosts + oneTimeCosts) / contributionPerActive : null,
+    modelGate: Math.abs(blended.bridgeCheck) > 0.01 ? 'BLOCK: bridge failed' : 'READY',
+    ...projection,
+    engineVersion: 'v1.1-CANONICAL-MULTICHANNEL',
+  };
+}
+
+/* Shared 5-year projection core — the "5-Year Model" sheet math. */
+function projectFiveYear(p) {
+  const ramp = Array.isArray(p.rampByYear) && p.rampByYear.length === 5
+    ? p.rampByYear.map(n) : [0.7, 0.9, 1, 1, 1];
+  const inflation = p.costInflation == null ? 0.03 : n(p.costInflation);
+  const discount = p.discountRate == null ? 0.10 : n(p.discountRate);
 
   const years = [];
   let cumNet = 0, cumInvestment = 0, npv = 0, cumIncRevenue = 0;
   for (let t = 1; t <= 5; t++) {
     const r = ramp[t - 1];
-    const activeMembers = m.activeMembers * r;
-    const incRevenue = m.incrementalRevenue * r;
-    const grossProfit = incRevenue * margin;
-    const rewardsCost = incRevenue * rewardRate;
-    const recurringCosts = m.recurringFixedCosts * Math.pow(1 + inflation, t - 1);
-    const oneTimeCosts = t === 1 ? m.oneTimeCosts : 0;
+    const activeMembers = p.activeMembers * r;
+    const incRevenue = p.incrementalRevenue * r;
+    const grossProfit = incRevenue * n(p.grossMargin);
+    const rewardsCost = incRevenue * n(p.rewardRate);
+    const recurringCosts = n(p.recurringFixedCosts) * Math.pow(1 + inflation, t - 1);
+    const oneTimeCosts = t === 1 ? n(p.oneTimeCosts) : 0;
     const totalInvestment = rewardsCost + recurringCosts + oneTimeCosts;
     const netContribution = grossProfit - totalInvestment;
     const discountFactor = 1 / Math.pow(1 + discount, t);
@@ -169,15 +273,36 @@ function computeFiveYear(i) {
       netPerActive: activeMembers > 0 ? netContribution / activeMembers : 0,
     });
   }
-
   return {
-    ...m,
     years,
     fiveYearIncRevenue: cumIncRevenue,
     fiveYearInvestment: cumInvestment,
     fiveYearNetContribution: cumNet,
     fiveYearNpv: npv,
   };
+}
+
+/**
+ * Five-year projection — "5-Year Model" sheet.
+ * Ramp applies to member value; recurring costs inflate; one-time costs hit
+ * Year 1 only; net contributions discount to NPV. Organic growth is never
+ * hidden inside loyalty value.
+ *
+ * @param {Object} i  Same fields as computeCanonicalModel, plus:
+ * @param {number[]} [i.rampByYear]     5 fractions, default [0.7,0.9,1,1,1] (Base)
+ * @param {number}   [i.costInflation]  Fraction / year, default 0.03
+ * @param {number}   [i.discountRate]   Fraction / year, default 0.10
+ */
+function computeFiveYear(i) {
+  const m = computeCanonicalModel(i);
+  const projection = projectFiveYear({
+    activeMembers: m.activeMembers,
+    incrementalRevenue: m.incrementalRevenue,
+    grossMargin: n(i.grossMargin), rewardRate: n(i.rewardRate),
+    recurringFixedCosts: m.recurringFixedCosts, oneTimeCosts: m.oneTimeCosts,
+    rampByYear: i.rampByYear, costInflation: i.costInflation, discountRate: i.discountRate,
+  });
+  return { ...m, ...projection };
 }
 
 /*
@@ -232,8 +357,8 @@ function computeLoyaltyRoi(inputs) {
 
 // Works as a classic <script> (browser global) and as a Node/ESM import.
 if (typeof window !== 'undefined') {
-  window.LoyaltyRoiEngine = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear };
+  window.LoyaltyRoiEngine = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear, computeMultiChannel, CHANNEL_SPECS };
 }
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear };
+  module.exports = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear, computeMultiChannel, CHANNEL_SPECS };
 }

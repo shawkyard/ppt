@@ -13,7 +13,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(join(here, '../public/roi/formulas.js'), 'utf8');
 const mod = { exports: {} };
 new Function('module', 'window', src)(mod, undefined);
-const { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear } = mod.exports;
+const { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear, computeMultiChannel, CHANNEL_SPECS } = mod.exports;
 
 let failures = 0;
 function approx(name, actual, expected, tol = 0.01) {
@@ -167,6 +167,55 @@ for (const [k, v] of Object.entries(junk)) {
   if (typeof v === 'number' && Number.isNaN(v)) { failures++; console.error(`  ✗ ${k} is NaN`); }
 }
 console.log('  ✓ invalid inputs never produce NaN');
+
+// ── Multi-channel model ──
+console.log('Multi-channel:');
+const sharedBase = {
+  grossMargin: 0.5, activeRate: 0.6, aovLift: 0.15, pfLift: 0.15,
+  identityAvailable: true, rewardRate: 0.025,
+  platformCost: 150000, implementationCost: 25000, integrationCost: 50000,
+  laborCost: 25000, marketingCost: 50000, servicesCost: 25000, otherCost: 0,
+  rampByYear: [0.7, 0.9, 1, 1, 1], costInflation: 0.03, discountRate: 0.1,
+};
+// E-commerce alone with Base-scenario numbers must equal the single-channel
+// canonical Base scenario exactly.
+const mc1 = computeMultiChannel(sharedBase, [
+  { key: 'ecommerce', annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, enrollmentRate: 0.35 },
+]);
+approx('ecom-only = Base customers', mc1.customers, b.customers, 1e-6);
+approx('ecom-only = Base incRevenue', mc1.incrementalRevenue, b.incrementalRevenue, 0.01);
+approx('ecom-only = Base totalInvestment', mc1.totalInvestment, b.totalInvestment, 0.01);
+approx('ecom-only = Base netContribution', mc1.netContribution, b.netContribution, 0.01);
+approx('ecom-only = Base 5yr net', mc1.fiveYearNetContribution, f.fiveYearNetContribution, 0.01);
+approx('ecom-only = Base 5yr NPV', mc1.fiveYearNpv, f.fiveYearNpv, 0.01);
+
+// CPG recruitment ceiling: 35% requested clamps to the 4% receipt-processing cap.
+// CPG: $250M revenue, $12 AOV, 24 purchases/yr → 868,055.56 customers;
+// enrolled at capped 4% = 34,722.22; active 60% = 20,833.33.
+const mc2 = computeMultiChannel(sharedBase, [
+  { key: 'cpg', annualRevenue: 250e6, aov: 12, purchaseFrequency: 24, enrollmentRate: 0.35 },
+]);
+approx('CPG customers', mc2.channels[0].customers, 868055.5555555555, 1e-4);
+approx('CPG enrollment clamped to 4%', mc2.channels[0].enrollmentRateApplied, 0.04, 1e-12);
+approx('CPG enrolled (capped)', mc2.channels[0].enrolledMembers, 34722.22222222222, 1e-4);
+if (!mc2.channels[0].enrollmentCapped) { failures++; console.error('  ✗ CPG cap flag missing'); }
+else console.log('  ✓ CPG cap flagged');
+if (CHANNEL_SPECS.cpg.enrollMax !== 0.04) { failures++; console.error('  ✗ CPG ceiling should be 4%'); }
+else console.log('  ✓ CPG ceiling = 4%');
+
+// Blend invariant: two channels = sum of each channel computed alone
+// (revenue side), with program costs applied exactly once.
+const chA = { key: 'ecommerce', annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, enrollmentRate: 0.35 };
+const chB = { key: 'cpg', annualRevenue: 250e6, aov: 12, purchaseFrequency: 24, enrollmentRate: 0.04 };
+const mcBoth = computeMultiChannel(sharedBase, [chA, chB]);
+const aloneA = computeMultiChannel(sharedBase, [chA]);
+const aloneB = computeMultiChannel(sharedBase, [chB]);
+approx('blend: customers sum', mcBoth.customers, aloneA.customers + aloneB.customers, 1e-4);
+approx('blend: incRevenue sum', mcBoth.incrementalRevenue, aloneA.incrementalRevenue + aloneB.incrementalRevenue, 0.01);
+approx('blend: active sum', mcBoth.activeMembers, aloneA.activeMembers + aloneB.activeMembers, 1e-4);
+const expectedInvestment = mcBoth.incrementalRevenue * 0.025 + 250000 + 75000;
+approx('blend: one cost denominator', mcBoth.totalInvestment, expectedInvestment, 0.01);
+approx('blend: bridge ≈ 0', mcBoth.bridgeCheck, 0);
 
 // ── Compact widget (canonical simple rewards mode) ──
 // customers 1200, ticket $28, 2 visits/mo, margin 60%, adoption 35%,
