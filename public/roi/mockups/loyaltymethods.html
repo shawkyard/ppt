@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concept Mock-up — Loyalty Methods Blog + Embedded ROI Calculator</title>
+<!--
+  CONCEPT MOCK-UP for a sales conversation with Loyalty Methods.
+  Recreates the look of their blog post "Loyalty Program ROI: How to Measure
+  and Maximize It" with the hosted ROI calculator embedded mid-article, to
+  show how the white-label embed would sit on their page. Not the live site.
+
+  Brand tokens (tune to match their site exactly):
+-->
+<style>
+  :root {
+    --lm-orange: #f58220;
+    --lm-orange-dark: #e06a0a;
+    --lm-slate: #54565a;
+    --lm-ink: #3a3c40;
+    --lm-light: #f5f5f5;
+    --lm-border: #e4e4e4;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Segoe UI", Roboto, Arial, sans-serif; color: var(--lm-ink); background: #fff; font-size: 15px; line-height: 1.65; }
+
+  .concept-banner {
+    background: #10243e; color: #cbd5e1; text-align: center; font-size: 12.5px; padding: 8px 14px;
+  }
+  .concept-banner b { color: #6fd3c7; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 6vw; background: #fff; border-bottom: 1px solid var(--lm-border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .lm-logo { display: flex; align-items: center; gap: 8px; }
+  .lm-logo .mark {
+    width: 34px; height: 26px; border-radius: 6px; background: var(--lm-orange);
+    display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 13px; letter-spacing: -1px;
+  }
+  .lm-logo .word { font-size: 15px; }
+  .lm-logo .word b { color: var(--lm-orange); font-weight: 800; letter-spacing: .06em; }
+  .lm-logo .word span { color: var(--lm-slate); }
+  nav.menu { display: flex; gap: 26px; font-size: 13.5px; color: var(--lm-slate); }
+  nav.menu a { color: inherit; text-decoration: none; }
+  .contact-btn {
+    background: var(--lm-orange); color: #fff; font-weight: 700; font-size: 13.5px;
+    padding: 9px 20px; border-radius: 5px; text-decoration: none;
+  }
+  @media (max-width: 860px) { nav.menu { display: none; } }
+
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; max-width: 1150px; margin: 0 auto; padding: 28px 4vw 60px; }
+  @media (max-width: 960px) { .wrap { grid-template-columns: 1fr; } }
+
+  .crumb { font-size: 12.5px; color: var(--lm-slate); margin-bottom: 18px; }
+  .crumb a { color: var(--lm-orange); text-decoration: none; }
+
+  .hero-img {
+    background: linear-gradient(120deg, #1a2b45 55%, var(--lm-orange) 55.2%);
+    border-radius: 6px; color: #fff; padding: 46px 34px; margin-bottom: 26px;
+  }
+  .hero-img .t1 { font-size: 26px; font-weight: 800; color: #fff; }
+  .hero-img .t2 { font-style: italic; font-size: 19px; color: #ffd9b3; margin-top: 6px; }
+
+  article h1 { font-size: 26px; margin-bottom: 14px; color: #202225; }
+  article h2 { font-size: 17px; font-weight: 800; margin: 26px 0 8px; color: #202225; }
+  article p { margin-bottom: 12px; color: var(--lm-ink); }
+  article .formula {
+    background: var(--lm-light); border-left: 4px solid var(--lm-orange);
+    padding: 12px 16px; font-weight: 700; margin: 14px 0;
+  }
+  table.roi-drivers { width: 100%; border-collapse: collapse; margin: 14px 0 6px; font-size: 13.5px; }
+  table.roi-drivers th, table.roi-drivers td { border: 1px solid var(--lm-border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  table.roi-drivers th { background: var(--lm-light); }
+  article ul { padding-left: 22px; margin-bottom: 12px; }
+  article li { margin-bottom: 7px; }
+
+  .calc-callout {
+    border: 2px solid var(--lm-orange); border-radius: 10px; margin: 30px 0;
+    overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  .calc-callout .callout-head {
+    background: linear-gradient(90deg, var(--lm-orange), var(--lm-orange-dark));
+    color: #fff; padding: 18px 22px;
+  }
+  .calc-callout .callout-head .t { font-size: 19px; font-weight: 800; }
+  .calc-callout .callout-head .s { font-size: 13.5px; opacity: .92; margin-top: 2px; }
+  .calc-callout .callout-body { padding: 10px; background: #fff; }
+
+  aside .featured h3 { color: var(--lm-orange); font-size: 15px; margin-bottom: 12px; }
+  .post-card {
+    border: 1px solid var(--lm-border); border-left: 4px solid var(--lm-orange);
+    border-radius: 4px; padding: 12px 14px; margin-bottom: 12px; background: #fff;
+  }
+  .post-card .date { font-size: 11.5px; color: var(--lm-slate); }
+  .post-card .title { font-size: 13.5px; font-weight: 700; margin: 3px 0 6px; }
+  .post-card a { color: var(--lm-orange); font-size: 12.5px; text-decoration: none; font-weight: 600; }
+
+  .certs {
+    border-top: 4px solid var(--lm-orange); background: #fafafa; padding: 30px 6vw;
+    display: flex; gap: 30px; align-items: center; flex-wrap: wrap;
+  }
+  .certs h4 { color: var(--lm-orange); font-size: 16px; }
+  .certs p { font-size: 12.5px; color: var(--lm-slate); }
+
+  footer { background: var(--lm-slate); color: #d8d8d8; padding: 40px 6vw 26px; font-size: 12.5px; }
+  .fcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 26px; max-width: 1150px; margin: 0 auto; }
+  .fcols h5 { color: var(--lm-orange); font-size: 13px; margin-bottom: 10px; }
+  .fcols div span { display: block; margin-bottom: 6px; }
+  .copyright { text-align: center; margin-top: 30px; color: #b9b9b9; }
+</style>
+</head>
+<body>
+<div class="concept-banner"><b>CONCEPT MOCK-UP</b> — how the hosted ROI calculator would look embedded on the Loyalty Methods blog. Prepared for a sales conversation; not the live site.</div>
+
+<header>
+  <div class="lm-logo"><span class="mark">lm</span><span class="word"><b>LOYALTY</b><span>methods</span></span></div>
+  <nav class="menu">
+    <a href="#">Platform ▾</a><a href="#">Solutions ▾</a><a href="#">Case Studies</a>
+    <a href="#">About LM ▾</a><a href="#">Resources &amp; Press</a>
+  </nav>
+  <a class="contact-btn" href="#">Contact Us</a>
+</header>
+
+<div class="wrap">
+  <article>
+    <div class="crumb"><a href="#">Resources</a> / Loyalty Program ROI: How to Measure and Maximize It</div>
+
+    <div class="hero-img">
+      <div class="t1">Loyalty Program ROI</div>
+      <div class="t2">How to Measure and Maximize It</div>
+    </div>
+
+    <p><strong>How to Prove It. How to Grow It.</strong></p>
+    <p>Most loyalty programs talk a big game. Points issued. Members enrolled.</p>
+    <p>But real economic buyers such as CFOs, CMOs, and COOs do not want fluff. They want ROI they can take to the boardroom.</p>
+    <p>So let us break it down.</p>
+
+    <h2>What counts as loyalty ROI</h2>
+    <p>Vanity metrics do not convince finance leaders. What matters are the levers that move the bottom line.</p>
+    <table class="roi-drivers">
+      <tr><th>ROI driver</th><th>Why it matters</th></tr>
+      <tr><td>Incremental revenue</td><td>Are customers spending more because of loyalty?</td></tr>
+      <tr><td>CLV uplift</td><td>Members who stay longer and buy more are worth more.</td></tr>
+      <tr><td>Churn reduction</td><td>Fewer drop-offs mean lower acquisition costs and higher margins.</td></tr>
+      <tr><td>Advocacy and referrals</td><td>Loyalty fuels word of mouth, creating growth without advertising spend.</td></tr>
+      <tr><td>Cost avoidance</td><td>Rewards can replace support costs. Small perks create meaningful savings.</td></tr>
+      <tr><td>Behavior change</td><td>Programs should drive the right actions such as app usage, bigger baskets, and repeat visits.</td></tr>
+    </table>
+
+    <h2>The formula you will show finance</h2>
+    <p>Loyalty ROI is calculated as:</p>
+    <div class="formula">(Program Gains − Program Costs) / Program Costs</div>
+    <p>Program gains include revenue, customer lifetime value, retention, and cost savings. Program costs include the technology stack, rewards, people, and operations. If the calculation does not lift the bottom line, it is simply overhead.</p>
+
+    <!-- ═══════════ THE EMBEDDED CALCULATOR — the product being sold ═══════════ -->
+    <div class="calc-callout">
+      <div class="callout-head">
+        <div class="t">Run your own numbers</div>
+        <div class="s">See the ROI a well-built loyalty program would generate for your business — free, interactive, 60 seconds.</div>
+      </div>
+      <div class="callout-body">
+        <script src="../embed.js" async
+                data-calc="wizard"
+                data-brand="Loyalty Methods"
+                data-color="f58220"
+                data-accent2="fbbf24"
+                data-theme="light"
+                data-chrome="0"
+                data-powered="0"
+                data-cta="Email my full projection"></script>
+      </div>
+    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+    <h2>Track the KPIs that matter</h2>
+    <p>To measure ROI effectively, finance teams need more than enrollment numbers. They need KPIs that show whether the program is truly profitable:</p>
+    <ul>
+      <li><strong>CLV by segment</strong> shows whether loyalty members are more valuable than non-members.</li>
+      <li><strong>Redemption rate</strong> indicates whether offers are resonating; if it is too low, promotions flop, while too high suggests reward costs are unsustainable.</li>
+      <li><strong>Offer response rate</strong> measures whether promotions are changing behavior rather than simply adding cost.</li>
+      <li><strong>Churn and retention</strong> reveal if the program is actually keeping customers longer.</li>
+      <li><strong>Participation rate</strong> confirms whether members are active and engaged.</li>
+      <li><strong>Cost per reward or point</strong> determines if the program can scale profitably.</li>
+    </ul>
+
+    <h2>Smart ways to boost ROI</h2>
+    <p><strong>Reward what is profitable.</strong> Do not simply reward more purchases. Focus on rewarding bundles, high-margin categories, app orders, and reactivation after dormancy.</p>
+    <p><strong>Rethink your reward mix.</strong> Balance emotional and monetary rewards. Set realistic breakage targets. Avoid point inflation.</p>
+    <p><strong>Run experiments ruthlessly.</strong> Test tiers, offers, timing, and reward types. ROI is built through iteration rather than through a spreadsheet.</p>
+
+    <h2>Sources</h2>
+    <p style="font-size:13px;color:var(--lm-slate)">McKinsey &amp; Company | BCG | amplifI Loyalty Solutions | Mintel | Bond Loyalty Report | McKinsey Airline Loyalty Study</p>
+  </article>
+
+  <aside>
+    <div class="featured">
+      <h3>Featured Posts</h3>
+      <div class="post-card"><div class="date">February 9, 2026</div><div class="title">The 2026 Forrester Loyalty Landscape Report is Out Now</div><a href="#">Continue Reading →</a></div>
+      <div class="post-card"><div class="date">April 3, 2026</div><div class="title">Shoptalk 2026 Recap: AI, Personalization &amp; the Future of Loyalty Programs</div><a href="#">Continue Reading →</a></div>
+      <div class="post-card"><div class="date">March 2, 2026</div><div class="title">Built for AI. Before AI.</div><a href="#">Continue Reading →</a></div>
+    </div>
+  </aside>
+</div>
+
+<div class="certs">
+  <div><h4>Certifications &amp; Compliance</h4><p>Independently audited and certified to industry security &amp; compliance standards.</p></div>
+</div>
+
+<footer>
+  <div class="fcols">
+    <div><h5>Why Loyalty Methods</h5><span>Why Choose Us</span><span>Case Studies</span></div>
+    <div><h5>Company</h5><span>Our Story</span><span>Partnership</span><span>Culture</span><span>Careers</span><span>Contact Us</span></div>
+    <div><h5>Platform</h5><span>Loyalty Engine</span><span>Rewards/Offers</span><span>Preferences</span><span>Personalization</span><span>Analytics</span><span>Gamification</span></div>
+    <div><h5>Solutions</h5><span>Retail</span><span>Fuel &amp; Convenience</span><span>Hospitality</span><span>Casino &amp; Gaming</span><span>Finance</span><span>Airlines</span></div>
+    <div><h5>Legal</h5><span>Privacy Policy</span><span>SOC 2</span></div>
+  </div>
+  <div class="copyright">Concept mock-up for demonstration purposes. Original article content © Loyalty Methods Corp. Calculator hosted and licensed by BBP ROI Modeling.</div>
+</footer>
+
+<script>
+  window.addEventListener('roi-lead', function (e) {
+    console.log('Lead captured (would route to vendor CRM):', e.detail);
+  });
+</script>
+</body>
+</html>

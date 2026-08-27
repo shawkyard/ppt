@@ -19,11 +19,14 @@
   var script = document.currentScript;
   if (!script) return;
 
-  var base = script.src.replace(/embed\.js.*$/, 'calculator.html');
+  // data-calc="wizard" embeds the full 5-step wizard; default is the compact widget.
+  var page = script.getAttribute('data-calc') === 'wizard' ? 'wizard.html' : 'calculator.html';
+  var base = script.src.replace(/embed\.js.*$/, page);
   var params = new URLSearchParams();
   var map = {
     brand: 'brand', sub: 'sub', color: 'color', ink: 'ink', logo: 'logo',
-    cta: 'cta', leadWebhook: 'leadWebhook', powered: 'powered'
+    cta: 'cta', leadWebhook: 'leadWebhook', powered: 'powered',
+    theme: 'theme', accent2: 'accent2', chrome: 'chrome'
   };
   Object.keys(map).forEach(function (key) {
     var attr = 'data-' + key.replace(/[A-Z]/g, function (c) { return '-' + c.toLowerCase(); });

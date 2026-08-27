@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loyalty ROI Calculator — BBP ROI Modeling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --accent: #f97316;
+    --accent2: #fbbf24;
+    --bg: #070707;
+    --panel: #141414;
+    --panel2: #1c1c1c;
+    --border: #2a2a2a;
+    --ink: #f5f5f4;
+    --muted: #a3a3a3;
+    --good: #34d399;
+    --bad: #fb7185;
+    --warn: #fbbf24;
+    --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --input-bg: #0d0d0d;
+    --nav-bg: #000;
+    --nav-border: #161616;
+    --ink-soft: #d4d4d4;
+    --row-border: #1e1e1e;
+  }
+  body.light {
+    --bg: #f8fafc; --panel: #ffffff; --panel2: #f1f5f9; --border: #e2e8f0;
+    --ink: #0f172a; --muted: #64748b; --input-bg: #ffffff;
+    --nav-bg: #ffffff; --nav-border: #e2e8f0;
+    --ink-soft: #475569; --row-border: #e2e8f0;
+    --good: #059669; --bad: #dc2626;
+  }
+  body.light .navlinks span.active { background: #fff7ed; border-color: #fed7aa; }
+  body.light .fcell.hot { background: #fff7ed; border-color: #fdba74; }
+  body.light .warnbox { background: #fef2f2; border-color: #fecaca; }
+  body.light .warnbox.amber { background: #fffbeb; border-color: #fde68a; }
+  body.light .kpi.hero-pos { background: #ecfdf5; border-color: #a7f3d0; }
+  body.light .kpi.hero-neg { background: #fef2f2; border-color: #fecaca; }
+  body.light .mode.sel { background: #fff7ed; }
+  body.light .btn-back { background: #e2e8f0; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); min-height: 100vh; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 4vw; border-bottom: 1px solid var(--nav-border); background: var(--nav-bg);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
+  .logo .mark {
+    width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); font-size: 16px;
+  }
+  .logo .dotcom { color: var(--accent); }
+  .navlinks { display: flex; gap: 8px; align-items: center; font-size: 13.5px; }
+  .navlinks span { padding: 8px 14px; border-radius: 8px; color: var(--muted); }
+  .navlinks span.active { background: #241407; color: var(--accent); border: 1px solid #3b2008; }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: #334155;
+    display: grid; place-items: center; font-size: 12px; font-weight: 700;
+  }
+  main { max-width: 1080px; margin: 0 auto; padding: 36px 4vw 80px; }
+
+  .back { color: var(--muted); font-size: 13.5px; cursor: pointer; margin-bottom: 26px; display: inline-block; }
+  .back:hover { color: var(--ink); }
+  .step-eyebrow { color: var(--accent); font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  h1.step-title { font-family: var(--serif); font-size: clamp(30px, 4vw, 44px); margin: 6px 0 8px; }
+  .step-sub { color: var(--muted); font-size: 15.5px; margin-bottom: 28px; }
+
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 26px; margin-bottom: 20px; }
+  .panel h2 { font-family: var(--serif); font-size: 22px; margin-bottom: 18px; }
+  .panel h3.small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; }
+  @media (max-width: 680px) { .fields { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px; }
+  .field input[type=number], .field input[type=text], .field input[type=email] {
+    width: 100%; padding: 12px 13px; font-size: 16px; font-family: var(--mono);
+    background: var(--input-bg); color: var(--ink); border: 1px solid var(--border); border-radius: 9px;
+  }
+  .field input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .field .note { font-size: 12px; color: var(--muted); margin-top: 5px; }
+
+  .slider-row { margin-bottom: 20px; }
+  .slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .slider-head label { font-size: 14.5px; font-weight: 600; }
+  .slider-head .val { font-size: 24px; font-weight: 800; color: var(--accent); font-family: var(--mono); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .slider-scale { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .sliders2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  @media (max-width: 680px) { .sliders2 { grid-template-columns: 1fr; } }
+
+  .presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 680px) { .presets { grid-template-columns: 1fr; } }
+  .preset { background: var(--panel2); border: 1px solid var(--border); border-radius: 11px; padding: 14px 16px; cursor: pointer; }
+  .preset .t { font-weight: 700; font-size: 14.5px; }
+  .preset .d { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .preset.sel { background: linear-gradient(135deg, #065f46, #10b981); border-color: #34d399; }
+  .preset.sel .d { color: #d1fae5; }
+
+  .funnel { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 10px; align-items: stretch; margin: 10px 0 22px; }
+  @media (max-width: 680px) { .funnel { grid-template-columns: 1fr; } .funnel .arrow { display: none; } }
+  .fcell { background: var(--panel2); border: 1px solid var(--border); border-radius: 11px; padding: 15px; }
+  .fcell.hot { background: #2a1503; border-color: #7c3a0d; }
+  .fcell .l { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .fcell .n { font-size: 26px; font-weight: 800; font-family: var(--mono); margin: 3px 0; }
+  .fcell.hot .n { color: var(--accent); }
+  .fcell .d { font-size: 12px; color: var(--muted); }
+  .arrow { align-self: center; color: var(--muted); font-size: 20px; }
+
+  .breakdown { background: var(--panel2); border: 1px solid var(--border); border-radius: 11px; padding: 18px 20px; }
+  .breakdown .row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14.5px; }
+  .breakdown .row .amt { font-family: var(--mono); color: var(--good); }
+  .breakdown .row.total { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 12px; font-weight: 700; font-size: 16px; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  @media (max-width: 860px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { background: var(--panel); border: 1px solid var(--border); border-radius: 13px; padding: 18px; text-align: center; }
+  .kpi .l { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .kpi .n { font-size: 26px; font-weight: 800; font-family: var(--mono); margin-top: 8px; }
+  .kpi .n.pos { color: var(--good); } .kpi .n.neg { color: var(--bad); }
+  .kpi.hero-pos { background: linear-gradient(160deg, #052e22, #101f1a); border-color: #14532d; }
+  .kpi.hero-neg { background: linear-gradient(160deg, #3f0d17, #1f1013); border-color: #7f1d2d; }
+
+  .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+  @media (max-width: 680px) { .cost-grid { grid-template-columns: 1fr; } }
+  .cost-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--row-border); }
+  .cost-row label { font-size: 14.5px; }
+  .cost-row input { width: 130px; padding: 9px 10px; text-align: right; font-family: var(--mono); font-size: 15px; background: var(--input-bg); color: var(--ink); border: 1px solid var(--border); border-radius: 8px; }
+  .cost-row .suffix { color: var(--muted); font-size: 14px; }
+  .cost-row.total { border-bottom: 0; padding-top: 14px; }
+  .cost-row.total label { font-weight: 800; font-size: 15.5px; letter-spacing: .04em; }
+  .cost-row.total .amt { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--bad); }
+
+  .warnbox { border: 1px solid #7f1d2d; background: #2b0f16; border-radius: 11px; padding: 14px 16px; margin-top: 18px; font-size: 13.5px; }
+  .warnbox b { color: var(--bad); display: block; margin-bottom: 3px; }
+  .warnbox.amber { border-color: #78500b; background: #241a05; }
+  .warnbox.amber b { color: var(--warn); }
+
+  table.proj { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.proj th { text-align: right; color: var(--muted); font-weight: 600; padding: 9px 10px; border-bottom: 1px solid var(--border); }
+  table.proj td { text-align: right; padding: 10px; border-bottom: 1px solid var(--row-border); font-family: var(--mono); }
+  table.proj th:first-child, table.proj td:first-child { text-align: left; font-family: var(--sans); font-weight: 700; }
+  table.proj td.pos { color: var(--good); } table.proj td.neg { color: var(--bad); }
+  table.proj tr.total td { border-top: 2px solid var(--border); font-weight: 700; }
+  .tablewrap { overflow-x: auto; }
+
+  .chart { background: var(--panel2); border: 1px solid var(--border); border-radius: 11px; padding: 16px; margin-bottom: 20px; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; gap: 18px; justify-content: center; font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
+
+  .navbtns { display: flex; gap: 12px; margin-top: 26px; }
+  button { font-family: var(--sans); cursor: pointer; border: 0; border-radius: 10px; font-size: 15.5px; font-weight: 700; }
+  .btn-next {
+    flex: 1; padding: 16px; color: #1c0a00;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .btn-next.green { background: linear-gradient(90deg, #10b981, #34d399); color: #022c22; }
+  .btn-back { padding: 16px 26px; background: #f5f5f4; color: #111; }
+  .methodology { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+  .methodology b { color: var(--ink); }
+
+  /* Start screen */
+  .start { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 40px 0; }
+  @media (max-width: 800px) { .start { grid-template-columns: 1fr; } }
+  .start .mark-big {
+    width: 60px; height: 60px; border-radius: 15px; display: grid; place-items: center; font-size: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); margin-bottom: 22px;
+  }
+  .start h1 { font-family: var(--serif); font-size: clamp(36px, 5vw, 54px); color: var(--accent); line-height: 1.1; }
+  .start p { color: var(--ink-soft); font-size: 17px; line-height: 1.6; margin-top: 16px; max-width: 420px; }
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .mode { border: 1px solid var(--border); background: var(--panel2); border-radius: 11px; padding: 18px 10px; text-align: center; cursor: pointer; font-size: 14px; font-weight: 700; }
+  .mode.sel { border-color: var(--accent); background: #2a1503; }
+  .chk { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); background: var(--panel2); border-radius: 10px; padding: 13px 14px; margin-bottom: 9px; cursor: pointer; font-size: 14.5px; }
+  .chk input { accent-color: var(--accent); width: 17px; height: 17px; }
+  .lead-inline { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .lead-inline input { flex: 1; min-width: 220px; }
+  .lead-ok { color: var(--good); font-weight: 700; padding: 10px 0; }
+  .foot { text-align: center; color: #525252; font-size: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><span class="mark">⚡</span><span id="brandName">BBP ROI Modeling</span><span class="dotcom" id="brandTld">.com</span></div>
+  <div class="navlinks">
+    <span class="active">🧮 ROI Engine</span><span>Executive Report</span><span>Loyalty Library</span>
+  </div>
+  <div class="avatar">SH</div>
+</nav>
+
+<main id="app"></main>
+<div class="foot" id="poweredBy">Engine v0.2-PLACEHOLDER — proprietary formulas pending in formulas.js</div>
+
+<script src="formulas.js"></script>
+<script>
+(function () {
+  'use strict';
+  var qs = new URLSearchParams(location.search);
+
+  // ---- White-label ----
+  function safeColor(v) { return /^[0-9a-fA-F]{3,8}$/.test(v || '') ? '#' + v : null; }
+  var brandParam = qs.get('brand');
+  if (brandParam) {
+    document.getElementById('brandName').textContent = brandParam;
+    document.getElementById('brandTld').textContent = '';
+    document.title = brandParam + ' — Loyalty ROI Calculator';
+  }
+  var c = safeColor(qs.get('color'));
+  if (c) document.documentElement.style.setProperty('--accent', c);
+  var c2 = safeColor(qs.get('accent2'));
+  if (c2) document.documentElement.style.setProperty('--accent2', c2);
+  if (qs.get('theme') === 'light') document.body.classList.add('light');
+  if (qs.get('chrome') === '0') document.querySelector('nav').hidden = true;
+  if (qs.get('powered') === '0') document.getElementById('poweredBy').hidden = true;
+
+  // ---- State ----
+  var state = {
+    step: 'start', // start | 1..5
+    mode: 'cold',  // cold | active
+    channels: { ecommerce: true, pos: false, email: false, cpg: false },
+    preset: 'realistic',
+    inputs: {
+      annualRevenue: 2000000, aov: 85, purchaseFrequency: 6,
+      enrollmentRatePct: 30, activeRatePct: 50, aovLiftPct: 15, freqLiftPct: 15,
+      softwareCost: 12000, setupFees: 5000, implementation: 3000,
+      marketingCost: 6000, laborCost: 10000, miscCost: 2000, rewardsCostPct: 5,
+      peakEnrollmentYear: 3, retentionRatePct: 90
+    }
+  };
+  var PRESETS = {
+    conservative: { label: 'Conservative', desc: '20% Enroll / 40% Active', enrollmentRatePct: 20, activeRatePct: 40 },
+    realistic:    { label: 'Realistic',    desc: '30% Enroll / 50% Active', enrollmentRatePct: 30, activeRatePct: 50 },
+    aggressive:   { label: 'Aggressive',   desc: '45% Enroll / 65% Active', enrollmentRatePct: 45, activeRatePct: 65 }
+  };
+
+  // ---- Format helpers ----
+  function money(v, dp) {
+    if (!isFinite(v)) return '—';
+    var abs = Math.abs(v);
+    var s = abs >= 1000 || dp === 0 ? Math.round(abs).toLocaleString('en-US') : abs.toFixed(dp == null ? 2 : dp);
+    return (v < 0 ? '-$' : '$') + s;
+  }
+  function int(v) { return isFinite(v) ? Math.round(v).toLocaleString('en-US') : '—'; }
+  function pctf(v, dp) { return isFinite(v) ? v.toFixed(dp == null ? 1 : dp) + '%' : '—'; }
+  function payback(v) {
+    if (!isFinite(v)) return 'Never';
+    if (v <= 0) return 'Immediate';
+    return v >= 12 ? (v / 12).toFixed(1) + ' yrs' : Math.round(v) + ' mo';
+  }
+  function signClass(v) { return v >= 0 ? 'pos' : 'neg'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
+
+  function model() { return window.LoyaltyRoiEngine.computeWizardModel(state.inputs); }
+
+  // ---- Renderers ----
+  var app = document.getElementById('app');
+
+  function header(step, title, sub, backLabel, backTo) {
+    return '<span class="back" data-go="' + backTo + '">&lsaquo; Back to ' + backLabel + '</span>' +
+      '<div class="step-eyebrow">Step ' + step + ' of 5</div>' +
+      '<h1 class="step-title">' + title + '</h1>' +
+      '<p class="step-sub">' + sub + '</p>';
+  }
+  function navBtns(nextLabel, nextTo, green) {
+    return '<div class="navbtns"><button class="btn-back" data-go="__back">&lsaquo; Back</button>' +
+      '<button class="btn-next' + (green ? ' green' : '') + '" data-go="' + nextTo + '">' + nextLabel + ' &rsaquo;</button></div>';
+  }
+  function numField(key, label, note) {
+    return '<div class="field"><label>' + label + '</label>' +
+      '<input type="number" min="0" step="any" data-key="' + key + '" value="' + state.inputs[key] + '" />' +
+      (note ? '<div class="note">' + note + '</div>' : '') + '</div>';
+  }
+  function slider(key, label, min, max, suffix) {
+    return '<div class="slider-row"><div class="slider-head"><label>' + label + '</label>' +
+      '<span class="val">+' + state.inputs[key] + (suffix || '%') + '</span></div>' +
+      '<input type="range" min="' + min + '" max="' + max + '" step="1" data-key="' + key + '" value="' + state.inputs[key] + '" />' +
+      '<div class="slider-scale"><span>' + min + '%</span><span>+' + max + '%</span></div></div>';
+  }
+
+  function renderStart() {
+    app.innerHTML =
+      '<div class="start"><div>' +
+        '<div class="mark-big">🧮</div>' +
+        '<h1>Loyalty ROI Calculator</h1>' +
+        '<p>Stop guessing. Start projecting. Use our advanced model to calculate the true incremental value of your loyalty program.</p>' +
+      '</div><div class="panel">' +
+        '<h3 class="small">Select analysis mode</h3>' +
+        '<div class="modes">' +
+          '<div class="mode' + (state.mode === 'cold' ? ' sel' : '') + '" data-mode="cold">🎯 Cold Outreach</div>' +
+          '<div class="mode' + (state.mode === 'active' ? ' sel' : '') + '" data-mode="active">👥 Active Deal</div>' +
+        '</div>' +
+        '<h3 class="small">Revenue channels</h3>' +
+        [['ecommerce', 'E-commerce'], ['pos', 'In-Store POS'], ['email', 'Email/Mobile'], ['cpg', 'CPG']].map(function (ch) {
+          return '<label class="chk"><input type="checkbox" data-channel="' + ch[0] + '"' + (state.channels[ch[0]] ? ' checked' : '') + ' /> ' + ch[1] + '</label>';
+        }).join('') +
+        '<div class="navbtns" style="margin-top:18px"><button class="btn-next" data-go="1">Start Calculator</button></div>' +
+      '</div></div>';
+  }
+
+  function renderStep1() {
+    var m = model();
+    app.innerHTML =
+      header(1, 'Baseline Metrics', 'Enter your core business inputs to establish the baseline.', 'Start', 'start') +
+      '<div class="panel"><h2>Revenue Drivers</h2><div class="fields">' +
+        numField('annualRevenue', 'Annual Revenue ($)') +
+        numField('aov', 'Average Order Value ($)') +
+        numField('purchaseFrequency', 'Annual Purchase Frequency', 'Average purchases per customer per year') +
+      '</div>' +
+      '<div class="funnel" style="margin-top:22px"><div class="fcell"><div class="l">Total Customers</div>' +
+        '<div class="n">' + int(m.totalCustomers) + '</div><div class="d">Revenue ÷ (AOV × Frequency)</div></div></div>' +
+      (m.totalCustomers < 1 && state.inputs.annualRevenue > 0
+        ? '<div class="warnbox"><b>Check your inputs</b>These numbers imply less than one customer. Annual Revenue should be your total yearly revenue; AOV is dollars per order; Frequency is orders per customer per year.</div>'
+        : '') +
+      '</div>' +
+      navBtns('Next: Loyalty Assumptions', '2');
+  }
+
+  function renderStep2() {
+    var m = model();
+    var presetBtns = Object.keys(PRESETS).map(function (k) {
+      var p = PRESETS[k];
+      return '<div class="preset' + (state.preset === k ? ' sel' : '') + '" data-preset="' + k + '">' +
+        '<div class="t">' + p.label + '</div><div class="d">' + p.desc + '</div></div>';
+    }).join('');
+    app.innerHTML =
+      header(2, 'Loyalty Assumptions', 'Fine-tune the engagement funnel. Set enrollment, activity, and lift metrics.', 'Baseline', '1') +
+      '<div class="panel"><h2>Quick Presets</h2><div class="presets">' + presetBtns + '</div>' +
+      '<div class="sliders2">' +
+        slider('enrollmentRatePct', 'Enrollment Rate', 0, 100) +
+        slider('activeRatePct', 'Active Rate', 0, 100) +
+        slider('aovLiftPct', 'AOV Lift', 0, 200) +
+        slider('freqLiftPct', 'Frequency Lift', 0, 200) +
+      '</div>' +
+      '<h2 style="margin-top:10px">Program Impact Funnel</h2>' +
+      '<div class="funnel">' +
+        '<div class="fcell"><div class="l">Total Customers</div><div class="n">' + int(m.totalCustomers) + '</div><div class="d">Based on Revenue / AOV / Freq</div></div>' +
+        '<div class="arrow">→</div>' +
+        '<div class="fcell"><div class="l">Enrolled Members</div><div class="n">' + int(m.enrolledMembers) + '</div><div class="d">' + state.inputs.enrollmentRatePct + '% of Customers</div></div>' +
+        '<div class="arrow">→</div>' +
+        '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">' + state.inputs.activeRatePct + '% of Enrolled</div></div>' +
+      '</div>' +
+      '<div class="breakdown"><h3 class="small">Incremental Revenue Breakdown (from active members)</h3>' +
+        '<div class="row"><span>AOV Incremental Revenue</span><span class="amt">' + money(m.aovIncremental, 0) + '</span></div>' +
+        '<div class="row"><span>Frequency Incremental Revenue</span><span class="amt">' + money(m.freqIncremental, 0) + '</span></div>' +
+        '<div class="row total"><span>Gross Incremental Revenue / yr</span><span class="amt">' + money(m.grossIncrementalRevenue, 0) + '</span></div>' +
+      '</div>' +
+      (m.activeMembers < 1000
+        ? '<div class="warnbox amber"><b>Low Active Member Count</b>Fewer than 1,000 active members may result in volatile data and low overall program impact.</div>'
+        : '') +
+      '</div>' +
+      navBtns('Save &amp; Continue — Next: Costs &amp; TCO', '3', true);
+  }
+
+  function renderStep3() {
+    var m = model();
+    function costRow(key, label, suffix) {
+      return '<div class="cost-row"><label>' + label + '</label><span>' +
+        '<input type="number" min="0" step="any" data-key="' + key + '" value="' + state.inputs[key] + '" />' +
+        (suffix ? ' <span class="suffix">' + suffix + '</span>' : '') + '</span></div>';
+    }
+    app.innerHTML =
+      header(3, 'Costs &amp; TCO', 'Complete breakdown of Investment Requirements vs Projected Performance.', 'Assumptions', '2') +
+      '<div class="panel"><h2>Investment Requirements</h2><div class="cost-grid">' +
+        costRow('softwareCost', 'Software Costs (ARR)') + costRow('marketingCost', 'Marketing &amp; Ads') +
+        costRow('setupFees', 'Setup Fees') + costRow('laborCost', 'Labor Costs') +
+        costRow('implementation', 'Implementation') + costRow('miscCost', 'Miscellaneous') +
+        costRow('rewardsCostPct', 'Rewards Cost %', '% of member spend') +
+        '<div class="cost-row total"><label>Total Investment (Year 1)</label><span class="amt">' + money(m.totalInvestmentYear1, 0) + '</span></div>' +
+      '</div></div>' +
+      '<div class="kpis">' +
+        '<div class="kpi ' + (m.netValueCreated5yr >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">ROI Multiple</div><div class="n ' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">Payback Period</div><div class="n">' + payback(m.paybackMonths) + '</div></div>' +
+        '<div class="kpi"><div class="l">Annual Profit Impact (Yr 1)</div><div class="n ' + signClass(m.annualProfitImpact) + '">' + money(m.annualProfitImpact, 0) + '</div></div>' +
+      '</div>' +
+      '<div class="panel"><h2>Calculation Methodology</h2><p class="methodology">' +
+        '<b>Total Customers</b> is derived from base Revenue divided by (AOV × Frequency). ' +
+        '<b>Active Members</b> is the share of enrolled members actively participating. ' +
+        '<b>Incremental Revenue</b> reflects the AOV and Frequency lift isolated to the active-member cohort. ' +
+        '<b>Net Value Created</b> is the 5-year net profit impact after all program costs, including rewards liability at ' + state.inputs.rewardsCostPct + '% of member spend.' +
+      '</p></div>' +
+      navBtns('Next: 5-Year Outlook', '4');
+  }
+
+  function chartSvg(years) {
+    var W = 760, H = 240, pad = 40;
+    var maxAbs = 1;
+    years.forEach(function (y) { maxAbs = Math.max(maxAbs, Math.abs(y.netProfit), Math.abs(y.incRevenue)); });
+    var zero = pad + (H - 2 * pad) / 2;
+    var scale = (H - 2 * pad) / 2 / maxAbs;
+    var bw = 34, group = (W - 2 * pad) / 5;
+    var bars = years.map(function (y, i) {
+      var x = pad + group * i + group / 2;
+      function bar(v, dx, color) {
+        var h = Math.abs(v) * scale;
+        var yy = v >= 0 ? zero - h : zero;
+        return '<rect x="' + (x + dx) + '" y="' + yy + '" width="' + bw + '" height="' + Math.max(h, 1) + '" rx="3" fill="' + color + '" />';
+      }
+      return bar(y.incRevenue, -bw - 3, 'var(--accent)') +
+             bar(y.netProfit, 3, y.netProfit >= 0 ? '#34d399' : '#fb7185') +
+             '<text x="' + x + '" y="' + (H - 12) + '" text-anchor="middle" fill="#a3a3a3" font-size="12">Year ' + y.year + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="5-year projection chart">' +
+      '<line x1="' + pad + '" y1="' + zero + '" x2="' + (W - pad) + '" y2="' + zero + '" stroke="#404040" stroke-dasharray="4 4"/>' +
+      bars + '</svg>' +
+      '<div class="legend"><span><i style="background:var(--accent)"></i>Incremental Revenue</span>' +
+      '<span><i style="background:#34d399"></i>Net Profit (loss in red)</span></div>';
+  }
+
+  function renderStep4() {
+    var m = model();
+    var rows = m.years.map(function (y) {
+      return '<tr><td>Year ' + y.year + '</td><td>' + int(y.activeMembers) + '</td>' +
+        '<td>' + money(y.revPerMember, 0) + '</td><td>' + money(y.incRevenue, 0) + '</td>' +
+        '<td class="neg">' + money(y.programCosts, 0) + '</td>' +
+        '<td class="' + signClass(y.netProfit) + '">' + money(y.netProfit, 0) + '</td>' +
+        '<td class="' + signClass(y.annualRoiPct) + '">' + pctf(y.annualRoiPct) + '</td>' +
+        '<td class="' + signClass(y.cumRoiPct) + '">' + pctf(y.cumRoiPct) + '</td></tr>';
+    }).join('');
+    app.innerHTML =
+      header(4, '5-Year Strategic Outlook', 'Project the long-term impact of loyalty. Adjust growth and retention levers to visualize scenarios.', 'Costs', '3') +
+      '<div class="panel"><div class="sliders2">' +
+        '<div class="slider-row"><div class="slider-head"><label>Peak Enrollment</label><span class="val">Year ' + state.inputs.peakEnrollmentYear + '</span></div>' +
+        '<input type="range" min="1" max="5" step="1" data-key="peakEnrollmentYear" value="' + state.inputs.peakEnrollmentYear + '" />' +
+        '<div class="slider-scale"><span>Year 1</span><span>Year 5</span></div></div>' +
+        '<div class="slider-row"><div class="slider-head"><label>Retention Rate</label><span class="val">' + state.inputs.retentionRatePct + '%</span></div>' +
+        '<input type="range" min="40" max="100" step="1" data-key="retentionRatePct" value="' + state.inputs.retentionRatePct + '" />' +
+        '<div class="slider-scale"><span>40%</span><span>100%</span></div></div>' +
+      '</div></div>' +
+      '<div class="chart">' + chartSvg(m.years) + '</div>' +
+      '<div class="panel"><div class="tablewrap"><table class="proj">' +
+        '<tr><th>Period</th><th>Active Members</th><th>Rev / Member</th><th>Inc. Revenue</th><th>Program Costs</th><th>Net Profit</th><th>Annual ROI</th><th>Cum. ROI</th></tr>' +
+        rows +
+        '<tr class="total"><td>TOTAL</td><td>—</td><td>—</td><td>' + money(m.cumIncRevenue5yr, 0) + '</td>' +
+        '<td class="neg">' + money(m.cumCosts5yr, 0) + '</td>' +
+        '<td class="' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</td><td>—</td>' +
+        '<td class="' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct) + '</td></tr>' +
+      '</table></div></div>' +
+      navBtns('Next: Executive ROI Analysis', '5');
+  }
+
+  function renderStep5() {
+    var m = model();
+    app.innerHTML =
+      header(5, 'Executive ROI Analysis', 'The headline numbers, ready to share with your leadership team.', 'Outlook', '4') +
+      '<div class="kpis">' +
+        '<div class="kpi ' + (m.netValueCreated5yr >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">5-yr Incremental Revenue</div><div class="n pos">' + money(m.cumIncRevenue5yr, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">ROI Multiple</div><div class="n ' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">Payback Period</div><div class="n">' + payback(m.paybackMonths) + '</div></div>' +
+      '</div>' +
+      '<div class="panel"><h2>Summary</h2><p class="methodology">' +
+        'With <b>' + int(m.totalCustomers) + '</b> customers and <b>' + int(m.activeMembers) + '</b> projected active members at full ramp, ' +
+        'the program generates <b>' + money(m.grossIncrementalRevenue, 0) + '</b> in incremental revenue per year at target. ' +
+        'Over five years that compounds to <b>' + money(m.cumIncRevenue5yr, 0) + '</b> of new revenue against <b>' + money(m.cumCosts5yr, 0) + '</b> of total program cost, ' +
+        'for a net value of <b>' + money(m.netValueCreated5yr, 0) + '</b>' +
+        (isFinite(m.paybackMonths) ? ' and payback in <b>' + payback(m.paybackMonths) + '</b>.' : '. At these assumptions the program does not pay back — adjust lift, adoption, or costs.') +
+      '</p>' +
+      '<h3 class="small" style="margin-top:18px">Get the full report</h3>' +
+      '<form class="lead-inline" id="leadForm">' +
+        '<div class="field" style="flex:1"><input type="email" id="leadEmail" placeholder="you@company.com" required /></div>' +
+        '<button class="btn-next" style="flex:0 0 auto;padding:12px 22px" type="submit">Email my full projection</button>' +
+      '</form><div class="lead-ok" id="leadOk" hidden>Thanks — your report is on its way.</div></div>' +
+      '<div class="navbtns"><button class="btn-back" data-go="4">&lsaquo; Back</button>' +
+      '<button class="btn-next green" data-go="start">Start a new analysis</button></div>';
+
+    document.getElementById('leadForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var payload = {
+        email: document.getElementById('leadEmail').value,
+        mode: state.mode, channels: state.channels,
+        inputs: state.inputs, results: model(),
+        brand: brandParam || 'BBP ROI Modeling',
+        page: document.referrer || null, ts: new Date().toISOString()
+      };
+      try { parent.postMessage({ type: 'roi-lead', payload: payload }, '*'); } catch (err) {}
+      var hook = qs.get('leadWebhook');
+      if (hook && /^https:\/\//.test(hook)) {
+        fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
+      }
+      document.getElementById('leadForm').hidden = true;
+      document.getElementById('leadOk').hidden = false;
+    });
+  }
+
+  var BACKMAP = { 1: 'start', 2: '1', 3: '2', 4: '3', 5: '4' };
+  function render() {
+    if (state.step === 'start') renderStart();
+    else if (state.step === '1') renderStep1();
+    else if (state.step === '2') renderStep2();
+    else if (state.step === '3') renderStep3();
+    else if (state.step === '4') renderStep4();
+    else renderStep5();
+    window.scrollTo(0, 0);
+    postHeight();
+  }
+
+  // ---- Event delegation ----
+  app.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-go]');
+    if (go) {
+      var to = go.getAttribute('data-go');
+      state.step = to === '__back' ? (BACKMAP[state.step] || 'start') : to;
+      render(); return;
+    }
+    var mode = e.target.closest('[data-mode]');
+    if (mode) { state.mode = mode.getAttribute('data-mode'); render(); return; }
+    var preset = e.target.closest('[data-preset]');
+    if (preset) {
+      var p = PRESETS[preset.getAttribute('data-preset')];
+      state.preset = preset.getAttribute('data-preset');
+      state.inputs.enrollmentRatePct = p.enrollmentRatePct;
+      state.inputs.activeRatePct = p.activeRatePct;
+      render(); return;
+    }
+  });
+  app.addEventListener('input', function (e) {
+    var key = e.target.getAttribute('data-key');
+    if (key) {
+      state.inputs[key] = parseFloat(e.target.value) || 0;
+      // Re-render everything except the input being typed in (sliders re-render fully).
+      if (e.target.type === 'range') { render(); }
+      else { refreshDerived(); }
+      return;
+    }
+    var ch = e.target.getAttribute('data-channel');
+    if (ch) { state.channels[ch] = e.target.checked; }
+  });
+  // Lightweight refresh for typed number fields: re-render but restore focus.
+  function refreshDerived() {
+    var active = document.activeElement;
+    var key = active && active.getAttribute('data-key');
+    var pos = active && active.selectionStart;
+    render();
+    if (key) {
+      var el = app.querySelector('[data-key="' + key + '"]');
+      if (el) {
+        el.focus();
+        try { el.selectionStart = el.selectionEnd = pos; } catch (err) {}
+      }
+    }
+  }
+
+  // ---- Embed support ----
+  function postHeight() {
+    try { parent.postMessage({ type: 'roi-resize', height: document.body.scrollHeight + 8 }, '*'); } catch (err) {}
+  }
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
+
+  render();
+})();
+</script>
+</body>
+</html>

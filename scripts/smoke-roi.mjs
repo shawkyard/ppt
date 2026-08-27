@@ -62,6 +62,51 @@ console.log('lead captured:', lead && lead.email, '| netAnnualProfit in payload:
 if (!lead || lead.email !== 'test@example.com') { console.error('FAIL lead capture'); fail++; }
 
 if (process.env.SMOKE_SHOT) await page.screenshot({ path: process.env.SMOKE_SHOT, fullPage: true });
+
+// 5. Wizard: step order must be Baseline → Loyalty Assumptions → Costs & TCO
+await page.goto('http://localhost:4173/roi/wizard.html');
+await page.click('[data-go="1"]');
+const s1 = await page.textContent('h1.step-title');
+await page.click('.btn-next');
+const s2 = await page.textContent('h1.step-title');
+await page.click('.btn-next');
+const s3 = await page.textContent('h1.step-title');
+console.log('wizard order:', s1, '→', s2, '→', s3);
+if (!s2.includes('Loyalty Assumptions')) { console.error('FAIL step 2 should be Loyalty Assumptions'); fail++; }
+if (!s3.includes('Costs')) { console.error('FAIL step 3 should be Costs & TCO'); fail++; }
+const kpiNet = await page.textContent('.kpi .n');
+console.log('wizard 5yr net value KPI:', kpiNet);
+if (kpiNet.includes('NaN') || kpiNet === '—') { console.error('FAIL wizard KPI'); fail++; }
+await page.click('.btn-next'); // -> outlook
+await page.click('.btn-next'); // -> executive report
+const s5 = await page.textContent('h1.step-title');
+if (!s5.includes('Executive')) { console.error('FAIL step 5'); fail++; }
+if (process.env.SMOKE_DIR) {
+  await page.screenshot({ path: process.env.SMOKE_DIR + '/wizard-step5.png', fullPage: true });
+  await page.goto('http://localhost:4173/roi/wizard.html');
+  await page.click('[data-go="1"]'); await page.click('.btn-next');
+  await page.screenshot({ path: process.env.SMOKE_DIR + '/wizard-step2-assumptions.png', fullPage: true });
+  await page.click('.btn-next');
+  await page.screenshot({ path: process.env.SMOKE_DIR + '/wizard-step3-costs.png', fullPage: true });
+}
+
+// 6. Loyalty Methods mockup: embedded wizard in light theme + brand color
+await page.goto('http://localhost:4173/roi/mockups/loyaltymethods.html');
+await page.waitForSelector('iframe', { timeout: 5000 });
+await page.waitForTimeout(600);
+const wframe = page.frames().find(f => f.url().includes('wizard.html'));
+const isLight = await wframe.evaluate(() => document.body.classList.contains('light'));
+const accent = await wframe.evaluate(() =>
+  getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
+const lmBrand = await wframe.textContent('#brandName');
+console.log('mockup embed → light:', isLight, '| accent:', accent, '| brand:', lmBrand);
+if (!isLight) { console.error('FAIL mockup should embed light theme'); fail++; }
+if (accent !== '#f58220') { console.error('FAIL mockup accent color'); fail++; }
+if (lmBrand !== 'Loyalty Methods') { console.error('FAIL mockup brand'); fail++; }
+if (process.env.SMOKE_DIR) {
+  await page.screenshot({ path: process.env.SMOKE_DIR + '/mockup-loyaltymethods.png', fullPage: true });
+}
+
 await browser.close();
 server.close();
 if (fail) { console.error(fail + ' smoke check(s) FAILED'); process.exit(1); }
