@@ -241,11 +241,13 @@
     // Per-channel baselines: each channel has its own revenue / AOV / purchase
     // frequency (→ its own customer count) and its own enrollment rate,
     // capped by the channel's recruitment ceiling (CHANNEL_SPECS).
+    // capPct = recruitment ceiling, user-editable per deal (in-store default 80%).
+    // activeRatePct varies by channel.
     channelInputs: {
-      ecommerce: { revenue: 1000000000, aov: 235, pf: 3, enrollPct: 35, aovLiftPct: 15, pfLiftPct: 15 },
-      pos:       { revenue: 500000000,  aov: 45,  pf: 8, enrollPct: 25, aovLiftPct: 15, pfLiftPct: 15 },
-      email:     { revenue: 100000000,  aov: 60,  pf: 4, enrollPct: 40, aovLiftPct: 15, pfLiftPct: 15 },
-      cpg:       { revenue: 250000000,  aov: 12,  pf: 24, enrollPct: 3.5, aovLiftPct: 15, pfLiftPct: 15 }
+      ecommerce: { revenue: 1000000000, aov: 235, pf: 3, enrollPct: 35, capPct: 100, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
+      pos:       { revenue: 500000000,  aov: 45,  pf: 8, enrollPct: 25, capPct: 80,  activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
+      email:     { revenue: 100000000,  aov: 60,  pf: 4, enrollPct: 40, capPct: 80,  activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
+      cpg:       { revenue: 250000000,  aov: 12,  pf: 24, enrollPct: 3.5, capPct: 4, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 }
     }
   };
   // Scenario presets from the workbook's 'Scenario Inputs' sheet.
@@ -302,7 +304,8 @@
       var c = state.channelInputs[k];
       return {
         key: k, annualRevenue: c.revenue, aov: c.aov, purchaseFrequency: c.pf,
-        enrollmentRate: pc(c.enrollPct),
+        enrollmentRate: pc(c.enrollPct), enrollMax: pc(c.capPct),
+        activeRate: pc(c.activeRatePct),
         aovLift: pc(c.aovLiftPct), pfLift: pc(c.pfLiftPct)
       };
     });
@@ -399,7 +402,7 @@
       '<div class="panel"><h2>Quick Presets</h2><div class="presets">' + presetBtns + '</div>' +
       m.channels.map(function (ch) {
         var ci = state.channelInputs[ch.key];
-        var capPct = Math.round(ch.spec.enrollMax * 100);
+        var capPct = ci.capPct;
         function chSlider(field, label, min, max, valSuffix) {
           return '<div class="slider-row"><div class="slider-head"><label>' + label + '</label>' +
             '<span class="val">' + ci[field] + (valSuffix || '%') + '</span></div>' +
@@ -407,21 +410,22 @@
             '<div class="slider-scale"><span>' + min + '%</span><span>' + max + '%</span></div></div>';
         }
         return '<h2 style="margin-top:10px">' + ch.label + '</h2>' +
-          '<p class="methodology" style="margin-bottom:12px">' + ch.spec.note +
-          (ch.spec.confirm ? ' <b>(ceiling to confirm)</b>' : '') + '</p>' +
+          '<p class="methodology" style="margin-bottom:12px">' + ch.spec.note + '</p>' +
           '<div class="sliders2">' +
           chSlider('enrollPct', 'Enrollment Rate (max ' + capPct + '%)', 0, capPct) +
+          chSlider('activeRatePct', 'Active Rate (% of enrolled)', 0, 100) +
           chSlider('aovLiftPct', 'AOV Lift', 0, 25) +
           chSlider('pfLiftPct', 'Purchase Frequency Lift', 0, 25) +
           '</div>' +
+          '<div class="fields" style="margin-bottom:14px"><div class="field" style="max-width:260px">' +
+          '<label>Recruitment Ceiling (%)</label>' +
+          '<input type="number" min="0" max="100" step="0.5" data-ck="' + ch.key + ':capPct" value="' + capPct + '" />' +
+          '<div class="note">Max share of this channel’s customers that can be recruited</div></div></div>' +
           (ch.enrollmentCapped
             ? '<div class="warnbox amber"><b>Recruitment ceiling applied</b>' + ch.label + ' can only recruit up to ' + capPct + '% of its customers; the model uses ' + capPct + '%.</div>'
             : '');
       }).join('') +
       '<h2 style="margin-top:18px">Program-wide</h2>' +
-      '<div class="sliders2">' +
-        slider('activeRatePct', 'Active Rate (% of enrolled)', 0, 100) +
-      '</div>' +
       '<label class="chk" style="max-width:520px"><input type="checkbox" data-toggle="identity"' + (state.identity ? ' checked' : '') + ' /> Repeat-customer identity is observable (required for frequency lift)</label>' +
       (!state.identity
         ? '<div class="warnbox amber" style="margin-bottom:16px"><b>Frequency lift disabled</b>Without repeat-customer identity, purchase-frequency uplift cannot be attributed and is excluded from the model.</div>'
@@ -432,7 +436,7 @@
         '<div class="arrow">→</div>' +
         '<div class="fcell"><div class="l">Enrolled Members</div><div class="n">' + int(m.enrolledMembers) + '</div><div class="d">Per-channel recruitment, capped by channel</div></div>' +
         '<div class="arrow">→</div>' +
-        '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">' + state.inputs.activeRatePct + '% of Enrolled — lift applies here</div></div>' +
+        '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">Per-channel active rates — lift applies here</div></div>' +
       '</div>' +
       (function () {
         var share = m.customers > 0 ? (m.activeMembers / m.customers) * 100 : 0;
@@ -467,7 +471,7 @@
     app.innerHTML =
       header(3, 'Costs &amp; TCO', 'Complete breakdown of Investment Requirements vs Projected Performance.', 'Assumptions', '2') +
       '<div class="panel"><h2>Investment Requirements</h2><div class="cost-grid">' +
-        costRow('platformCost', 'Platform / Software (yr)') + costRow('marketingCost', 'Program Marketing (yr)') +
+        costRow('platformCost', 'Platform / Software (yr)') + costRow('marketingCost', 'Marketing &amp; Email Volume (yr)') +
         costRow('laborCost', 'Labor / Administration (yr)') + costRow('servicesCost', 'Services / Agency (yr)') +
         costRow('implementationCost', 'Implementation (one-time)') + costRow('integrationCost', 'Integration (one-time)') +
         costRow('otherCost', 'Other Costs (yr)') +
@@ -627,9 +631,10 @@
       var p = PRESETS[preset.getAttribute('data-preset')];
       state.preset = preset.getAttribute('data-preset');
       state.inputs.activeRatePct = p.activeRatePct;
-      // Presets seed every selected channel's lifts; e-commerce (direct
-      // relationship) also takes the preset enrollment rate.
+      // Presets seed every selected channel's active rate and lifts;
+      // e-commerce (direct relationship) also takes the preset enrollment.
       selectedChannels().forEach(function (k) {
+        state.channelInputs[k].activeRatePct = p.activeRatePct;
         state.channelInputs[k].aovLiftPct = p.aovLiftPct;
         state.channelInputs[k].pfLiftPct = p.pfLiftPct;
       });

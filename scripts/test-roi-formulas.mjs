@@ -203,6 +203,20 @@ else console.log('  ✓ CPG cap flagged');
 if (CHANNEL_SPECS.cpg.enrollMax !== 0.04) { failures++; console.error('  ✗ CPG ceiling should be 4%'); }
 else console.log('  ✓ CPG ceiling = 4%');
 
+// User-adjustable ceilings and per-channel active rates.
+if (CHANNEL_SPECS.pos.enrollMax !== 0.80) { failures++; console.error('  ✗ POS default ceiling should be 80%'); }
+else console.log('  ✓ POS default ceiling = 80%');
+const mc3 = computeMultiChannel(sharedBase, [
+  // Override the CPG ceiling per deal (user-editable): 10% instead of 4%.
+  { key: 'cpg', annualRevenue: 250e6, aov: 12, purchaseFrequency: 24, enrollmentRate: 0.35, enrollMax: 0.10 },
+]);
+approx('user ceiling override applied', mc3.channels[0].enrollmentRateApplied, 0.10, 1e-12);
+const mc4 = computeMultiChannel(sharedBase, [
+  // Per-channel active rate: 50% here vs 60% shared.
+  { key: 'ecommerce', annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, enrollmentRate: 0.35, activeRate: 0.5 },
+]);
+approx('per-channel active rate', mc4.activeMembers, b.enrolledMembers * 0.5, 1e-4);
+
 // Blend invariant: two channels = sum of each channel computed alone
 // (revenue side), with program costs applied exactly once.
 const chA = { key: 'ecommerce', annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, enrollmentRate: 0.35 };

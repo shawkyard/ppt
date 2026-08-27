@@ -129,14 +129,16 @@ function computeCanonicalModel(i) {
  *  - POS and Email/Mobile ceilings are working assumptions pending the
  *    owner's numbers (marked confirm:true).
  */
+// Default ceilings — every ceiling is user-overridable per deal (pass
+// enrollMax on the channel input).
 const CHANNEL_SPECS = {
-  ecommerce: { label: 'E-commerce', enrollMin: 0.20, enrollMax: 1.00, confirm: false,
+  ecommerce: { label: 'E-commerce', enrollMin: 0.20, enrollMax: 1.00,
     note: 'Direct enrollment at checkout / account creation: 20–100% of customers recruitable.' },
-  pos: { label: 'In-Store POS', enrollMin: 0, enrollMax: 0.60, confirm: true,
-    note: 'Requires tender or named-customer identity at the register. Ceiling to be confirmed.' },
-  email: { label: 'Email / Mobile', enrollMin: 0, enrollMax: 0.80, confirm: true,
-    note: 'Known subscribers / opt-ins. Ceiling to be confirmed.' },
-  cpg: { label: 'CPG (receipt processing)', enrollMin: 0, enrollMax: 0.04, confirm: false,
+  pos: { label: 'In-Store POS', enrollMin: 0, enrollMax: 0.80,
+    note: 'Recruitment at the register / receipt; default ceiling 80%.' },
+  email: { label: 'Email / Mobile', enrollMin: 0, enrollMax: 0.80,
+    note: 'Known subscribers / opt-ins; default ceiling 80%.' },
+  cpg: { label: 'CPG (receipt processing)', enrollMin: 0, enrollMax: 0.04,
     note: 'No direct customer relationship (sold through retailers); receipt processing recruits ~3–4%.' },
 };
 
@@ -156,12 +158,15 @@ const CHANNEL_SPECS = {
 function computeMultiChannel(shared, channels) {
   const perChannel = (channels || []).map((ch) => {
     const spec = CHANNEL_SPECS[ch.key] || { label: ch.key, enrollMin: 0, enrollMax: 1, note: '' };
-    const enrollmentRate = Math.min(Math.max(n(ch.enrollmentRate), 0), spec.enrollMax);
+    const enrollMax = ch.enrollMax != null ? Math.min(Math.max(n(ch.enrollMax), 0), 1) : spec.enrollMax;
+    const enrollmentRate = Math.min(Math.max(n(ch.enrollmentRate), 0), enrollMax);
     const m = computeCanonicalModel({
       annualRevenue: ch.annualRevenue, uniqueCustomers: ch.uniqueCustomers,
       aov: ch.aov, purchaseFrequency: ch.purchaseFrequency,
       grossMargin: shared.grossMargin,
-      enrollmentRate, activeRate: shared.activeRate,
+      enrollmentRate,
+      // Active rate varies by channel; program-level value is the fallback.
+      activeRate: ch.activeRate != null ? ch.activeRate : shared.activeRate,
       // The CMO conversation happens per channel: lifts are channel-level
       // assumptions (typically 3%–25%), falling back to program-level.
       aovLift: ch.aovLift != null ? ch.aovLift : shared.aovLift,
@@ -173,8 +178,10 @@ function computeMultiChannel(shared, channels) {
     });
     return {
       key: ch.key, label: spec.label, spec,
+      enrollMax,
       enrollmentRateApplied: enrollmentRate,
-      enrollmentCapped: n(ch.enrollmentRate) > spec.enrollMax,
+      enrollmentCapped: n(ch.enrollmentRate) > enrollMax,
+      activeRateApplied: ch.activeRate != null ? n(ch.activeRate) : n(shared.activeRate),
       customers: m.customers, enrolledMembers: m.enrolledMembers, activeMembers: m.activeMembers,
       baselineActiveRevenue: m.baselineActiveRevenue,
       aovOnlyLift: m.aovOnlyLift, pfOnlyLift: m.pfOnlyLift, synergyLift: m.synergyLift,
