@@ -1,57 +1,192 @@
 /*
  * Loyalty Program ROI Engine
  * ==========================
- * ENGINE VERSION: v0.1-PLACEHOLDER
+ * ENGINE VERSION: v1.0-CANONICAL
  *
- * ⚠️  These are PLACEHOLDER formulas using standard loyalty-economics math.
- *     They exist so the widget, embed flow, and white-label demo can be
- *     tested end-to-end. The proprietary formulas (from the owner's Excel
- *     models) replace the body of `computeLoyaltyRoi` below. Nothing else
- *     in the product needs to change when that happens — the UI and API
- *     talk only to this one function.
+ * Ported from the owner's "Alma Loyalty CRM ROI Master Control Center"
+ * workbook — sheets: Formula Canon, Canonical Model, 5-Year Model,
+ * Scenario Inputs, Input Dictionary, QA Tests, Checks. The JS below
+ * reproduces those formulas exactly; scripts/test-roi-formulas.mjs proves
+ * every output against the workbook's own calculated values.
  *
- * Contract:
- *   computeLoyaltyRoi(inputs) -> outputs
- *   All money values are plain numbers in dollars. All *Pct inputs are
- *   percentages as entered by the user (e.g. 35 means 35%), converted to
- *   fractions internally.
+ * Conventions (matching the workbook):
+ *  - All rates are FRACTIONS (0.15 = 15%), exactly as Excel stores them.
+ *  - Money values are plain dollar numbers.
+ *  - Guards: IFERROR-style division → 0; zero investment → ROI/multiple null
+ *    ("N/M"); non-positive net contribution → paybackMonths Infinity
+ *    ("No payback"); PF lift requires repeat identity (identity gate).
+ *
+ * Canon rules encoded here:
+ *  - Incremental revenue = AOV-only + PF-only + synergy, and must reconcile
+ *    ("bridge") with Active × (projected − baseline) revenue. Count synergy
+ *    exactly once.
+ *  - Revenue is not profit: gross margin applies before any ROI math.
+ *  - One denominator: rewards + recurring + one-time all feed Total
+ *    Investment. Net ROI = net ÷ investment (no +1 — that would be the
+ *    benefit-cost multiple, a separate metric).
  */
 
-/**
- * @typedef {Object} RoiInputs
- * @property {number} monthlyCustomers   Unique active customers per month
- * @property {number} avgTicket          Average transaction value ($)
- * @property {number} visitsPerMonth     Average visits per customer per month
- * @property {number} grossMarginPct     Gross margin on sales (%)
- * @property {number} memberAdoptionPct  Share of customers who join the program (%)
- * @property {number} visitLiftPct       Visit-frequency lift among members (%)
- * @property {number} spendLiftPct       Ticket-size lift among members (%)
- * @property {number} rewardCostPct      Reward/redemption cost as % of member spend
- * @property {number} monthlyProgramCost Software/vendor fee per month ($)
- * @property {number} launchCost         One-time setup cost ($), may be 0
- */
+function n(v) { return Number.isFinite(Number(v)) ? Number(v) : 0; }
+function div(a, b) { return b > 0 ? a / b : 0; }
 
 /**
- * @typedef {Object} RoiOutputs
- * @property {number} baselineMonthlyRevenue
- * @property {number} members                     Members enrolled (count)
- * @property {number} incrementalMonthlyRevenue   New revenue created by the program / month
- * @property {number} incrementalAnnualRevenue
- * @property {number} annualRewardCost
- * @property {number} annualProgramCost           Software fees x12 (excludes launch)
- * @property {number} netAnnualProfit             Gross profit on lift − rewards − fees
- * @property {number} roiPct                      Net annual profit / total annual cost
- * @property {number} paybackMonths               Months to recover launch + fees; Infinity if never
- * @property {string} engineVersion
+ * Single-year canonical model — "Canonical Model" sheet.
+ *
+ * @param {Object} i
+ * @param {number}  i.annualRevenue       $ / year
+ * @param {number}  [i.uniqueCustomers]   Actual customers (preferred when known)
+ * @param {number}  i.aov                 $ / order
+ * @param {number}  i.purchaseFrequency   Orders / customer / year
+ * @param {number}  i.grossMargin         Fraction (0.5 = 50%)
+ * @param {number}  i.enrollmentRate      Fraction of customers
+ * @param {number}  i.activeRate          Fraction of enrolled
+ * @param {number}  i.aovLift             Fraction
+ * @param {number}  i.pfLift              Fraction (gated on identity)
+ * @param {boolean} [i.identityAvailable=true]  Repeat identity observable?
+ * @param {number}  i.rewardRate          Fraction of incremental revenue (simple mode)
+ * @param {number}  i.platformCost        $ recurring / year
+ * @param {number}  i.laborCost           $ recurring / year
+ * @param {number}  i.marketingCost       $ recurring / year
+ * @param {number}  i.servicesCost        $ recurring / year
+ * @param {number}  i.otherCost           $ recurring / year
+ * @param {number}  i.implementationCost  $ one-time (Year 1)
+ * @param {number}  i.integrationCost     $ one-time (Year 1)
  */
+function computeCanonicalModel(i) {
+  const identity = i.identityAvailable !== false;
+
+  const revenue = n(i.annualRevenue);
+  const aov = n(i.aov);
+  const pf = n(i.purchaseFrequency);
+  const margin = n(i.grossMargin);
+  const aovLift = n(i.aovLift);
+  const pfLift = identity ? n(i.pfLift) : 0; // identity gate: no PF uplift without repeat identity
+
+  // Estimated customers: Revenue ÷ (AOV × PF); actual customers win when given.
+  const customers = n(i.uniqueCustomers) > 0 ? n(i.uniqueCustomers) : div(revenue, aov * pf);
+  const enrolledMembers = customers * n(i.enrollmentRate);
+  const activeMembers = enrolledMembers * n(i.activeRate);
+
+  const baselineActiveRevenue = activeMembers * aov * pf;
+  const projectedAov = aov * (1 + aovLift);
+  const projectedPf = pf * (1 + pfLift);
+
+  // Driver bridge — count synergy exactly once.
+  const aovOnlyLift = activeMembers * pf * (projectedAov - aov);
+  const pfOnlyLift = activeMembers * aov * (projectedPf - pf);
+  const synergyLift = activeMembers * (projectedAov - aov) * (projectedPf - pf);
+  const incrementalRevenue = aovOnlyLift + pfOnlyLift + synergyLift;
+  const bridgeCheck =
+    incrementalRevenue - ((activeMembers * projectedAov * projectedPf) - baselineActiveRevenue);
+
+  const incrementalGrossProfit = incrementalRevenue * margin;
+
+  // Rewards, simple mode: % of incremental revenue.
+  const rewardsCost = incrementalRevenue * n(i.rewardRate);
+  const recurringFixedCosts =
+    n(i.platformCost) + n(i.laborCost) + n(i.marketingCost) + n(i.servicesCost) + n(i.otherCost);
+  const oneTimeCosts = n(i.implementationCost) + n(i.integrationCost);
+  const totalInvestment = rewardsCost + recurringFixedCosts + oneTimeCosts;
+
+  const netContribution = incrementalGrossProfit - totalInvestment;
+  const netRoi = totalInvestment > 0 ? netContribution / totalInvestment : null;          // "N/M"
+  const benefitCostMultiple = totalInvestment > 0 ? incrementalGrossProfit / totalInvestment : null;
+  const paybackMonths = netContribution > 0 ? totalInvestment / (netContribution / 12) : Infinity;
+
+  const incRevenueShareOfCompany = div(incrementalRevenue, revenue);
+  const contributionPerActive =
+    activeMembers > 0 ? (incrementalGrossProfit - rewardsCost) / activeMembers : 0;
+  const breakEvenActiveMembers =
+    contributionPerActive > 0 ? (recurringFixedCosts + oneTimeCosts) / contributionPerActive : null;
+
+  const modelGate = !identity
+    ? 'LIMIT PF: identity unavailable'
+    : Math.abs(bridgeCheck) > 0.01
+      ? 'BLOCK: bridge failed'
+      : 'READY';
+
+  return {
+    customers, enrolledMembers, activeMembers,
+    baselineActiveRevenue, projectedAov, projectedPf,
+    aovOnlyLift, pfOnlyLift, synergyLift,
+    incrementalRevenue, bridgeCheck,
+    incrementalGrossProfit,
+    rewardsCost, recurringFixedCosts, oneTimeCosts, totalInvestment,
+    netContribution, netRoi, benefitCostMultiple, paybackMonths,
+    incRevenueShareOfCompany, contributionPerActive, breakEvenActiveMembers,
+    modelGate,
+    engineVersion: 'v1.0-CANONICAL',
+  };
+}
 
 /**
- * @param {RoiInputs} inputs
- * @returns {RoiOutputs}
+ * Five-year projection — "5-Year Model" sheet.
+ * Ramp applies to member value; recurring costs inflate; one-time costs hit
+ * Year 1 only; net contributions discount to NPV. Organic growth is never
+ * hidden inside loyalty value.
+ *
+ * @param {Object} i  Same fields as computeCanonicalModel, plus:
+ * @param {number[]} [i.rampByYear]     5 fractions, default [0.7,0.9,1,1,1] (Base)
+ * @param {number}   [i.costInflation]  Fraction / year, default 0.03
+ * @param {number}   [i.discountRate]   Fraction / year, default 0.10
+ */
+function computeFiveYear(i) {
+  const m = computeCanonicalModel(i);
+  const ramp = Array.isArray(i.rampByYear) && i.rampByYear.length === 5
+    ? i.rampByYear.map(n) : [0.7, 0.9, 1, 1, 1];
+  const inflation = i.costInflation == null ? 0.03 : n(i.costInflation);
+  const discount = i.discountRate == null ? 0.10 : n(i.discountRate);
+  const margin = n(i.grossMargin);
+  const rewardRate = n(i.rewardRate);
+
+  const years = [];
+  let cumNet = 0, cumInvestment = 0, npv = 0, cumIncRevenue = 0;
+  for (let t = 1; t <= 5; t++) {
+    const r = ramp[t - 1];
+    const activeMembers = m.activeMembers * r;
+    const incRevenue = m.incrementalRevenue * r;
+    const grossProfit = incRevenue * margin;
+    const rewardsCost = incRevenue * rewardRate;
+    const recurringCosts = m.recurringFixedCosts * Math.pow(1 + inflation, t - 1);
+    const oneTimeCosts = t === 1 ? m.oneTimeCosts : 0;
+    const totalInvestment = rewardsCost + recurringCosts + oneTimeCosts;
+    const netContribution = grossProfit - totalInvestment;
+    const discountFactor = 1 / Math.pow(1 + discount, t);
+
+    cumNet += netContribution;
+    cumInvestment += totalInvestment;
+    npv += netContribution * discountFactor;
+    cumIncRevenue += incRevenue;
+
+    years.push({
+      year: t, ramp: r, activeMembers, incRevenue, grossProfit,
+      rewardsCost, recurringCosts, oneTimeCosts, totalInvestment,
+      netContribution, discountFactor,
+      presentValue: netContribution * discountFactor,
+      cumulativeNet: cumNet,
+      annualRoi: totalInvestment > 0 ? netContribution / totalInvestment : null,
+      cumulativeRoi: cumInvestment > 0 ? cumNet / cumInvestment : null,
+      netPerActive: activeMembers > 0 ? netContribution / activeMembers : 0,
+    });
+  }
+
+  return {
+    ...m,
+    years,
+    fiveYearIncRevenue: cumIncRevenue,
+    fiveYearInvestment: cumInvestment,
+    fiveYearNetContribution: cumNet,
+    fiveYearNpv: npv,
+  };
+}
+
+/*
+ * Compact-widget model (Tier-1 quick embed). Same canonical economics on a
+ * reduced input set: monthly business metrics in, single-year outputs out.
+ * Rewards follow the canon's simple mode: % of INCREMENTAL revenue.
  */
 function computeLoyaltyRoi(inputs) {
-  const n = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
-  const pct = (v) => n(v) / 100;
+  const pct = (v) => n(v) / 100; // widget inputs arrive as whole percents
 
   const monthlyCustomers = n(inputs.monthlyCustomers);
   const avgTicket = n(inputs.avgTicket);
@@ -60,12 +195,11 @@ function computeLoyaltyRoi(inputs) {
   const adoption = pct(inputs.memberAdoptionPct);
   const visitLift = pct(inputs.visitLiftPct);
   const spendLift = pct(inputs.spendLiftPct);
-  const rewardCost = pct(inputs.rewardCostPct);
+  const rewardRate = pct(inputs.rewardCostPct);
   const monthlyProgramCost = n(inputs.monthlyProgramCost);
   const launchCost = n(inputs.launchCost);
 
   const baselineMonthlyRevenue = monthlyCustomers * visitsPerMonth * avgTicket;
-
   const members = monthlyCustomers * adoption;
   const memberBaselineSpend = members * visitsPerMonth * avgTicket;
   const memberLiftedSpend =
@@ -74,191 +208,32 @@ function computeLoyaltyRoi(inputs) {
   const incrementalMonthlyRevenue = memberLiftedSpend - memberBaselineSpend;
   const incrementalAnnualRevenue = incrementalMonthlyRevenue * 12;
 
-  const monthlyRewardCost = memberLiftedSpend * rewardCost;
+  const monthlyRewardCost = incrementalMonthlyRevenue * rewardRate;
   const annualRewardCost = monthlyRewardCost * 12;
   const annualProgramCost = monthlyProgramCost * 12;
 
   const monthlyGrossProfitLift = incrementalMonthlyRevenue * margin;
-  const netMonthlyProfit =
-    monthlyGrossProfitLift - monthlyRewardCost - monthlyProgramCost;
+  const netMonthlyProfit = monthlyGrossProfitLift - monthlyRewardCost - monthlyProgramCost;
   const netAnnualProfit = netMonthlyProfit * 12;
 
   const totalAnnualCost = annualRewardCost + annualProgramCost + launchCost;
   const roiPct = totalAnnualCost > 0 ? (netAnnualProfit / totalAnnualCost) * 100 : 0;
-
   const paybackMonths =
     netMonthlyProfit > 0 ? launchCost / netMonthlyProfit : launchCost === 0 ? 0 : Infinity;
 
   return {
-    baselineMonthlyRevenue,
-    members,
-    incrementalMonthlyRevenue,
-    incrementalAnnualRevenue,
-    annualRewardCost,
-    annualProgramCost,
-    netAnnualProfit,
-    roiPct,
-    paybackMonths,
-    engineVersion: 'v0.1-PLACEHOLDER',
-  };
-}
-
-/*
- * Full wizard model (BBP ROI Modeling flow).
- * Step order: Baseline → Loyalty Assumptions → Costs & TCO → 5-Year Outlook → Executive Report.
- *
- * ⚠️  PLACEHOLDER math, same contract rule as above: the proprietary Excel
- *     formulas replace the body of `computeWizardModel`; the wizard UI only
- *     reads the returned fields.
- *
- * Invariants the UI relies on (keep these when swapping formulas in):
- *  - No output is ever NaN; division guards return 0.
- *  - paybackMonths is Infinity when the program never pays back.
- *  - totalCustomers = annualRevenue / (aov × purchaseFrequency).
- *  - aovIncremental + freqIncremental === grossIncrementalRevenue (year 1).
- */
-
-/**
- * @typedef {Object} WizardInputs
- * Baseline:
- * @property {number} annualRevenue        Merchant annual revenue ($)
- * @property {number} aov                  Average order value ($)
- * @property {number} purchaseFrequency   Purchases per customer per YEAR
- * Loyalty assumptions:
- * @property {number} enrollmentRatePct   % of customers who enroll
- * @property {number} activeRatePct       % of enrolled who stay active
- * @property {number} aovLiftPct          AOV lift among active members (%)
- * @property {number} freqLiftPct         Frequency lift among active members (%)
- * Costs & TCO:
- * @property {number} softwareCost        Software/ARR per year ($)
- * @property {number} setupFees           One-time ($)
- * @property {number} implementation      One-time ($)
- * @property {number} marketingCost       Per year ($)
- * @property {number} laborCost           Per year ($)
- * @property {number} miscCost            Per year ($)
- * @property {number} rewardsCostPct      Rewards as % of active-member (lifted) spend
- * Outlook:
- * @property {number} peakEnrollmentYear  Year enrollment reaches target (1-5)
- * @property {number} retentionRatePct    Enrolled members retained year over year (%)
- */
-function computeWizardModel(inputs) {
-  const n = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
-  const pct = (v) => n(v) / 100;
-  const div = (a, b) => (b > 0 ? a / b : 0);
-
-  const annualRevenue = n(inputs.annualRevenue);
-  const aov = n(inputs.aov);
-  const freq = n(inputs.purchaseFrequency);
-  const enrollRate = pct(inputs.enrollmentRatePct);
-  const activeRate = pct(inputs.activeRatePct);
-  const aovLift = pct(inputs.aovLiftPct);
-  const freqLift = pct(inputs.freqLiftPct);
-  const rewardsRate = pct(inputs.rewardsCostPct);
-
-  const oneTimeCost = n(inputs.setupFees) + n(inputs.implementation);
-  const recurringCost =
-    n(inputs.softwareCost) + n(inputs.marketingCost) + n(inputs.laborCost) + n(inputs.miscCost);
-
-  const peakYear = Math.min(5, Math.max(1, Math.round(n(inputs.peakEnrollmentYear) || 1)));
-  const retention = Math.min(1, Math.max(0, pct(inputs.retentionRatePct ?? 100)));
-
-  // --- Baseline ---
-  const totalCustomers = div(annualRevenue, aov * freq);
-
-  // --- Funnel (steady state, year 1 at full ramp) ---
-  const enrolledTarget = totalCustomers * enrollRate;
-  const activeTarget = enrolledTarget * activeRate;
-
-  // Per-active-member spend
-  const baseSpendPerActive = aov * freq;
-  const liftedSpendPerActive = aov * (1 + aovLift) * freq * (1 + freqLift);
-  const incrementalPerActive = liftedSpendPerActive - baseSpendPerActive;
-
-  // Year-1 incremental revenue breakdown (at target funnel)
-  const activeBaseRevenue = activeTarget * baseSpendPerActive;
-  const aovIncremental = activeBaseRevenue * aovLift;
-  const freqIncremental = activeBaseRevenue * freqLift * (1 + aovLift);
-  const grossIncrementalRevenue = activeBaseRevenue * ((1 + aovLift) * (1 + freqLift) - 1);
-
-  // --- 5-year projection ---
-  // Enrollment ramps linearly to target by peakYear, then holds; retention
-  // shrinks the standing base each year after peak (placeholder dynamics).
-  const years = [];
-  let cumNet = 0;
-  let cumCosts = 0;
-  let cumIncRevenue = 0;
-  for (let t = 1; t <= 5; t++) {
-    const ramp = Math.min(t / peakYear, 1);
-    const retentionFactor = t > peakYear ? Math.pow(retention, t - peakYear) : 1;
-    const active = activeTarget * ramp * retentionFactor;
-    const incRevenue = active * incrementalPerActive;
-    const memberLiftedRevenue = active * liftedSpendPerActive;
-    const rewardsCost = memberLiftedRevenue * rewardsRate;
-    const programCosts = recurringCost + rewardsCost + (t === 1 ? oneTimeCost : 0);
-    const netProfit = incRevenue - programCosts;
-    cumNet += netProfit;
-    cumCosts += programCosts;
-    cumIncRevenue += incRevenue;
-    years.push({
-      year: t,
-      activeMembers: active,
-      revPerMember: active > 0 ? liftedSpendPerActive : 0,
-      incRevenue,
-      programCosts,
-      netProfit,
-      annualRoiPct: div(netProfit, programCosts) * 100,
-      cumRoiPct: div(cumNet, cumCosts) * 100,
-    });
-  }
-
-  // Payback: walk months assuming each year's net accrues evenly.
-  let paybackMonths = Infinity;
-  let running = 0;
-  for (const y of years) {
-    const monthly = y.netProfit / 12;
-    for (let m = 1; m <= 12; m++) {
-      running += monthly;
-      if (running >= 0 && y.netProfit > 0) {
-        paybackMonths = (y.year - 1) * 12 + m;
-        break;
-      }
-    }
-    if (paybackMonths !== Infinity) break;
-  }
-  if (cumNet <= 0) paybackMonths = Infinity;
-
-  const year1 = years[0];
-  const totalInvestmentYear1 = year1.programCosts;
-
-  return {
-    // Baseline
-    totalCustomers,
-    baselineRevenue: annualRevenue,
-    // Funnel
-    enrolledMembers: enrolledTarget,
-    activeMembers: activeTarget,
-    // Year-1 revenue breakdown
-    aovIncremental,
-    freqIncremental,
-    grossIncrementalRevenue,
-    // Headline KPIs
-    totalInvestmentYear1,
-    annualProfitImpact: year1.netProfit,
-    netValueCreated5yr: cumNet,
-    roiMultiplePct: div(cumNet, cumCosts) * 100,
-    paybackMonths,
-    cumIncRevenue5yr: cumIncRevenue,
-    cumCosts5yr: cumCosts,
-    // Projection table
-    years,
-    engineVersion: 'v0.2-PLACEHOLDER',
+    baselineMonthlyRevenue, members,
+    incrementalMonthlyRevenue, incrementalAnnualRevenue,
+    annualRewardCost, annualProgramCost,
+    netAnnualProfit, roiPct, paybackMonths,
+    engineVersion: 'v1.0-CANONICAL',
   };
 }
 
 // Works as a classic <script> (browser global) and as a Node/ESM import.
 if (typeof window !== 'undefined') {
-  window.LoyaltyRoiEngine = { computeLoyaltyRoi, computeWizardModel };
+  window.LoyaltyRoiEngine = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear };
 }
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { computeLoyaltyRoi, computeWizardModel };
+  module.exports = { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear };
 }

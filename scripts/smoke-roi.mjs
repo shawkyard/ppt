@@ -26,9 +26,9 @@ const roi = await page.textContent('#roiNote');
 const payback = await page.textContent('#payback');
 const title = await page.textContent('#brandTitle');
 console.log('net:', net, '| roi:', roi, '| payback:', payback, '| title:', title);
-if (net !== '$31,974') { console.error('FAIL net'); fail++; }
-if (!roi.startsWith('135%')) { console.error('FAIL roi'); fail++; }
-if (payback !== '0.6 mo') { console.error('FAIL payback'); fail++; }
+if (net !== '$46,086') { console.error('FAIL net'); fail++; }
+if (!roi.startsWith('480%')) { console.error('FAIL roi'); fail++; }
+if (payback !== '0.4 mo') { console.error('FAIL payback'); fail++; }
 if (title !== 'TestCo ROI Calculator') { console.error('FAIL branding'); fail++; }
 
 // 2. Change an input, verify recompute
@@ -36,7 +36,7 @@ await page.fill('#monthlyCustomers', '2400');
 await page.waitForTimeout(200);
 const net2 = await page.textContent('#netAnnualProfit');
 console.log('net after 2400 customers:', net2);
-if (net2 !== '$67,536') { console.error('FAIL recompute (expected $67,536)'); fail++; }
+if (net2 !== '$95,760') { console.error('FAIL recompute (expected $95,760)'); fail++; }
 
 // 3. Demo client page: embed script creates iframe and it resizes
 await page.goto('http://localhost:4173/roi/demo-client.html');
@@ -93,8 +93,13 @@ if (process.env.SMOKE_DIR) {
 // 6. Loyalty Methods mockup: embedded wizard in light theme + brand color
 await page.goto('http://localhost:4173/roi/mockups/loyaltymethods.html');
 await page.waitForSelector('iframe', { timeout: 5000 });
-await page.waitForTimeout(600);
-const wframe = page.frames().find(f => f.url().includes('wizard.html'));
+let wframe;
+for (let i = 0; i < 50 && !wframe; i++) {
+  await page.waitForTimeout(200);
+  const f = page.frames().find(fr => fr.url().includes('wizard.html'));
+  if (f && await f.evaluate(() => !!window.LoyaltyRoiEngine).catch(() => false)) wframe = f;
+}
+if (!wframe) { console.error('FAIL mockup wizard frame never booted'); process.exit(1); }
 const isLight = await wframe.evaluate(() => document.body.classList.contains('light'));
 const accent = await wframe.evaluate(() =>
   getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());

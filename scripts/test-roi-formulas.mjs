@@ -1,11 +1,9 @@
 /*
- * Verifies the ROI engine against hand-computed values.
+ * Proves the JS engine matches the Excel "Master Control Center" workbook.
+ * Every expected value below is a CACHED VALUE read from the workbook itself
+ * (Canonical Model, 5-Year Model, QA Tests sheets) — the engine must
+ * reproduce Excel to the penny.
  * Run: npm run test:roi
- *
- * When the placeholder engine is replaced with the proprietary formulas,
- * replace these expected values with worked examples from the Excel models —
- * ideally 3-4 rows pulled straight from the spreadsheet, so the web engine
- * is proven to match Excel to the penny.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -15,130 +13,183 @@ const here = dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(join(here, '../public/roi/formulas.js'), 'utf8');
 const mod = { exports: {} };
 new Function('module', 'window', src)(mod, undefined);
-const { computeLoyaltyRoi, computeWizardModel } = mod.exports;
+const { computeLoyaltyRoi, computeCanonicalModel, computeFiveYear } = mod.exports;
 
 let failures = 0;
 function approx(name, actual, expected, tol = 0.01) {
-  const ok = Math.abs(actual - expected) <= tol;
-  if (!ok) {
-    failures++;
-    console.error(`  ✗ ${name}: got ${actual}, expected ${expected}`);
-  } else {
-    console.log(`  ✓ ${name} = ${expected}`);
-  }
+  const ok = actual === expected || Math.abs(actual - expected) <= tol;
+  if (!ok) { failures++; console.error(`  ✗ ${name}: got ${actual}, expected ${expected}`); }
+  else console.log(`  ✓ ${name} = ${expected}`);
 }
 
-// Case 1: widget defaults, hand-computed.
-// baseline = 1200 * 2 * 28                          = 67,200 / mo
-// members  = 1200 * 0.35                            = 420
-// member spend before = 420 * 2 * 28                = 23,520
-// member spend after  = 420 * (2*1.2) * (28*1.1)    = 31,046.40
-// incremental / mo    = 7,526.40  → 90,316.80 / yr
-// rewards / mo        = 31,046.40 * 5%              = 1,552.32 → 18,627.84 / yr
-// net / mo            = 7,526.40*60% − 1,552.32 − 299 = 2,664.52 → 31,974.24 / yr
-// ROI = 31,974.24 / (18,627.84 + 3,588 + 1,500)     = 134.8223…%
-// payback = 1,500 / 2,664.52                        = 0.56296… months
-console.log('Case 1: widget defaults');
-const r1 = computeLoyaltyRoi({
+// Scenario Inputs (workbook 'Scenario Inputs' C/D/E columns)
+const SCENARIOS = {
+  conservative: {
+    annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, grossMargin: 0.5,
+    enrollmentRate: 0.25, activeRate: 0.45, aovLift: 0.08, pfLift: 0.08,
+    rewardRate: 0.02, platformCost: 100000, implementationCost: 75000,
+    integrationCost: 75000, laborCost: 40000, marketingCost: 50000,
+    servicesCost: 25000, otherCost: 15000,
+    rampByYear: [0.6, 0.8, 0.95, 1, 1], costInflation: 0.03, discountRate: 0.1,
+  },
+  base: {
+    annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, grossMargin: 0.5,
+    enrollmentRate: 0.35, activeRate: 0.6, aovLift: 0.15, pfLift: 0.15,
+    rewardRate: 0.025, platformCost: 150000, implementationCost: 25000,
+    integrationCost: 50000, laborCost: 25000, marketingCost: 50000,
+    servicesCost: 25000, otherCost: 0,
+    rampByYear: [0.7, 0.9, 1, 1, 1], costInflation: 0.03, discountRate: 0.1,
+  },
+  aggressive: {
+    annualRevenue: 1e9, aov: 235, purchaseFrequency: 3, grossMargin: 0.5,
+    enrollmentRate: 0.45, activeRate: 0.7, aovLift: 0.22, pfLift: 0.22,
+    rewardRate: 0.03, platformCost: 250000, implementationCost: 150000,
+    integrationCost: 125000, laborCost: 75000, marketingCost: 100000,
+    servicesCost: 50000, otherCost: 25000,
+    rampByYear: [0.8, 0.95, 1, 1, 1], costInflation: 0.03, discountRate: 0.1,
+  },
+};
+
+// ── Canonical Model, Base scenario (workbook column D cached values) ──
+console.log('Canonical Model — Base scenario vs workbook:');
+const b = computeCanonicalModel(SCENARIOS.base);
+approx('customers', b.customers, 1418439.7163120566);
+approx('enrolledMembers', b.enrolledMembers, 496453.9007092198);
+approx('activeMembers', b.activeMembers, 297872.34042553185);
+approx('baselineActiveRevenue', b.baselineActiveRevenue, 209999999.99999994);
+approx('projectedAov', b.projectedAov, 270.25);
+approx('projectedPf', b.projectedPf, 3.4499999999999997, 1e-9);
+approx('aovOnlyLift', b.aovOnlyLift, 31499999.999999993);
+approx('pfOnlyLift', b.pfOnlyLift, 31499999.999999974);
+approx('synergyLift', b.synergyLift, 4724999.999999996);
+approx('incrementalRevenue', b.incrementalRevenue, 67724999.99999997);
+approx('bridgeCheck ≈ 0', b.bridgeCheck, 0);
+approx('incrementalGrossProfit', b.incrementalGrossProfit, 33862499.999999985);
+approx('rewardsCost', b.rewardsCost, 1693124.9999999993);
+approx('recurringFixedCosts', b.recurringFixedCosts, 250000);
+approx('oneTimeCosts', b.oneTimeCosts, 75000);
+approx('totalInvestment', b.totalInvestment, 2018124.9999999993);
+approx('netContribution', b.netContribution, 31844374.999999985);
+approx('netRoi', b.netRoi, 15.779188603282748, 1e-9);
+approx('benefitCostMultiple', b.benefitCostMultiple, 16.779188603282748, 1e-9);
+approx('paybackMonths', b.paybackMonths, 0.7604953779121116, 1e-9);
+approx('incRevShareOfCompany', b.incRevenueShareOfCompany, 0.06772499999999997, 1e-9);
+approx('contributionPerActive', b.contributionPerActive, 107.99718749999998, 1e-6);
+approx('breakEvenActiveMembers', b.breakEvenActiveMembers, 3009.3376274266407, 1e-6);
+if (b.modelGate !== 'READY') { failures++; console.error('  ✗ modelGate should be READY'); }
+else console.log('  ✓ modelGate = READY');
+
+// ── Conservative & Aggressive headline values ──
+console.log('Conservative / Aggressive scenarios vs workbook:');
+const c = computeCanonicalModel(SCENARIOS.conservative);
+approx('cons. incrementalRevenue', c.incrementalRevenue, 18720000.000000015, 0.1);
+approx('cons. netContribution', c.netContribution, 8605600.000000007, 0.1);
+approx('cons. netRoi', c.netRoi, 11.407211028632032, 1e-9);
+approx('cons. paybackMonths', c.paybackMonths, 1.0519661615692102, 1e-9);
+const a = computeCanonicalModel(SCENARIOS.aggressive);
+approx('aggr. incrementalRevenue', a.incrementalRevenue, 153846000, 0.1);
+approx('aggr. netContribution', a.netContribution, 71532620, 0.1);
+approx('aggr. netRoi', a.netRoi, 13.270422493404917, 1e-9);
+// Scenario ordering check (workbook 'Checks' A12): C ≤ B ≤ A
+if (!(c.incrementalRevenue <= b.incrementalRevenue && b.incrementalRevenue <= a.incrementalRevenue)) {
+  failures++; console.error('  ✗ scenario order violated');
+} else console.log('  ✓ scenario order C ≤ B ≤ A');
+
+// ── 5-Year Model, Base scenario (workbook cached values) ──
+console.log('5-Year Model — Base scenario vs workbook:');
+const f = computeFiveYear(SCENARIOS.base);
+approx('Y1 activeMembers', f.years[0].activeMembers, 208510.63829787227, 1e-6);
+approx('Y1 incRevenue', f.years[0].incRevenue, 47407499.99999998);
+approx('Y1 grossProfit', f.years[0].grossProfit, 23703749.99999999);
+approx('Y1 rewardsCost', f.years[0].rewardsCost, 1185187.4999999995);
+approx('Y1 recurringCosts', f.years[0].recurringCosts, 250000);
+approx('Y1 oneTimeCosts', f.years[0].oneTimeCosts, 75000);
+approx('Y1 totalInvestment', f.years[0].totalInvestment, 1510187.4999999995);
+approx('Y1 netContribution', f.years[0].netContribution, 22193562.49999999);
+approx('Y1 annualRoi', f.years[0].annualRoi, 14.69589868807681, 1e-9);
+approx('Y2 netContribution', f.years[1].netContribution, 28694937.49999999);
+approx('Y3 recurringCosts (inflated)', f.years[2].recurringCosts, 265225);
+approx('Y5 recurringCosts (inflated)', f.years[4].recurringCosts, 281377.20249999996);
+approx('Y5 netContribution', f.years[4].netContribution, 31887997.797499985);
+approx('Y5 cumulativeNet', f.years[4].cumulativeNet, 146576841.04749995);
+approx('Y5 cumulativeRoi', f.years[4].cumulativeRoi, 15.948458299350653, 1e-9);
+approx('Y5 netPerActive', f.years[4].netPerActive, 107.05256403446425, 1e-6);
+approx('5yr incRevenue', f.fiveYearIncRevenue, 311534999.9999999);
+approx('5yr investment', f.fiveYearInvestment, 9190658.952499997);
+approx('5yr netContribution', f.fiveYearNetContribution, 146576841.04749995);
+approx('5yr NPV', f.fiveYearNpv, 109446317.34124586);
+// One-time costs Year 1 only (workbook QA Tests A22)
+if (f.years.slice(1).some((y) => y.oneTimeCosts !== 0)) {
+  failures++; console.error('  ✗ one-time costs leaked past Year 1');
+} else console.log('  ✓ one-time costs Year 1 only');
+
+// ── QA Tests sheet: lift compounds exactly once ──
+console.log('QA unit tests (workbook QA Tests sheet):');
+const qa = [
+  ['No lift',           100, 100, 2, 0,    0,    0],
+  ['AOV only +10%',     100, 100, 2, 0.10, 0,    2000],
+  ['PF only +10%',      100, 100, 2, 0,    0.10, 2000],
+  ['Both +10% = 21%',   100, 100, 2, 0.10, 0.10, 4200],
+  ['Both +18% = 39.24%',100, 100, 2, 0.18, 0.18, 7848],
+  ['Zero active',       0,   100, 2, 0.20, 0.20, 0],
+  ['High PF, AOV only', 50,  80, 12, 0.05, 0,    2400],
+  ['High AOV, PF only', 25,  500, 4, 0,    0.25, 12500],
+];
+for (const [label, active, aov, pf, aovLift, pfLift, expected] of qa) {
+  const m = computeCanonicalModel({
+    uniqueCustomers: active, enrollmentRate: 1, activeRate: 1,
+    aov, purchaseFrequency: pf, aovLift, pfLift,
+    grossMargin: 0.5, rewardRate: 0,
+    platformCost: 0, laborCost: 0, marketingCost: 0, servicesCost: 0,
+    otherCost: 0, implementationCost: 0, integrationCost: 0,
+    annualRevenue: 0,
+  });
+  approx(label, m.incrementalRevenue, expected);
+}
+
+// ── Guardrails (workbook QA qualitative tests + Checks) ──
+console.log('Guardrails:');
+const neg = computeCanonicalModel({ ...SCENARIOS.base, aovLift: 0, pfLift: 0 });
+if (neg.paybackMonths !== Infinity) { failures++; console.error('  ✗ negative net → payback must be Infinity ("No payback")'); }
+else console.log('  ✓ negative net contribution → "No payback"');
+const zeroInv = computeCanonicalModel({
+  ...SCENARIOS.base, rewardRate: 0, platformCost: 0, laborCost: 0, marketingCost: 0,
+  servicesCost: 0, otherCost: 0, implementationCost: 0, integrationCost: 0,
+});
+if (zeroInv.netRoi !== null) { failures++; console.error('  ✗ zero investment → ROI must be null ("N/M")'); }
+else console.log('  ✓ zero investment → ROI "N/M"');
+const gated = computeCanonicalModel({ ...SCENARIOS.base, identityAvailable: false });
+approx('identity gate: PF lift zeroed', gated.pfOnlyLift, 0);
+if (!gated.modelGate.startsWith('LIMIT PF')) { failures++; console.error('  ✗ identity gate message'); }
+else console.log('  ✓ identity gate flagged');
+const junk = computeCanonicalModel({ annualRevenue: 'abc', aov: null, purchaseFrequency: undefined });
+for (const [k, v] of Object.entries(junk)) {
+  if (typeof v === 'number' && Number.isNaN(v)) { failures++; console.error(`  ✗ ${k} is NaN`); }
+}
+console.log('  ✓ invalid inputs never produce NaN');
+
+// ── Compact widget (canonical simple rewards mode) ──
+// customers 1200, ticket $28, 2 visits/mo, margin 60%, adoption 35%,
+// visit lift 20%, spend lift 10%, rewards 5% of incremental, fee $299/mo,
+// launch $1,500. Incremental/mo = 420×2×28×(1.2×1.1−1) = 7,526.40;
+// rewards 376.32; net/mo = 4,515.84 − 376.32 − 299 = 3,840.52 → 46,086.24/yr;
+// ROI = 46,086.24 / (4,515.84×... ) — denom = 4,515.84 + 3,588 + 1,500? No:
+// annualRewards 4,515.84 + annualFees 3,588 + launch 1,500 = 9,603.84 →
+// 479.87%; payback = 1,500 / 3,840.52 = 0.39057 mo.
+console.log('Compact widget:');
+const w = computeLoyaltyRoi({
   monthlyCustomers: 1200, avgTicket: 28, visitsPerMonth: 2, grossMarginPct: 60,
   memberAdoptionPct: 35, visitLiftPct: 20, spendLiftPct: 10, rewardCostPct: 5,
   monthlyProgramCost: 299, launchCost: 1500,
 });
-approx('baselineMonthlyRevenue', r1.baselineMonthlyRevenue, 67200);
-approx('members', r1.members, 420);
-approx('incrementalMonthlyRevenue', r1.incrementalMonthlyRevenue, 7526.4);
-approx('incrementalAnnualRevenue', r1.incrementalAnnualRevenue, 90316.8);
-approx('annualRewardCost', r1.annualRewardCost, 18627.84);
-approx('annualProgramCost', r1.annualProgramCost, 3588);
-approx('netAnnualProfit', r1.netAnnualProfit, 31974.24);
-approx('roiPct', r1.roiPct, 134.8223, 0.001);
-approx('paybackMonths', r1.paybackMonths, 0.563, 0.001);
-
-// Case 2: zero lift → program is pure cost, ROI negative, payback never.
-console.log('Case 2: zero lift');
-const r2 = computeLoyaltyRoi({
-  monthlyCustomers: 500, avgTicket: 40, visitsPerMonth: 1, grossMarginPct: 50,
-  memberAdoptionPct: 30, visitLiftPct: 0, spendLiftPct: 0, rewardCostPct: 5,
-  monthlyProgramCost: 199, launchCost: 1000,
-});
-approx('incrementalAnnualRevenue', r2.incrementalAnnualRevenue, 0);
-// rewards: 150 members * 40 * 5% = 300/mo → net = −300 − 199 = −499/mo
-approx('netAnnualProfit', r2.netAnnualProfit, -5988);
-if (r2.paybackMonths !== Infinity) { failures++; console.error('  ✗ paybackMonths should be Infinity'); }
-else console.log('  ✓ paybackMonths = Infinity');
-if (r2.roiPct >= 0) { failures++; console.error('  ✗ roiPct should be negative'); }
-else console.log(`  ✓ roiPct negative (${r2.roiPct.toFixed(1)}%)`);
-
-// Case 3: garbage in → zeros, never NaN. The widget must never show NaN.
-console.log('Case 3: invalid inputs never produce NaN');
-const r3 = computeLoyaltyRoi({ monthlyCustomers: 'abc', avgTicket: null });
-for (const [k, v] of Object.entries(r3)) {
-  if (typeof v === 'number' && Number.isNaN(v)) {
-    failures++; console.error(`  ✗ ${k} is NaN`);
-  }
-}
-if (failures === 0) console.log('  ✓ no NaN outputs');
-
-// Case 4: full wizard model, hand-computed.
-// customers = 1,200,000 / (50 × 12) = 2,000; enrolled 600; active 300
-// base spend/active = 600; lifted = 50×1.1 × 12×1.2 = 792; incremental = 192
-// active-base rev = 180,000 → AOV inc 18,000; Freq inc 39,600; gross 57,600
-// recurring = 18,000/yr; one-time = 6,000; rewards = 5% of lifted member spend
-// peak year 2, retention 90%:
-//   Y1 (ramp .5): active 150, incRev 28,800, rewards 5,940, costs 29,940, net −1,140
-//   Y2: active 300, incRev 57,600, rewards 11,880, costs 29,880, net 27,720
-//   Y3 (.9): active 270, incRev 51,840, costs 28,692, net 23,148
-//   Y4 (.81): active 243, incRev 46,656, costs 27,622.80, net 19,033.20
-//   Y5 (.729): active 218.7, incRev 41,990.40, costs 26,660.52, net 15,329.88
-// 5yr net = 84,091.08; 5yr costs = 142,795.32; ROI = 58.889%; payback = 13 mo
-console.log('Case 4: wizard model');
-const w = computeWizardModel({
-  annualRevenue: 1200000, aov: 50, purchaseFrequency: 12,
-  enrollmentRatePct: 30, activeRatePct: 50, aovLiftPct: 10, freqLiftPct: 20,
-  softwareCost: 12000, setupFees: 4000, implementation: 2000,
-  marketingCost: 6000, laborCost: 0, miscCost: 0, rewardsCostPct: 5,
-  peakEnrollmentYear: 2, retentionRatePct: 90,
-});
-approx('totalCustomers', w.totalCustomers, 2000);
-approx('enrolledMembers', w.enrolledMembers, 600);
-approx('activeMembers', w.activeMembers, 300);
-approx('aovIncremental', w.aovIncremental, 18000);
-approx('freqIncremental', w.freqIncremental, 39600);
-approx('grossIncrementalRevenue', w.grossIncrementalRevenue, 57600);
-approx('breakdown sums to gross', w.aovIncremental + w.freqIncremental, w.grossIncrementalRevenue);
-approx('totalInvestmentYear1', w.totalInvestmentYear1, 29940);
-approx('annualProfitImpact (Y1)', w.annualProfitImpact, -1140);
-approx('Y2 net', w.years[1].netProfit, 27720);
-approx('Y5 active', w.years[4].activeMembers, 218.7);
-approx('Y5 net', w.years[4].netProfit, 15329.88);
-approx('netValueCreated5yr', w.netValueCreated5yr, 84091.08);
-approx('cumCosts5yr', w.cumCosts5yr, 142795.32);
-approx('roiMultiplePct', w.roiMultiplePct, 58.889, 0.001);
-approx('paybackMonths', w.paybackMonths, 13);
-
-// Case 5: the Horizon bug scenario — degenerate inputs must not produce
-// nonsense (their build showed Rev/Member $209,000 with 0 members, ROI −597%
-// with 0.0-month payback, and negative net styled as positive).
-console.log('Case 5: wizard degenerate inputs (the Horizon failure mode)');
-const wz = computeWizardModel({
-  annualRevenue: 1000, aov: 1000, purchaseFrequency: 1000,
-  enrollmentRatePct: 30, activeRatePct: 50, aovLiftPct: 10, freqLiftPct: 10,
-  softwareCost: 1000, setupFees: 1000, implementation: 0,
-  marketingCost: 1000, laborCost: 1000, miscCost: 1000, rewardsCostPct: 5,
-  peakEnrollmentYear: 3, retentionRatePct: 85,
-});
-for (const [k, v] of Object.entries(wz)) {
-  if (typeof v === 'number' && Number.isNaN(v)) { failures++; console.error(`  ✗ ${k} is NaN`); }
-}
-if (wz.years.some((y) => Number.isNaN(y.revPerMember) || (y.activeMembers === 0 && y.revPerMember !== 0))) {
-  failures++; console.error('  ✗ revPerMember nonsense with ~0 members');
-} else console.log('  ✓ revPerMember guarded when members ~0');
-if (wz.netValueCreated5yr < 0 && wz.paybackMonths !== Infinity) {
-  failures++; console.error('  ✗ negative program must have Infinity payback');
-} else console.log('  ✓ negative program → payback Never (not 0.0 mo)');
+approx('incrementalAnnualRevenue', w.incrementalAnnualRevenue, 90316.8);
+approx('annualRewardCost', w.annualRewardCost, 4515.84);
+approx('netAnnualProfit', w.netAnnualProfit, 46086.24);
+approx('roiPct', w.roiPct, 479.8729, 0.001);
+approx('paybackMonths', w.paybackMonths, 0.39057, 0.0001);
 
 if (failures > 0) {
   console.error(`\n${failures} check(s) FAILED`);
   process.exit(1);
 }
-console.log('\nAll ROI engine checks passed.');
+console.log('\nAll ROI engine checks passed — JS matches the Excel workbook.');

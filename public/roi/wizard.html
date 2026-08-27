@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Loyalty ROI Calculator — BBP ROI Modeling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+<!-- media=print + onload swap keeps the font request from blocking first paint/scripts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 <style>
   :root {
     --accent: #f97316;
@@ -195,7 +196,7 @@
 </nav>
 
 <main id="app"></main>
-<div class="foot" id="poweredBy">Engine v0.2-PLACEHOLDER — proprietary formulas pending in formulas.js</div>
+<div class="foot" id="poweredBy">Engine v1.0-CANONICAL — ported from the ROI Master Control Center workbook, verified against Excel</div>
 
 <script src="formulas.js"></script>
 <script>
@@ -220,23 +221,32 @@
   if (qs.get('powered') === '0') document.getElementById('poweredBy').hidden = true;
 
   // ---- State ----
+  // Defaults = the canonical workbook's Base scenario, so every number on
+  // screen is provable against the Excel Master Control Center.
   var state = {
     step: 'start', // start | 1..5
     mode: 'cold',  // cold | active
     channels: { ecommerce: true, pos: false, email: false, cpg: false },
-    preset: 'realistic',
+    preset: 'base',
+    identity: true, // repeat identity observable? (gates PF lift)
     inputs: {
-      annualRevenue: 2000000, aov: 85, purchaseFrequency: 6,
-      enrollmentRatePct: 30, activeRatePct: 50, aovLiftPct: 15, freqLiftPct: 15,
-      softwareCost: 12000, setupFees: 5000, implementation: 3000,
-      marketingCost: 6000, laborCost: 10000, miscCost: 2000, rewardsCostPct: 5,
-      peakEnrollmentYear: 3, retentionRatePct: 90
+      annualRevenue: 1000000000, aov: 235, purchaseFrequency: 3, grossMarginPct: 50,
+      enrollmentRatePct: 35, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15,
+      rewardRatePct: 2.5, platformCost: 150000, implementationCost: 25000,
+      integrationCost: 50000, laborCost: 25000, marketingCost: 50000,
+      servicesCost: 25000, otherCost: 0,
+      rampY1Pct: 70, rampY2Pct: 90, rampY3Pct: 100,
+      costInflationPct: 3, discountRatePct: 10
     }
   };
+  // Scenario presets from the workbook's 'Scenario Inputs' sheet.
   var PRESETS = {
-    conservative: { label: 'Conservative', desc: '20% Enroll / 40% Active', enrollmentRatePct: 20, activeRatePct: 40 },
-    realistic:    { label: 'Realistic',    desc: '30% Enroll / 50% Active', enrollmentRatePct: 30, activeRatePct: 50 },
-    aggressive:   { label: 'Aggressive',   desc: '45% Enroll / 65% Active', enrollmentRatePct: 45, activeRatePct: 65 }
+    conservative: { label: 'Conservative', desc: '25% Enroll / 45% Active / 8% Lifts',
+      enrollmentRatePct: 25, activeRatePct: 45, aovLiftPct: 8, pfLiftPct: 8 },
+    base:         { label: 'Base',         desc: '35% Enroll / 60% Active / 15% Lifts',
+      enrollmentRatePct: 35, activeRatePct: 60, aovLiftPct: 15, pfLiftPct: 15 },
+    aggressive:   { label: 'Aggressive',   desc: '45% Enroll / 70% Active / 22% Lifts',
+      enrollmentRatePct: 45, activeRatePct: 70, aovLiftPct: 22, pfLiftPct: 22 }
   };
 
   // ---- Format helpers ----
@@ -249,14 +259,33 @@
   function int(v) { return isFinite(v) ? Math.round(v).toLocaleString('en-US') : '—'; }
   function pctf(v, dp) { return isFinite(v) ? v.toFixed(dp == null ? 1 : dp) + '%' : '—'; }
   function payback(v) {
-    if (!isFinite(v)) return 'Never';
+    if (!isFinite(v)) return 'No payback';
     if (v <= 0) return 'Immediate';
-    return v >= 12 ? (v / 12).toFixed(1) + ' yrs' : Math.round(v) + ' mo';
+    return v >= 12 ? (v / 12).toFixed(1) + ' yrs' : v.toFixed(1) + ' mo';
   }
+  function roiPct(ratio, dp) { return ratio == null ? 'N/M' : pctf(ratio * 100, dp == null ? 0 : dp); }
   function signClass(v) { return v >= 0 ? 'pos' : 'neg'; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
 
-  function model() { return window.LoyaltyRoiEngine.computeWizardModel(state.inputs); }
+  // UI holds whole percents; the canonical engine takes fractions like Excel.
+  function engineInputs() {
+    var s = state.inputs;
+    var pc = function (v) { return (parseFloat(v) || 0) / 100; };
+    return {
+      annualRevenue: s.annualRevenue, aov: s.aov, purchaseFrequency: s.purchaseFrequency,
+      grossMargin: pc(s.grossMarginPct),
+      enrollmentRate: pc(s.enrollmentRatePct), activeRate: pc(s.activeRatePct),
+      aovLift: pc(s.aovLiftPct), pfLift: pc(s.pfLiftPct),
+      identityAvailable: state.identity,
+      rewardRate: pc(s.rewardRatePct),
+      platformCost: s.platformCost, laborCost: s.laborCost, marketingCost: s.marketingCost,
+      servicesCost: s.servicesCost, otherCost: s.otherCost,
+      implementationCost: s.implementationCost, integrationCost: s.integrationCost,
+      rampByYear: [pc(s.rampY1Pct), pc(s.rampY2Pct), pc(s.rampY3Pct), 1, 1],
+      costInflation: pc(s.costInflationPct), discountRate: pc(s.discountRatePct)
+    };
+  }
+  function model() { return window.LoyaltyRoiEngine.computeFiveYear(engineInputs()); }
 
   // ---- Renderers ----
   var app = document.getElementById('app');
@@ -310,11 +339,12 @@
       '<div class="panel"><h2>Revenue Drivers</h2><div class="fields">' +
         numField('annualRevenue', 'Annual Revenue ($)') +
         numField('aov', 'Average Order Value ($)') +
-        numField('purchaseFrequency', 'Annual Purchase Frequency', 'Average purchases per customer per year') +
+        numField('purchaseFrequency', 'Annual Purchase Frequency', 'Average orders per customer per year') +
+        numField('grossMarginPct', 'Gross Margin (%)', 'Revenue is not profit — ROI is computed on gross profit') +
       '</div>' +
-      '<div class="funnel" style="margin-top:22px"><div class="fcell"><div class="l">Total Customers</div>' +
-        '<div class="n">' + int(m.totalCustomers) + '</div><div class="d">Revenue ÷ (AOV × Frequency)</div></div></div>' +
-      (m.totalCustomers < 1 && state.inputs.annualRevenue > 0
+      '<div class="funnel" style="margin-top:22px"><div class="fcell"><div class="l">Estimated Customers</div>' +
+        '<div class="n">' + int(m.customers) + '</div><div class="d">Revenue ÷ (AOV × Frequency)</div></div></div>' +
+      (m.customers < 1 && state.inputs.annualRevenue > 0
         ? '<div class="warnbox"><b>Check your inputs</b>These numbers imply less than one customer. Annual Revenue should be your total yearly revenue; AOV is dollars per order; Frequency is orders per customer per year.</div>'
         : '') +
       '</div>' +
@@ -334,21 +364,26 @@
       '<div class="sliders2">' +
         slider('enrollmentRatePct', 'Enrollment Rate', 0, 100) +
         slider('activeRatePct', 'Active Rate', 0, 100) +
-        slider('aovLiftPct', 'AOV Lift', 0, 200) +
-        slider('freqLiftPct', 'Frequency Lift', 0, 200) +
+        slider('aovLiftPct', 'AOV Lift', 0, 50) +
+        slider('pfLiftPct', 'Purchase Frequency Lift', 0, 50) +
       '</div>' +
+      '<label class="chk" style="max-width:520px"><input type="checkbox" data-toggle="identity"' + (state.identity ? ' checked' : '') + ' /> Repeat-customer identity is observable (required for frequency lift)</label>' +
+      (!state.identity
+        ? '<div class="warnbox amber" style="margin-bottom:16px"><b>Frequency lift disabled</b>Without repeat-customer identity, purchase-frequency uplift cannot be attributed and is excluded from the model.</div>'
+        : '') +
       '<h2 style="margin-top:10px">Program Impact Funnel</h2>' +
       '<div class="funnel">' +
-        '<div class="fcell"><div class="l">Total Customers</div><div class="n">' + int(m.totalCustomers) + '</div><div class="d">Based on Revenue / AOV / Freq</div></div>' +
+        '<div class="fcell"><div class="l">Total Customers</div><div class="n">' + int(m.customers) + '</div><div class="d">Based on Revenue / AOV / Freq</div></div>' +
         '<div class="arrow">→</div>' +
         '<div class="fcell"><div class="l">Enrolled Members</div><div class="n">' + int(m.enrolledMembers) + '</div><div class="d">' + state.inputs.enrollmentRatePct + '% of Customers</div></div>' +
         '<div class="arrow">→</div>' +
-        '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">' + state.inputs.activeRatePct + '% of Enrolled</div></div>' +
+        '<div class="fcell hot"><div class="l">Active Members</div><div class="n">' + int(m.activeMembers) + '</div><div class="d">' + state.inputs.activeRatePct + '% of Enrolled — lift applies here</div></div>' +
       '</div>' +
-      '<div class="breakdown"><h3 class="small">Incremental Revenue Breakdown (from active members)</h3>' +
-        '<div class="row"><span>AOV Incremental Revenue</span><span class="amt">' + money(m.aovIncremental, 0) + '</span></div>' +
-        '<div class="row"><span>Frequency Incremental Revenue</span><span class="amt">' + money(m.freqIncremental, 0) + '</span></div>' +
-        '<div class="row total"><span>Gross Incremental Revenue / yr</span><span class="amt">' + money(m.grossIncrementalRevenue, 0) + '</span></div>' +
+      '<div class="breakdown"><h3 class="small">Incremental Revenue Bridge (active members, annual)</h3>' +
+        '<div class="row"><span>AOV-only revenue lift</span><span class="amt">' + money(m.aovOnlyLift, 0) + '</span></div>' +
+        '<div class="row"><span>Frequency-only revenue lift</span><span class="amt">' + money(m.pfOnlyLift, 0) + '</span></div>' +
+        '<div class="row"><span>Synergy interaction (counted once)</span><span class="amt">' + money(m.synergyLift, 0) + '</span></div>' +
+        '<div class="row total"><span>Gross Incremental Revenue / yr</span><span class="amt">' + money(m.incrementalRevenue, 0) + '</span></div>' +
       '</div>' +
       (m.activeMembers < 1000
         ? '<div class="warnbox amber"><b>Low Active Member Count</b>Fewer than 1,000 active members may result in volatile data and low overall program impact.</div>'
@@ -367,23 +402,26 @@
     app.innerHTML =
       header(3, 'Costs &amp; TCO', 'Complete breakdown of Investment Requirements vs Projected Performance.', 'Assumptions', '2') +
       '<div class="panel"><h2>Investment Requirements</h2><div class="cost-grid">' +
-        costRow('softwareCost', 'Software Costs (ARR)') + costRow('marketingCost', 'Marketing &amp; Ads') +
-        costRow('setupFees', 'Setup Fees') + costRow('laborCost', 'Labor Costs') +
-        costRow('implementation', 'Implementation') + costRow('miscCost', 'Miscellaneous') +
-        costRow('rewardsCostPct', 'Rewards Cost %', '% of member spend') +
-        '<div class="cost-row total"><label>Total Investment (Year 1)</label><span class="amt">' + money(m.totalInvestmentYear1, 0) + '</span></div>' +
+        costRow('platformCost', 'Platform / Software (yr)') + costRow('marketingCost', 'Program Marketing (yr)') +
+        costRow('laborCost', 'Labor / Administration (yr)') + costRow('servicesCost', 'Services / Agency (yr)') +
+        costRow('implementationCost', 'Implementation (one-time)') + costRow('integrationCost', 'Integration (one-time)') +
+        costRow('otherCost', 'Other Costs (yr)') +
+        costRow('rewardRatePct', 'Rewards Cost %', '% of incremental revenue') +
+        '<div class="cost-row total"><label>Total Investment (steady year)</label><span class="amt">' + money(m.totalInvestment, 0) + '</span></div>' +
       '</div></div>' +
       '<div class="kpis">' +
-        '<div class="kpi ' + (m.netValueCreated5yr >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</div></div>' +
-        '<div class="kpi"><div class="l">ROI Multiple</div><div class="n ' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct, 0) + '</div></div>' +
+        '<div class="kpi ' + (m.fiveYearNetContribution >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.fiveYearNetContribution) + '">' + money(m.fiveYearNetContribution, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">Net ROI (annual)</div><div class="n ' + (m.netRoi == null ? '' : signClass(m.netRoi)) + '">' + roiPct(m.netRoi) + '</div></div>' +
         '<div class="kpi"><div class="l">Payback Period</div><div class="n">' + payback(m.paybackMonths) + '</div></div>' +
-        '<div class="kpi"><div class="l">Annual Profit Impact (Yr 1)</div><div class="n ' + signClass(m.annualProfitImpact) + '">' + money(m.annualProfitImpact, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">Annual Net Contribution</div><div class="n ' + signClass(m.netContribution) + '">' + money(m.netContribution, 0) + '</div></div>' +
       '</div>' +
       '<div class="panel"><h2>Calculation Methodology</h2><p class="methodology">' +
-        '<b>Total Customers</b> is derived from base Revenue divided by (AOV × Frequency). ' +
-        '<b>Active Members</b> is the share of enrolled members actively participating. ' +
-        '<b>Incremental Revenue</b> reflects the AOV and Frequency lift isolated to the active-member cohort. ' +
-        '<b>Net Value Created</b> is the 5-year net profit impact after all program costs, including rewards liability at ' + state.inputs.rewardsCostPct + '% of member spend.' +
+        '<b>Customers</b> derive from Revenue ÷ (AOV × Frequency). <b>Active Members</b> are ' +
+        'the enrolled share actively participating — lift applies only to them. ' +
+        '<b>Incremental Revenue</b> is the AOV-only + frequency-only + synergy bridge, counted exactly once. ' +
+        '<b>Gross margin</b> converts revenue to profit before any ROI math. Rewards (' + state.inputs.rewardRatePct + '% of incremental revenue), ' +
+        'recurring costs, and one-time costs feed one investment denominator. ' +
+        '<b>Net ROI</b> is net contribution ÷ total investment; the benefit-cost multiple (' + (m.benefitCostMultiple == null ? 'N/M' : m.benefitCostMultiple.toFixed(1) + '×') + ') is reported separately, never as ROI.' +
       '</p></div>' +
       navBtns('Next: 5-Year Outlook', '4');
   }
@@ -391,7 +429,7 @@
   function chartSvg(years) {
     var W = 760, H = 240, pad = 40;
     var maxAbs = 1;
-    years.forEach(function (y) { maxAbs = Math.max(maxAbs, Math.abs(y.netProfit), Math.abs(y.incRevenue)); });
+    years.forEach(function (y) { maxAbs = Math.max(maxAbs, Math.abs(y.netContribution), Math.abs(y.incRevenue)); });
     var zero = pad + (H - 2 * pad) / 2;
     var scale = (H - 2 * pad) / 2 / maxAbs;
     var bw = 34, group = (W - 2 * pad) / 5;
@@ -403,7 +441,7 @@
         return '<rect x="' + (x + dx) + '" y="' + yy + '" width="' + bw + '" height="' + Math.max(h, 1) + '" rx="3" fill="' + color + '" />';
       }
       return bar(y.incRevenue, -bw - 3, 'var(--accent)') +
-             bar(y.netProfit, 3, y.netProfit >= 0 ? '#34d399' : '#fb7185') +
+             bar(y.netContribution, 3, y.netContribution >= 0 ? '#34d399' : '#fb7185') +
              '<text x="' + x + '" y="' + (H - 12) + '" text-anchor="middle" fill="#a3a3a3" font-size="12">Year ' + y.year + '</text>';
     }).join('');
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="5-year projection chart">' +
@@ -417,31 +455,37 @@
     var m = model();
     var rows = m.years.map(function (y) {
       return '<tr><td>Year ' + y.year + '</td><td>' + int(y.activeMembers) + '</td>' +
-        '<td>' + money(y.revPerMember, 0) + '</td><td>' + money(y.incRevenue, 0) + '</td>' +
-        '<td class="neg">' + money(y.programCosts, 0) + '</td>' +
-        '<td class="' + signClass(y.netProfit) + '">' + money(y.netProfit, 0) + '</td>' +
-        '<td class="' + signClass(y.annualRoiPct) + '">' + pctf(y.annualRoiPct) + '</td>' +
-        '<td class="' + signClass(y.cumRoiPct) + '">' + pctf(y.cumRoiPct) + '</td></tr>';
+        '<td>' + money(y.incRevenue, 0) + '</td><td>' + money(y.grossProfit, 0) + '</td>' +
+        '<td class="neg">' + money(y.totalInvestment, 0) + '</td>' +
+        '<td class="' + signClass(y.netContribution) + '">' + money(y.netContribution, 0) + '</td>' +
+        '<td class="' + (y.annualRoi == null ? '' : signClass(y.annualRoi)) + '">' + roiPct(y.annualRoi) + '</td>' +
+        '<td class="' + (y.cumulativeRoi == null ? '' : signClass(y.cumulativeRoi)) + '">' + roiPct(y.cumulativeRoi) + '</td></tr>';
     }).join('');
+    function pctSlider(key, label, min, max) {
+      return '<div class="slider-row"><div class="slider-head"><label>' + label + '</label>' +
+        '<span class="val">' + state.inputs[key] + '%</span></div>' +
+        '<input type="range" min="' + min + '" max="' + max + '" step="1" data-key="' + key + '" value="' + state.inputs[key] + '" />' +
+        '<div class="slider-scale"><span>' + min + '%</span><span>' + max + '%</span></div></div>';
+    }
     app.innerHTML =
-      header(4, '5-Year Strategic Outlook', 'Project the long-term impact of loyalty. Adjust growth and retention levers to visualize scenarios.', 'Costs', '3') +
+      header(4, '5-Year Strategic Outlook', 'Ramp, cost inflation and discounting are visible assumptions — organic growth is never hidden inside loyalty value.', 'Costs', '3') +
       '<div class="panel"><div class="sliders2">' +
-        '<div class="slider-row"><div class="slider-head"><label>Peak Enrollment</label><span class="val">Year ' + state.inputs.peakEnrollmentYear + '</span></div>' +
-        '<input type="range" min="1" max="5" step="1" data-key="peakEnrollmentYear" value="' + state.inputs.peakEnrollmentYear + '" />' +
-        '<div class="slider-scale"><span>Year 1</span><span>Year 5</span></div></div>' +
-        '<div class="slider-row"><div class="slider-head"><label>Retention Rate</label><span class="val">' + state.inputs.retentionRatePct + '%</span></div>' +
-        '<input type="range" min="40" max="100" step="1" data-key="retentionRatePct" value="' + state.inputs.retentionRatePct + '" />' +
-        '<div class="slider-scale"><span>40%</span><span>100%</span></div></div>' +
+        pctSlider('rampY1Pct', 'Year 1 Value Ramp', 0, 100) +
+        pctSlider('rampY2Pct', 'Year 2 Value Ramp', 0, 100) +
+        pctSlider('rampY3Pct', 'Year 3 Value Ramp', 0, 100) +
+        pctSlider('costInflationPct', 'Recurring Cost Inflation', 0, 10) +
+        pctSlider('discountRatePct', 'Discount Rate (NPV)', 0, 20) +
       '</div></div>' +
       '<div class="chart">' + chartSvg(m.years) + '</div>' +
       '<div class="panel"><div class="tablewrap"><table class="proj">' +
-        '<tr><th>Period</th><th>Active Members</th><th>Rev / Member</th><th>Inc. Revenue</th><th>Program Costs</th><th>Net Profit</th><th>Annual ROI</th><th>Cum. ROI</th></tr>' +
+        '<tr><th>Period</th><th>Active Members</th><th>Inc. Revenue</th><th>Gross Profit</th><th>Total Investment</th><th>Net Contribution</th><th>Annual ROI</th><th>Cum. ROI</th></tr>' +
         rows +
-        '<tr class="total"><td>TOTAL</td><td>—</td><td>—</td><td>' + money(m.cumIncRevenue5yr, 0) + '</td>' +
-        '<td class="neg">' + money(m.cumCosts5yr, 0) + '</td>' +
-        '<td class="' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</td><td>—</td>' +
-        '<td class="' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct) + '</td></tr>' +
-      '</table></div></div>' +
+        '<tr class="total"><td>TOTAL</td><td>—</td><td>' + money(m.fiveYearIncRevenue, 0) + '</td><td>—</td>' +
+        '<td class="neg">' + money(m.fiveYearInvestment, 0) + '</td>' +
+        '<td class="' + signClass(m.fiveYearNetContribution) + '">' + money(m.fiveYearNetContribution, 0) + '</td><td>—</td>' +
+        '<td class="' + (m.years[4].cumulativeRoi == null ? '' : signClass(m.years[4].cumulativeRoi)) + '">' + roiPct(m.years[4].cumulativeRoi) + '</td></tr>' +
+      '</table></div>' +
+      '<p class="methodology" style="margin-top:12px">5-year NPV at ' + state.inputs.discountRatePct + '% discount rate: <b>' + money(m.fiveYearNpv, 0) + '</b>. One-time costs hit Year 1 only.</p></div>' +
       navBtns('Next: Executive ROI Analysis', '5');
   }
 
@@ -450,17 +494,19 @@
     app.innerHTML =
       header(5, 'Executive ROI Analysis', 'The headline numbers, ready to share with your leadership team.', 'Outlook', '4') +
       '<div class="kpis">' +
-        '<div class="kpi ' + (m.netValueCreated5yr >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.netValueCreated5yr) + '">' + money(m.netValueCreated5yr, 0) + '</div></div>' +
-        '<div class="kpi"><div class="l">5-yr Incremental Revenue</div><div class="n pos">' + money(m.cumIncRevenue5yr, 0) + '</div></div>' +
-        '<div class="kpi"><div class="l">ROI Multiple</div><div class="n ' + signClass(m.roiMultiplePct) + '">' + pctf(m.roiMultiplePct, 0) + '</div></div>' +
+        '<div class="kpi ' + (m.fiveYearNetContribution >= 0 ? 'hero-pos' : 'hero-neg') + '"><div class="l">Net Value Created (5yr)</div><div class="n ' + signClass(m.fiveYearNetContribution) + '">' + money(m.fiveYearNetContribution, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">5-yr NPV</div><div class="n ' + signClass(m.fiveYearNpv) + '">' + money(m.fiveYearNpv, 0) + '</div></div>' +
+        '<div class="kpi"><div class="l">Net ROI (annual)</div><div class="n ' + (m.netRoi == null ? '' : signClass(m.netRoi)) + '">' + roiPct(m.netRoi) + '</div></div>' +
         '<div class="kpi"><div class="l">Payback Period</div><div class="n">' + payback(m.paybackMonths) + '</div></div>' +
       '</div>' +
       '<div class="panel"><h2>Summary</h2><p class="methodology">' +
-        'With <b>' + int(m.totalCustomers) + '</b> customers and <b>' + int(m.activeMembers) + '</b> projected active members at full ramp, ' +
-        'the program generates <b>' + money(m.grossIncrementalRevenue, 0) + '</b> in incremental revenue per year at target. ' +
-        'Over five years that compounds to <b>' + money(m.cumIncRevenue5yr, 0) + '</b> of new revenue against <b>' + money(m.cumCosts5yr, 0) + '</b> of total program cost, ' +
-        'for a net value of <b>' + money(m.netValueCreated5yr, 0) + '</b>' +
+        'With <b>' + int(m.customers) + '</b> customers and <b>' + int(m.activeMembers) + '</b> active members at full ramp, ' +
+        'the program generates <b>' + money(m.incrementalRevenue, 0) + '</b> in incremental revenue per year at target — ' +
+        '<b>' + money(m.incrementalGrossProfit, 0) + '</b> of gross profit at ' + state.inputs.grossMarginPct + '% margin. ' +
+        'Over five years that compounds to <b>' + money(m.fiveYearIncRevenue, 0) + '</b> of new revenue against <b>' + money(m.fiveYearInvestment, 0) + '</b> of total program investment, ' +
+        'for a net contribution of <b>' + money(m.fiveYearNetContribution, 0) + '</b> (NPV <b>' + money(m.fiveYearNpv, 0) + '</b>)' +
         (isFinite(m.paybackMonths) ? ' and payback in <b>' + payback(m.paybackMonths) + '</b>.' : '. At these assumptions the program does not pay back — adjust lift, adoption, or costs.') +
+        (m.modelGate !== 'READY' ? ' <b>Model gate: ' + m.modelGate + '.</b>' : '') +
       '</p>' +
       '<h3 class="small" style="margin-top:18px">Get the full report</h3>' +
       '<form class="lead-inline" id="leadForm">' +
@@ -530,7 +576,9 @@
       return;
     }
     var ch = e.target.getAttribute('data-channel');
-    if (ch) { state.channels[ch] = e.target.checked; }
+    if (ch) { state.channels[ch] = e.target.checked; return; }
+    var tog = e.target.getAttribute('data-toggle');
+    if (tog === 'identity') { state.identity = e.target.checked; render(); }
   });
   // Lightweight refresh for typed number fields: re-render but restore focus.
   function refreshDerived() {
