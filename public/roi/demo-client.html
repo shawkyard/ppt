@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Harborline Rewards — What Would Loyalty Earn You?</title>
+<!--
+  DEMO / MOCK-UP ONLY.
+  "Harborline Rewards" is a fictional loyalty vendor used to demonstrate the
+  white-label embed. For a real prospect, this page gets restyled with their
+  colors, logo, and copy — the calculator itself is configured entirely
+  through the embed script's data-* attributes below.
+-->
+<style>
+  :root {
+    --navy: #10243e; --teal: #0e8f83; --sand: #f6f3ee; --ink: #1e293b;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--ink); background: #fff; }
+  .sans { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 6vw; background: var(--navy); color: #fff;
+  }
+  nav .logo { font-weight: 800; font-size: 20px; letter-spacing: .02em; }
+  nav .logo span { color: #6fd3c7; }
+  nav .links a { color: #cbd5e1; text-decoration: none; margin-left: 26px; font-size: 14.5px; }
+  nav .links a.cta {
+    background: var(--teal); color: #fff; padding: 9px 18px; border-radius: 999px; font-weight: 700;
+  }
+  .hero { background: var(--navy); color: #fff; padding: 64px 6vw 84px; text-align: center; }
+  .hero h1 { font-size: clamp(30px, 4.5vw, 52px); line-height: 1.15; max-width: 800px; margin: 0 auto; }
+  .hero h1 em { color: #6fd3c7; font-style: normal; }
+  .hero p { max-width: 620px; margin: 18px auto 0; font-size: 18px; color: #cbd5e1; line-height: 1.6; }
+  .calc-section { background: var(--sand); padding: 0 6vw 70px; }
+  .calc-card {
+    max-width: 1060px; margin: -46px auto 0; background: #fff;
+    border-radius: 18px; box-shadow: 0 18px 50px rgba(16,36,62,.16); padding: 30px;
+  }
+  .calc-card .eyebrow {
+    text-align: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--teal); font-weight: 700; margin-bottom: 24px;
+  }
+  .strip { display: flex; justify-content: center; gap: 6vw; padding: 46px 6vw; flex-wrap: wrap; }
+  .strip .stat { text-align: center; }
+  .strip .stat .n { font-size: 34px; font-weight: 800; color: var(--navy); }
+  .strip .stat .l { font-size: 14px; color: #64748b; }
+  footer { background: var(--navy); color: #94a3b8; text-align: center; padding: 26px; font-size: 13px; }
+</style>
+</head>
+<body>
+<nav class="sans">
+  <div class="logo">Harborline<span>&nbsp;Rewards</span></div>
+  <div class="links">
+    <a href="#">Platform</a><a href="#">Pricing</a><a href="#">Book</a>
+    <a href="#calculator" class="cta">Run Your Numbers</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Your loyalty program should be a <em>profit center</em>, not a discount bucket.</h1>
+  <p>Most merchants guess at what loyalty is worth. Run your real numbers through
+     our ROI engine and see the profit a well-built program adds in year one.</p>
+</section>
+
+<section class="calc-section" id="calculator">
+  <div class="calc-card">
+    <div class="eyebrow sans">Free · Takes 60 seconds · No signup to see results</div>
+    <!-- ONE-LINE WHITE-LABEL EMBED — this is all a client pastes: -->
+    <script src="embed.js" async
+            data-brand="Harborline Rewards"
+            data-sub="See what a Harborline loyalty program earns for your business"
+            data-color="0e8f83"
+            data-cta="Email my full projection"
+            data-powered="0"></script>
+  </div>
+</section>
+
+<div class="strip sans">
+  <div class="stat"><div class="n">11 yrs</div><div class="l">of loyalty economics research</div></div>
+  <div class="stat"><div class="n">3 tiers</div><div class="l">embed, API, or fully hosted</div></div>
+  <div class="stat"><div class="n">100%</div><div class="l">your brand, our formulas</div></div>
+</div>
+
+<footer class="sans">
+  Harborline Rewards is a fictional demo brand. Calculator and formulas licensed from the platform owner.
+</footer>
+
+<script>
+  // Host-page lead handling: the embed re-emits captured leads here so the
+  // vendor can forward them to their own CRM. Demo just logs it.
+  window.addEventListener('roi-lead', function (e) {
+    console.log('Lead captured for vendor CRM:', e.detail);
+  });
+</script>
+</body>
+</html>

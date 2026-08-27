@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ROI Calculator Platform — Test Bench</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a; color: #e2e8f0; padding: 40px 5vw; line-height: 1.55;
+  }
+  h1 { font-size: 28px; margin-bottom: 6px; }
+  .sub { color: #94a3b8; margin-bottom: 30px; }
+  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .tier { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 20px; }
+  .tier .badge { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #5eead4; font-weight: 700; }
+  .tier h2 { font-size: 18px; margin: 6px 0 8px; }
+  .tier p { font-size: 14px; color: #94a3b8; }
+  .tier .status { margin-top: 10px; font-size: 12.5px; color: #fbbf24; }
+  .tier .status.live { color: #34d399; }
+  a { color: #5eead4; }
+  .gen { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 24px; }
+  .gen h2 { font-size: 20px; margin-bottom: 14px; }
+  .gen .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .gen label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .gen input {
+    width: 100%; padding: 9px 10px; border-radius: 8px; border: 1px solid #475569;
+    background: #0f172a; color: #e2e8f0; font-size: 14px;
+  }
+  pre {
+    background: #020617; border: 1px solid #334155; border-radius: 10px;
+    padding: 16px; font-size: 12.5px; overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+  }
+  button {
+    margin-top: 10px; padding: 10px 18px; border: 0; border-radius: 8px;
+    background: #14b8a6; color: #042f2e; font-weight: 700; font-size: 14px; cursor: pointer;
+  }
+  .links { margin: 26px 0; }
+  .links a { margin-right: 22px; font-size: 15px; }
+</style>
+</head>
+<body>
+  <h1>Loyalty ROI Calculator — Platform Test Bench</h1>
+  <p class="sub">Hosted calculators with white-label embeds. Formula engine: <strong>v0.1-PLACEHOLDER</strong> — proprietary formulas drop into <code>formulas.js</code>.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <span class="badge">Tier 1</span>
+      <h2>Embed on their site</h2>
+      <p>Client pastes one script tag. We host the calculator and every formula; it renders inside their page, in their brand colors, and hands captured leads to their CRM.</p>
+      <div class="status live">✅ Working — generator below</div>
+    </div>
+    <div class="tier">
+      <span class="badge">Tier 2</span>
+      <h2>API connection</h2>
+      <p>Client builds their own UI and calls our engine over HTTPS. The JSON contract already exists — it's the documented inputs/outputs of <code>computeLoyaltyRoi()</code>.</p>
+      <div class="status">🔜 Contract defined; needs a small serverless function</div>
+    </div>
+    <div class="tier">
+      <span class="badge">Tier 3</span>
+      <h2>Fully hosted, private label</h2>
+      <p>We host a complete branded page on their behalf — their logo, colors, domain. See the mock-up built for a fictional client.</p>
+      <div class="status live">✅ Working — <a href="demo-client.html">view Harborline Rewards demo</a></div>
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="calculator.html">Bare calculator</a>
+    <a href="demo-client.html">Mock client page (Tier 3)</a>
+  </div>
+
+  <div class="gen">
+    <h2>Embed code generator (Tier 1)</h2>
+    <div class="row">
+      <div><label>Brand name</label><input id="gBrand" value="Acme Rewards" /></div>
+      <div><label>Brand color (hex, no #)</label><input id="gColor" value="0f766e" /></div>
+      <div><label>Logo URL (https, optional)</label><input id="gLogo" placeholder="https://…/logo.png" /></div>
+      <div><label>Button text</label><input id="gCta" value="Email my full report" /></div>
+      <div><label>Lead webhook (https, optional)</label><input id="gHook" placeholder="https://…/api/leads" /></div>
+    </div>
+    <pre id="gOut"></pre>
+    <button id="gCopy">Copy embed code</button>
+  </div>
+
+<script>
+(function () {
+  var host = location.origin + location.pathname.replace(/index\.html$/, '').replace(/\/$/, '');
+  function esc(v) { return v.replace(/"/g, '&quot;'); }
+  function build() {
+    var lines = ['<script src="' + host + '/embed.js" async'];
+    var brand = document.getElementById('gBrand').value.trim();
+    var color = document.getElementById('gColor').value.trim();
+    var logo = document.getElementById('gLogo').value.trim();
+    var cta = document.getElementById('gCta').value.trim();
+    var hook = document.getElementById('gHook').value.trim();
+    if (brand) lines.push('        data-brand="' + esc(brand) + '"');
+    if (color) lines.push('        data-color="' + esc(color) + '"');
+    if (logo)  lines.push('        data-logo="' + esc(logo) + '"');
+    if (cta)   lines.push('        data-cta="' + esc(cta) + '"');
+    if (hook)  lines.push('        data-lead-webhook="' + esc(hook) + '"');
+    var code = lines.join('\n') + '><\/script>';
+    document.getElementById('gOut').textContent = code;
+    return code;
+  }
+  ['gBrand','gColor','gLogo','gCta','gHook'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', build);
+  });
+  document.getElementById('gCopy').addEventListener('click', function () {
+    navigator.clipboard.writeText(build()).then(function () {
+      document.getElementById('gCopy').textContent = 'Copied ✓';
+      setTimeout(function () { document.getElementById('gCopy').textContent = 'Copy embed code'; }, 1500);
+    });
+  });
+  build();
+})();
+</script>
+</body>
+</html>

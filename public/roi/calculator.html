@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loyalty ROI Calculator</title>
+<style>
+  :root {
+    --brand: #0f766e;
+    --brand-ink: #ffffff;
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --good: #059669;
+    --bad: #dc2626;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--ink);
+    padding: 4px; /* breathing room inside iframe */
+  }
+  .widget { max-width: 960px; margin: 0 auto; }
+  .head { display: flex; align-items: center; gap: 12px; padding: 14px 4px; }
+  .head img { height: 34px; }
+  .head .title { font-size: 18px; font-weight: 700; }
+  .head .sub { font-size: 13px; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px;
+  }
+  .card h3 {
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .field .hint { font-weight: 400; color: var(--muted); }
+  .field input {
+    width: 100%; padding: 9px 10px; font-size: 15px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--ink);
+  }
+  .field input:focus { outline: 2px solid var(--brand); outline-offset: -1px; border-color: transparent; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-hero {
+    background: var(--brand); color: var(--brand-ink);
+    border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+  }
+  .kpi-hero .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .kpi-hero .value { font-size: 34px; font-weight: 800; line-height: 1.2; }
+  .kpi-hero .note { font-size: 13px; opacity: .85; margin-top: 4px; }
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+  .kpi .label { font-size: 11.5px; color: var(--muted); }
+  .kpi .value { font-size: 19px; font-weight: 700; margin-top: 2px; }
+  .kpi .value.neg { color: var(--bad); }
+  .bars { margin-top: 14px; }
+  .bar-row { margin-bottom: 8px; }
+  .bar-row .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+  .bar-track { background: var(--border); border-radius: 99px; height: 10px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; background: var(--brand); transition: width .3s ease; }
+  .bar-fill.alt { opacity: .45; }
+  .lead {
+    margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px;
+  }
+  .lead p { font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+  .lead form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .lead input[type=email] {
+    flex: 1; min-width: 200px; padding: 10px 12px; font-size: 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+  }
+  .lead button {
+    padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
+    background: var(--brand); color: var(--brand-ink); border: 0; border-radius: 8px;
+  }
+  .lead .ok { color: var(--good); font-weight: 600; font-size: 14px; padding: 8px 0; }
+  .foot { text-align: center; font-size: 11.5px; color: var(--muted); padding: 12px 0 4px; }
+</style>
+</head>
+<body>
+<div class="widget">
+  <div class="head" id="head">
+    <img id="brandLogo" alt="" hidden />
+    <div>
+      <div class="title" id="brandTitle">Loyalty Program ROI Calculator</div>
+      <div class="sub" id="brandSub">See what a loyalty program would earn for your business</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Your business today</h3>
+      <div class="two">
+        <div class="field">
+          <label for="monthlyCustomers">Active customers <span class="hint">/ month</span></label>
+          <input id="monthlyCustomers" type="number" min="0" value="1200" />
+        </div>
+        <div class="field">
+          <label for="visitsPerMonth">Visits <span class="hint">per customer / mo</span></label>
+          <input id="visitsPerMonth" type="number" min="0" step="0.1" value="2" />
+        </div>
+        <div class="field">
+          <label for="avgTicket">Average ticket <span class="hint">$</span></label>
+          <input id="avgTicket" type="number" min="0" step="0.01" value="28" />
+        </div>
+        <div class="field">
+          <label for="grossMarginPct">Gross margin <span class="hint">%</span></label>
+          <input id="grossMarginPct" type="number" min="0" max="100" value="60" />
+        </div>
+      </div>
+
+      <h3 style="margin-top:14px">Program assumptions</h3>
+      <div class="two">
+        <div class="field">
+          <label for="memberAdoptionPct">Member adoption <span class="hint">%</span></label>
+          <input id="memberAdoptionPct" type="number" min="0" max="100" value="35" />
+        </div>
+        <div class="field">
+          <label for="visitLiftPct">Visit lift <span class="hint">%</span></label>
+          <input id="visitLiftPct" type="number" min="0" value="20" />
+        </div>
+        <div class="field">
+          <label for="spendLiftPct">Spend lift <span class="hint">%</span></label>
+          <input id="spendLiftPct" type="number" min="0" value="10" />
+        </div>
+        <div class="field">
+          <label for="rewardCostPct">Reward cost <span class="hint">% of member spend</span></label>
+          <input id="rewardCostPct" type="number" min="0" max="100" value="5" />
+        </div>
+        <div class="field">
+          <label for="monthlyProgramCost">Program fee <span class="hint">$ / mo</span></label>
+          <input id="monthlyProgramCost" type="number" min="0" value="299" />
+        </div>
+        <div class="field">
+          <label for="launchCost">Launch cost <span class="hint">$ one-time</span></label>
+          <input id="launchCost" type="number" min="0" value="1500" />
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="kpi-hero">
+        <div class="label">Net profit added, year one</div>
+        <div class="value" id="netAnnualProfit">$0</div>
+        <div class="note" id="roiNote">—</div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="label">New revenue / year</div><div class="value" id="incrementalAnnualRevenue">$0</div></div>
+        <div class="kpi"><div class="label">Members enrolled</div><div class="value" id="members">0</div></div>
+        <div class="kpi"><div class="label">Rewards + fees / year</div><div class="value" id="totalCost">$0</div></div>
+        <div class="kpi"><div class="label">Payback on launch</div><div class="value" id="payback">—</div></div>
+      </div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bar-label"><span>Revenue today</span><span id="baseRevLabel"></span></div>
+          <div class="bar-track"><div class="bar-fill alt" id="baseBar" style="width:70%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Revenue with loyalty program</span><span id="newRevLabel"></span></div>
+          <div class="bar-track"><div class="bar-fill" id="newBar" style="width:80%"></div></div>
+        </div>
+      </div>
+      <div class="lead" id="leadBlock">
+        <p id="leadText">Want the full month-by-month projection for your business?</p>
+        <form id="leadForm">
+          <input type="email" id="leadEmail" placeholder="you@company.com" required />
+          <button type="submit" id="leadCta">Email my full report</button>
+        </form>
+        <div class="ok" id="leadOk" hidden>Thanks — your report is on its way.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot" id="poweredBy">Calculations powered by this calculator's licensed ROI engine.</div>
+</div>
+
+<script src="formulas.js"></script>
+<script>
+(function () {
+  var qs = new URLSearchParams(location.search);
+
+  // ---- White-label config via URL params ----
+  // brand, sub, color (hex without #), ink (text-on-brand), logo (URL),
+  // cta, leadWebhook (POST target for captured leads), powered (0 to hide)
+  function safeColor(v) { return /^[0-9a-fA-F]{3,8}$/.test(v || '') ? '#' + v : null; }
+  var brand = qs.get('brand');
+  if (brand) document.getElementById('brandTitle').textContent = brand + ' ROI Calculator';
+  if (qs.get('sub')) document.getElementById('brandSub').textContent = qs.get('sub');
+  var color = safeColor(qs.get('color'));
+  if (color) document.documentElement.style.setProperty('--brand', color);
+  var ink = safeColor(qs.get('ink'));
+  if (ink) document.documentElement.style.setProperty('--brand-ink', ink);
+  var logo = qs.get('logo');
+  if (logo && /^https:\/\//.test(logo)) {
+    var img = document.getElementById('brandLogo');
+    img.src = logo; img.hidden = false;
+  }
+  if (qs.get('cta')) document.getElementById('leadCta').textContent = qs.get('cta');
+  if (qs.get('powered') === '0') document.getElementById('poweredBy').hidden = true;
+
+  // ---- Formatting ----
+  var money = function (v) {
+    if (!isFinite(v)) return '—';
+    return (v < 0 ? '-$' : '$') + Math.abs(Math.round(v)).toLocaleString('en-US');
+  };
+
+  // ---- Wire inputs to engine ----
+  var ids = ['monthlyCustomers','avgTicket','visitsPerMonth','grossMarginPct',
+             'memberAdoptionPct','visitLiftPct','spendLiftPct','rewardCostPct',
+             'monthlyProgramCost','launchCost'];
+
+  function readInputs() {
+    var o = {};
+    ids.forEach(function (id) { o[id] = parseFloat(document.getElementById(id).value) || 0; });
+    return o;
+  }
+
+  function render() {
+    var r = window.LoyaltyRoiEngine.computeLoyaltyRoi(readInputs());
+    var el = function (id) { return document.getElementById(id); };
+
+    el('netAnnualProfit').textContent = money(r.netAnnualProfit);
+    el('roiNote').textContent = isFinite(r.roiPct)
+      ? Math.round(r.roiPct) + '% return on every program dollar spent'
+      : '—';
+    el('incrementalAnnualRevenue').textContent = money(r.incrementalAnnualRevenue);
+    el('members').textContent = Math.round(r.members).toLocaleString('en-US');
+    el('totalCost').textContent = money(r.annualRewardCost + r.annualProgramCost);
+    el('payback').textContent =
+      r.paybackMonths === 0 ? 'Immediate'
+      : isFinite(r.paybackMonths) ? r.paybackMonths.toFixed(1) + ' mo'
+      : 'Never';
+    el('netAnnualProfit').parentElement.style.background =
+      r.netAnnualProfit >= 0 ? 'var(--brand)' : 'var(--bad)';
+
+    var baseAnnual = r.baselineMonthlyRevenue * 12;
+    var newAnnual = baseAnnual + r.incrementalAnnualRevenue;
+    var max = Math.max(baseAnnual, newAnnual, 1);
+    el('baseBar').style.width = (baseAnnual / max * 100) + '%';
+    el('newBar').style.width = (newAnnual / max * 100) + '%';
+    el('baseRevLabel').textContent = money(baseAnnual) + ' / yr';
+    el('newRevLabel').textContent = money(newAnnual) + ' / yr';
+
+    postHeight();
+  }
+
+  ids.forEach(function (id) {
+    document.getElementById(id).addEventListener('input', render);
+  });
+
+  // ---- Lead capture ----
+  document.getElementById('leadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('leadEmail').value;
+    var payload = {
+      email: email,
+      inputs: readInputs(),
+      results: window.LoyaltyRoiEngine.computeLoyaltyRoi(readInputs()),
+      brand: brand || null,
+      page: document.referrer || null,
+      ts: new Date().toISOString()
+    };
+    // Tell the host page (vendor site) a lead arrived, so they can route it
+    // to their own CRM. Optionally POST to a webhook if one was configured.
+    try { parent.postMessage({ type: 'roi-lead', payload: payload }, '*'); } catch (err) {}
+    var hook = qs.get('leadWebhook');
+    if (hook && /^https:\/\//.test(hook)) {
+      fetch(hook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function () {});
+    }
+    document.getElementById('leadForm').hidden = true;
+    document.getElementById('leadOk').hidden = false;
+    postHeight();
+  });
+
+  // ---- Auto-resize for iframe embeds ----
+  function postHeight() {
+    try {
+      parent.postMessage({ type: 'roi-resize', height: document.body.scrollHeight + 8 }, '*');
+    } catch (err) {}
+  }
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
+
+  render();
+})();
+</script>
+</body>
+</html>
